@@ -14,7 +14,7 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
     if (Wrapper !== null && Wrapper !== undefined) {
       return <Wrapper {...props} />
     } else {
-      return <div className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
+      return <div style={{position: 'relative'}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
         {
           props.reversedLabel === true ? 
           <>

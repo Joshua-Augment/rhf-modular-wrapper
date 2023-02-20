@@ -88,6 +88,7 @@ export interface LineInputProps extends FormBaseInput<String> {
 }
 
 export interface LinesInputProps extends FormBaseInput<String> {
+  theme ?: any,
   rows ?: number,
   cols ?: number
 }
