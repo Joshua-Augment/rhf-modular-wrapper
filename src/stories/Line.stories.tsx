@@ -7,7 +7,7 @@ import Lines from "../components/Inputs/Text/Lines"
 import WYSIWYG from "../components/Inputs/Text/WYSIWYG";
 
 export default {
-  title: 'Components/Line',
+  title: 'Components/Inputs/Line',
   component: Line
 } as ComponentMeta<typeof Line>; 
 

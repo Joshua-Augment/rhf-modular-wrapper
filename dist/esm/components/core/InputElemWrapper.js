@@ -6,7 +6,7 @@ import { ThemeContext } from './Form';
 const InputElemWrapper = (props) => {
     const Wrapper = useContext(ThemeContext);
     const WrapElem = useMemo(() => {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         if (Wrapper !== null && Wrapper !== undefined) {
             return React.createElement(Wrapper, Object.assign({}, props));
         }
@@ -14,7 +14,7 @@ const InputElemWrapper = (props) => {
             return React.createElement("div", { className: `form-item-wrapper ${(_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.wrapperClassName) !== null && _b !== void 0 ? _b : ''}` }, props.reversedLabel === true ?
                 React.createElement(React.Fragment, null,
                     React.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? 'no-border' : ''}` }, props.children),
-                    React.createElement("label", { htmlFor: props.name, className: (_d = (_c = props === null || props === void 0 ? void 0 : props.customClasses) === null || _c === void 0 ? void 0 : _c.labelClassName) !== null && _d !== void 0 ? _d : '' },
+                    React.createElement("label", { htmlFor: (_c = props.id) !== null && _c !== void 0 ? _c : props.name, className: (_e = (_d = props === null || props === void 0 ? void 0 : props.customClasses) === null || _d === void 0 ? void 0 : _d.labelClassName) !== null && _e !== void 0 ? _e : '' },
                         props.noBorder !== false && React.createElement("span", null,
                             props.label,
                             " ",
@@ -30,7 +30,7 @@ const InputElemWrapper = (props) => {
                             " ",
                             ' '))) :
                 React.createElement(React.Fragment, null,
-                    React.createElement("label", { htmlFor: props.name, className: (_f = (_e = props === null || props === void 0 ? void 0 : props.customClasses) === null || _e === void 0 ? void 0 : _e.labelClassName) !== null && _f !== void 0 ? _f : '' },
+                    React.createElement("label", { htmlFor: (_f = props.id) !== null && _f !== void 0 ? _f : props.name, className: (_h = (_g = props === null || props === void 0 ? void 0 : props.customClasses) === null || _g === void 0 ? void 0 : _g.labelClassName) !== null && _h !== void 0 ? _h : '' },
                         props.noBorder !== false && React.createElement("span", null,
                             props.label,
                             " ",

@@ -16,8 +16,9 @@ const InputWrapper = (props: FormBaseInput) => {
         formState,
       }) => (
         <InputElemWrapper
-          reversedLabel={props.reversedLabel}
+          id={props.id}
           name={props.name}
+          reversedLabel={props.reversedLabel}
           errors={error}
           label={props.label}
           helperText={props.helperText}

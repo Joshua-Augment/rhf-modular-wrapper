@@ -19,14 +19,14 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
           props.reversedLabel === true ? 
           <>
             <div className={`form-item-child-wrapper ${props.noBorder ? 'no-border':''}`}>{props.children}</div>
-            <label htmlFor={props.name} className={props?.customClasses?.labelClassName ?? ''}>
+            <label htmlFor={props.id ?? props.name} className={props?.customClasses?.labelClassName ?? ''}>
               {props.noBorder !== false && <span>{props.label} {' '}</span>}
               <span>{props.helperText && <Tooltip title={props.helperText}><InfoIcon style={{color:'blue'}} /></Tooltip>} {' '}</span>
               <span>{props.errors && <Tooltip title={props.errors.message}><ErrorIcon style={{color:'red'}} /></Tooltip>} {' '}</span>
             </label>
           </> :
           <> 
-            <label htmlFor={props.name} className={props?.customClasses?.labelClassName ?? ''}>
+            <label htmlFor={props.id ?? props.name} className={props?.customClasses?.labelClassName ?? ''}>
               {props.noBorder !== false && <span>{props.label} {' '}</span>}
               <span>{props.helperText && <Tooltip title={props.helperText}><InfoIcon style={{color:'blue'}} /></Tooltip>} {' '}</span>
               <span>{props.errors && <Tooltip title={props.errors.message}><ErrorIcon style={{color:'red'}} /></Tooltip>} {' '}</span>

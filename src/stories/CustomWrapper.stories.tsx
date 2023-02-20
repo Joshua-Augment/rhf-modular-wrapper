@@ -5,7 +5,7 @@ import {Form} from "../components/core/Form"
 import Line from "../components/Inputs/Text/Line"
 
 export default {
-  title: 'Components/CustomWrapper',
+  title: 'Components/Styling/CustomWrapper',
   component: Line
 } as ComponentMeta<typeof Line>; 
 

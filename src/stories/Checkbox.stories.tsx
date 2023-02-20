@@ -6,7 +6,7 @@ import Checkbox from "../components/Inputs/Checkboxes/Checkbox";
 import CheckboxGroup from "../components/Inputs/Checkboxes/CheckboxGroup";
 
 export default {
-  title: 'Components/Checkbox',
+  title: 'Components/Inputs/Checkbox',
   component: Checkbox
 } as ComponentMeta<typeof Checkbox>; 
 
@@ -22,7 +22,7 @@ export const CheckboxSimple = () => {
 
 export const CheckboxGroupExample = () => {  
   return <Form onSubmit={onSubmit} >
-    <CheckboxGroup title='Checkbox Group with Title'>      
+    <CheckboxGroup title='Checkbox Group with Title - Horizontal Layout'>      
       <Checkbox label="Simple Checkbox One" name="checkbox.one" />
       <Checkbox label="Simple Checkbox Two" name="checkbox.two" />
       <Checkbox label="Simple Checkbox Three" name="checkbox.three" />
@@ -32,7 +32,7 @@ export const CheckboxGroupExample = () => {
 
 export const CheckboxGroupExampleVertical = () => {  
   return <Form onSubmit={onSubmit} >
-    <CheckboxGroup title='Checkbox Group with Title' orientation="vertical">      
+    <CheckboxGroup title='Checkbox Group with Title - Vertical Layout' orientation="vertical">      
       <Checkbox label="Simple Checkbox One" name="checkbox.one" />
       <Checkbox label="Simple Checkbox Two" name="checkbox.two" />
       <Checkbox label="Simple Checkbox Three" name="checkbox.three" />
