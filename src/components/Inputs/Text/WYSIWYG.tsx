@@ -7,7 +7,7 @@ const WYSIWYG = (props: LinesInputProps) => {
   
 
   return (
-    <InputWrapper noBorder {...props} >
+    <InputWrapper {...props} >
       {
         (IWprops:IFormFrameInjector) => {
           console.log("[props] - ",IWprops)

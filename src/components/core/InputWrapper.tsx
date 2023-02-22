@@ -4,7 +4,7 @@ import InputElemWrapper from "./InputElemWrapper";
 import { FormBaseInput } from "./interfaces";
 
 const InputWrapper = (props: FormBaseInput) => {
-  const methods = useFormContext();
+  const methods = props.contextless ? {control:undefined, } : useFormContext();
 
   return (
     <Controller

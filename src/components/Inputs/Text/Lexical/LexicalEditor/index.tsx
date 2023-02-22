@@ -18,12 +18,13 @@ interface ILexicalEditor extends IFormFrameInjector {
 }
 
 const PlaceHolderWrapper = styled.div`
-    position: absolute;
-    bottom: 15px;
-    border: none;
-    background: transparent;
-    width: 100%;
-    text-align: center;
+  pointer-events: none;
+  position: absolute;
+  bottom: 15px;
+  border: none !important;
+  background: transparent !important;
+  width: 100%;
+  text-align: center;
 `
 
 const LexicalEditor  = (props : ILexicalEditor) => {  
@@ -36,9 +37,9 @@ const LexicalEditor  = (props : ILexicalEditor) => {
   // LexicalOnChangePlugin!
   const onChangeHandler = (editorState, editor) => {
     
-    const htmlString = $generateHtmlFromNodes(editor, null);
-    console.log("[htmlstring] - ",htmlString);
-    props.onChange(htmlString)
+    // const htmlString = $generateHtmlFromNodes(editor, null);
+    // console.log("[htmlstring] - ",htmlString);
+    props.onChange(editorState)
 
 
     editorState.read(() => {
@@ -68,7 +69,7 @@ const LexicalEditor  = (props : ILexicalEditor) => {
 
   return <LexicalComposer initialConfig={initialConfig}>
   <LexicalToolbar />
-  <RichTextPlugin contentEditable={<ContentEditable />} placeholder={<PlaceHolderWrapper>Enter some text...</PlaceHolderWrapper>} ErrorBoundary={LexicalErrorBoundary} />
+  <RichTextPlugin contentEditable={<ContentEditable style={{borderRadius:'0 0 0.5rem 0.5rem'}} />} placeholder={<PlaceHolderWrapper>Enter some text...</PlaceHolderWrapper>} ErrorBoundary={LexicalErrorBoundary} />
   <OnChangePlugin onChange={onChangeHandler} />
   <HistoryPlugin />
 </LexicalComposer>

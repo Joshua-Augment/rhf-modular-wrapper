@@ -1,11 +1,16 @@
-import React, {lazy, createContext, useMemo} from 'react'
+import React, {lazy, createContext, useMemo, useContext} from 'react'
 import { FormProvider, useForm } from 'react-hook-form';
 import {FieldValues} from "react-hook-form/dist/types"
-import { FormFrameWrapperProps, IForm } from './interfaces';
+import { FormFrameWrapperProps, IForm, ISubmitButton } from './interfaces';
 
 import "../styling/core.css"
 
-export const ThemeContext = createContext<null|React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>>(null)
+type TTemplateContext = {
+  inputTemplate : null|React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
+  buttonTemplate : null|React.ComponentType<ISubmitButton> | React.ComponentType<any>,
+}
+
+export const ThemeContext = createContext<TTemplateContext>({inputTemplate: null, buttonTemplate: null})
 
 const BSTheme = lazy(()=>import('../styling/BootstrapTheme'))
 const MUITheme = lazy(()=>import('../styling/MUITheme'))
@@ -39,12 +44,9 @@ export const Form = <T extends FieldValues,>(props: IForm<T>) => {
   
   return (
   <ChosenTheme style={props.style}>
-    <ThemeContext.Provider value={props.inputWrapper ?? null} >
+    <ThemeContext.Provider value={{inputTemplate:props.inputWrapper ?? null, buttonTemplate: props.buttonWrapper ?? null}} >
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(
-              (data:T) => props.onSubmit(data).then(() => {if(props.resetOnComplete) {methods.reset()}}),
-              () => {if(props.resetOnComplete) {methods.reset()}}
-            )}
+        <form onSubmit={methods.handleSubmit(props.onSubmit)}
           id={formID}>
           {props.children}
         </form>
@@ -52,4 +54,14 @@ export const Form = <T extends FieldValues,>(props: IForm<T>) => {
     </ThemeContext.Provider>
   </ChosenTheme>
   )
+}
+
+
+export const SubmitButton = (props: ISubmitButton) => {
+  
+  const Wrapper = useContext(ThemeContext).buttonTemplate
+
+  return Wrapper === null ? 
+    <button type="submit" className={`${props.buttonClass ?? ''}`}>{props.label ?? props.children ?? ''}</button> : 
+    <Wrapper {...props} />
 }
