@@ -1,11 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import { $getSelection, $isRangeSelection, LexicalEditor } from "lexical";
 import {
-  $getSelectionStyleValueForProperty,
-  $isParentElementRTL,
   $patchStyleText,
-  $selectAll,
-  $setBlocksType_experimental,
 } from "@lexical/selection";
 import DropdownButton, { IDropDownButton } from "../DropdownButton";
 interface IStyleDropDown extends IDropDownButton {

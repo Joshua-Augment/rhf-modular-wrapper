@@ -1,6 +1,6 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import { createCommand, LexicalCommand } from 'lexical'
-import { $createImageNode, $isImageNode, ImageNode, ImagePayload,} from '../../../../nodes/ImageNode';
+import { ImagePayload,} from '../../../../nodes/ImageNode';
 import React from 'react'
 import Line from '../../../../../Line'
 import BaseModal from '../../core/baseModal'

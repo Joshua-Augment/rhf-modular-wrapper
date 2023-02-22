@@ -23,11 +23,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Form = exports.ThemeContext = void 0;
+exports.SubmitButton = exports.Form = exports.ThemeContext = void 0;
 const react_1 = __importStar(require("react"));
 const react_hook_form_1 = require("react-hook-form");
 require("../styling/core.css");
-exports.ThemeContext = (0, react_1.createContext)(null);
+exports.ThemeContext = (0, react_1.createContext)({ inputTemplate: null, buttonTemplate: null });
 const BSTheme = (0, react_1.lazy)(() => Promise.resolve().then(() => __importStar(require('../styling/BootstrapTheme'))));
 const MUITheme = (0, react_1.lazy)(() => Promise.resolve().then(() => __importStar(require('../styling/MUITheme'))));
 const ChosenTheme = ({ children, style }) => {
@@ -38,7 +38,7 @@ const ChosenTheme = ({ children, style }) => {
         children));
 };
 const Form = (props) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
     const formID = (0, react_1.useMemo)(() => { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : `rhf-wc-f-${new Date().getTime()}`; }, []);
     const methods = (0, react_hook_form_1.useForm)({
         mode: (_a = props.mode) !== null && _a !== void 0 ? _a : "onChange",
@@ -53,13 +53,17 @@ const Form = (props) => {
         delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined
     });
     return (react_1.default.createElement(ChosenTheme, { style: props.style },
-        react_1.default.createElement(exports.ThemeContext.Provider, { value: (_h = props.inputWrapper) !== null && _h !== void 0 ? _h : null },
+        react_1.default.createElement(exports.ThemeContext.Provider, { value: { inputTemplate: (_h = props.inputWrapper) !== null && _h !== void 0 ? _h : null, buttonTemplate: (_j = props.buttonWrapper) !== null && _j !== void 0 ? _j : null } },
             react_1.default.createElement(react_hook_form_1.FormProvider, Object.assign({}, methods),
-                react_1.default.createElement("form", { onSubmit: methods.handleSubmit((data) => props.onSubmit(data).then(() => { if (props.resetOnComplete) {
-                        methods.reset();
-                    } }), () => { if (props.resetOnComplete) {
-                        methods.reset();
-                    } }), id: formID }, props.children)))));
+                react_1.default.createElement("form", { onSubmit: methods.handleSubmit(props.onSubmit), id: formID }, props.children)))));
 };
 exports.Form = Form;
+const SubmitButton = (props) => {
+    var _a, _b, _c;
+    const Wrapper = (0, react_1.useContext)(exports.ThemeContext).buttonTemplate;
+    return Wrapper === null ?
+        react_1.default.createElement("button", { type: "submit", className: `${(_a = props.buttonClass) !== null && _a !== void 0 ? _a : ''}` }, (_c = (_b = props.label) !== null && _b !== void 0 ? _b : props.children) !== null && _c !== void 0 ? _c : '') :
+        react_1.default.createElement(Wrapper, Object.assign({}, props));
+};
+exports.SubmitButton = SubmitButton;
 //# sourceMappingURL=Form.js.map

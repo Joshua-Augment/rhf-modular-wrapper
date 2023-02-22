@@ -4,11 +4,9 @@ import { IFormFrameInjector } from '../../../../core';
 import {$getRoot, $getSelection} from 'lexical';
 import {LexicalComposer} from '@lexical/react/LexicalComposer';
 import {RichTextPlugin} from "@lexical/react/LexicalRichTextPlugin"
-import {$generateHtmlFromNodes, $generateNodesFromDOM} from '@lexical/html';
 import {ContentEditable} from '@lexical/react/LexicalContentEditable';
 import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import LexicalToolbar from '../Toolbar';
 import styled from "styled-components"

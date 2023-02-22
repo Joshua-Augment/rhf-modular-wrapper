@@ -3,10 +3,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { mergeRegister } from "@lexical/utils";
 import {
   $getSelectionStyleValueForProperty,
-  $isParentElementRTL,
-  $patchStyleText,
-  $selectAll,
-  $setBlocksType_experimental,
+  // $patchStyleText,
 } from "@lexical/selection";
 import styled from "styled-components";
 import {
@@ -21,13 +18,10 @@ import {
   FaAlignCenter,
   FaAlignRight,
   FaAlignJustify,
-  FaFont,
-  FaPaintBrush,
   FaImage,
 } from "react-icons/fa";
 
 import {
-  $getRoot,
   $getSelection,
   $isRangeSelection,
   FORMAT_TEXT_COMMAND,
@@ -39,10 +33,8 @@ import {
   SquareButton,
   VerticalSpacer,
 } from "./components/core/styled_components";
-import DropdownButton from "./components/core/DropdownButton";
 import FontDropDown from "./components/Dropdowns/FontDropDown";
 import FamilyDropDown from "./components/Dropdowns/FamilyDropdown";
-import FontColorDropDown from "./components/Dropdowns/FontColorDropdown";
 import EmbedImageModal from "./components/Modals/EmbedImage";
 
 const ToolbarWrapper = styled.div`
@@ -62,14 +54,14 @@ const ToolbarWrapper = styled.div`
 
 const DEFAULT_FONT_SIZE = "15px";
 const DEFAULT_FONT_FAMILY = "Arial";
-const DEFAULT_COLOR = "#000";
-const DEFAULT_BG_COLOR = "#ffffff0";
+// const DEFAULT_COLOR = "#000";
+// const DEFAULT_BG_COLOR = "#ffffff0";
 
 const LexicalToolbar = () => {
   const [editor] = useLexicalComposerContext();
-  const [activeEditor, setActiveEditor] = useState(editor); //eslint-disable-line
+  // const [activeEditor, setActiveEditor] = useState(editor); //eslint-disable-line
 
-  const [isEditable, setIsEditable] = useState(true);
+  // const [isEditable, setIsEditable] = useState(true);
   const [openEmbedImage, setOpenEmbedImage] = useState(false)
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
@@ -77,9 +69,9 @@ const LexicalToolbar = () => {
   const [isUnderline, setIsUnderline] = useState(false);
   const [fontSize, setFontSize] = useState<string>(DEFAULT_FONT_SIZE);
   const [fontFamily, setFontFamily] = useState<string>("Arial");
-  const [fontColor, setFontColor] = useState<string>("#000");
-  const [bgColor, setBgColor] = useState<string>("#fff");
-  const [isLink, setIsLink] = useState(false);
+  // const [fontColor, setFontColor] = useState<string>("#000");
+  // const [bgColor, setBgColor] = useState<string>("#fff");
+  // const [isLink, setIsLink] = useState(false);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -103,36 +95,27 @@ const LexicalToolbar = () => {
           DEFAULT_FONT_FAMILY
         )
       );
-      setFontColor(
-        $getSelectionStyleValueForProperty(selection, "color", DEFAULT_COLOR)
-      );
-      setBgColor(
-        $getSelectionStyleValueForProperty(
-          selection,
-          "background-color",
-          DEFAULT_BG_COLOR
-        )
-      );
+      // setFontColor($getSelectionStyleValueForProperty(selection, "color", DEFAULT_COLOR));
+      // setBgColor($getSelectionStyleValueForProperty(selection,"background-color",DEFAULT_BG_COLOR));
     }
   }, [editor]);
 
-  const applyStyleText = useCallback(
-    (styles: Record<string, string>) => {
-      console.log("[applyStyleText] - Style : ",styles)
-      activeEditor.update(() => {
-        const selection = $getSelection();
-        if ($isRangeSelection(selection)) {
-          $patchStyleText(selection, styles);
-        }
-      });
-    },
-    [activeEditor],
-  );
+  // const applyStyleText = useCallback(
+  //   (styles: Record<string, string>) => {
+  //     console.log("[applyStyleText] - Style : ",styles)
+  //     activeEditor.update(() => {
+  //       const selection = $getSelection();
+  //       if ($isRangeSelection(selection)) {
+  //         $patchStyleText(selection, styles);
+  //       }
+  //     });
+  //   },
+  //   [activeEditor],
+  // );
 
   useEffect(() => {
     return mergeRegister(
       editor.registerEditableListener((editable) => {
-        setIsEditable(editable);
       }),
       editor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => {

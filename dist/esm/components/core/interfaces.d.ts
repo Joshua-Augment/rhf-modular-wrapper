@@ -1,7 +1,13 @@
 /// <reference types="react" />
 import { ValidationMode, Resolver, DeepPartial, FieldValues, FieldError, CriteriaMode } from 'react-hook-form/dist/types';
+export interface ISubmitButton {
+    label?: string;
+    children?: React.ReactNode;
+    buttonClass?: string;
+}
 export interface IForm<T extends FieldValues> {
     inputWrapper?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
+    buttonWrapper?: React.ComponentType<ISubmitButton> | React.ComponentType<ISubmitButton>;
     style?: 'bootstrap' | 'mui';
     id?: string;
     defaultValues?: DeepPartial<T>;
@@ -46,6 +52,7 @@ export type FormInputClassNames = {
     inputClassName?: string;
 };
 export interface FormBaseInput<T = any> {
+    contextless?: boolean;
     name: string;
     id?: string;
     customClasses?: FormInputClassNames;
@@ -84,6 +91,7 @@ export interface LineInputProps extends FormBaseInput<String> {
     type?: HTMLInputTypeAttribute;
 }
 export interface LinesInputProps extends FormBaseInput<String> {
+    theme?: any;
     rows?: number;
     cols?: number;
 }
