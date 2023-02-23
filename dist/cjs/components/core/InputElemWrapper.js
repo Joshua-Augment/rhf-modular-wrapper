@@ -32,7 +32,8 @@ const Error_1 = __importDefault(require("@mui/icons-material/Error"));
 const Info_1 = __importDefault(require("@mui/icons-material/Info"));
 const Form_1 = require("./Form");
 const InputElemWrapper = (props) => {
-    const Wrapper = (0, react_1.useContext)(Form_1.ThemeContext).inputTemplate;
+    var _a;
+    const Wrapper = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : (0, react_1.useContext)(Form_1.ThemeContext).inputTemplate;
     const WrapElem = (0, react_1.useMemo)(() => {
         var _a, _b, _c, _d, _e, _f, _g, _h;
         if (Wrapper !== null && Wrapper !== undefined) {

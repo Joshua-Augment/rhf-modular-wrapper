@@ -26,17 +26,17 @@ const LexicalEditor = (props) => {
     };
     // When the editor changes, you can get notified via the
     // LexicalOnChangePlugin!
-    const onChangeHandler = (editorState, editor) => {
-        // const htmlString = $generateHtmlFromNodes(editor, null);
-        // console.log("[htmlstring] - ",htmlString);
-        props.onChange(editorState);
-        editorState.read(() => {
-            // Read the contents of the EditorState here.
-            const root = $getRoot();
-            const selection = $getSelection();
-            console.log(root, selection);
-        });
-    };
+    // const onChangeHandler = (editorState, editor) => {
+    //   // const htmlString = $generateHtmlFromNodes(editor, null);
+    //   // console.log("[htmlstring] - ",htmlString);
+    //   props.onChange(editorState)
+    //   editorState.read(() => {
+    //     // Read the contents of the EditorState here.
+    //     const root = $getRoot();
+    //     const selection = $getSelection();
+    //     console.log(root, selection);
+    //   });
+    // }
     // Catch any errors that occur during Lexical updates and log them
     // or throw them as needed. If you don't throw them, Lexical will
     // try to recover gracefully without losing user data.

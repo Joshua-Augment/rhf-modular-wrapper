@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VerticalSpacer = exports.SquareButton = exports.BaseButton = void 0;
 const styled_components_1 = __importDefault(require("styled-components"));
-exports.BaseButton = styled_components_1.default.button `
+exports.BaseButton = styled_components_1.default.button.attrs({ type: 'button' }) `
   display: flex;
   align-items: center;
   height : 30px;
@@ -36,7 +36,6 @@ exports.SquareButton = (0, styled_components_1.default)(exports.BaseButton) `
   width : 30px;
 `;
 exports.VerticalSpacer = styled_components_1.default.div `
-
   width:3px;
   height:25px;
   border-left: 1px solid #000000;

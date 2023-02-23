@@ -26,7 +26,7 @@ const DropzoneHandler = (props) => {
                 " - ",
                 _file.size,
                 " ",
-                React.createElement(FaTrash, { onClick: () => IWprops.onChange(IWprops.value.filter((x, i) => i !== _index)), style: { cursor: 'pointer' } })))));
+                React.createElement(FaTrash, { onClick: () => props.onChange(props.value.filter((x, i) => i !== _index)), style: { cursor: 'pointer' } })))));
 };
 export default DropzoneUploader;
 //# sourceMappingURL=index.js.map
