@@ -1,6 +1,6 @@
 import React from 'react'
 import { IFormFrameInjector } from '../../../../core';
-
+import {$generateHtmlFromNodes} from '@lexical/html';
 import {$getRoot, $getSelection} from 'lexical';
 import {LexicalComposer} from '@lexical/react/LexicalComposer';
 import {RichTextPlugin} from "@lexical/react/LexicalRichTextPlugin"
@@ -10,6 +10,7 @@ import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import LexicalToolbar from '../Toolbar';
 import styled from "styled-components"
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
 interface ILexicalEditor extends IFormFrameInjector {
   theme : any,
@@ -68,9 +69,33 @@ const LexicalEditor  = (props : ILexicalEditor) => {
   return <LexicalComposer initialConfig={initialConfig}>
   <LexicalToolbar />
   <RichTextPlugin contentEditable={<ContentEditable style={{borderRadius:'0 0 0.5rem 0.5rem'}} />} placeholder={<PlaceHolderWrapper>Enter some text...</PlaceHolderWrapper>} ErrorBoundary={LexicalErrorBoundary} />
-  <OnChangePlugin onChange={onChangeHandler} />
+  <OnChangeHandler onChange={props.onChange} />
   <HistoryPlugin />
 </LexicalComposer>
+}
+
+const OnChangeHandler = ({onChange}:{onChange: Function}) => {
+  const [editor] = useLexicalComposerContext()
+
+  const onChangeHandler = (state) => {
+    
+    editor.update(()=> {
+      const htmlString = $generateHtmlFromNodes(editor, null);
+      console.log("[htmlstring] - ",htmlString);
+      onChange({...state, "html" : htmlString})
+    })
+
+    state.read(() => {
+      // Read the contents of the EditorState here.
+      const root = $getRoot();
+      const selection = $getSelection();
+
+      console.log(root, selection);
+    });
+  }
+
+  return <OnChangePlugin onChange={onChangeHandler} />
+
 }
 
 export default LexicalEditor

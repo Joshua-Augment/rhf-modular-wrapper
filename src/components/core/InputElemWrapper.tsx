@@ -8,7 +8,7 @@ import { ThemeContext } from './Form';
 
 
 const InputElemWrapper = (props: FormFrameWrapperProps) => {
-  const Wrapper = useContext(ThemeContext).inputTemplate
+  const Wrapper = props.inputWrapper ?? useContext(ThemeContext).inputTemplate 
 
   const WrapElem = useMemo(()=>{
     if (Wrapper !== null && Wrapper !== undefined) {

@@ -7,7 +7,7 @@ const Checkbox = (props: ICheckbox) => {
     <InputWrapper {...props} reversedLabel customClasses={{wrapperClassName:'form-check'}}>
       {
         (IWprops:IFormFrameInjector) => {
-          console.log("[props] - ",props)
+          if (IWprops.value === undefined) {IWprops.onChange(false)}
           return <input id={props.name} type="checkbox" name={props.name} value={IWprops.value} onChange={IWprops.onChange} />
         }
       }

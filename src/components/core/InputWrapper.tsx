@@ -16,6 +16,8 @@ const InputWrapper = (props: FormBaseInput) => {
         formState,
       }) => (
         <InputElemWrapper
+          value={value}
+          onChange={onChange}
           id={props.id}
           name={props.name}
           reversedLabel={props.reversedLabel}
@@ -35,6 +37,7 @@ const InputWrapper = (props: FormBaseInput) => {
               isTouched,
               isDirty,
               error,
+              disabled : props.disabled,
               ref,
             })}
         </InputElemWrapper>
