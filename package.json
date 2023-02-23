@@ -10,6 +10,9 @@
   "scripts": {
     "start": "start-storybook -p 6006",
     "build": "rm -rf /dist && npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs",
+    "build-patch": "rm -rf /dist && npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version patch && npm publish",
+    "build-minor": "rm -rf /dist && npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version minor && npm publish",
+    "build-major": "rm -rf /dist && npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version major && npm publish",
     "build:esm": "tsc",
     "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
     "storybook": "start-storybook -p 6006",

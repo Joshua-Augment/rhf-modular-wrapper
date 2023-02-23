@@ -1,6 +1,5 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Dropzone, {FileRejection, DropEvent} from 'react-dropzone'
-import { useFormContext } from 'react-hook-form'
 import { FaTrash } from 'react-icons/fa'
 import { IDropzoneUploader, IFormFrameInjector } from '../../../core'
 import InputWrapper from '../../../core/InputWrapper'
@@ -50,7 +49,7 @@ const DropzoneHandler = (props: IDropzoneHandler) => {
     props.value &&
     <ol>
       {
-        props.value.map((_file,_index) => <li key={`${props.name}-pr-${_index}`}>{_file.name} - {_file.size} <FaTrash onClick={()=>IWprops.onChange(IWprops.value.filter((x,i) => i !== _index))} style={{cursor:'pointer'}} /></li>) 
+        props.value.map((_file,_index) => <li key={`${props.name}-pr-${_index}`}>{_file.name} - {_file.size} <FaTrash onClick={()=>props.onChange(props.value.filter((x,i) => i !== _index))} style={{cursor:'pointer'}} /></li>) 
       }
     </ol>
   }

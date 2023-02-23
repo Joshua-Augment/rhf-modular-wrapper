@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { Uppy } from './../../../node_modules/@uppy/core/types/index.d';
 import { ValidationMode, Resolver, DeepPartial, FieldValues, FieldError, CriteriaMode } from 'react-hook-form/dist/types';
 export interface ISubmitButton {
     label?: string;
@@ -25,6 +26,7 @@ export interface IForm<T extends FieldValues> {
     delayError?: number;
 }
 export interface FormFrameWrapperProps {
+    inputWrapper?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
     id?: string;
     errors?: FieldError;
     name: string;
@@ -36,15 +38,18 @@ export interface FormFrameWrapperProps {
     noLabel?: boolean;
     placeholder?: string;
     customClasses?: FormInputClassNames;
-}
-export interface IFormFrameInjector extends FormFrameWrapperProps {
+    onChange: Function;
     value: any;
-    onChange: (e: any) => void;
+}
+export interface IFormFrameInjector<T = any> extends FormFrameWrapperProps {
+    value: T;
+    onChange: (e: T) => void;
     onBlur: (e: any) => any;
     isTouched: boolean;
     isDirty: boolean;
     error: any;
     ref: any;
+    disabled?: boolean;
 }
 export type FormInputClassNames = {
     wrapperClassName?: string;
@@ -53,8 +58,10 @@ export type FormInputClassNames = {
 };
 export interface FormBaseInput<T = any> {
     contextless?: boolean;
+    inputWrapper?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
     name: string;
     id?: string;
+    disabled?: boolean;
     customClasses?: FormInputClassNames;
     reversedLabel?: boolean;
     helperText?: string;
@@ -104,6 +111,24 @@ export interface ICheckbox extends FormBaseInput<String> {
 }
 export interface IRadiobox extends FormBaseInput<String> {
     value: string;
+}
+export interface IDropzoneUploader extends FormBaseInput<File[]> {
+    accept?: {
+        [key: string]: string[];
+    };
+    showList?: boolean;
+    previewType?: 'list';
+}
+export interface IBaseUppy extends FormBaseInput<String[]> {
+    endpoint: string;
+    metadata?: any;
+}
+export interface IUppyUploader extends IBaseUppy {
+}
+export interface IUppyDD extends IBaseUppy {
+}
+export interface IBaseUppyInjector extends IFormFrameInjector {
+    uppy: Uppy;
 }
 export interface ICheckboxes {
     title?: string;

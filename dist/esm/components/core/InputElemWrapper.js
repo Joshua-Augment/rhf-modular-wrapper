@@ -4,7 +4,8 @@ import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
 import { ThemeContext } from './Form';
 const InputElemWrapper = (props) => {
-    const Wrapper = useContext(ThemeContext).inputTemplate;
+    var _a;
+    const Wrapper = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : useContext(ThemeContext).inputTemplate;
     const WrapElem = useMemo(() => {
         var _a, _b, _c, _d, _e, _f, _g, _h;
         if (Wrapper !== null && Wrapper !== undefined) {
