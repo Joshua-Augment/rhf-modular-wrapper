@@ -4,7 +4,7 @@ import {IFormFrameInjector,IUppyUploader} from "../../../../core";
 import UppyDashboardInstance from "./UppyDashboardInstance";
 import InputWrapper from "../../../../core/InputWrapper";
 
-const UppyUploader = (props: IUppyUploader) => {
+const UppyDashboardUploader = (props: IUppyUploader) => {
   const uppy = new Uppy()
   return (
   <InputWrapper noBorder {...props}>
@@ -21,4 +21,4 @@ const UppyUploader = (props: IUppyUploader) => {
   );
 };
 
-export default UppyUploader;
+export default UppyDashboardUploader;

@@ -1,2 +1,2 @@
-export * from "./Dashboard";
+export { default as UppyDashboardUploader } from "./Dashboard";
 //# sourceMappingURL=index.js.map

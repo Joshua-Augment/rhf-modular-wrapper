@@ -5,7 +5,7 @@ import DatePickerComponent from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-const Datepicker = (props: IDatePicker) => {
+const DatePicker = (props: IDatePicker) => {
   return (
     <InputWrapper {...props} noBorder>
       {
@@ -18,4 +18,4 @@ const Datepicker = (props: IDatePicker) => {
   )
 }
 
-export default Datepicker
+export default DatePicker

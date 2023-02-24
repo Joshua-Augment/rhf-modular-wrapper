@@ -1,12 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext, Controller } from "react-hook-form";
 import InputElemWrapper from "./InputElemWrapper";
 import { FormBaseInput } from "./interfaces";
 
 const InputWrapper = (props: FormBaseInput) => {
-  const methods = props.contextless ? {control:undefined, } : useFormContext();
+  const [_value, _setValue] = useState(null)
+  const methods = props.contextless === true ? {control:undefined } : useFormContext();
 
   return (
+    props.contextless ?
+    // Since this does not live in a form there is no form context, as such just store the state in the wrapper itself
+    // to maintain the input as a controlled input
+    <InputElemWrapper
+    value={_value}
+    onChange={_setValue}
+    id={props.id}
+    name={props.name}
+    reversedLabel={props.reversedLabel}
+    errors={undefined}
+    label={props.label}
+    helperText={props.helperText}
+    noBorder={props.noBorder}
+    noLabel={props.noLabel}
+    customClasses={props.customClasses}
+  >
+    {props.children &&
+      props.children({
+        ...props,
+        value : _value,
+        onChange : _setValue,
+        onBlur : ()=>false,
+        isTouched: _value !== null,
+        isDirty: _value !== null,
+        error : undefined,
+        disabled : props.disabled,
+        ref : undefined,
+      })}
+  </InputElemWrapper> : 
+  // Control is handled by the Controller Element instead
     <Controller
       control={methods.control}
       name={props.name}

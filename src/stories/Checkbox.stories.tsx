@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { ComponentMeta } from '@storybook/react';
-import {Form, SubmitButton} from "../components/core/Form"
+import {Form, SubmitButton, Checkbox, CheckboxGroup } from "../components/"
 
-import Checkbox from "../components/Inputs/Checkboxes/Checkbox";
-import CheckboxGroup from "../components/Inputs/Checkboxes/CheckboxGroup";
 import { Template } from "./_story_template";
 
 export default {

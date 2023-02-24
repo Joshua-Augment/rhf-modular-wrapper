@@ -1,3 +1,3 @@
-export * from "./Line"
-export * from "./Lines"
-export * from "./WYSIWYG"
+export {default as Line} from "./Line"
+export {default as Lines} from "./Lines"
+export {default as WYSIWYGEditor} from "./WYSIWYG"

@@ -1,1 +1,1 @@
-export * from "./Dashboard"
+export {default as UppyDashboardUploader} from "./Dashboard"

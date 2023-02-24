@@ -1,5 +1,5 @@
 export * from "./interfaces";
 export * from "./Form";
-export * from "./InputElemWrapper";
-export * from "./InputWrapper";
+export { default as InputElemWrapper } from "./InputElemWrapper";
+export { default as InputWrapper } from "./InputWrapper";
 //# sourceMappingURL=index.js.map

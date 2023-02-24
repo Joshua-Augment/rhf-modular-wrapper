@@ -1,4 +1,4 @@
-export * from "./Checkbox";
-export * from "./Radiobox";
-export * from "./CheckboxGroup";
+export { default as Checkbox } from "./Checkbox";
+export { default as Radiobox } from "./Radiobox";
+export { default as CheckboxGroup } from "./CheckboxGroup";
 //# sourceMappingURL=index.js.map
