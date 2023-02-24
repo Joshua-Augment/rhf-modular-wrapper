@@ -13,7 +13,7 @@ The Line element are simply text inputs, using the <input> element as its root, 
 ### Lines 
 Lines are just textarea inputs, so at its core its just a <textarea> element
 
-### WYSIWYG (Working but in development)
+### WYSIWYGEditor (Working but in development)
 A WYSIWYG editor, powered by Lexical. When the form is submitted you'll get the raw editor object as an output, but it also includes the key "html" for a string HTML representation of the output for convenience
 
 ### DatePicker
@@ -36,3 +36,4 @@ Currently more inputs are being planned out, including;
   3. Number Lines
   4. Conversion Inputs (height / weight / etc)
   5. Persist options
+  6. Listed inputs (Add remove lines of inputs)
