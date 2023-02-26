@@ -1,5 +1,5 @@
-import React from 'react'
-import Dropzone, {FileRejection, DropEvent} from 'react-dropzone'
+import React, {useState, useEffect} from 'react'
+import Dropzone, {FileRejection, DropEvent, useDropzone} from 'react-dropzone'
 import { FaTrash } from 'react-icons/fa'
 import { IDropzoneUploader, IFormFrameInjector } from '../../../core'
 import InputWrapper from '../../../core/InputWrapper'
@@ -20,38 +20,48 @@ interface IDropzoneHandler extends IFormFrameInjector<File[]> {
   accept ?: {[key:string]:string[]}
 }
 const DropzoneHandler = (props: IDropzoneHandler) => {
+  
+  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+  const [files, setFiles] = useState<File[]>([])
 
-  const onDropHandler = (acceptedFiles: File[],rejectedFiles: FileRejection[], onChange:Function, value:File[], dropEvent: DropEvent) => {
+  useEffect(()=>{ if (props.value !== undefined) {setFiles(props.value)}},[])
+
+  useEffect(() => {props.onChange([...files, ...acceptedFiles]); setFiles([...files, ...acceptedFiles])},[JSON.stringify(acceptedFiles)])
+
+  const onDropHandler = (acceptedFiles: File[],rejectedFiles: FileRejection[], dropEvent: DropEvent) => {
     console.group("Dropzone - onDropHandler")
     console.log("[onDropHandler] - Accepted files: ", acceptedFiles)
     console.log("[onDropHandler] - Rejected files: ", rejectedFiles)
-    console.log("[onDropHandler] - Current files: ", value)
-    console.log("[onDropHandler] - OnChange: ", onChange)
+    console.log("[onDropHandler] - Current files: ", props.value)
+    console.log("[onDropHandler] - OnChange: ", props.onChange)
     console.log("[onDropHandler] - DropEvent: ", dropEvent)
     console.groupEnd()
-    onChange(acceptedFiles)
+    setFiles([...props.value, ...acceptedFiles])
+  }
+
+  const handleDelete = (index: number) => {
+    const rem = files.filter((x,i) => i !== index)
+    props.onChange(rem)
+    setFiles(rem)
   }
 
   return  <div>
-  <Dropzone
-    disabled={props.disabled}
-    accept={props.accept}
-    onDrop={(accept, reject,dropEvent) => onDropHandler(accept,reject,props.onChange,props.value,dropEvent)}
-  >          
-  {({getRootProps, getInputProps}) => (
-    <div {...getRootProps()}>
-      <input {...getInputProps()} />
-      <p>Drag 'n' drop some files here, or click to select files</p>
-    </div>
-  )}
-</Dropzone>
+  
+  <div {...getRootProps()}>
+    <input {...getInputProps()} />
+    <p>Drag 'n' drop some files here, or click to select files</p>
+  </div>
+  
   {
-    props.value &&
-    <ol>
+    files.length > 0 && <ul>
       {
-        props.value.map((_file,_index) => <li key={`${props.name}-pr-${_index}`}>{_file.name} - {_file.size} <FaTrash onClick={()=>props.onChange(props.value.filter((x,i) => i !== _index))} style={{cursor:'pointer'}} /></li>) 
-      }
-    </ol>
+      <ol>
+        {
+          files.map((_file,_index) => <li key={`${props.name}-pr-${_index}`}>{_file.name} - {_file.size} <FaTrash onClick={()=>handleDelete(_index)} style={{cursor:'pointer'}} /></li>) 
+        }
+      </ol>
+  }
+    </ul>
   }
 </div>
 } 
