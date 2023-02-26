@@ -127,6 +127,14 @@ export interface IUppyUploader extends IBaseUppy {
 }
 export interface IUppyDD extends IBaseUppy {
 }
+export interface ISlider extends FormBaseInput<String | Number> {
+    min?: number;
+    max?: number;
+    steps: number | string[] | {
+        value: any;
+        label: string | number;
+    }[];
+}
 export interface IBaseUppyInjector extends IFormFrameInjector {
     uppy: Uppy;
 }
