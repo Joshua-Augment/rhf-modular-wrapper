@@ -23,23 +23,9 @@ export interface IForm<T extends FieldValues> {
   delayError?: number,  
 }
 
-export interface FormFrameWrapperProps  {
-  inputWrapper ?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
-  id ?: string,
+export interface FormFrameWrapperProps extends IInputsBaseProps  {
   errors ?: FieldError,
-  name: string, 
-  helperText ?: string
-  label ?: string,
   children : JSX.Element,
-
-  reversedLabel ?: boolean,
-  noBorder ?: boolean,
-  noLabel ?: boolean,
-
-  placeholder ?: string,
-  
-  customClasses ?: FormInputClassNames,
-
   onChange : Function,
   value : any
 }
@@ -62,8 +48,8 @@ export type FormInputClassNames = {
 }
 
 /* INPUTS */
-
-export interface FormBaseInput<T = any> {
+export interface IInputsBaseProps<T=any> {
+  
   contextless ?:boolean,
   inputWrapper ?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
   name : string,
@@ -85,7 +71,6 @@ export interface FormBaseInput<T = any> {
     find : string[],
     calculate : (this : T, foundFields : any[], allFields: any ) => T
   },
-  children ?: Function,
   validation ?: {
     required ?: boolean | string,
     max ?: {value: number, message ?: string},
@@ -93,6 +78,10 @@ export interface FormBaseInput<T = any> {
     min ?: {value: number, message ?: string},
     minLength ?: {value: number, message ?: string},
   }
+  
+}
+export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {  
+  children ?: Function
 }
 
 export interface LineInputProps extends FormBaseInput<String> {

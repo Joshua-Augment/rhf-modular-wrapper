@@ -12,17 +12,9 @@ const InputWrapper = (props: FormBaseInput) => {
     // Since this does not live in a form there is no form context, as such just store the state in the wrapper itself
     // to maintain the input as a controlled input
     <InputElemWrapper
-    value={_value}
-    onChange={_setValue}
-    id={props.id}
-    name={props.name}
-    reversedLabel={props.reversedLabel}
-    errors={undefined}
-    label={props.label}
-    helperText={props.helperText}
-    noBorder={props.noBorder}
-    noLabel={props.noLabel}
-    customClasses={props.customClasses}
+      {...props}
+      value={_value}
+      onChange={_setValue}
   >
     {props.children &&
       props.children({
@@ -47,17 +39,10 @@ const InputWrapper = (props: FormBaseInput) => {
         formState,
       }) => (
         <InputElemWrapper
+          {...props}
           value={value}
           onChange={onChange}
-          id={props.id}
-          name={props.name}
-          reversedLabel={props.reversedLabel}
           errors={error}
-          label={props.label}
-          helperText={props.helperText}
-          noBorder={props.noBorder}
-          noLabel={props.noLabel}
-          customClasses={props.customClasses}
         >
           {props.children &&
             props.children({

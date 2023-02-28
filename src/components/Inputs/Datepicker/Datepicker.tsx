@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { IDatePicker, IFormFrameInjector } from '../../core'
 import InputWrapper from '../../core/InputWrapper'
 import DatePickerComponent from "react-datepicker";
@@ -11,11 +11,23 @@ const DatePicker = (props: IDatePicker) => {
       {
         (IWProps:IFormFrameInjector) => {
           console.log(`[Datepickerprops] - ${props.name}`,IWProps)
-          return <DatePickerComponent selected={IWProps.value} onChange={(a)=>IWProps.onChange(a)} id={props.id} {...props.options}/>
+          return <DateWrapper {...IWProps} options={props.options} />
         }
       }
     </InputWrapper>
   )
+}
+
+interface IDateWrapper extends IFormFrameInjector<Date|null> {
+  options: any
+}
+const DateWrapper = (props: IDateWrapper) => {
+  const [value, setValue] = useState<Date|null>(props.value ?? new Date())
+
+  useEffect(()=>{props.onChange(value)},[value])
+  useEffect(()=>{if ((props.value && value && value.getTime() !== value.getTime()) || (props.value === null) ) {setValue(props.value)} },[props.value])
+
+  return <DatePickerComponent selected={value} onChange={(a)=>setValue(a)} id={props.id} {...props.options}/>
 }
 
 export default DatePicker

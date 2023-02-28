@@ -1,6 +1,7 @@
 import React from "react";
 import { ComponentMeta } from '@storybook/react';
 import {Form, DatePicker} from "../components/"
+import { Template } from "./_story_template";
 
 export default {
   title: 'Components/Inputs/Special/Datepicker',
@@ -9,14 +10,11 @@ export default {
 
 const onSubmit = (a:any) => new Promise((resolve, reject) => resolve(console.log('FormSubmission:',a)))
 
-export const SimpleDatePicker = () => {
-  return <Form onSubmit={onSubmit} >
-    <DatePicker label="Simple Form Input (Text)" name="simple_datepicker" />
-  </Form>
-}
+export const SimpleDatePicker = Template.bind({}) 
+SimpleDatePicker.args = {
+  children : <DatePicker label="Simple Form Input (Text)" name="simple_datepicker" />}
 
-export const SimpleTimePicker = () => {
-  return <Form onSubmit={onSubmit} >
-    <DatePicker label="Simple Form Input (Text)" name="simple_timepicker" options={{showTimeSelect : true, dateFormat:"Pp"}} />
-  </Form>
-}
+export const SimpleTimePicker = Template.bind({}) 
+SimpleTimePicker.args = {
+    children: <DatePicker label="Simple Form Input (Text)" name="simple_timepicker" options={{showTimeSelect : true, dateFormat:"Pp"}} />
+  }
