@@ -18,4 +18,5 @@ __exportStar(require("./Checkboxes"), exports);
 __exportStar(require("./DatePicker"), exports);
 __exportStar(require("./Text"), exports);
 __exportStar(require("./Uploaders"), exports);
+__exportStar(require("./Select"), exports);
 //# sourceMappingURL=index.js.map

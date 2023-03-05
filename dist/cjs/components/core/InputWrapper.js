@@ -35,10 +35,10 @@ const InputWrapper = (props) => {
     return (props.contextless ?
         // Since this does not live in a form there is no form context, as such just store the state in the wrapper itself
         // to maintain the input as a controlled input
-        react_1.default.createElement(InputElemWrapper_1.default, { value: _value, onChange: _setValue, id: props.id, name: props.name, reversedLabel: props.reversedLabel, errors: undefined, label: props.label, helperText: props.helperText, noBorder: props.noBorder, noLabel: props.noLabel, customClasses: props.customClasses }, props.children &&
+        react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { value: _value, onChange: _setValue }), props.children &&
             props.children(Object.assign(Object.assign({}, props), { value: _value, onChange: _setValue, onBlur: () => false, isTouched: _value !== null, isDirty: _value !== null, error: undefined, disabled: props.disabled, ref: undefined }))) :
         // Control is handled by the Controller Element instead
-        react_1.default.createElement(react_hook_form_1.Controller, { control: methods.control, name: props.name, render: ({ field: { onChange, onBlur, value, name, ref }, fieldState: { invalid, isTouched, isDirty, error }, formState, }) => (react_1.default.createElement(InputElemWrapper_1.default, { value: value, onChange: onChange, id: props.id, name: props.name, reversedLabel: props.reversedLabel, errors: error, label: props.label, helperText: props.helperText, noBorder: props.noBorder, noLabel: props.noLabel, customClasses: props.customClasses }, props.children &&
+        react_1.default.createElement(react_hook_form_1.Controller, { control: methods.control, name: props.name, render: ({ field: { onChange, onBlur, value, name, ref }, fieldState: { invalid, isTouched, isDirty, error }, formState, }) => (react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { value: value, onChange: onChange, errors: error }), props.children &&
                 props.children(Object.assign(Object.assign({}, props), { value,
                     onChange,
                     onBlur,
