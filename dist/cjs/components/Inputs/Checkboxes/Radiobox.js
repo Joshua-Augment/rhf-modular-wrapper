@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const InputWrapper_1 = __importDefault(require("../../core/InputWrapper"));
 const react_radio_buttons_1 = require("react-radio-buttons");
-require("./Radiobox.css");
+require("../../styling/Radiobox.css");
 const Radiobox = (props) => {
     return (react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props, { id: `${props.name}`, noLabel: true, noBorder: true, customClasses: { wrapperClassName: 'form-check' } }), (IWprops) => {
         return react_1.default.createElement(RadioWrapper, Object.assign({}, props, IWprops));

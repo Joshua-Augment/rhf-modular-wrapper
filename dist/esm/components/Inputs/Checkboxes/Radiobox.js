@@ -1,7 +1,7 @@
 import React from 'react';
 import InputWrapper from '../../core/InputWrapper';
 import { RadioGroup, RadioButton, ReversedRadioButton } from "react-radio-buttons";
-import "./Radiobox.css";
+import "../../styling/Radiobox.css";
 const Radiobox = (props) => {
     return (React.createElement(InputWrapper, Object.assign({}, props, { id: `${props.name}`, noLabel: true, noBorder: true, customClasses: { wrapperClassName: 'form-check' } }), (IWprops) => {
         return React.createElement(RadioWrapper, Object.assign({}, props, IWprops));

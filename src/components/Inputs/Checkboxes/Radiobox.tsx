@@ -2,7 +2,7 @@ import React from 'react'
 import { IRadiobox, IFormFrameInjector } from '../../core'
 import InputWrapper from '../../core/InputWrapper'
 import { RadioGroup, RadioButton, ReversedRadioButton } from "react-radio-buttons"
-import "./Radiobox.css"
+import "../../styling/Radiobox.css"
 
 const Radiobox = (props: IRadiobox) => {
   
