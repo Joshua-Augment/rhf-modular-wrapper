@@ -1,20 +1,38 @@
 import React from 'react'
 import { IRadiobox, IFormFrameInjector } from '../../core'
 import InputWrapper from '../../core/InputWrapper'
+import { RadioGroup, RadioButton, ReversedRadioButton } from "react-radio-buttons"
+import "./Radiobox.css"
 
 const Radiobox = (props: IRadiobox) => {
+  
   return (
-    <InputWrapper {...props} id={`${props.name}-${props.value}`} reversedLabel customClasses={{wrapperClassName:'form-check'}}>
+    <InputWrapper {...props} id={`${props.name}`} noLabel noBorder customClasses={{wrapperClassName:'form-check'}}>
       {
         (IWprops:IFormFrameInjector) => {
-          console.log("[props] - ",props)
-          console.log("[IWprops] - ",IWprops)
-          console.log(`[checked] [${props.name}] (Value : ${props.value}) - ${props.value === IWprops.value}`)
-          return <input id={`${props.name}-${props.value}`} type="radio" name={props.name} checked={props.value === IWprops.value} value={props.value} onChange={(a) => IWprops.onChange(props.value)} />
+          return <RadioWrapper {...props} {...IWprops} />
         }
       }
     </InputWrapper>
   )
 }
+
+interface IRadioWrapper extends IRadiobox, IFormFrameInjector<string> {}
+
+const RadioWrapper = (props : IRadioWrapper) => {
+
+  return <span className="rb-item-wrapper">
+    <RadioGroup horizontal={props.orientation === 'horizontal'} onChange={props.onChange} >
+    {
+      props.options.map((option,i) => (option.reversed ? 
+        <ReversedRadioButton rootColor="black" key={`${props.name}-opt-${i}`} value={option.value}>{option.label}</ReversedRadioButton> :
+        <RadioButton rootColor="black" key={`${props.name}-opt-${i}`} value={option.value}>{option.label}</RadioButton>)
+      )
+    }
+  </RadioGroup>
+  </span>
+}
+
+
 
 export default Radiobox

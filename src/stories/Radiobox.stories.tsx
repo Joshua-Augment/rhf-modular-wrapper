@@ -13,27 +13,10 @@ export default {
 
 export const RadioboxSimple = Template.bind({})
 RadioboxSimple.args =  {
-  children : <>  
-    <Radiobox label="Simple Radiobox One" value="one" name="radiobox" />
-    <Radiobox label="Simple Radiobox Two" value="two" name="radiobox" />
-    <Radiobox label="Simple Radiobox Three" value="three" name="radiobox" />
-    </>
+  children : <Radiobox label="Simple Radiobox One" options={[{value:'one',label:'One'},{value:'two',label:'Two'},{value:'three',label:'Three'}]} name="radiobox" />
 }
 
-export const RadioboxGroupExample = Template.bind({})  
-RadioboxGroupExample.args = {  
-    children : <RadioboxGroup title='Radiobox Group with Title - Horizontal Layout'>      
-      <Radiobox label="Simple Radiobox One" value="one" name="radiobox-test" />
-      <Radiobox label="Simple Radiobox Two" value="two" name="radiobox-test" />
-      <Radiobox label="Simple Radiobox Three" value="three" name="radiobox-test" />
-    </RadioboxGroup>
-}
-
-export const RadioboxGroupExampleVertical = Template.bind({})
-RadioboxGroupExampleVertical.args = {  
-    children : <RadioboxGroup title='Radiobox Group with Title - Vertical Layout' orientation="vertical">      
-      <Radiobox label="Simple Radiobox One" value="one" name="radiobox" />
-      <Radiobox label="Simple Radiobox Two" value="two" name="radiobox" />
-      <Radiobox label="Simple Radiobox Three" value="three" name="radiobox" />
-    </RadioboxGroup>
+export const RadioboxGroupHorizontal = Template.bind({})  
+RadioboxGroupHorizontal.args = {
+  children : <Radiobox orientation="horizontal" label="Simple Radiobox One" options={[{value:'one',label:'One'},{value:'two',label:'Two'},{value:'three',label:'Three'}]} name="radiobox" />
 }

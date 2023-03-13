@@ -40,16 +40,16 @@ const SelectWrapper = (props) => {
     var _a;
     const [options, setOptions] = (0, react_1.useState)((_a = props.options) !== null && _a !== void 0 ? _a : []);
     const [selectedOption, setSelectedOption] = (0, react_1.useState)(null);
-    (0, react_1.useEffect)(() => { setOptions(props.options); }, [JSON.stringify(props.options)]);
+    (0, react_1.useEffect)(() => { setOptions(props.options); }, [props.options]);
     const createNew = (0, react_1.useCallback)((a) => {
-        if (props.isCreateable !== undefined) {
-            if (props.isCreateable === true) {
+        if (props.isCreatable !== undefined) {
+            if (props.isCreatable === true) {
                 setOptions([{ label: a, value: a }, ...options]);
                 setSelectedOption({ label: a, value: a });
                 props.onChange({ label: a, value: a });
             }
             else {
-                props.isCreateable(a).then(opt => {
+                props.isCreatable(a).then((opt) => {
                     setOptions([opt, ...options]);
                     setSelectedOption(opt);
                     props.onChange(opt);
@@ -57,10 +57,11 @@ const SelectWrapper = (props) => {
             }
         }
     }, []);
-    const onChangeHandler = (0, react_1.useCallback)((a) => { setSelectedOption(a); props.onChange(a); }, []);
-    return props.isCreateable !== undefined ?
-        react_1.default.createElement(creatable_1.default, Object.assign({ onCreateOption: createNew }, props, { options: options, value: selectedOption, onChange: onChangeHandler }, props.rsOptions)) :
-        react_1.default.createElement(react_select_1.default, Object.assign({}, props, { options: options, value: selectedOption, onChange: onChangeHandler }, props.rsOptions));
+    const onChangeHandler = (0, react_1.useCallback)((a) => {
+        setSelectedOption(a);
+        props.onChange(a);
+    }, []);
+    return props.isCreatable !== undefined ? (react_1.default.createElement(creatable_1.default, Object.assign({ onCreateOption: createNew }, props, { options: options, value: selectedOption, onChange: onChangeHandler }, props.rsOptions))) : (react_1.default.createElement(react_select_1.default, Object.assign({}, props, { options: options, value: selectedOption, onChange: onChangeHandler }, props.rsOptions)));
 };
 exports.default = Select;
 //# sourceMappingURL=index.js.map

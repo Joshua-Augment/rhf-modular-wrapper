@@ -1,4 +1,4 @@
 /// <reference types="react" />
-import { LinesInputProps } from '../../core';
-declare const WYSIWYG: (props: LinesInputProps) => JSX.Element;
+import { ILines } from "../../core";
+declare const WYSIWYG: (props: ILines) => JSX.Element;
 export default WYSIWYG;

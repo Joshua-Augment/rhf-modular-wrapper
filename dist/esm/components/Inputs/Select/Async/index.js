@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import AsyncSelectInput from 'react-select/async';
-import AsyncCreatableSelectInput from 'react-select/async-creatable';
-import { InputWrapper } from '../../../core';
+import React, { useCallback, useEffect, useState } from "react";
+import AsyncSelectInput from "react-select/async";
+import AsyncCreatableSelectInput from "react-select/async-creatable";
+import { InputWrapper, } from "../../../core";
 const AsyncSelect = (props) => {
     return (React.createElement(InputWrapper, Object.assign({}, props, { noBorder: true }), (IWProps) => {
         console.log(`[Datepickerprops] - ${props.name}`, IWProps);
@@ -12,16 +12,19 @@ const SelectWrapper = (props) => {
     var _a, _b, _c, _d, _e, _f, _g;
     const [options, setOptions] = useState((_a = props.options) !== null && _a !== void 0 ? _a : []);
     const [selectedOption, setSelectedOption] = useState(null);
-    useEffect(() => { setOptions(props.options); }, [JSON.stringify(props.options)]);
+    useEffect(() => {
+        var _a;
+        setOptions((_a = props.options) !== null && _a !== void 0 ? _a : []);
+    }, [JSON.stringify(props.options)]);
     const createNew = useCallback((a) => {
-        if (props.isCreateable !== undefined) {
-            if (props.isCreateable === true) {
+        if (props.isCreatable !== undefined) {
+            if (props.isCreatable === true) {
                 setOptions([{ label: a, value: a }, ...options]);
                 setSelectedOption({ label: a, value: a });
                 props.onChange({ label: a, value: a });
             }
             else {
-                props.isCreateable(a).then(opt => {
+                props.isCreatable(a).then((opt) => {
                     setOptions([opt, ...options]);
                     setSelectedOption(opt);
                     props.onChange(opt);
@@ -29,10 +32,11 @@ const SelectWrapper = (props) => {
             }
         }
     }, []);
-    const onChangeHandler = useCallback((a) => { setSelectedOption(a); props.onChange(a); }, []);
-    return props.isCreateable !== undefined ?
-        React.createElement(AsyncCreatableSelectInput, Object.assign({ onCreateOption: createNew }, props, { options: options, isDisabled: (_d = (_c = (_b = props.rsOptions) === null || _b === void 0 ? void 0 : _b.isDisabled) !== null && _c !== void 0 ? _c : props.disabled) !== null && _d !== void 0 ? _d : false, value: selectedOption, onChange: onChangeHandler }, props.rsOptions)) :
-        React.createElement(AsyncSelectInput, Object.assign({}, props, { options: options, isDisabled: (_g = (_f = (_e = props.rsOptions) === null || _e === void 0 ? void 0 : _e.isDisabled) !== null && _f !== void 0 ? _f : props.disabled) !== null && _g !== void 0 ? _g : false, value: selectedOption, onChange: onChangeHandler }, props.rsOptions));
+    const onChangeHandler = useCallback((a) => {
+        setSelectedOption(a);
+        props.onChange(a);
+    }, []);
+    return props.isCreatable !== undefined ? (React.createElement(AsyncCreatableSelectInput, Object.assign({ onCreateOption: createNew }, props, { options: options, isDisabled: (_d = (_c = (_b = props.rsOptions) === null || _b === void 0 ? void 0 : _b.isDisabled) !== null && _c !== void 0 ? _c : props.disabled) !== null && _d !== void 0 ? _d : false, value: selectedOption, onChange: onChangeHandler }, props.rsOptions))) : (React.createElement(AsyncSelectInput, Object.assign({}, props, { options: options, isDisabled: (_g = (_f = (_e = props.rsOptions) === null || _e === void 0 ? void 0 : _e.isDisabled) !== null && _f !== void 0 ? _f : props.disabled) !== null && _g !== void 0 ? _g : false, value: selectedOption, onChange: onChangeHandler }, props.rsOptions)));
 };
 export default AsyncSelect;
 //# sourceMappingURL=index.js.map

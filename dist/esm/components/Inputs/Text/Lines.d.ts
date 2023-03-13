@@ -1,4 +1,4 @@
 /// <reference types="react" />
-import { LinesInputProps } from '../../core';
-declare const Line: (props: LinesInputProps) => JSX.Element;
-export default Line;
+import { ILines } from "../../core";
+declare const Lines: (props: ILines) => JSX.Element;
+export default Lines;

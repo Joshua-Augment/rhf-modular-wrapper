@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useFormContext, Controller } from "react-hook-form";
 import InputElemWrapper from "./InputElemWrapper";
 import { FormBaseInput } from "./interfaces";
 
 const InputWrapper = (props: FormBaseInput) => {
+  let x=0
   const [_value, _setValue] = useState(null)
-  const methods = props.contextless === true ? {control:undefined } : useFormContext();
+  const methods = props.contextless === true ? {control:undefined, watch : (a:string) => null } : useFormContext();
+  const child = useMemo(()=>{console.log(`Rerendering ${props.name}....X:${x}, value : ${methods.watch(props.name)}`);x++; return props.children},[_value, methods.watch(props.name),props.children])
 
   return (
     props.contextless ?
@@ -16,8 +18,8 @@ const InputWrapper = (props: FormBaseInput) => {
       value={_value}
       onChange={_setValue}
   >
-    {props.children &&
-      props.children({
+    {child &&
+      child({
         ...props,
         value : _value,
         onChange : _setValue,
@@ -44,8 +46,8 @@ const InputWrapper = (props: FormBaseInput) => {
           onChange={onChange}
           errors={error}
         >
-          {props.children &&
-            props.children({
+          {child &&
+            child({
               ...props,
               value,
               onChange,

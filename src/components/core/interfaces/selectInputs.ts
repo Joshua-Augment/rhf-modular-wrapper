@@ -25,11 +25,13 @@ export type RSOptionsBase = {
   styles ?: TRSStyles
 }
 export interface BaseSelect extends IInputsBaseProps<TSelectOption|null> {
-  isCreateable ?: true | ((createdString:string) => Promise<TSelectOption>)
-  options : TSelectOption[],
+  isCreatable ?: true | ((createdString:string) => Promise<TSelectOption>)
   rsOptions ?: RSOptionsBase,
 }
 
-export interface ISelect extends BaseSelect {}
-export interface ISelectAsync extends BaseSelect,RSOptionsAsync {}
-export interface ISelectCreatable extends BaseSelect,RSOptionsCreatable {}
+export interface SelectNotAsync { options : TSelectOption[] }
+export interface SelectAsync { options ?: TSelectOption[] }
+
+export interface ISelect extends BaseSelect,SelectNotAsync {}
+export interface ISelectCreatable extends BaseSelect,RSOptionsCreatable,SelectNotAsync {}
+export interface ISelectAsync extends BaseSelect,RSOptionsAsync,SelectAsync {}

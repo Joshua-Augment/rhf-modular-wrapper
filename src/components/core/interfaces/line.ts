@@ -5,10 +5,10 @@ export interface LineInputProps extends FormBaseInput<String> {
   type ?: HTMLInputTypeAttribute
 }
 
-export interface LinesInputProps extends FormBaseInput<String> {
+export interface ILines extends FormBaseInput<String> {
   theme ?: any,
   rows ?: number,
   cols ?: number
 }
 
-export interface WYSIWYGProps extends FormBaseInput<String> {}
+export interface IWYSIWYG extends FormBaseInput<String> {}

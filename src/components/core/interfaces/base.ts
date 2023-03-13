@@ -46,6 +46,15 @@ export type FormInputClassNames = {
   inputClassName ?: string
 }
 
+export type TInputHTMLProps = {
+  style ?: React.CSSProperties,
+  className ?: string
+}
+
+export type TInputWrapperHTML = TInputHTMLProps & {wrapperClass ?: string, wrapperStyle ?: React.CSSProperties}
+export type TInputInputHTML = TInputHTMLProps & {inputClass ?: string, inputStyle ?: React.CSSProperties}
+export type TInputWrapperInputHTML = TInputWrapperHTML & TInputInputHTML
+
 /* INPUTS */
 export interface IInputsBaseProps<T=any> {
   
@@ -80,8 +89,9 @@ export interface IInputsBaseProps<T=any> {
   
 }
 export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {  
-  children ?: Function
+  children ?: Function 
 }
+
 
 export type HTMLInputTypeAttribute =
 | 'button'

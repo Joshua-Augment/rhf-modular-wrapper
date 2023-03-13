@@ -46,6 +46,19 @@ export type FormInputClassNames = {
     labelClassName?: string;
     inputClassName?: string;
 };
+export type TInputHTMLProps = {
+    style?: React.CSSProperties;
+    className?: string;
+};
+export type TInputWrapperHTML = TInputHTMLProps & {
+    wrapperClass?: string;
+    wrapperStyle?: React.CSSProperties;
+};
+export type TInputInputHTML = TInputHTMLProps & {
+    inputClass?: string;
+    inputStyle?: React.CSSProperties;
+};
+export type TInputWrapperInputHTML = TInputWrapperHTML & TInputInputHTML;
 export interface IInputsBaseProps<T = any> {
     contextless?: boolean;
     inputWrapper?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
