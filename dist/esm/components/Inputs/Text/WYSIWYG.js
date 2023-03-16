@@ -1,10 +1,29 @@
-import React from "react";
+import React from 'react';
 import InputWrapper from "../../core/InputWrapper";
-import LexicalEditor from "./Lexical/LexicalEditor";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 const WYSIWYG = (props) => {
+    const toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        ['link', 'image'],
+        [{ 'header': 1 }, { 'header': 2 }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],
+        [{ 'indent': '-1' }, { 'indent': '+1' }],
+        [{ 'direction': 'rtl' }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        ['clean'] // remove formatting button
+    ];
     return (React.createElement(InputWrapper, Object.assign({}, props), (IWprops) => {
         console.log("[props] - ", IWprops);
-        return React.createElement(LexicalEditor, Object.assign({}, IWprops, { theme: props.theme }));
+        return React.createElement(ReactQuill, Object.assign({ modules: {
+                toolbar: toolbarOptions
+            } }, IWprops, { theme: props.theme }));
     }));
 };
 export default WYSIWYG;
