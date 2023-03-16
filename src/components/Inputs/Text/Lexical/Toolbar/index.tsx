@@ -1,10 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { mergeRegister } from "@lexical/utils";
-import {
-  $getSelectionStyleValueForProperty,
-  // $patchStyleText,
-} from "@lexical/selection";
+import { $getSelectionStyleValueForProperty, /* $patchStyleText */ } from "@lexical/selection";
+import {$isLinkNode, TOGGLE_LINK_COMMAND} from '@lexical/link';
 import styled from "styled-components";
 import {
   FaUndo,
@@ -36,6 +34,8 @@ import {
 import FontDropDown from "./components/Dropdowns/FontDropDown";
 import FamilyDropDown from "./components/Dropdowns/FamilyDropdown";
 import EmbedImageModal from "./components/Modals/EmbedImage";
+import { getSelectedNode } from "../utils/getSelectedNode";
+import { sanitizeUrl } from "../utils/url";
 
 const ToolbarWrapper = styled.div`
   display: flex !important;
@@ -68,7 +68,8 @@ const LexicalToolbar = () => {
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
   const [fontSize, setFontSize] = useState<string>(DEFAULT_FONT_SIZE);
-  const [fontFamily, setFontFamily] = useState<string>("Arial");
+  const [fontFamily, setFontFamily] = useState<string>("Arial");  
+  const [isLink, setIsLink] = useState(false);
   // const [fontColor, setFontColor] = useState<string>("#000");
   // const [bgColor, setBgColor] = useState<string>("#fff");
   // const [isLink, setIsLink] = useState(false);
@@ -95,10 +96,24 @@ const LexicalToolbar = () => {
           DEFAULT_FONT_FAMILY
         )
       );
+
+      // Update links
+      const node = getSelectedNode(selection);
+      const parent = node.getParent();
+      if ($isLinkNode(parent) || $isLinkNode(node)) { setIsLink(true); }
+      else { setIsLink(false);}
       // setFontColor($getSelectionStyleValueForProperty(selection, "color", DEFAULT_COLOR));
       // setBgColor($getSelectionStyleValueForProperty(selection,"background-color",DEFAULT_BG_COLOR));
     }
   }, [editor]);
+
+  const insertLink = useCallback(() => {
+    if (!isLink) {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl('https://'));
+    } else {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+    }
+  }, [editor, isLink]);
 
   // const applyStyleText = useCallback(
   //   (styles: Record<string, string>) => {
@@ -115,8 +130,6 @@ const LexicalToolbar = () => {
 
   useEffect(() => {
     return mergeRegister(
-      editor.registerEditableListener((editable) => {
-      }),
       editor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => {
           updateToolbar();
@@ -138,34 +151,27 @@ const LexicalToolbar = () => {
         <FaRedo />
       </SquareButton>
       <VerticalSpacer />
-      <SquareButton
-        active={isBold}
-        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")}
-      >
+      <SquareButton active={isBold} onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")} >
         <FaBold />
       </SquareButton>
-      <SquareButton
-        active={isItalic}
-        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")}
-      >
+
+      <SquareButton active={isItalic} onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")} >
         <FaItalic />
       </SquareButton>
-      <SquareButton
-        active={isUnderline}
-        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")}
-      >
+
+      <SquareButton active={isUnderline} onClick={() => {console.log("Underline",editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline"))}} >
         <FaUnderline />
       </SquareButton>
-      <SquareButton
-        active={isStrikethrough}
-        onClick={() =>
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")
-        }
-      >
+
+      <SquareButton title="Strike-through" active={isStrikethrough} onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")} >
         <FaStrikethrough />
       </SquareButton>
+
       <VerticalSpacer />
-      <SquareButton><FaLink /></SquareButton>
+
+      <SquareButton onClick={insertLink} active={isLink} title="Insert Link">
+        <FaLink />
+      </SquareButton>
       <SquareButton onClick={()=>setOpenEmbedImage(true)}><FaImage /></SquareButton>
       <VerticalSpacer />
       <SquareButton

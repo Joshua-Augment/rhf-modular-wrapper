@@ -21,24 +21,28 @@ const EmbedImageModal = (props: IEmbedImageModal) => {
     const imageURL = document.getElementById("image_url") as HTMLInputElement
     const URLSrc = imageURL !== null ? imageURL.value : undefined
 
-    const imageAttach = document.getElementById("image_url") as HTMLInputElement
+    const imageAttach = document.getElementById("image_attach") as HTMLInputElement
     const Attach = imageAttach !== null ? imageAttach.files : undefined
 
     console.log("[AddImage] -a",a)
     console.log("[AddImage] -",URLSrc)
     console.log("[AddImage] -",Attach)
 
-    const payload:InsertImagePayload = {altText: '' ,src: URLSrc ? URLSrc : 
-      Attach && Attach[0] !== null && Attach[0] !== undefined ?  URL.createObjectURL(Attach[0]) :''}
+    const payload:InsertImagePayload = {
+      altText: '' ,
+      src: URLSrc ? URLSrc : Attach && Attach[0] !== null && Attach[0] !== undefined ?  URL.createObjectURL(Attach[0]) :''
+    }
     
-    editor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
+    console.log("[DispatchImage]",editor.dispatchCommand(INSERT_IMAGE_COMMAND, payload))
   }
 
   return (
     <BaseModal title="Add Image" show={props.show} onClose={props.onClose}>
-        <Line id="image_url" contextless label="URL" name="image_url" />
+        <label htmlFor='image_url'>URL</label>
+        <input id="image_url" name="image_url" />
         <p style={{textAlign: 'center'}}>or</p>
-        <Line id="image_attach" contextless label="Attach Image" name="image_attach" type="file" />
+        <label htmlFor='image_attach'>Attach Image</label>
+        <input id="image_attach" name="image_attach" type="file" />
         <button type="button" onClick={(e)=>addImage(e)}>Add Image</button>
         <button type="button" onClick={()=>props.onClose()}>Cancel</button>
     </BaseModal>
