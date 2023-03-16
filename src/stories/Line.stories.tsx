@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ComponentMeta } from '@storybook/react';
-import {Form} from "../components/core/Form"
+import {Form, SubmitButton} from "../components/core/Form"
 
 import Line from "../components/Inputs/Text/Line"
 import Lines from "../components/Inputs/Text/Lines"
@@ -35,4 +35,27 @@ TextArea.args = {
 export const WYSIWYGEditor = Template.bind({}) 
 WYSIWYGEditor.args = {
   children : <WYSIWYG label="Simple Form Input (WYSIWYG Editor)" name="wysiwyg" placeholder="Text Placeholder" />
+}
+
+export const WYSIWYGEditorWhenStateChanges = () => {
+  const [response, setResponse] = useState<string|null>(null)
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setResponse("Testing One Two Three")
+    },1000)
+  },[])
+
+  const _onSubmit = (a:any) => new Promise((resolve, reject) => {
+    console.log("[Raw Submit] - ",a)
+    setResponse(JSON.stringify(a,( key, value) => key == 'parent' ? null : value,2))
+  })
+
+  return <div>
+    <p style={{margin:'10px',padding:'5px',border:'1px solid blue', borderRadius:'5px'}}>Submitted Object : {response}</p>
+    <Form onSubmit={_onSubmit}>
+    <WYSIWYG label="Simple Form Input (WYSIWYG Editor)" name="wysiwyg" placeholder="Text Placeholder" />
+    <SubmitButton>Submit</SubmitButton>
+  </Form>
+</div>
 }

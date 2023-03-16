@@ -1,11 +1,25 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import { IFormFrameInjector, ILines } from "../../core";
 import InputWrapper from "../../core/InputWrapper";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const WYSIWYG = (props:ILines) => {
-  const toolbarOptions = [
+
+ 
+  return (    
+    <InputWrapper {...props}>
+      {(IWprops: IFormFrameInjector) => {
+        console.log("[props] - ", IWprops);
+        return <ReactQuillWrapper {...IWprops} {...props} />
+        // return <ReactQuill modules={{toolbar : toolbarOptions}} {...IWprops} theme={props.theme} />;
+      }}
+    </InputWrapper>
+  )
+}
+
+const ReactQuillWrapper = (props : any) => {
+  const toolbarOptions = useMemo(()=>([
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
     ['blockquote', 'code-block'],
     ['link','image'],
@@ -24,18 +38,9 @@ const WYSIWYG = (props:ILines) => {
     [{ 'align': [] }],
   
     ['clean']                                         // remove formatting button
-  ];
+  ]),[]);
 
-  return (    
-    <InputWrapper {...props}>
-      {(IWprops: IFormFrameInjector) => {
-        console.log("[props] - ", IWprops);
-        return <ReactQuill modules={{
-          toolbar : toolbarOptions
-        }} {...IWprops} theme={props.theme} />;
-      }}
-    </InputWrapper>
-  )
+  return <ReactQuill theme={'snow'} modules={{toolbar : toolbarOptions}} onChange={props.onChange}  />
 }
 
 export default WYSIWYG

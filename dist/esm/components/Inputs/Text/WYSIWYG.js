@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import InputWrapper from "../../core/InputWrapper";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 const WYSIWYG = (props) => {
-    const toolbarOptions = [
+    return (React.createElement(InputWrapper, Object.assign({}, props), (IWprops) => {
+        console.log("[props] - ", IWprops);
+        return React.createElement(ReactQuillWrapper, Object.assign({}, IWprops, props));
+        // return <ReactQuill modules={{toolbar : toolbarOptions}} {...IWprops} theme={props.theme} />;
+    }));
+};
+const ReactQuillWrapper = (props) => {
+    const toolbarOptions = useMemo(() => ([
         ['bold', 'italic', 'underline', 'strike'],
         ['blockquote', 'code-block'],
         ['link', 'image'],
@@ -18,13 +25,8 @@ const WYSIWYG = (props) => {
         [{ 'font': [] }],
         [{ 'align': [] }],
         ['clean'] // remove formatting button
-    ];
-    return (React.createElement(InputWrapper, Object.assign({}, props), (IWprops) => {
-        console.log("[props] - ", IWprops);
-        return React.createElement(ReactQuill, Object.assign({ modules: {
-                toolbar: toolbarOptions
-            } }, IWprops, { theme: props.theme }));
-    }));
+    ]), []);
+    return React.createElement(ReactQuill, { theme: 'snow', modules: { toolbar: toolbarOptions }, onChange: props.onChange });
 };
 export default WYSIWYG;
 //# sourceMappingURL=WYSIWYG.js.map
