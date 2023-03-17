@@ -1,6 +1,7 @@
 import React, {lazy, createContext, useMemo, useContext} from 'react'
 import { FormProvider, useForm } from 'react-hook-form';
 import {FieldValues} from "react-hook-form/dist/types"
+import { yupResolver } from '@hookform/resolvers/yup';
 import { FormFrameWrapperProps, IForm, ISubmitButton } from './interfaces';
 
 import "../styling/core.css"
@@ -33,13 +34,13 @@ export const Form = <T extends FieldValues,>(props: IForm<T>) => {
     mode: props.mode ?? "onChange",
     reValidateMode: props.reValidateMode ?? 'onChange',
     defaultValues: props.defaultValues,
-    resolver: props.resolver,
+    resolver: props.yupSchema ? yupResolver(props.yupSchema) : undefined,
     context: props.context,
     criteriaMode: props.criteriaMode ?? "firstError",
     shouldFocusError: props.shouldFocusError ?? true,
     shouldUnregister: props.shouldUnregister ?? false,
     shouldUseNativeValidation: props.shouldUseNativeValidation ?? false,
-    delayError: props.delayError ?? undefined
+    delayError: props.delayError ?? undefined,
   });
   
   return (

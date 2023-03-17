@@ -5,16 +5,69 @@ The main purpose for the development of this plugin was to create a easy to set 
 
 This readme will be updated further as we go along, as this is my first time writing documentation on Github, but most of the elements are for the most part self-explanatory, and the storybook page shows common usecases (Coming soon). 
 
+
+## Use Case (TLDR)
+While each Input has a `contextless` prop  that allows it to be used as a standalone input, most of them work within a ``` <Form> ``` component as shown
+
+```
+const onSubmit = (returnObjects: any) => new Promise<any>((resolve, reject) => {})
+const defaultValues = {name: 'James'}
+
+<Form onSubmit={onSubmit} defaultValues={defaultValues}>
+  {
+    ... Inputs
+  }
+</Form>
+
+```
+
+For inputs, the bare minimum needed is the name prop (label props are not required)
+
+```
+<Line name="name" />  // Line is used for default input elements, single lined basic inputs (but can be 
+                      // extended with the `type` prop)
+```
+
+## Validation
+Validation is now provided by the use of a Yup resolver, where the schema should be attached to the <Form> as the prop `yupSchema`. 
+
+
+More options to come soon
+
+## Props
+
+For the <Form> element the props are
+Prop | Type | Use | Default
+| --- | --- | --- | ---
+mode | 'onBlur','onChange','onSubmit','onTouched','all'| Validation Strategy *before* submission | onSubmit
+reValidateMode |  "onChange" , "onBlur" , "onSubmit" | Validation Strategy *after* submission | onChange
+defaultValues | any | Partial of the form object schema | unedefined
+yupSchema | Resolver<yup> | Yup Schema Resolver | undefined
+context | FormContext | Form Context to allow deeply nested or complex form structures | FormContext
+criteriaMode | "firstError","all" | Show only First error or all errors for any field | "firstError"
+shouldFocusError | boolean | Should focus on the error element | true
+shouldUnregister | boolean | Unregisters an input value if the input is removed. If false, inputs value is kept even if the input is removed from DOM | false
+shouldUseNativeValidation | boolean | If the native validation should be used instead | false
+delayError | number | Delay the error message by x milliseconds | undefined
+
 ## Types of Input
 
 ### Line
 The Line element are simply text inputs, using the <input> element as its root, so HTML5 validation using the type attribute still works natively; eg: <Line type="email" {...props} /> validates as an email.
 
+```
+ <Line name="some_input" label="Some Label" />
+```
+
 ### Lines 
 Lines are just textarea inputs, so at its core its just a <textarea> element
 
+```
+ <Line name="some_input" label="Some Label" />
+```
+
 ### WYSIWYGEditor (Working but in development)
-A WYSIWYG editor, powered by Lexical. When the form is submitted you'll get the raw editor object as an output, but it also includes the key "html" for a string HTML representation of the output for convenience
+A WYSIWYG editor, powered by QuillJS. When the form is submitted you'll get the HTML as a plaintext string in the form object
 
 ### DatePicker
 A Datepicker powered by react-datepicker. Can use all props of react-datepicker as usual, just include them under the option prop; ie <DatePicker options={"react-datepicker props"} />
@@ -31,9 +84,9 @@ Ditto on the Radiobox
 ## Planned Upgrades
 
 Currently more inputs are being planned out, including; 
-  1. Switches
-  2. Color-pickers
-  3. Number Lines
-  4. Conversion Inputs (height / weight / etc)
-  5. Persist options
-  6. Listed inputs (Add remove lines of inputs)
+- [ ]  1. Switches
+- [ ]  2. Color-pickers
+- [ ]  3. Number Lines
+- [ ]  4. Conversion Inputs (height / weight / etc)
+- [ ]  5. Persist options
+- [X]  6. Listed inputs (Add remove lines of inputs) *Basic lists done*

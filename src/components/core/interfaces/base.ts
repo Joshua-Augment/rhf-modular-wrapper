@@ -13,7 +13,7 @@ export interface IForm<T extends FieldValues> {
   children : JSX.Element[] | JSX.Element
   mode ?: keyof ValidationMode,
   reValidateMode ?: "onBlur" | "onChange" | "onSubmit",
-  resolver ?: Resolver<T,any>, 
+  yupSchema ?: any, 
   context ?: any,
   criteriaMode?: CriteriaMode,
   shouldFocusError ?: boolean,
