@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { FieldValues, DeepPartial } from 'react-hook-form/dist/types';
-import { CriteriaMode, Resolver, ValidationMode, FieldError } from 'react-hook-form/dist/types';
+import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form/dist/types';
 export interface ISubmitButton {
     label?: string;
     children?: React.ReactNode;
@@ -17,7 +17,7 @@ export interface IForm<T extends FieldValues> {
     children: JSX.Element[] | JSX.Element;
     mode?: keyof ValidationMode;
     reValidateMode?: "onBlur" | "onChange" | "onSubmit";
-    resolver?: Resolver<T, any>;
+    yupSchema?: any;
     context?: any;
     criteriaMode?: CriteriaMode;
     shouldFocusError?: boolean;

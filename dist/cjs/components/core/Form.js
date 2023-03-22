@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SubmitButton = exports.Form = exports.ThemeContext = void 0;
 const react_1 = __importStar(require("react"));
 const react_hook_form_1 = require("react-hook-form");
+const yup_1 = require("@hookform/resolvers/yup");
 require("../styling/core.css");
 exports.ThemeContext = (0, react_1.createContext)({ inputTemplate: null, buttonTemplate: null });
 const BSTheme = (0, react_1.lazy)(() => Promise.resolve().then(() => __importStar(require('../styling/BootstrapTheme'))));
@@ -44,13 +45,13 @@ const Form = (props) => {
         mode: (_a = props.mode) !== null && _a !== void 0 ? _a : "onChange",
         reValidateMode: (_b = props.reValidateMode) !== null && _b !== void 0 ? _b : 'onChange',
         defaultValues: props.defaultValues,
-        resolver: props.resolver,
+        resolver: props.yupSchema ? (0, yup_1.yupResolver)(props.yupSchema) : undefined,
         context: props.context,
         criteriaMode: (_c = props.criteriaMode) !== null && _c !== void 0 ? _c : "firstError",
         shouldFocusError: (_d = props.shouldFocusError) !== null && _d !== void 0 ? _d : true,
         shouldUnregister: (_e = props.shouldUnregister) !== null && _e !== void 0 ? _e : false,
         shouldUseNativeValidation: (_f = props.shouldUseNativeValidation) !== null && _f !== void 0 ? _f : false,
-        delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined
+        delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined,
     });
     return (react_1.default.createElement(ChosenTheme, { style: props.style },
         react_1.default.createElement(exports.ThemeContext.Provider, { value: { inputTemplate: (_h = props.inputWrapper) !== null && _h !== void 0 ? _h : null, buttonTemplate: (_j = props.buttonWrapper) !== null && _j !== void 0 ? _j : null } },

@@ -31,15 +31,15 @@ export interface BaseSelect extends IInputsBaseProps<TSelectOption | null> {
     isCreatable?: true | ((createdString: string) => Promise<TSelectOption>);
     rsOptions?: RSOptionsBase;
 }
-export interface SelectNotAsync {
+export interface IOptionsSelectNotAsync {
     options: TSelectOption[];
 }
-export interface SelectAsync {
+export interface IOptionsSelectAsync {
     options?: TSelectOption[];
 }
-export interface ISelect extends BaseSelect, SelectNotAsync {
+export interface ISelect extends BaseSelect, IOptionsSelectNotAsync {
 }
-export interface ISelectCreatable extends BaseSelect, RSOptionsCreatable, SelectNotAsync {
+export interface ISelectCreatable extends BaseSelect, RSOptionsCreatable, IOptionsSelectNotAsync {
 }
-export interface ISelectAsync extends BaseSelect, RSOptionsAsync, SelectAsync {
+export interface ISelectAsync extends BaseSelect, RSOptionsAsync, IOptionsSelectAsync {
 }

@@ -1,5 +1,5 @@
 import { FieldValues, DeepPartial } from 'react-hook-form/dist/types';
-import { CriteriaMode, Resolver, ValidationMode, FieldError } from 'react-hook-form/dist/types';
+import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form/dist/types';
 export interface ISubmitButton {label ?: string; children ?: React.ReactNode;buttonClass ?: string; }
 
 export interface IForm<T extends FieldValues> {
