@@ -77,7 +77,7 @@ Currently two uploaders are available, a dashboard centered image uploader using
 
 ### Dropzone
 
-The Dropzone uploader allows for the Uploading of multiple files, with a preview available for PDF / image files
+The Dropzone uploader allows for the Uploading of multiple files, with a preview available for PDF / image / text / doc  files
 
 Use case :
 ```
