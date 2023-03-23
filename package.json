@@ -1,12 +1,12 @@
 {
   "name": "rhf-modular-wrapper",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Modular Wrapper for React Hook Form using context, plug and play smart components style",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "files": [
     "dist"
-  ],  
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Joshua-Augment/rhf-modular-wrapper"
