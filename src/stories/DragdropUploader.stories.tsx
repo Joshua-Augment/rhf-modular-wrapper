@@ -13,5 +13,5 @@ export default {
 
 export const DragDropUploader = Template.bind({}) 
 DragDropUploader.args = {
-    children : <DropzoneUploader label="Uppy Uploader" name="uploader"  endpoint="/" />
+    children : <DropzoneUploader label="Uppy Uploader" name="uploader" />
 }

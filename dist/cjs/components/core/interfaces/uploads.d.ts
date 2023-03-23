@@ -1,5 +1,6 @@
+/// <reference types="react" />
 import { Uppy } from '@uppy/core';
-import { FormBaseInput, IFormFrameInjector } from './base';
+import { FormBaseInput, IFormFrameInjector, IInputsBaseProps } from './base';
 export interface IBaseUppy extends FormBaseInput<String[]> {
     endpoint: string;
     metadata?: any;
@@ -11,10 +12,26 @@ export interface IUppyDD extends IBaseUppy {
 export interface IBaseUppyInjector extends IFormFrameInjector {
     uppy: Uppy;
 }
-export interface IDropzoneUploader extends FormBaseInput<File[]> {
+export type TDropzonePreview = {
+    files: File[];
+    moveFile: (currentIndex: number, moveIndex: number, isRelative?: boolean) => void;
+    handleDelete: (currentIndex: number) => void;
+    showPreview: (currentIndex: number) => void;
+};
+export interface DropzoneBasic {
+    previewType?: 'list' | 'thumbnail-TBA';
+    containerCaption?: string;
     accept?: {
         [key: string]: string[];
     };
     showList?: boolean;
-    previewType?: 'list';
+    newWindow?: boolean;
+    previewBox?: React.ComponentType<IDropzoneHandler & TDropzonePreview>;
+}
+export interface IDropzoneHandler extends IFormFrameInjector<File[]>, DropzoneBasic {
+}
+export interface IDropzoneUploader extends FormBaseInput<File[]>, DropzoneBasic {
+}
+export interface IPDFUploader extends IInputsBaseProps<File[]> {
+    newWindow?: boolean;
 }

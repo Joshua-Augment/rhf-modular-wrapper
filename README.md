@@ -75,6 +75,15 @@ A Datepicker powered by react-datepicker. Can use all props of react-datepicker 
 ### Uploaders
 Currently two uploaders are available, a dashboard centered image uploader using Uppy, and a drag n drop system using react-dropzone. For Uppy, an endpoint is necessary, while for dropzone, it holds the File objects for submission at the end or for processing
 
+### Dropzone
+
+The Dropzone uploader allows for the Uploading of multiple files, with a preview available for PDF / image files
+
+Use case :
+```
+  <DropzoneUploader label="Example Uploader" name="uploader" />
+```
+
 ### Checkbox
 To use checkboxes, similar to native use include a name prop and value prop.
 

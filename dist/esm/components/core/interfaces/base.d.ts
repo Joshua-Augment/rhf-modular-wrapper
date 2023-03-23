@@ -7,8 +7,8 @@ export interface ISubmitButton {
     buttonClass?: string;
 }
 export interface IForm<T extends FieldValues> {
-    inputWrapper?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
-    buttonWrapper?: React.ComponentType<ISubmitButton> | React.ComponentType<ISubmitButton>;
+    inputWrapper?: React.ComponentType<FormFrameWrapperProps>;
+    buttonWrapper?: React.ComponentType<ISubmitButton>;
     style?: 'bootstrap' | 'mui';
     id?: string;
     defaultValues?: DeepPartial<T>;
