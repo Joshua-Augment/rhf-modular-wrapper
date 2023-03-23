@@ -6,7 +6,11 @@
   "module": "dist/esm/index.js",
   "files": [
     "dist"
-  ],
+  ],  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Joshua-Augment/rhf-modular-wrapper"
+  },
   "scripts": {
     "start": "start-storybook -p 6006",
     "build": "rm -rf /dist && npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs",
