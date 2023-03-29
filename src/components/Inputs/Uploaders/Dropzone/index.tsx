@@ -64,10 +64,12 @@ const DropzoneHandler = (props: IDropzoneHandler) => {
   const [preview, setPreview] = useState<null|File>(null)
 
   useEffect(()=>{ if (props.value !== undefined && !compareArrays(files, props.value)) {
-    console.log("[useEffect] - dropzone",props.value)
-    props.onChange(props.value)
-    setFiles(props.value)
-  }},[props.value])
+    const _files = [...props.value]
+    console.log("[useEffect] - dropzone",_files)
+    setFiles(_files)
+
+    props.onChange(_files)
+  }},[props.value, files])
 
   useEffect(() => {
     const _newFiles=  acceptedFiles
@@ -77,7 +79,7 @@ const DropzoneHandler = (props: IDropzoneHandler) => {
 
   const showPreview = (index:number) => {
     if (props.newWindow) {
-
+      window.open(URL.createObjectURL(files[index]),'_blank')
     } else {
       setPreview(files[index])
     }

@@ -29,13 +29,13 @@ export const CheckboxGroupExampleVertical = () => {
     fetch(imgFile)
       .then((data) => data.blob())
       .then((data) => {
-        const file = new File([data],'1.png', {type: 'image/png', lastModified: new Date().getTime()})
+        const file = new File([data],'1.png', {type: 'image/png', lastModified: new Date().getTime(), path: '1.png'})
         setDefaultValues({
           line: 'TEST INPUT',
           line_number : 3,
           datepicker : new Date(new Date().getTime() - 1000 * 60 * 60 * 24),
           select: {label:'Option 2',value:2},
-          dropzone : [file]
+          dropzone : [file, file]
         })
 
         setReady(true)
