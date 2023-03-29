@@ -49,6 +49,7 @@ export type TMadeInputList =
   | "select_async"
   | "textarea"
   | "custom"
+  | "switch"
   | "yesno"
 
 

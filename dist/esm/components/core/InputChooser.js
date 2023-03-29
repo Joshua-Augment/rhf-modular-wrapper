@@ -1,5 +1,5 @@
 import React from 'react';
-import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox } from '../Inputs';
+import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch } from '../Inputs';
 const InputChooser = (props) => {
     const OutputComponent = () => {
         switch (props.type) {
@@ -8,6 +8,8 @@ const InputChooser = (props) => {
                 return React.createElement(Elem, Object.assign({}, props));
             case 'yesno':
                 return React.createElement(YesNo, Object.assign({}, props));
+            case 'switch':
+                return React.createElement(Switch, Object.assign({}, props));
             case "checkbox":
                 return React.createElement(Checkbox, Object.assign({}, props));
             case "radiobox":

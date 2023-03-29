@@ -13,6 +13,8 @@ const InputChooser = (props) => {
                 return react_1.default.createElement(Elem, Object.assign({}, props));
             case 'yesno':
                 return react_1.default.createElement(Inputs_1.YesNo, Object.assign({}, props));
+            case 'switch':
+                return react_1.default.createElement(Inputs_1.Switch, Object.assign({}, props));
             case "checkbox":
                 return react_1.default.createElement(Inputs_1.Checkbox, Object.assign({}, props));
             case "radiobox":

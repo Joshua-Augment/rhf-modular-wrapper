@@ -29,5 +29,5 @@ export interface ITableList extends IBaseList {
     headerTemplate?: React.ReactNode;
     footerTemplate?: React.ReactNode;
 }
-export type TMadeInputList = "wysiwyg" | "datepicker" | "select" | "select_async" | "textarea" | "custom" | "yesno";
+export type TMadeInputList = "wysiwyg" | "datepicker" | "select" | "select_async" | "textarea" | "custom" | "switch" | "yesno";
 export type TListInputs = HTMLInputTypeAttribute | TMadeInputList;
