@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import AsyncSelectInput from "react-select/async";
 import AsyncCreatableSelectInput from "react-select/async-creatable";
 import { InputWrapper, } from "../../../core";
+import { compareArrays } from "../../../core/helpers";
 const AsyncSelect = (props) => {
     return (React.createElement(InputWrapper, Object.assign({}, props, { noBorder: true }), (IWProps) => {
         console.log(`[Datepickerprops] - ${props.name}`, IWProps);
@@ -16,6 +17,11 @@ const SelectWrapper = (props) => {
         var _a;
         setOptions((_a = props.options) !== null && _a !== void 0 ? _a : []);
     }, [JSON.stringify(props.options)]);
+    useEffect(() => {
+        if (Array.isArray(props.value) ? !compareArrays(props.value, selectedOption) : (props.value === null ? false : props.value.value !== (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value))) {
+            setSelectedOption(props.value);
+        }
+    }, [props.value]);
     const createNew = useCallback((a) => {
         if (props.isCreatable !== undefined) {
             if (props.isCreatable === true) {

@@ -5,6 +5,7 @@ import { FaCaretDown, FaCaretUp, FaEye, FaTrash } from 'react-icons/fa';
 import InputWrapper from '../../../core/InputWrapper';
 import styled from "styled-components";
 import PreviewModal from './components/PreviewModal';
+import { compareArrays } from '../../../core/helpers';
 const PreviewContainer = styled.div `
   width:100%;
   padding:5px;
@@ -45,9 +46,14 @@ const DropzoneHandler = (props) => {
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
     const [files, setFiles] = useState([]);
     const [preview, setPreview] = useState(null);
-    useEffect(() => { if (props.value !== undefined) {
-        setFiles(props.value);
-    } }, []);
+    useEffect(() => {
+        if (props.value !== undefined && !compareArrays(files, props.value)) {
+            const _files = [...props.value];
+            console.log("[useEffect] - dropzone", _files);
+            setFiles(_files);
+            props.onChange(_files);
+        }
+    }, [props.value, files]);
     useEffect(() => {
         const _newFiles = acceptedFiles;
         props.onChange([...files, ..._newFiles]);
@@ -55,6 +61,7 @@ const DropzoneHandler = (props) => {
     }, [JSON.stringify(acceptedFiles)]);
     const showPreview = (index) => {
         if (props.newWindow) {
+            window.open(URL.createObjectURL(files[index]), '_blank');
         }
         else {
             setPreview(files[index]);

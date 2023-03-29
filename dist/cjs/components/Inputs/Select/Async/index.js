@@ -30,6 +30,7 @@ const react_1 = __importStar(require("react"));
 const async_1 = __importDefault(require("react-select/async"));
 const async_creatable_1 = __importDefault(require("react-select/async-creatable"));
 const core_1 = require("../../../core");
+const helpers_1 = require("../../../core/helpers");
 const AsyncSelect = (props) => {
     return (react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { noBorder: true }), (IWProps) => {
         console.log(`[Datepickerprops] - ${props.name}`, IWProps);
@@ -44,6 +45,11 @@ const SelectWrapper = (props) => {
         var _a;
         setOptions((_a = props.options) !== null && _a !== void 0 ? _a : []);
     }, [JSON.stringify(props.options)]);
+    (0, react_1.useEffect)(() => {
+        if (Array.isArray(props.value) ? !(0, helpers_1.compareArrays)(props.value, selectedOption) : (props.value === null ? false : props.value.value !== (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value))) {
+            setSelectedOption(props.value);
+        }
+    }, [props.value]);
     const createNew = (0, react_1.useCallback)((a) => {
         if (props.isCreatable !== undefined) {
             if (props.isCreatable === true) {

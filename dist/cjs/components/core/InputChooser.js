@@ -11,6 +11,12 @@ const InputChooser = (props) => {
             case 'custom':
                 const Elem = props.elem;
                 return react_1.default.createElement(Elem, Object.assign({}, props));
+            case 'yesno':
+                return react_1.default.createElement(Inputs_1.YesNo, Object.assign({}, props));
+            case "checkbox":
+                return react_1.default.createElement(Inputs_1.Checkbox, Object.assign({}, props));
+            case "radiobox":
+                return react_1.default.createElement(Inputs_1.Radiobox, Object.assign({ options: props.options }, props));
             case 'wysiwyg':
                 return react_1.default.createElement(Inputs_1.WYSIWYGEditor, Object.assign({}, props));
             case 'datepicker':

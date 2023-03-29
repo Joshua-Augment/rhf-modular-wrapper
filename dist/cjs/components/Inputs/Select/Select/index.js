@@ -30,6 +30,7 @@ const react_1 = __importStar(require("react"));
 const react_select_1 = __importDefault(require("react-select/"));
 const creatable_1 = __importDefault(require("react-select/creatable"));
 const core_1 = require("../../../core");
+const helpers_1 = require("../../../core/helpers");
 const Select = (props) => {
     return (react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { noBorder: true }), (IWProps) => {
         console.log(`[Datepickerprops] - ${props.name}`, IWProps);
@@ -41,6 +42,11 @@ const SelectWrapper = (props) => {
     const [options, setOptions] = (0, react_1.useState)((_a = props.options) !== null && _a !== void 0 ? _a : []);
     const [selectedOption, setSelectedOption] = (0, react_1.useState)(null);
     (0, react_1.useEffect)(() => { setOptions(props.options); }, [props.options]);
+    (0, react_1.useEffect)(() => {
+        if (Array.isArray(props.value) ? !(0, helpers_1.compareArrays)(props.value, selectedOption) : (props.value === null ? false : props.value.value !== (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value))) {
+            setSelectedOption(props.value);
+        }
+    }, [props.value]);
     const createNew = (0, react_1.useCallback)((a) => {
         if (props.isCreatable !== undefined) {
             if (props.isCreatable === true) {

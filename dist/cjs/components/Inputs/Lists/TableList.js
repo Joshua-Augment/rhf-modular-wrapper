@@ -31,9 +31,16 @@ const react_hook_form_1 = require("react-hook-form");
 const InputElemWrapper_1 = __importDefault(require("../../core/InputElemWrapper"));
 const InputChooser_1 = __importDefault(require("../../core/InputChooser"));
 const fa_1 = require("react-icons/fa");
+const styled_components_1 = __importDefault(require("styled-components"));
+const Table = styled_components_1.default.table `
+  width: 100%;
+  margin-top:5px;
+  margin-bottom: 5px;
+`;
 const TableList = (props) => {
-    const { control } = (0, react_hook_form_1.useFormContext)();
+    const { control, formState: { errors } } = (0, react_hook_form_1.useFormContext)();
     const { fields, append, remove } = (0, react_hook_form_1.useFieldArray)({ control, name: props.name });
+    console.log("[TableList] - fields", fields);
     const generateRow = (0, react_1.useCallback)((i) => react_1.default.createElement("tr", { key: `fw-${props.name}-${i}` },
         props.showIndex === true && react_1.default.createElement("td", null, i + 1),
         props.items.map((item, iT) => react_1.default.createElement("td", { key: `fw-${props.name}-${i}-${iT}-iew` },
@@ -52,12 +59,13 @@ const TableList = (props) => {
     }, []);
     const footerGenerator = (0, react_1.useMemo)(() => { var _a; return (_a = props.footerTemplate) !== null && _a !== void 0 ? _a : headerGenerator; }, []);
     // const bodyGenerator = useMemo(()=> fields.length === 0 ? generateRow(0) : fields.map((field,i) => generateRow(i)),[fields])
-    const bodyGenerator = (0, react_1.useMemo)(() => fields.map((field, i) => generateRow(i)), [fields]);
+    const bodyGenerator = (0, react_1.useMemo)(() => fields.map((field, i) => generateRow(i)), [fields, errors]);
     return (react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { onChange: () => { }, value: null }),
         react_1.default.createElement("div", null,
-            (props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator,
-            react_1.default.createElement("tbody", null, bodyGenerator),
-            (props.header === 'footer' || props.header === 'header_footer') ? footerGenerator : (props.header === 'bottom' || props.header === 'both') && headerGenerator)));
+            react_1.default.createElement(Table, null,
+                (props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator,
+                react_1.default.createElement("tbody", null, bodyGenerator),
+                (props.header === 'footer' || props.header === 'header_footer') ? footerGenerator : (props.header === 'bottom' || props.header === 'both') && headerGenerator))));
 };
 exports.default = TableList;
 //# sourceMappingURL=TableList.js.map

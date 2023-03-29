@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { ICheckbox, IFormFrameInjector } from '../../core'
 import InputWrapper from '../../core/InputWrapper'
 

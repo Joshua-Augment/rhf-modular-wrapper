@@ -5,8 +5,14 @@ const Checkbox = (props) => {
         if (IWprops.value === undefined) {
             IWprops.onChange(false);
         }
-        return React.createElement("input", { id: props.name, type: "checkbox", name: props.name, value: IWprops.value, onChange: IWprops.onChange });
+        return React.createElement(CheckBoxWrapper, Object.assign({}, props, IWprops));
     }));
+};
+const CheckBoxWrapper = (props) => {
+    // useEffect(()=>{
+    //   if (props)
+    // },[props.value])
+    return React.createElement("input", { id: props.name, type: "checkbox", name: props.name, checked: props.value, value: props.value, onChange: props.onChange });
 };
 export default Checkbox;
 //# sourceMappingURL=Checkbox.js.map

@@ -33,6 +33,7 @@ const fa_1 = require("react-icons/fa");
 const InputWrapper_1 = __importDefault(require("../../../core/InputWrapper"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const PreviewModal_1 = __importDefault(require("./components/PreviewModal"));
+const helpers_1 = require("../../../core/helpers");
 const PreviewContainer = styled_components_1.default.div `
   width:100%;
   padding:5px;
@@ -73,9 +74,14 @@ const DropzoneHandler = (props) => {
     const { acceptedFiles, getRootProps, getInputProps } = (0, react_dropzone_1.useDropzone)();
     const [files, setFiles] = (0, react_1.useState)([]);
     const [preview, setPreview] = (0, react_1.useState)(null);
-    (0, react_1.useEffect)(() => { if (props.value !== undefined) {
-        setFiles(props.value);
-    } }, []);
+    (0, react_1.useEffect)(() => {
+        if (props.value !== undefined && !(0, helpers_1.compareArrays)(files, props.value)) {
+            const _files = [...props.value];
+            console.log("[useEffect] - dropzone", _files);
+            setFiles(_files);
+            props.onChange(_files);
+        }
+    }, [props.value, files]);
     (0, react_1.useEffect)(() => {
         const _newFiles = acceptedFiles;
         props.onChange([...files, ..._newFiles]);
@@ -83,6 +89,7 @@ const DropzoneHandler = (props) => {
     }, [JSON.stringify(acceptedFiles)]);
     const showPreview = (index) => {
         if (props.newWindow) {
+            window.open(URL.createObjectURL(files[index]), '_blank');
         }
         else {
             setPreview(files[index]);

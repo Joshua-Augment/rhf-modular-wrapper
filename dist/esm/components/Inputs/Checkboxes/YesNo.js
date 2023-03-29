@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { InputWrapper } from '../../core';
 import styled from "styled-components";
 const YesNo = (props) => {
@@ -27,6 +27,13 @@ const Button = styled.button `
 const RadioWrapper = (props) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
     const [value, setValue] = useState(undefined);
+    useEffect(() => {
+        var _a, _b, _c;
+        if (props.value !== undefined && props.value !== value) {
+            const isYes = ((_a = props.yes) === null || _a === void 0 ? void 0 : _a.value) ? props.value === props.yes.value : props.value;
+            buttonHandler(props.value, isYes ? (_b = props.yes) === null || _b === void 0 ? void 0 : _b.extHandler : (_c = props.no) === null || _c === void 0 ? void 0 : _c.extHandler);
+        }
+    }, [props.value, value]);
     const buttonHandler = useCallback((val, extHandler) => {
         if (extHandler) {
             extHandler(val).then(a => { if (a) {
