@@ -8,6 +8,13 @@ import styled from "styled-components"
 import PreviewModal from './components/PreviewModal'
 import { compareArrays } from '../../../core/helpers';
 
+const DropzoneContainer = styled.div`
+  padding:10px;
+  margin: 5px 2px;
+  background:#e0e0e0;
+  border-radius: 2px;
+`
+
 const PreviewContainer = styled.div`
   width:100%;
   padding:5px;
@@ -98,7 +105,7 @@ const DropzoneHandler = (props: IDropzoneHandler) => {
     props.onChange(newFileArr)
   }
 
-  return  <div>
+  return  <DropzoneContainer>
   <PreviewModal file={preview} setFile={setPreview} /> 
   <div {...getRootProps()}>
     <input {...getInputProps()} />
@@ -108,7 +115,7 @@ const DropzoneHandler = (props: IDropzoneHandler) => {
   {
     files.length > 0 && <PreviewViewer {...props} files={files} showPreview={showPreview} moveFile={moveFile} handleDelete={handleDelete} />
   }
-</div>
+</DropzoneContainer>
 } 
 
 const PreviewViewer = (props: IDropzoneHandler & TDropzonePreview ) => {

@@ -28,13 +28,13 @@
   padding-left: 1.5em;
   margin-bottom: 0.125rem;
   justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 .form-item-child-wrapper.no-border > div {border:none !important;}
 
-.form-item-child-wrapper > *, .form-item-child-wrapper input {
+/* .form-item-child-wrapper > *,  */.form-item-child-wrapper input {
   box-sizing: border-box;
   display: block;
   width: 100%;

@@ -34,6 +34,12 @@ const InputWrapper_1 = __importDefault(require("../../../core/InputWrapper"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const PreviewModal_1 = __importDefault(require("./components/PreviewModal"));
 const helpers_1 = require("../../../core/helpers");
+const DropzoneContainer = styled_components_1.default.div `
+  padding:10px;
+  margin: 5px 2px;
+  background:#e0e0e0;
+  border-radius: 2px;
+`;
 const PreviewContainer = styled_components_1.default.div `
   width:100%;
   padding:5px;
@@ -105,7 +111,7 @@ const DropzoneHandler = (props) => {
         setFiles(newFileArr);
         props.onChange(newFileArr);
     };
-    return react_1.default.createElement("div", null,
+    return react_1.default.createElement(DropzoneContainer, null,
         react_1.default.createElement(PreviewModal_1.default, { file: preview, setFile: setPreview }),
         react_1.default.createElement("div", Object.assign({}, getRootProps()),
             react_1.default.createElement("input", Object.assign({}, getInputProps())),

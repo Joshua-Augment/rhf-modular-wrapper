@@ -86,6 +86,7 @@
     "react-quill": "^2.0.0",
     "react-radio-buttons": "^1.2.2",
     "react-select": "^5.7.0",
+    "react-switch": "^7.0.0",
     "styled-components": "^5.3.6",
     "yup": "^0.32.11"
   }

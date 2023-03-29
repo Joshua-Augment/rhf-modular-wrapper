@@ -1,3 +1,7 @@
 .no-border, .no-border > * {
   border : none;
 }
+
+.react-datepicker-wrapper {
+  padding: 0.375rem 0;
+}

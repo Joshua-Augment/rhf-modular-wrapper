@@ -6,6 +6,12 @@ import InputWrapper from '../../../core/InputWrapper';
 import styled from "styled-components";
 import PreviewModal from './components/PreviewModal';
 import { compareArrays } from '../../../core/helpers';
+const DropzoneContainer = styled.div `
+  padding:10px;
+  margin: 5px 2px;
+  background:#e0e0e0;
+  border-radius: 2px;
+`;
 const PreviewContainer = styled.div `
   width:100%;
   padding:5px;
@@ -77,7 +83,7 @@ const DropzoneHandler = (props) => {
         setFiles(newFileArr);
         props.onChange(newFileArr);
     };
-    return React.createElement("div", null,
+    return React.createElement(DropzoneContainer, null,
         React.createElement(PreviewModal, { file: preview, setFile: setPreview }),
         React.createElement("div", Object.assign({}, getRootProps()),
             React.createElement("input", Object.assign({}, getInputProps())),

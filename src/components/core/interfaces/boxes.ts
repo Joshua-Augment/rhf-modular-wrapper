@@ -25,3 +25,7 @@ export interface IYesNo extends IInputsBaseProps<any>, TInputWrapperInputHTML {
   no ?: YesNoButtonOptions,
   otherOptions ?: YesNoButtonOptions[]
 }
+
+export interface ISwitch extends IInputsBaseProps<any>, TInputWrapperInputHTML {
+  footLabel ?: [a:string, b:string]
+}

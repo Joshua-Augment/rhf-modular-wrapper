@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ComponentMeta } from '@storybook/react';
-import {Form, DatePicker, Line, Select, TSelectOption, DropzoneUploader, SubmitButton, AsyncSelect, TableList} from "../components"
+import {Form, DatePicker,Switch, Line, Select, TSelectOption, DropzoneUploader, SubmitButton, AsyncSelect, TableList} from "../components"
 import { Template } from "./_story_template";
 import * as yup from "yup"
 
@@ -26,9 +26,10 @@ const yupValidation = yup.object({
   line: yup.string().matches(/[TEST INPUT]|[NOT]/i, 'INPUT MUST BE "TEST INPUT" OR "NOT"').required("INPUT REQUIRED"),
   line_number : yup.number().min(2).max(6,"NUMBER CANNOT BE GREATER THAN 6"),
   datepicker: yup.date(),
+  switch : yup.boolean().isTrue("INPUT NEEDS TO BE TRUE"),
   select: yup.object({value: yup.number(),label: yup.string()}).nullable().required("SELECT AN OPTION"),
   select_async: yup.object({value: yup.number(),label: yup.string()}).nullable().required("SELECT AN OPTION"),
-  dropzone: yup.array().of(yup.object({fileSize: yup.number(),name: yup.string()})).required("FILE INPUT REQUIRED"),
+  dropzone: yup.array().of(yup.mixed().required("FILE INPUT REQUIRED")),
   table_list: yup.array().of(yup.object({
     line: yup.string().required("INPUT REQUIRED"),
     number: yup.number().required("INPUT REQUIRED"),
@@ -54,6 +55,7 @@ export const CheckboxGroupExampleVertical = () => {
           select: {label:'Option 2',value:2},
           select_async: {label:'Option 5',value:5},
           dropzone : [file, file],
+          switch : false,
           table_list : [
             {line:'testing', number:3,yesno:false,checkbox:true, radiobox:2}
           ]
@@ -86,7 +88,15 @@ export const CheckboxGroupExampleVertical = () => {
         <Select rsOptions={{isClearable:true}} name="select" helperText="Select" label="Select" options={BASE_SELECTS} />
         <AsyncSelect rsOptions={{isClearable:true}} name="select_async" helperText="Async Select" label="Async Select" loadOptions={loadingOptions} />
         <DropzoneUploader name="dropzone" label="Dropzone" helperText="Dropzone" />
+        <Switch label="Switch" name="switch" footLabel={['NO','YES']} helperText="Switch" /> 
         <TableList name="table_list" helperText="Table List" label="Table List" 
+          headerTemplate={<tr>
+            <th>Line</th>
+            <th>Number</th>
+            <th>Yesno</th>
+            <th>Checkbox</th>
+            <th>Radiobox</th>
+          </tr>}
           items={[{name:'line'},{name:'number',type:'number'},{name:'yesno',type:'yesno'},{name:'checkbox',type:'checkbox'},{name:'radiobox',options:[{value:1,label:1},{value:2,label:2}], type:'radiobox'}]}
         />
         <SubmitButton>test</SubmitButton>

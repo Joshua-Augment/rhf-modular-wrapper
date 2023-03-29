@@ -12,6 +12,17 @@ const Table = styled.table`
   margin-bottom: 5px;
 `
 
+const IconUp = styled(FaPlusSquare)`
+  color : green;
+  font-size: 25px;
+  margin : 2px 5px;
+`
+const IconDown = styled(FaMinusSquare)`
+  color : red;
+  font-size: 25px;
+  margin : 2px 5px;
+`
+
 const TableList = (props:ITableList) => {
   const {control, formState: {errors}} = useFormContext() 
   const {fields,append,remove} = useFieldArray({control,name: props.name});
@@ -21,7 +32,7 @@ const TableList = (props:ITableList) => {
     (i:number) => <tr key={`fw-${props.name}-${i}`}>
     {props.showIndex === true && <td>{i + 1}</td>}
     {props.items.map((item,iT) => <td key={`fw-${props.name}-${i}-${iT}-iew`} ><InputChooser {...item} noLabel name={`${props.name}.${i}.${item.name}`}/></td>)}
-    {props.fixed !== true && <td ><FaPlusSquare onClick={()=>append(props.emptyRow ?? {})} /> {<FaMinusSquare onClick={()=>{console.log("[removing...]",i);remove(i)}}/>}</td>}
+    {props.fixed !== true && <td ><IconUp onClick={()=>append(props.emptyRow ?? {})} /> {<IconDown onClick={()=>{console.log("[removing...]",i);remove(i)}}/>}</td>}
   </tr>,[fields])
 
   const headerGenerator = useMemo(()=> props.headerTemplate ?? <thead><tr>

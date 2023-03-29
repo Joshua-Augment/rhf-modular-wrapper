@@ -9,6 +9,16 @@ const Table = styled.table `
   margin-top:5px;
   margin-bottom: 5px;
 `;
+const IconUp = styled(FaPlusSquare) `
+  color : green;
+  font-size: 25px;
+  margin : 2px 5px;
+`;
+const IconDown = styled(FaMinusSquare) `
+  color : red;
+  font-size: 25px;
+  margin : 2px 5px;
+`;
 const TableList = (props) => {
     const { control, formState: { errors } } = useFormContext();
     const { fields, append, remove } = useFieldArray({ control, name: props.name });
@@ -18,9 +28,9 @@ const TableList = (props) => {
         props.items.map((item, iT) => React.createElement("td", { key: `fw-${props.name}-${i}-${iT}-iew` },
             React.createElement(InputChooser, Object.assign({}, item, { noLabel: true, name: `${props.name}.${i}.${item.name}` })))),
         props.fixed !== true && React.createElement("td", null,
-            React.createElement(FaPlusSquare, { onClick: () => { var _a; return append((_a = props.emptyRow) !== null && _a !== void 0 ? _a : {}); } }),
+            React.createElement(IconUp, { onClick: () => { var _a; return append((_a = props.emptyRow) !== null && _a !== void 0 ? _a : {}); } }),
             " ",
-            React.createElement(FaMinusSquare, { onClick: () => { console.log("[removing...]", i); remove(i); } }))), [fields]);
+            React.createElement(IconDown, { onClick: () => { console.log("[removing...]", i); remove(i); } }))), [fields]);
     const headerGenerator = useMemo(() => {
         var _a;
         return (_a = props.headerTemplate) !== null && _a !== void 0 ? _a : React.createElement("thead", null,
