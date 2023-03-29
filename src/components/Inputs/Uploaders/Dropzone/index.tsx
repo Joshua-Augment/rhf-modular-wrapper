@@ -6,6 +6,7 @@ import { IDropzoneHandler, IDropzoneUploader, IFormFrameInjector, TDropzonePrevi
 import InputWrapper from '../../../core/InputWrapper'
 import styled from "styled-components"
 import PreviewModal from './components/PreviewModal'
+import { compareArrays } from '../../../core/helpers';
 
 const PreviewContainer = styled.div`
   width:100%;
@@ -62,7 +63,11 @@ const DropzoneHandler = (props: IDropzoneHandler) => {
   const [files, setFiles] = useState<File[]>([])
   const [preview, setPreview] = useState<null|File>(null)
 
-  useEffect(()=>{ if (props.value !== undefined) {setFiles(props.value)}},[])
+  useEffect(()=>{ if (props.value !== undefined && !compareArrays(files, props.value)) {
+    console.log("[useEffect] - dropzone",props.value)
+    props.onChange(props.value)
+    setFiles(props.value)
+  }},[props.value])
 
   useEffect(() => {
     const _newFiles=  acceptedFiles

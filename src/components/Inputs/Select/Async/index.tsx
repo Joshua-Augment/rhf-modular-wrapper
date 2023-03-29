@@ -7,6 +7,7 @@ import {
   TSelectOption,
   ISelectAsync,
 } from "../../../core";
+import { compareArrays } from "../../../core/helpers";
 
 const AsyncSelect = (props: ISelectAsync) => {
   return (
@@ -29,6 +30,12 @@ const SelectWrapper = (props: ISelectWrapper) => {
   useEffect(() => {
     setOptions(props.options ?? []);
   }, [JSON.stringify(props.options)]);
+
+  useEffect(() => {
+    if (Array.isArray(props.value) ? !compareArrays(props.value,selectedOption) : (props.value === null ? false:  props.value.value !== selectedOption?.value)) {
+      setSelectedOption(props.value)
+    }
+  },[props.value])
 
   const createNew = useCallback((a: any) => {
     if (props.isCreatable !== undefined) {

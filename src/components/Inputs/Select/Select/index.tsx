@@ -7,6 +7,7 @@ import {
   InputWrapper,
   TSelectOption,
 } from "../../../core";
+import { compareArrays } from "../../../core/helpers";
 
 const Select = (props: ISelect) => {
   return (
@@ -27,6 +28,11 @@ const SelectWrapper = (props: ISelectWrapper) => {
   const [selectedOption, setSelectedOption] = useState<TSelectOption | null>(null);
 
   useEffect(() => { setOptions(props.options) }, [props.options]);
+  useEffect(() => {
+    if (Array.isArray(props.value) ? !compareArrays(props.value,selectedOption) : (props.value === null ? false:  props.value.value !== selectedOption?.value)) {
+      setSelectedOption(props.value)
+    }
+  },[props.value])
 
   const createNew = useCallback((a: any) => {
     if (props.isCreatable !== undefined) {
