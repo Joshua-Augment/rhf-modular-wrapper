@@ -1,5 +1,5 @@
 import React from 'react'
-import { DatePicker, Select,AsyncSelect, WYSIWYGEditor, Line, Lines } from '../Inputs'
+import { DatePicker, Select,AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox } from '../Inputs'
 import { TListItems } from './interfaces/lists'
 
 const InputChooser = (props: TListItems) => {
@@ -8,6 +8,12 @@ const InputChooser = (props: TListItems) => {
         case 'custom':
           const Elem = props.elem
           return <Elem {...props} />
+        case 'yesno':
+          return <YesNo {...props}/>
+        case "checkbox":
+          return <Checkbox {...props} />
+        case "radiobox":
+          return <Radiobox options={props.options} {...props} />
         case 'wysiwyg':
           return <WYSIWYGEditor {...props}/>
         case 'datepicker':

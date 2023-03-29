@@ -4,10 +4,18 @@ import InputElemWrapper from '../../core/InputElemWrapper';
 import { ITableList } from '../../core/interfaces/lists';
 import InputChooser from '../../core/InputChooser';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
+import styled from "styled-components"
+
+const Table = styled.table`
+  width: 100%;
+  margin-top:5px;
+  margin-bottom: 5px;
+`
 
 const TableList = (props:ITableList) => {
-  const {control} = useFormContext() 
+  const {control, formState: {errors}} = useFormContext() 
   const {fields,append,remove} = useFieldArray({control,name: props.name});
+  console.log("[TableList] - fields",fields)
 
   const generateRow = useCallback(
     (i:number) => <tr key={`fw-${props.name}-${i}`}>
@@ -25,16 +33,18 @@ const TableList = (props:ITableList) => {
   const footerGenerator = useMemo(()=> props.footerTemplate ?? headerGenerator,[])
 
   // const bodyGenerator = useMemo(()=> fields.length === 0 ? generateRow(0) : fields.map((field,i) => generateRow(i)),[fields])
-  const bodyGenerator = useMemo(()=> fields.map((field,i) => generateRow(i)),[fields])
+  const bodyGenerator = useMemo(()=> fields.map((field,i) => generateRow(i)),[fields, errors])
 
   return (
     <InputElemWrapper {...props} onChange={()=>{}} value={null} >
       <div>
-        {(props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator}
-        <tbody>
-          {bodyGenerator}
-        </tbody>
-        {(props.header === 'footer' || props.header === 'header_footer') ? footerGenerator : (props.header === 'bottom' || props.header === 'both') && headerGenerator}
+        <Table>
+          {(props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator}
+          <tbody>
+            {bodyGenerator}
+          </tbody>
+          {(props.header === 'footer' || props.header === 'header_footer') ? footerGenerator : (props.header === 'bottom' || props.header === 'both') && headerGenerator}
+        </Table>
       </div>
     </InputElemWrapper>
   )

@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ComponentMeta } from '@storybook/react';
-import {Form, DatePicker, Line, Select, TSelectOption, DropzoneUploader, SubmitButton} from "../components"
+import {Form, DatePicker, Line, Select, TSelectOption, DropzoneUploader, SubmitButton, AsyncSelect, TableList} from "../components"
 import { Template } from "./_story_template";
+import * as yup from "yup"
 
 import imgFile from "./1.png"
 
@@ -21,6 +22,22 @@ const BASE_SELECTS: TSelectOption[] = [
   { label: "Option 8", value: 8 },
 ];
 
+const yupValidation = yup.object({
+  line: yup.string().matches(/[TEST INPUT]|[NOT]/i, 'INPUT MUST BE "TEST INPUT" OR "NOT"').required("INPUT REQUIRED"),
+  line_number : yup.number().min(2).max(6,"NUMBER CANNOT BE GREATER THAN 6"),
+  datepicker: yup.date(),
+  select: yup.object({value: yup.number(),label: yup.string()}).nullable().required("SELECT AN OPTION"),
+  select_async: yup.object({value: yup.number(),label: yup.string()}).nullable().required("SELECT AN OPTION"),
+  dropzone: yup.array().of(yup.object({fileSize: yup.number(),name: yup.string()})).required("FILE INPUT REQUIRED"),
+  table_list: yup.array().of(yup.object({
+    line: yup.string().required("INPUT REQUIRED"),
+    number: yup.number().required("INPUT REQUIRED"),
+    yesno: yup.boolean().required("INPUT REQUIRED"),
+    checkbox : yup.boolean().required("INPUT REQUIRED"),
+    radiobox : yup.number().required("INPUT REQUIRED")
+  })),
+})
+
 export const CheckboxGroupExampleVertical = () => {
   const [output,setOutput] = useState(<p>None Yet</p>)
   const [defaultValues, setDefaultValues] = useState<any>(null)
@@ -29,13 +46,17 @@ export const CheckboxGroupExampleVertical = () => {
     fetch(imgFile)
       .then((data) => data.blob())
       .then((data) => {
-        const file = new File([data],'1.png', {type: 'image/png', lastModified: new Date().getTime(), path: '1.png'})
+        const file:any = new File([data],'1.png', {type: 'image/png', lastModified: new Date().getTime(), path: '1.png'})
         setDefaultValues({
           line: 'TEST INPUT',
           line_number : 3,
           datepicker : new Date(new Date().getTime() - 1000 * 60 * 60 * 24),
           select: {label:'Option 2',value:2},
-          dropzone : [file, file]
+          select_async: {label:'Option 5',value:5},
+          dropzone : [file, file],
+          table_list : [
+            {line:'testing', number:3,yesno:false,checkbox:true, radiobox:2}
+          ]
         })
 
         setReady(true)
@@ -49,15 +70,25 @@ export const CheckboxGroupExampleVertical = () => {
     setOutput(<p>{JSON.stringify(a)}</p>)
   }),[])
 
+  const loadingOptions = useCallback((a:any, callback:any)=> {
+    setTimeout(() => {
+      callback(BASE_SELECTS)
+    },400)
+  },[])
+
   return <div>
     {output}
     {
-      ready ? <Form onSubmit={onSubmit} defaultValues={defaultValues}>
+      ready ? <Form onSubmit={onSubmit} defaultValues={defaultValues} yupSchema={yupValidation}>
       <Line name="line" label="Line Input" helperText="Line Input" />
         <Line name="line_number" type="number" label="Line Input (Number)" helperText="Line Input (Number)" />
         <DatePicker name="datepicker" label="Date Picker" helperText="Date Picker" />
-        <Select name="select" helperText="Select" label="Select" options={BASE_SELECTS} />
+        <Select rsOptions={{isClearable:true}} name="select" helperText="Select" label="Select" options={BASE_SELECTS} />
+        <AsyncSelect rsOptions={{isClearable:true}} name="select_async" helperText="Async Select" label="Async Select" loadOptions={loadingOptions} />
         <DropzoneUploader name="dropzone" label="Dropzone" helperText="Dropzone" />
+        <TableList name="table_list" helperText="Table List" label="Table List" 
+          items={[{name:'line'},{name:'number',type:'number'},{name:'yesno',type:'yesno'},{name:'checkbox',type:'checkbox'},{name:'radiobox',options:[{value:1,label:1},{value:2,label:2}], type:'radiobox'}]}
+        />
         <SubmitButton>test</SubmitButton>
       </Form> : <p>Loading...</p>
     }

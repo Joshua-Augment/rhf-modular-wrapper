@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ICheckbox, IFormFrameInjector } from '../../core'
 import InputWrapper from '../../core/InputWrapper'
 
@@ -8,11 +8,20 @@ const Checkbox = (props: ICheckbox) => {
       {
         (IWprops:IFormFrameInjector) => {
           if (IWprops.value === undefined) {IWprops.onChange(false)}
-          return <input id={props.name} type="checkbox" name={props.name} value={IWprops.value} onChange={IWprops.onChange} />
+          return <CheckBoxWrapper  {...props} {...IWprops}/>
         }
       }
     </InputWrapper>
   )
+}
+
+const CheckBoxWrapper = (props:any) => {
+
+  // useEffect(()=>{
+  //   if (props)
+  // },[props.value])
+
+  return <input id={props.name} type="checkbox" name={props.name} checked={props.value} value={props.value} onChange={props.onChange} />
 }
 
 export default Checkbox

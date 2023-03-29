@@ -38,8 +38,8 @@ export interface IBaseList extends IInputsBaseProps<any> {
 export interface IList extends IBaseList {}
 export interface ITableList extends IBaseList {
   header ?: 'none' | 'top' | 'bottom' | 'both' | 'footer' | 'header_footer'
-  headerTemplate : React.ReactNode,
-  footerTemplate : React.ReactNode,
+  headerTemplate ?: React.ReactNode,
+  footerTemplate ?: React.ReactNode,
 }
 
 export type TMadeInputList = 
@@ -49,6 +49,7 @@ export type TMadeInputList =
   | "select_async"
   | "textarea"
   | "custom"
+  | "yesno"
 
 
 export type TListInputs = HTMLInputTypeAttribute | TMadeInputList

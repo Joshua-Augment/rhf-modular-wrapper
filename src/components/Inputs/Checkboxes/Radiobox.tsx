@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { IRadiobox, IFormFrameInjector } from '../../core'
 import InputWrapper from '../../core/InputWrapper'
 import { RadioGroup, RadioButton, ReversedRadioButton } from "react-radio-buttons"
@@ -21,8 +21,12 @@ interface IRadioWrapper extends IRadiobox, IFormFrameInjector<string> {}
 
 const RadioWrapper = (props : IRadioWrapper) => {
 
+  const [value, setValue]  = useState("")
+
+  useEffect(()=>{ if (value !== props?.value) {setValue(props?.value)} },[value, props.value])
+
   return <span className="rb-item-wrapper">
-    <RadioGroup horizontal={props.orientation === 'horizontal'} onChange={props.onChange} >
+    <RadioGroup horizontal={props.orientation === 'horizontal'} onChange={props.onChange} value={value}>
     {
       props.options.map((option,i) => (option.reversed ? 
         <ReversedRadioButton rootColor="black" key={`${props.name}-opt-${i}`} value={option.value}>{option.label}</ReversedRadioButton> :

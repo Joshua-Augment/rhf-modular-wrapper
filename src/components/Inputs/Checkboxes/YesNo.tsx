@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { IFormFrameInjector, InputWrapper, IYesNo } from '../../core'
 import styled from "styled-components"
 
@@ -38,6 +38,14 @@ const Button = styled.button`
 
 const RadioWrapper = (props : IRadioWrapper) => { 
   const [value, setValue] = useState<any>(undefined)
+
+  useEffect(()=>{
+    if (props.value !== undefined && props.value !== value) {
+      const isYes = props.yes?.value ? props.value  === props.yes.value : props.value
+
+      buttonHandler(props.value, isYes ? props.yes?.extHandler : props.no?.extHandler)
+    }
+  },[props.value,value])
 
   const buttonHandler = useCallback((val: any, extHandler ?: ((val:string)=>Promise<boolean>))=>{
     if (extHandler) {
