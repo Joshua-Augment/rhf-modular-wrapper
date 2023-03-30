@@ -11,6 +11,8 @@ const InputChooser = (props) => {
             case 'custom':
                 const Elem = props.elem;
                 return react_1.default.createElement(Elem, Object.assign({}, props));
+            case 'dropzone':
+                return react_1.default.createElement(Inputs_1.DropzoneUploader, Object.assign({}, props));
             case 'yesno':
                 return react_1.default.createElement(Inputs_1.YesNo, Object.assign({}, props));
             case 'switch':

@@ -1,11 +1,13 @@
 import React from 'react';
-import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch } from '../Inputs';
+import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader } from '../Inputs';
 const InputChooser = (props) => {
     const OutputComponent = () => {
         switch (props.type) {
             case 'custom':
                 const Elem = props.elem;
                 return React.createElement(Elem, Object.assign({}, props));
+            case 'dropzone':
+                return React.createElement(DropzoneUploader, Object.assign({}, props));
             case 'yesno':
                 return React.createElement(YesNo, Object.assign({}, props));
             case 'switch':
