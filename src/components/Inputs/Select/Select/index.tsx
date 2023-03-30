@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import SelectInput from "react-select/";
+import SelectInput from "react-select";
 import SelectCreatableInput from "react-select/creatable";
 import {
   ISelect,

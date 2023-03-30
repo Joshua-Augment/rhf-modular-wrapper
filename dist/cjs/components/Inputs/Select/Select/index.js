@@ -27,7 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-const react_select_1 = __importDefault(require("react-select/"));
+const react_select_1 = __importDefault(require("react-select"));
 const creatable_1 = __importDefault(require("react-select/creatable"));
 const core_1 = require("../../../core");
 const helpers_1 = require("../../../core/helpers");
