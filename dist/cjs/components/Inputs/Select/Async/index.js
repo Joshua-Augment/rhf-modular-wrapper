@@ -46,8 +46,10 @@ const SelectWrapper = (props) => {
         setOptions((_a = props.options) !== null && _a !== void 0 ? _a : []);
     }, [JSON.stringify(props.options)]);
     (0, react_1.useEffect)(() => {
-        if (Array.isArray(props.value) ? !(0, helpers_1.compareArrays)(props.value, selectedOption) : (props.value === null ? false : props.value.value !== (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value))) {
-            setSelectedOption(props.value);
+        if (props.value !== undefined) {
+            if (Array.isArray(props.value) ? !(0, helpers_1.compareArrays)(props.value, selectedOption) : (props.value === null ? false : props.value.value !== (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value))) {
+                setSelectedOption(props.value);
+            }
         }
     }, [props.value]);
     const createNew = (0, react_1.useCallback)((a) => {
