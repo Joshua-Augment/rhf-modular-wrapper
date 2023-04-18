@@ -64,7 +64,7 @@ export interface IInputsBaseProps<T=any> {
   name : string,
   id ?: string,
 
-  value ?: T,
+  defaultValue ?: T,
 
   disabled ?: boolean,
 

@@ -1,10 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
 import { ThemeContext } from './Form';
 const InputElemWrapper = (props) => {
     var _a;
+    // Set Value First if Available
+    useEffect(() => { if (props.defaultValue) {
+        props.onChange(props.defaultValue);
+    } }, [props.defaultValue]);
     const Wrapper = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : useContext(ThemeContext).inputTemplate;
     // <div style={{position: 'relative'}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
     //     {

@@ -20,9 +20,7 @@ const Select = (props: ISelect) => {
   );
 };
 
-interface ISelectWrapper
-  extends IFormFrameInjector<TSelectOption | null>,
-    ISelect {}
+interface ISelectWrapper extends IFormFrameInjector<TSelectOption | null>,ISelect {}
 const SelectWrapper = (props: ISelectWrapper) => {
   const [options, setOptions] = useState<TSelectOption[]>(props.options ?? []);
   const [selectedOption, setSelectedOption] = useState<TSelectOption | null>(null);

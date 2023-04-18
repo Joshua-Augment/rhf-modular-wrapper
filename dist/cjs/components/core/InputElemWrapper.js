@@ -33,6 +33,10 @@ const Info_1 = __importDefault(require("@mui/icons-material/Info"));
 const Form_1 = require("./Form");
 const InputElemWrapper = (props) => {
     var _a;
+    // Set Value First if Available
+    (0, react_1.useEffect)(() => { if (props.defaultValue) {
+        props.onChange(props.defaultValue);
+    } }, [props.defaultValue]);
     const Wrapper = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : (0, react_1.useContext)(Form_1.ThemeContext).inputTemplate;
     // <div style={{position: 'relative'}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
     //     {

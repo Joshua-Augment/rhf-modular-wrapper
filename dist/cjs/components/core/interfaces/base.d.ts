@@ -29,7 +29,8 @@ export interface FormFrameWrapperProps<T = any> extends IInputsBaseProps<T> {
     errors?: FieldError;
     children: JSX.Element;
     onChange: Function;
-    value: any;
+    value: T;
+    defaultValue?: T;
 }
 export interface IFormFrameInjector<T = any> extends FormFrameWrapperProps<T> {
     value: T;
@@ -64,6 +65,7 @@ export interface IInputsBaseProps<T = any> {
     inputWrapper?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
     name: string;
     id?: string;
+    defaultValue?: T;
     disabled?: boolean;
     customClasses?: FormInputClassNames;
     reversedLabel?: boolean;

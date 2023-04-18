@@ -12,7 +12,7 @@ const InputWrapper = (props) => {
         React.createElement(InputElemWrapper, Object.assign({}, props, { value: _value, onChange: _setValue }), child &&
             child(Object.assign(Object.assign({}, props), { value: _value, onChange: _setValue, onBlur: () => false, isTouched: _value !== null, isDirty: _value !== null, error: undefined, disabled: props.disabled, ref: undefined }))) :
         // Control is handled by the Controller Element instead
-        React.createElement(Controller, { control: methods.control, name: props.name, render: ({ field: { onChange, onBlur, value, name, ref }, fieldState: { invalid, isTouched, isDirty, error }, formState, }) => (React.createElement(InputElemWrapper, Object.assign({}, props, { value: value, onChange: onChange, errors: error }), child &&
+        React.createElement(Controller, { control: methods.control, name: props.name, render: ({ field: { onChange, onBlur, value, name, ref }, fieldState: { invalid, isTouched, isDirty, error }, formState, }) => (React.createElement(InputElemWrapper, Object.assign({}, props, { value: value === undefined ? props.defaultValue : value, onChange: onChange, errors: error }), child &&
                 child(Object.assign(Object.assign({}, props), { value,
                     onChange,
                     onBlur,
