@@ -82,7 +82,8 @@ export const CheckboxGroupExampleVertical = () => {
     {output}
     {
       ready ? <Form onSubmit={onSubmit} defaultValues={defaultValues} yupSchema={yupValidation}>
-      <Line name="line" label="Line Input" helperText="Line Input" />
+        <Line name="line_with_default_value" label="Line Input with default Value" value="This is a test Value" helperText="Line Input" />
+        <Line name="line" label="Line Input" helperText="Line Input" />
         <Line name="line_number" type="number" label="Line Input (Number)" helperText="Line Input (Number)" />
         <DatePicker name="datepicker" label="Date Picker" helperText="Date Picker" />
         <Select rsOptions={{isClearable:true}} name="select" helperText="Select" label="Select" options={BASE_SELECTS} />

@@ -42,7 +42,8 @@ const InputWrapper = (props: FormBaseInput) => {
       }) => (
         <InputElemWrapper
           {...props}
-          value={value}
+          defaultValue={props.value}
+          value={value === undefined ? props.value : value}
           onChange={onChange}
           errors={error}
         >
