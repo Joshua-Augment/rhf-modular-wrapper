@@ -1,4 +1,6 @@
 export const compareArrays = (a:any[], b:any) => {
+  console.log("[compareArrays] - ",a,b)
+  if (a === undefined || b === undefined || a === null || b === null) {return true}
   if (!Array.isArray(a) || !Array.isArray(b)) {return a === b}
   console.log("[compareArrays] - a",a)
   console.log("[compareArrays] - b",b)
