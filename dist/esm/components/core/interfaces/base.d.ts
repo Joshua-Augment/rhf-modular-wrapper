@@ -69,6 +69,7 @@ export interface IInputsBaseProps<T = any> {
     disabled?: boolean;
     customClasses?: FormInputClassNames;
     reversedLabel?: boolean;
+    externalStateSetter?: (a: T) => void;
     helperText?: string;
     label?: string;
     placeholder?: string;
@@ -76,7 +77,7 @@ export interface IInputsBaseProps<T = any> {
     noLabel?: boolean;
     calculatedField?: {
         find: string[];
-        calculate: (this: T, foundFields: any[], allFields: any) => T;
+        calculate: (thisValue: T, foundFields: any[], allFields: any) => T;
     };
     validation?: {
         required?: boolean | string;

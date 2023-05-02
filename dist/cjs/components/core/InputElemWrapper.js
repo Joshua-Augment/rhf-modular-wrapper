@@ -31,12 +31,24 @@ const Tooltip_1 = __importDefault(require("@mui/material/Tooltip"));
 const Error_1 = __importDefault(require("@mui/icons-material/Error"));
 const Info_1 = __importDefault(require("@mui/icons-material/Info"));
 const Form_1 = require("./Form");
+const react_hook_form_1 = require("react-hook-form");
 const InputElemWrapper = (props) => {
     var _a;
+    const { getValues } = props.contextless !== true ? (0, react_hook_form_1.useFormContext)() : { getValues: null };
     // Set Value First if Available
     (0, react_1.useEffect)(() => { if (props.defaultValue) {
         props.onChange(props.defaultValue);
     } }, [props.defaultValue]);
+    (0, react_1.useEffect)(() => {
+        // External Field
+        if (props.externalStateSetter) {
+            props.externalStateSetter(props.value);
+        }
+        // Calculated Fields
+        if (props.calculatedField && props.contextless !== true && getValues !== null) {
+            props.onChange(props.name, props.calculatedField.calculate(props.value, getValues(props.calculatedField.find), getValues()));
+        }
+    }, [props.value]);
     const Wrapper = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : (0, react_1.useContext)(Form_1.ThemeContext).inputTemplate;
     // <div style={{position: 'relative'}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
     //     {

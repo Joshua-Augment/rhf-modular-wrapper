@@ -16,7 +16,8 @@ const SelectWrapper = (props) => {
     useEffect(() => { setOptions(props.options); }, [props.options]);
     useEffect(() => {
         if (props.value !== undefined) {
-            if (Array.isArray(props.value) ? !compareArrays(props.value, selectedOption) : (props.value === null ? false : props.value.value !== (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value))) {
+            if (selectedOption === null ||
+                (Array.isArray(props.value) ? !compareArrays(props.value, selectedOption) : (props.value === null ? false : props.value.value !== (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value)))) {
                 setSelectedOption(props.value);
             }
         }

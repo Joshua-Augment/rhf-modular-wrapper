@@ -47,7 +47,8 @@ const SelectWrapper = (props) => {
     }, [JSON.stringify(props.options)]);
     (0, react_1.useEffect)(() => {
         if (props.value !== undefined) {
-            if (Array.isArray(props.value) ? !(0, helpers_1.compareArrays)(props.value, selectedOption) : (props.value === null ? false : props.value.value !== (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value))) {
+            if (selectedOption === null ||
+                (Array.isArray(props.value) ? !(0, helpers_1.compareArrays)(props.value, selectedOption) : (props.value === null ? false : props.value.value !== (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value)))) {
                 setSelectedOption(props.value);
             }
         }

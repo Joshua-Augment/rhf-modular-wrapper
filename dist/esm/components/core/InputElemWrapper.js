@@ -3,12 +3,24 @@ import Tooltip from '@mui/material/Tooltip';
 import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
 import { ThemeContext } from './Form';
+import { useFormContext } from 'react-hook-form';
 const InputElemWrapper = (props) => {
     var _a;
+    const { getValues } = props.contextless !== true ? useFormContext() : { getValues: null };
     // Set Value First if Available
     useEffect(() => { if (props.defaultValue) {
         props.onChange(props.defaultValue);
     } }, [props.defaultValue]);
+    useEffect(() => {
+        // External Field
+        if (props.externalStateSetter) {
+            props.externalStateSetter(props.value);
+        }
+        // Calculated Fields
+        if (props.calculatedField && props.contextless !== true && getValues !== null) {
+            props.onChange(props.name, props.calculatedField.calculate(props.value, getValues(props.calculatedField.find), getValues()));
+        }
+    }, [props.value]);
     const Wrapper = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : useContext(ThemeContext).inputTemplate;
     // <div style={{position: 'relative'}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
     //     {
