@@ -71,6 +71,8 @@ export interface IInputsBaseProps<T=any> {
   customClasses ?: FormInputClassNames,
   reversedLabel ?: boolean, 
 
+  externalStateSetter ?: (a: T) => void,
+
   helperText ?: string
   label ?: string,
   placeholder ?: string,

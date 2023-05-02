@@ -9,7 +9,9 @@ import { ThemeContext } from './Form';
 
 const InputElemWrapper = (props: FormFrameWrapperProps) => {
   // Set Value First if Available
-  useEffect(()=>{ if (props.defaultValue) {props.onChange(props.defaultValue);} },[props.defaultValue])
+  useEffect(()=>{ if (props.defaultValue) {props.onChange(props.defaultValue);} },[props.defaultValue]) 
+  useEffect(()=>{ if(props.externalStateSetter) {props.externalStateSetter(props.value)}}, [props.value])
+
 
   const Wrapper = props.inputWrapper ?? useContext(ThemeContext).inputTemplate 
 
