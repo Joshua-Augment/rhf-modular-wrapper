@@ -33,7 +33,10 @@ const SelectWrapper = (props: ISelectWrapper) => {
 
   useEffect(() => {
     if (props.value !== undefined) {
-      if ( Array.isArray(props.value) ? !compareArrays(props.value,selectedOption) : (props.value === null ? false:  props.value.value !== selectedOption?.value)) {
+      if (
+          selectedOption === null || 
+          (Array.isArray(props.value) ? !compareArrays(props.value,selectedOption) : (props.value === null ? false:  props.value.value !== selectedOption?.value))
+        ) {
         setSelectedOption(props.value)
       }
     }
