@@ -82,7 +82,7 @@ export interface IInputsBaseProps<T=any> {
 
   calculatedField ?: {
     find : string[],
-    calculate : (this : T, foundFields : any[], allFields: any ) => T
+    calculate : (thisValue : T, foundFields : any[], allFields: any ) => T
   },
   validation ?: {
     required ?: boolean | string,

@@ -4,13 +4,24 @@ import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
 import { FormFrameWrapperProps } from './interfaces';
 import { ThemeContext } from './Form';
+import { useFormContext } from 'react-hook-form';
 
 
 
 const InputElemWrapper = (props: FormFrameWrapperProps) => {
+  
+  const {getValues} = props.contextless !== true ? useFormContext() : {getValues: null}
   // Set Value First if Available
   useEffect(()=>{ if (props.defaultValue) {props.onChange(props.defaultValue);} },[props.defaultValue]) 
-  useEffect(()=>{ if(props.externalStateSetter) {props.externalStateSetter(props.value)}}, [props.value])
+  useEffect(()=>{ 
+    // External Field
+    if(props.externalStateSetter) {props.externalStateSetter(props.value)}
+
+    // Calculated Fields
+    if (props.calculatedField && props.contextless !== true && getValues !== null) {
+      props.onChange(props.name, props.calculatedField.calculate(props.value,getValues(props.calculatedField.find), getValues()))
+    }
+  }, [props.value])
 
 
   const Wrapper = props.inputWrapper ?? useContext(ThemeContext).inputTemplate 
