@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { ReactSwitchProps } from 'react-switch';
 import { FormBaseInput, IInputsBaseProps, TInputWrapperInputHTML } from './base';
 export interface ICheckbox extends FormBaseInput<string> {
 }
@@ -29,5 +30,6 @@ export interface IYesNo extends IInputsBaseProps<any>, TInputWrapperInputHTML {
 }
 export interface ISwitch extends IInputsBaseProps<any>, TInputWrapperInputHTML {
     footLabel?: [a: string, b: string];
+    options?: ReactSwitchProps;
 }
 export {};

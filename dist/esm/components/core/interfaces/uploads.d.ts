@@ -26,9 +26,7 @@ export interface DropzoneBasic {
     };
     showList?: boolean;
     newWindow?: boolean;
-    previewBox?: React.ComponentType<IDropzoneHandler & TDropzonePreview>;
-}
-export interface IDropzoneHandler extends IFormFrameInjector<File[]>, DropzoneBasic {
+    previewBox?: React.ComponentType<IDropzoneUploader & TDropzonePreview>;
 }
 export interface IDropzoneUploader extends FormBaseInput<File[]>, DropzoneBasic {
 }

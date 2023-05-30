@@ -27,15 +27,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
+const react_hook_form_1 = require("react-hook-form");
 const InputWrapper_1 = __importDefault(require("../../core/InputWrapper"));
 const Line = (props) => {
-    return (react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props), (IWprops) => react_1.default.createElement(LineWrapper, Object.assign({}, IWprops, props))));
-};
-const LineWrapper = (props) => {
-    var _a, _b, _c, _d, _e;
-    const [value, setValue] = (0, react_1.useState)((_b = (_a = props.value) !== null && _a !== void 0 ? _a : props.defaultValue) !== null && _b !== void 0 ? _b : '');
-    const onChange = (a) => { props.onChange(a.target.value); setValue(a.target.value); };
-    return react_1.default.createElement("input", { id: props.name, className: (_d = (_c = props === null || props === void 0 ? void 0 : props.customClasses) === null || _c === void 0 ? void 0 : _c.inputClassName) !== null && _d !== void 0 ? _d : '', name: props.name, value: value, onChange: onChange, placeholder: props.placeholder, type: (_e = props.type) !== null && _e !== void 0 ? _e : 'text' });
+    var _a, _b, _c;
+    const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
+    const _val = watch(props.name);
+    const val = (0, react_1.useMemo)(() => _val, [_val]);
+    return (react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props),
+        react_1.default.createElement("input", { id: props.name, className: (_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.inputClassName) !== null && _b !== void 0 ? _b : '', name: props.name, value: val, onChange: (a) => setValue(props.name, a.target.value), placeholder: props.placeholder, type: (_c = props.type) !== null && _c !== void 0 ? _c : 'text' })));
 };
 exports.default = Line;
 //# sourceMappingURL=Line.js.map

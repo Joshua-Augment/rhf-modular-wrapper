@@ -1,6 +1,6 @@
-import { FormBaseInput } from './base';
-export interface ISlider extends FormBaseInput<String|Number> {
+import { IInputsBaseProps } from './base';
+export interface ISlider extends IInputsBaseProps<String|Number> {
   min?:number,
   max?:number,
-  steps: number | string[] | {value: any, label: string | number}[]
+  steps ?: number | string
 }

@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import { useDropzone} from 'react-dropzone'
 import {arrayMoveImmutable} from 'array-move';
 import { FaCaretDown, FaCaretUp, FaEye, FaTrash } from 'react-icons/fa'
-import { IDropzoneHandler, IDropzoneUploader, IFormFrameInjector, TDropzonePreview } from '../../../core'
+import { IDropzoneUploader, TDropzonePreview } from '../../../core'
 import InputWrapper from '../../../core/InputWrapper'
 import styled from "styled-components"
 import PreviewModal from './components/PreviewModal'
 import { compareArrays } from '../../../core/helpers';
+import { useFormContext } from 'react-hook-form';
 
 const DropzoneContainer = styled.div`
   padding:10px;
@@ -52,73 +53,119 @@ const PaginationWrapper = styled.div`
 const ActionsWrapper = styled.div``
 
 const DropzoneUploader = (props: IDropzoneUploader) => {
+  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+  const {watch, setValue} = useFormContext()
+  const _val = watch(props.name)
+  const val = useMemo(() => _val ,[_val])
+  const [preview, setPreview] = useState<null|File>(null)
   
-  return (
+  useEffect(()=>{ if (props.value !== undefined && !compareArrays(val, props.value)) {
+    const _files = [...props.value]
+    console.log("[useEffect] - dropzone",_files)
+    setValue(props.name, _files)
+  }},[props.value, val])
+
+  useEffect(() => {
+    const newFileList = Array.isArray(val) ? [...val] : []
+    newFileList.push(...acceptedFiles)
+    setValue(props.name, [...newFileList]); 
+  },[JSON.stringify(acceptedFiles)])
+
+  const showPreview = (index:number) => {
+    console.log(`showPreview ${index}, `,props, val)
+    if (props.newWindow) {
+      window.open(URL.createObjectURL(val[index]),'_blank')
+    } else {
+      setPreview(val[index])
+    }
+  }
+
+  const handleDelete = (index: number) => {
+    const rem = val.filter((x,i) => i !== index)
+    setValue(props.name, rem)
+  }
+
+  const moveFile = (index: number, change: number, isRelative: boolean = true ) => {
+    const newFileArr = arrayMoveImmutable(val, index, isRelative ? index + change : change)
+
+    setValue(props.name, newFileArr)
+  }
+
+  return (<>    
+    <PreviewModal file={preview} setFile={setPreview} /> 
     <InputWrapper {...props}>
-      {
-        (IWprops:IFormFrameInjector<File[]>) => <DropzoneHandler {...props} {...IWprops} />
-      }
+      <DropzoneContainer>
+        <div {...getRootProps()}>
+          <input {...getInputProps()} />
+          <p>{props.containerCaption ?? "Drag 'n' drop some files here, or click to select files"}</p>
+        </div>
+        
+        {
+          val && val.length > 0 && <PreviewViewer {...props} files={val} showPreview={showPreview} moveFile={moveFile} handleDelete={handleDelete} />
+        }
+      </DropzoneContainer>
     </InputWrapper>
+  </>
   )
 }
 
 
 
-const DropzoneHandler = (props: IDropzoneHandler) => {
+// const DropzoneHandler = (props: IDropzoneHandler) => {
   
-  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
-  const [files, setFiles] = useState<File[]>([])
-  const [preview, setPreview] = useState<null|File>(null)
+//   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+//   const [files, setFiles] = useState<File[]>([])
+//   const [preview, setPreview] = useState<null|File>(null)
 
-  useEffect(()=>{ if (props.value !== undefined && !compareArrays(files, props.value)) {
-    const _files = [...props.value]
-    console.log("[useEffect] - dropzone",_files)
-    setFiles(_files)
+//   useEffect(()=>{ if (props.value !== undefined && !compareArrays(files, props.value)) {
+//     const _files = [...props.value]
+//     console.log("[useEffect] - dropzone",_files)
+//     setFiles(_files)
 
-    props.onChange(_files)
-  }},[props.value, files])
+//     props.onChange(_files)
+//   }},[props.value, files])
 
-  useEffect(() => {
-    const _newFiles=  acceptedFiles
-    props.onChange([...files, ..._newFiles]); 
-    setFiles([...files, ..._newFiles])
-  },[JSON.stringify(acceptedFiles)])
+//   useEffect(() => {
+//     const _newFiles=  acceptedFiles
+//     props.onChange([...files, ..._newFiles]); 
+//     setFiles([...files, ..._newFiles])
+//   },[JSON.stringify(acceptedFiles)])
 
-  const showPreview = (index:number) => {
-    if (props.newWindow) {
-      window.open(URL.createObjectURL(files[index]),'_blank')
-    } else {
-      setPreview(files[index])
-    }
-  }
+//   const showPreview = (index:number) => {
+//     if (props.newWindow) {
+//       window.open(URL.createObjectURL(files[index]),'_blank')
+//     } else {
+//       setPreview(files[index])
+//     }
+//   }
 
-  const handleDelete = (index: number) => {
-    const rem = files.filter((x,i) => i !== index)
-    props.onChange(rem)
-    setFiles(rem)
-  }
+//   const handleDelete = (index: number) => {
+//     const rem = files.filter((x,i) => i !== index)
+//     props.onChange(rem)
+//     setFiles(rem)
+//   }
 
-  const moveFile = (index: number, change: number, isRelative: boolean = true ) => {
-    const newFileArr = arrayMoveImmutable(files, index, isRelative ? index + change : change)
+//   const moveFile = (index: number, change: number, isRelative: boolean = true ) => {
+//     const newFileArr = arrayMoveImmutable(files, index, isRelative ? index + change : change)
 
-    setFiles(newFileArr)
-    props.onChange(newFileArr)
-  }
+//     setFiles(newFileArr)
+//     props.onChange(newFileArr)
+//   }
 
-  return  <DropzoneContainer>
-  <PreviewModal file={preview} setFile={setPreview} /> 
-  <div {...getRootProps()}>
-    <input {...getInputProps()} />
-    <p>{props.containerCaption ?? "Drag 'n' drop some files here, or click to select files"}</p>
-  </div>
+//   return  <DropzoneContainer>
+//   <PreviewModal file={preview} setFile={setPreview} /> 
+//   <div {...getRootProps()}>
+//     <input {...getInputProps()} />
+//     <p>{props.containerCaption ?? "Drag 'n' drop some files here, or click to select files"}</p>
+//   </div>
   
-  {
-    files.length > 0 && <PreviewViewer {...props} files={files} showPreview={showPreview} moveFile={moveFile} handleDelete={handleDelete} />
-  }
-</DropzoneContainer>
-} 
+//   {
+//     files.length > 0 && <PreviewViewer {...props} files={files} showPreview={showPreview} moveFile={moveFile} handleDelete={handleDelete} />
+//   }
+// </DropzoneContainer>
+// } 
 
-const PreviewViewer = (props: IDropzoneHandler & TDropzonePreview ) => {
+const PreviewViewer = (props: IDropzoneUploader & TDropzonePreview ) => {
   const Preview = props.previewBox
   return props.previewBox && Preview !== undefined ? 
     <Preview {...props} files={props.files}  /> : (

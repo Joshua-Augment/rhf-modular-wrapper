@@ -1,19 +1,18 @@
 import React, {useMemo} from 'react'
-import { IFormFrameInjector, ILines } from "../../core";
+import { ILines } from "../../core";
 import InputWrapper from "../../core/InputWrapper";
+import { useFormContext } from "react-hook-form";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const WYSIWYG = (props:ILines) => {
+  const {watch, setValue} = useFormContext()
+  const _val = watch(props.name)
+  const val = useMemo(() => _val ,[_val])
 
- 
   return (    
     <InputWrapper {...props}>
-      {(IWprops: IFormFrameInjector) => {
-        console.log("[props] - ", IWprops);
-        return <ReactQuillWrapper {...IWprops} {...props} />
-        // return <ReactQuill modules={{toolbar : toolbarOptions}} {...IWprops} theme={props.theme} />;
-      }}
+      <ReactQuillWrapper {...props} value={val} onChange={(a: string) => setValue(props.name,a)} />
     </InputWrapper>
   )
 }

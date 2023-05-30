@@ -30,47 +30,41 @@ const react_1 = __importStar(require("react"));
 const react_select_1 = __importDefault(require("react-select"));
 const creatable_1 = __importDefault(require("react-select/creatable"));
 const core_1 = require("../../../core");
-const helpers_1 = require("../../../core/helpers");
+const react_hook_form_1 = require("react-hook-form");
 const Select = (props) => {
-    return (react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { noBorder: true }), (IWProps) => {
-        console.log(`[Datepickerprops] - ${props.name}`, IWProps);
-        return react_1.default.createElement(SelectWrapper, Object.assign({}, IWProps, props));
-    }));
-};
-const SelectWrapper = (props) => {
     var _a;
     const [options, setOptions] = (0, react_1.useState)((_a = props.options) !== null && _a !== void 0 ? _a : []);
-    const [selectedOption, setSelectedOption] = (0, react_1.useState)(null);
-    (0, react_1.useEffect)(() => { setOptions(props.options); }, [props.options]);
+    // Watch for changed options
     (0, react_1.useEffect)(() => {
-        if (props.value !== undefined) {
-            if (selectedOption === null ||
-                (Array.isArray(props.value) ? !(0, helpers_1.compareArrays)(props.value, selectedOption) : (props.value === null ? false : props.value.value !== (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value)))) {
-                setSelectedOption(props.value);
-            }
-        }
-    }, [props.value]);
-    const createNew = (0, react_1.useCallback)((a) => {
+        console.log("[options] - ", props.options);
+        setOptions(props.options);
+    }, [props.options]);
+    const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
+    const _val = watch(props.name);
+    const val = (0, react_1.useMemo)(() => _val, [_val]);
+    const createNew = (a) => {
         if (props.isCreatable !== undefined) {
             if (props.isCreatable === true) {
                 setOptions([{ label: a, value: a }, ...options]);
-                setSelectedOption({ label: a, value: a });
-                props.onChange({ label: a, value: a });
+                // setSelectedOption({ label: a, value: a });
+                setValue(props.name, { label: a, value: a });
             }
             else {
                 props.isCreatable(a).then((opt) => {
                     setOptions([opt, ...options]);
-                    setSelectedOption(opt);
-                    props.onChange(opt);
+                    // setSelectedOption(opt);
+                    setValue(props.name, opt);
                 });
             }
         }
-    }, []);
-    const onChangeHandler = (0, react_1.useCallback)((a) => {
-        setSelectedOption(a);
-        props.onChange(a);
-    }, []);
-    return props.isCreatable !== undefined ? (react_1.default.createElement(creatable_1.default, Object.assign({ onCreateOption: createNew }, props, { options: options, value: selectedOption, onChange: onChangeHandler }, props.rsOptions))) : (react_1.default.createElement(react_select_1.default, Object.assign({}, props, { options: options, value: selectedOption, onChange: onChangeHandler }, props.rsOptions)));
+    };
+    const SelectElems = (0, react_1.useMemo)(() => {
+        console.log("[SelectElems] -rendered", options);
+        return react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { noBorder: true, options: options }), props.isCreatable !== undefined ?
+            react_1.default.createElement(creatable_1.default, Object.assign({ onCreateOption: createNew }, props, props.rsOptions, { options: options, value: val, onChange: (a) => setValue(props.name, a) })) :
+            react_1.default.createElement(react_select_1.default, Object.assign({}, props, props.rsOptions, { options: options, value: val, onChange: (a) => setValue(props.name, a) })));
+    }, [options]);
+    return (SelectElems);
 };
 exports.default = Select;
 //# sourceMappingURL=index.js.map

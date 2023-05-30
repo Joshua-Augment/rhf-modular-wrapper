@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react';
 import InputWrapper from "../../core/InputWrapper";
+import { useFormContext } from "react-hook-form";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 const WYSIWYG = (props) => {
-    return (React.createElement(InputWrapper, Object.assign({}, props), (IWprops) => {
-        console.log("[props] - ", IWprops);
-        return React.createElement(ReactQuillWrapper, Object.assign({}, IWprops, props));
-        // return <ReactQuill modules={{toolbar : toolbarOptions}} {...IWprops} theme={props.theme} />;
-    }));
+    const { watch, setValue } = useFormContext();
+    const _val = watch(props.name);
+    const val = useMemo(() => _val, [_val]);
+    return (React.createElement(InputWrapper, Object.assign({}, props),
+        React.createElement(ReactQuillWrapper, Object.assign({}, props, { value: val, onChange: (a) => setValue(props.name, a) }))));
 };
 const ReactQuillWrapper = (props) => {
     const toolbarOptions = useMemo(() => ([

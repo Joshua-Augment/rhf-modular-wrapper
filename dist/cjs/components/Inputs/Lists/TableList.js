@@ -28,10 +28,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const react_hook_form_1 = require("react-hook-form");
-const InputElemWrapper_1 = __importDefault(require("../../core/InputElemWrapper"));
 const InputChooser_1 = __importDefault(require("../../core/InputChooser"));
 const fa_1 = require("react-icons/fa");
 const styled_components_1 = __importDefault(require("styled-components"));
+const core_1 = require("../../core");
 const Table = styled_components_1.default.table `
   width: 100%;
   margin-top:5px;
@@ -48,17 +48,31 @@ const IconDown = (0, styled_components_1.default)(fa_1.FaMinusSquare) `
   margin : 2px 5px;
 `;
 const TableList = (props) => {
-    const { control, formState: { errors } } = (0, react_hook_form_1.useFormContext)();
-    const { fields, append, remove } = (0, react_hook_form_1.useFieldArray)({ control, name: props.name });
-    console.log("[TableList] - fields", fields);
-    const generateRow = (0, react_1.useCallback)((i) => react_1.default.createElement("tr", { key: `fw-${props.name}-${i}` },
+    const { watch, control, formState: { errors } } = (0, react_hook_form_1.useFormContext)();
+    const { fields, append, insert, remove } = (0, react_hook_form_1.useFieldArray)({ control, name: props.name });
+    const _val = watch(props.name);
+    const val = (0, react_1.useMemo)(() => _val, [_val]);
+    const emptyRow = (0, react_1.useMemo)(() => {
+        if (props.emptyRow) {
+            return props.emptyRow;
+        }
+        else {
+            let obj = {};
+            props.items.forEach(i => obj[i.name] = '');
+            return obj;
+        }
+    }, []);
+    (0, react_1.useEffect)(() => { if (fields.length === 0) {
+        append(emptyRow);
+    } });
+    const generateRow = (i) => react_1.default.createElement("tr", { key: `fw-${props.name}-${i}` },
         props.showIndex === true && react_1.default.createElement("td", null, i + 1),
         props.items.map((item, iT) => react_1.default.createElement("td", { key: `fw-${props.name}-${i}-${iT}-iew` },
             react_1.default.createElement(InputChooser_1.default, Object.assign({}, item, { noLabel: true, name: `${props.name}.${i}.${item.name}` })))),
         props.fixed !== true && react_1.default.createElement("td", null,
-            react_1.default.createElement(IconUp, { onClick: () => { var _a; return append((_a = props.emptyRow) !== null && _a !== void 0 ? _a : {}); } }),
+            react_1.default.createElement(IconUp, { onClick: () => insert(i + 1, emptyRow) }),
             " ",
-            react_1.default.createElement(IconDown, { onClick: () => { console.log("[removing...]", i); remove(i); } }))), [fields]);
+            react_1.default.createElement(IconDown, { onClick: () => { console.log("[removing...]", i); remove(i); } })));
     const headerGenerator = (0, react_1.useMemo)(() => {
         var _a;
         return (_a = props.headerTemplate) !== null && _a !== void 0 ? _a : react_1.default.createElement("thead", null,
@@ -69,8 +83,12 @@ const TableList = (props) => {
     }, []);
     const footerGenerator = (0, react_1.useMemo)(() => { var _a; return (_a = props.footerTemplate) !== null && _a !== void 0 ? _a : headerGenerator; }, []);
     // const bodyGenerator = useMemo(()=> fields.length === 0 ? generateRow(0) : fields.map((field,i) => generateRow(i)),[fields])
-    const bodyGenerator = (0, react_1.useMemo)(() => fields.map((field, i) => generateRow(i)), [fields, errors]);
-    return (react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { onChange: () => { }, value: null }),
+    const bodyGenerator = (0, react_1.useMemo)(() => {
+        console.log("[bodyGenerator] - Fields", fields);
+        console.log("[bodyGenerator] - Final", fields.map((field, i) => generateRow(i)));
+        return fields.map((field, i) => generateRow(i));
+    }, [fields, errors, val]);
+    return (react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props),
         react_1.default.createElement("div", null,
             react_1.default.createElement(Table, null,
                 (props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator,

@@ -30,23 +30,83 @@ const react_1 = __importStar(require("react"));
 const react_hook_form_1 = require("react-hook-form");
 const InputElemWrapper_1 = __importDefault(require("./InputElemWrapper"));
 const InputWrapper = (props) => {
-    let x = 0;
-    const [_value, _setValue] = (0, react_1.useState)(null);
-    const methods = props.contextless === true ? { control: undefined, watch: (a) => null } : (0, react_hook_form_1.useFormContext)();
-    const child = (0, react_1.useMemo)(() => { console.log(`Rerendering ${props.name}....X:${x}, value : ${methods.watch(props.name)}`); x++; return props.children; }, [_value, methods.watch(props.name), props.children]);
-    return (props.contextless ?
-        // Since this does not live in a form there is no form context, as such just store the state in the wrapper itself
-        // to maintain the input as a controlled input
-        react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { value: _value, onChange: _setValue }), child &&
-            child(Object.assign(Object.assign({}, props), { value: _value, onChange: _setValue, onBlur: () => false, isTouched: _value !== null, isDirty: _value !== null, error: undefined, disabled: props.disabled, ref: undefined }))) :
-        // Control is handled by the Controller Element instead
-        react_1.default.createElement(react_hook_form_1.Controller, { control: methods.control, name: props.name, render: ({ field: { onChange, onBlur, value, name, ref }, fieldState: { invalid, isTouched, isDirty, error }, formState, }) => (react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { value: value === undefined ? props.defaultValue : value, onChange: onChange, errors: error }), child &&
-                child(Object.assign(Object.assign({}, props), { value,
-                    onChange,
-                    onBlur,
-                    isTouched,
-                    isDirty,
-                    error, disabled: props.disabled, ref })))) }));
+    const [value, setValue] = (0, react_1.useState)(undefined);
+    const { getValues, watch, setValue: contextSetValue } = (0, react_hook_form_1.useFormContext)();
+    const watchValue = watch(props.name);
+    (0, react_1.useEffect)(() => setValue(watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue]);
+    // Set Value First if Available
+    (0, react_1.useEffect)(() => { if (props.defaultValue) {
+        contextSetValue(props.name, props.defaultValue);
+    } }, [props.defaultValue]);
+    (0, react_1.useEffect)(() => {
+        // External Field
+        if (props.externalStateSetter) {
+            props.externalStateSetter(watchValue !== null && watchValue !== void 0 ? watchValue : value);
+        }
+        // Calculated Fields
+        if (props.calculatedField) {
+            contextSetValue(props.name, props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues()));
+        }
+    }, [value]);
+    // const [_value, _setValue] = useState(null)
+    // const methods = props.contextless === true ? {control:undefined, watch : (a:string) => null } : useFormContext();
+    const child = (0, react_1.useMemo)(() => {
+        return react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { value: value }), props.children);
+    }, [value, props === null || props === void 0 ? void 0 : props.options]);
+    return child;
+    // return (
+    //   props.contextless ?
+    //   // Since this does not live in a form there is no form context, as such just store the state in the wrapper itself
+    //   // to maintain the input as a controlled input
+    //   <InputElemWrapper
+    //     {...props}
+    //     value={_value}
+    //     onChange={_setValue}
+    // >
+    //   {child &&
+    //     child({
+    //       ...props,
+    //       value : _value,
+    //       onChange : _setValue,
+    //       onBlur : ()=>false,
+    //       isTouched: _value !== null,
+    //       isDirty: _value !== null,
+    //       error : undefined,
+    //       disabled : props.disabled,
+    //       ref : undefined,
+    //     })}
+    // </InputElemWrapper> : 
+    // // Control is handled by the Controller Element instead
+    //   <Controller
+    //     control={methods.control}
+    //     name={props.name}
+    //     render={({
+    //       field: { onChange, onBlur, value, name, ref },
+    //       fieldState: { invalid, isTouched, isDirty, error },
+    //       formState,
+    //     }) => (
+    //       <InputElemWrapper
+    //         {...props}
+    //         value={value === undefined ? props.defaultValue : value}
+    //         onChange={onChange}
+    //         errors={error}
+    //       >
+    //         {child &&
+    //           child({
+    //             ...props,
+    //             value,
+    //             onChange,
+    //             onBlur,
+    //             isTouched,
+    //             isDirty,
+    //             error,
+    //             disabled : props.disabled,
+    //             ref,
+    //           })}
+    //       </InputElemWrapper>
+    //     )}
+    //   />
+    // );
 };
 exports.default = InputWrapper;
 //# sourceMappingURL=InputWrapper.js.map

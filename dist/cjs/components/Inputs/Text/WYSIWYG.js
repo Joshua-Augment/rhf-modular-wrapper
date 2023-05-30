@@ -28,14 +28,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const InputWrapper_1 = __importDefault(require("../../core/InputWrapper"));
+const react_hook_form_1 = require("react-hook-form");
 const react_quill_1 = __importDefault(require("react-quill"));
 require("react-quill/dist/quill.snow.css");
 const WYSIWYG = (props) => {
-    return (react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props), (IWprops) => {
-        console.log("[props] - ", IWprops);
-        return react_1.default.createElement(ReactQuillWrapper, Object.assign({}, IWprops, props));
-        // return <ReactQuill modules={{toolbar : toolbarOptions}} {...IWprops} theme={props.theme} />;
-    }));
+    const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
+    const _val = watch(props.name);
+    const val = (0, react_1.useMemo)(() => _val, [_val]);
+    return (react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props),
+        react_1.default.createElement(ReactQuillWrapper, Object.assign({}, props, { value: val, onChange: (a) => setValue(props.name, a) }))));
 };
 const ReactQuillWrapper = (props) => {
     const toolbarOptions = (0, react_1.useMemo)(() => ([

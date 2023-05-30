@@ -1,34 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { IFormFrameInjector, InputWrapper, ISwitch } from '../../core'
+import React, { useMemo } from 'react'
+import { InputWrapper, ISwitch } from '../../core'
 import {default as SwitchInput} from "react-switch";
+import { useFormContext } from 'react-hook-form';
 
 const Switch = (props:ISwitch) => {
+  
+  const {watch, setValue} = useFormContext()
+  const _val = watch(props.name)
+  const val = useMemo(() => _val ,[_val])
+
   return (
     <InputWrapper {...props} id={`${props.name}`} noBorder customClasses={{wrapperClassName:'form-check'}}>
-      {
-        (IWprops:IFormFrameInjector) => {
-          return <SwitchContainer {...props} {...IWprops} />
-        }
-      }
+      <div className={`d-block ${props.wrapperClass}`} style={{display:'flex',alignItems: 'center',flexDirection: 'column',...props.wrapperStyle}}>
+        <SwitchInput className={props.inputClass} onChange={(a) => setValue(props.name, a)} checked={val} {...props.options} />
+        {props.footLabel && <div className='text-muted text-center'>{props.footLabel && (val ? props.footLabel[1] : props.footLabel[0])}</div>}
+      </div>
     </InputWrapper>
   )
 }
-interface ISwitchContainer extends ISwitch,IFormFrameInjector {}
+// interface ISwitchContainer extends ISwitch,IFormFrameInjector {}
 
-const SwitchContainer = (props:ISwitchContainer) => {
-  const [value, setValue] = useState(false)
+// const SwitchContainer = (props:ISwitchContainer) => {
+//   const [value, setValue] = useState(false)
 
-  useEffect(()=>{
-    if (value !== props.value) {
-      setValue(props.value)
-    }
-  },[props.value, value])
+//   useEffect(()=>{
+//     if (value !== props.value) {
+//       setValue(props.value)
+//     }
+//   },[props.value, value])
 
-  return <div className={`d-block ${props.wrapperClass}`} style={props.wrapperStyle}>
-    <SwitchInput className={props.inputClass} onChange={props.onChange} checked={props.value} />
-    <div className='text-muted text-center'>{props.footLabel && (value ? props.footLabel[1] : props.footLabel[0])}</div>
-  </div>
+//   return <div className={`d-block ${props.wrapperClass}`} style={props.wrapperStyle}>
+//     <SwitchInput className={props.inputClass} onChange={props.onChange} checked={props.value} />
+//     <div className='text-muted text-center'>{props.footLabel && (value ? props.footLabel[1] : props.footLabel[0])}</div>
+//   </div>
 
-}
+// }
 
 export default Switch

@@ -5,3 +5,9 @@
 .react-datepicker-wrapper {
   padding: 0.375rem 0;
 }
+
+.form-item-wrapper.form-check {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}

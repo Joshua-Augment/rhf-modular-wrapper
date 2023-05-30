@@ -30,20 +30,16 @@ const react_1 = __importStar(require("react"));
 const InputWrapper_1 = __importDefault(require("../../core/InputWrapper"));
 const react_radio_buttons_1 = require("react-radio-buttons");
 require("../../styling/Radiobox.css");
+const react_hook_form_1 = require("react-hook-form");
 const Radiobox = (props) => {
-    return (react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props, { id: `${props.name}`, noLabel: true, noBorder: true, customClasses: { wrapperClassName: 'form-check' } }), (IWprops) => {
-        return react_1.default.createElement(RadioWrapper, Object.assign({}, props, IWprops));
-    }));
-};
-const RadioWrapper = (props) => {
-    const [value, setValue] = (0, react_1.useState)("");
-    (0, react_1.useEffect)(() => { if (value !== (props === null || props === void 0 ? void 0 : props.value)) {
-        setValue(props === null || props === void 0 ? void 0 : props.value);
-    } }, [value, props.value]);
-    return react_1.default.createElement("span", { className: "rb-item-wrapper" },
-        react_1.default.createElement(react_radio_buttons_1.RadioGroup, { horizontal: props.orientation === 'horizontal', onChange: props.onChange, value: value }, props.options.map((option, i) => (option.reversed ?
-            react_1.default.createElement(react_radio_buttons_1.ReversedRadioButton, { rootColor: "black", key: `${props.name}-opt-${i}`, value: option.value }, option.label) :
-            react_1.default.createElement(react_radio_buttons_1.RadioButton, { rootColor: "black", key: `${props.name}-opt-${i}`, value: option.value }, option.label)))));
+    const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
+    const _val = watch(props.name);
+    const val = (0, react_1.useMemo)(() => _val, [_val]);
+    return (react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props, { id: `${props.name}`, noLabel: true, noBorder: true, customClasses: { wrapperClassName: 'form-check' } }),
+        react_1.default.createElement("span", { className: "rb-item-wrapper" },
+            react_1.default.createElement(react_radio_buttons_1.RadioGroup, { horizontal: props.orientation === 'horizontal', onChange: (a) => setValue(props.name, a), value: val }, props.options.map((option, i) => (option.reversed ?
+                react_1.default.createElement(react_radio_buttons_1.ReversedRadioButton, { rootColor: "black", key: `${props.name}-opt-${i}`, value: option.value }, option.label) :
+                react_1.default.createElement(react_radio_buttons_1.RadioButton, { rootColor: "black", key: `${props.name}-opt-${i}`, value: option.value }, option.label)))))));
 };
 exports.default = Radiobox;
 //# sourceMappingURL=Radiobox.js.map

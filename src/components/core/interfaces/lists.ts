@@ -35,7 +35,9 @@ export interface IBaseList extends IInputsBaseProps<any> {
   maxItems ?: number;
 }
 
-export interface IList extends IBaseList {}
+export interface IList extends IBaseList {
+  bodyTemplate ?: React.ReactElement
+}
 export interface ITableList extends IBaseList {
   header ?: 'none' | 'top' | 'bottom' | 'both' | 'footer' | 'header_footer'
   headerTemplate ?: React.ReactNode,

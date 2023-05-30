@@ -28,9 +28,7 @@ export interface IForm<T extends FieldValues> {
 export interface FormFrameWrapperProps<T = any> extends IInputsBaseProps<T> {
     errors?: FieldError;
     children: JSX.Element;
-    onChange: Function;
     value: T;
-    defaultValue?: T;
 }
 export interface IFormFrameInjector<T = any> extends FormFrameWrapperProps<T> {
     value: T;
@@ -61,14 +59,15 @@ export type TInputInputHTML = TInputHTMLProps & {
 };
 export type TInputWrapperInputHTML = TInputWrapperHTML & TInputInputHTML;
 export interface IInputsBaseProps<T = any> {
-    contextless?: boolean;
     inputWrapper?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
     name: string;
     id?: string;
     defaultValue?: T;
     disabled?: boolean;
     customClasses?: FormInputClassNames;
+    style?: React.CSSProperties;
     reversedLabel?: boolean;
+    side?: boolean;
     externalStateSetter?: (a: T) => void;
     helperText?: string;
     label?: string;
@@ -98,8 +97,12 @@ export interface IInputsBaseProps<T = any> {
             message?: string;
         };
     };
+    value?: any;
+    onChange?: (a: any) => void;
+    [key: string]: any;
+    [key: number]: any;
 }
 export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {
-    children?: Function;
+    children?: any;
 }
 export type HTMLInputTypeAttribute = 'button' | 'checkbox' | 'color' | 'date' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | (string & {});

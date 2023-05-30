@@ -25,9 +25,9 @@ export interface IForm<T extends FieldValues> {
 export interface FormFrameWrapperProps<T=any> extends IInputsBaseProps<T>  {
   errors ?: FieldError,
   children : JSX.Element,
-  onChange : Function,
+  // onChange : Function,
   value : T
-  defaultValue ?: T
+  // defaultValue ?: T
 }
 
 export interface IFormFrameInjector<T=any> extends FormFrameWrapperProps<T> {
@@ -58,8 +58,6 @@ export type TInputWrapperInputHTML = TInputWrapperHTML & TInputInputHTML
 
 /* INPUTS */
 export interface IInputsBaseProps<T=any> {
-  
-  contextless ?:boolean,
   inputWrapper ?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
   name : string,
   id ?: string,
@@ -69,7 +67,9 @@ export interface IInputsBaseProps<T=any> {
   disabled ?: boolean,
 
   customClasses ?: FormInputClassNames,
+  style ?: React.CSSProperties
   reversedLabel ?: boolean, 
+  side ?: boolean,
 
   externalStateSetter ?: (a: T) => void,
 
@@ -90,11 +90,14 @@ export interface IInputsBaseProps<T=any> {
     maxLength ?: {value: number, message ?: string},
     min ?: {value: number, message ?: string},
     minLength ?: {value: number, message ?: string},
-  }
-  
+  },
+  value ?: any,
+  onChange ?: (a:any) => void,
+  [key: string]: any,
+  [key :number]: any,  
 }
 export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {  
-  children ?: Function 
+  children ?: any
 }
 
 

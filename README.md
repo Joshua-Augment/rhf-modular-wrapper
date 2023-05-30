@@ -84,6 +84,20 @@ Use case :
   <DropzoneUploader label="Example Uploader" name="uploader" />
 ```
 
+### List
+
+There are three types of lists available, Basic List, Template Lists, and Table Lists
+
+#### Basic List <FormList />
+A Basic List is generated using Bootstrap Row and Col elements. Just add the list of items via the item prop and you're good to go
+
+#### Template List <FormList />
+Using the same method as the Basic List, you can also add in a template via the bodyTemplate prop. The template can be constructed via standard DOM or React elements, and add the prop "data-name" to link an element (a div would suffice) to an input (set via the `items` props). To add an index, just add the data-index props and the index will be injected as a child of the element. For Adding or Removing rows, use `data-add` and `data-remove` respectively. Two props are injected into these elements, one is the `onClick` handler that would handle adding/removing the rows. Another prop given is `isEnd` prop, if true means the list cannot handle further clicks. You may use this to style the prop accordingly (active/disabled etc)
+
+#### TableList <TableList />
+
+Tablelist operates the same as <FormList />, with the exception that the inputs are generated as a table Element. a `headerTemplate` and `footerTemplate` prop is available to generate your own Header / Footer for the Table.
+
 ### Checkbox
 To use checkboxes, similar to native use include a name prop and value prop.
 

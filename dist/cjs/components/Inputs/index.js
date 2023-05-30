@@ -20,4 +20,5 @@ __exportStar(require("./Text"), exports);
 __exportStar(require("./Uploaders"), exports);
 __exportStar(require("./Select"), exports);
 __exportStar(require("./Lists"), exports);
+__exportStar(require("./Range"), exports);
 //# sourceMappingURL=index.js.map

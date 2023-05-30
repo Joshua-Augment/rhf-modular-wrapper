@@ -31,25 +31,9 @@ const Tooltip_1 = __importDefault(require("@mui/material/Tooltip"));
 const Error_1 = __importDefault(require("@mui/icons-material/Error"));
 const Info_1 = __importDefault(require("@mui/icons-material/Info"));
 const Form_1 = require("./Form");
-const react_hook_form_1 = require("react-hook-form");
 const InputElemWrapper = (props) => {
-    var _a;
-    const { getValues } = props.contextless !== true ? (0, react_hook_form_1.useFormContext)() : { getValues: null };
-    // Set Value First if Available
-    (0, react_1.useEffect)(() => { if (props.defaultValue) {
-        props.onChange(props.defaultValue);
-    } }, [props.defaultValue]);
-    (0, react_1.useEffect)(() => {
-        // External Field
-        if (props.externalStateSetter) {
-            props.externalStateSetter(props.value);
-        }
-        // Calculated Fields
-        if (props.calculatedField && props.contextless !== true && getValues !== null) {
-            props.onChange(props.name, props.calculatedField.calculate(props.value, getValues(props.calculatedField.find), getValues()));
-        }
-    }, [props.value]);
-    const Wrapper = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : (0, react_1.useContext)(Form_1.ThemeContext).inputTemplate;
+    var _a, _b;
+    const Wrapper = (_b = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : (0, react_1.useContext)(Form_1.ThemeContext).inputTemplate) !== null && _b !== void 0 ? _b : null;
     // <div style={{position: 'relative'}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
     //     {
     //       props.reversedLabel === true ? 
@@ -71,16 +55,18 @@ const InputElemWrapper = (props) => {
     //       </>
     //     }
     //   </div>
-    const WrapElem = () => {
+    const WrapElem = (0, react_1.useMemo)(() => {
         var _a, _b, _c, _d, _e, _f, _g, _h;
+        console.log(`[WrapElem] - value for ${props.name} - `, props.value);
+        console.log(`[WrapElem] - child for ${props.name} - `, props.children);
         if (Wrapper !== null && Wrapper !== undefined) {
             return react_1.default.createElement(Wrapper, Object.assign({}, props));
         }
         else {
-            return react_1.default.createElement("div", { style: { position: 'relative' }, className: `form-item-wrapper ${(_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.wrapperClassName) !== null && _b !== void 0 ? _b : ''}` }, props.reversedLabel === true ?
+            return react_1.default.createElement("div", { style: Object.assign({ position: 'relative' }, props.style), className: `form-item-wrapper ${(_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.wrapperClassName) !== null && _b !== void 0 ? _b : ''}` }, props.reversedLabel === true ?
                 react_1.default.createElement(react_1.default.Fragment, null,
                     react_1.default.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? 'no-border' : ''}` }, props.children),
-                    react_1.default.createElement("label", { htmlFor: (_c = props.id) !== null && _c !== void 0 ? _c : props.name, className: (_e = (_d = props === null || props === void 0 ? void 0 : props.customClasses) === null || _d === void 0 ? void 0 : _d.labelClassName) !== null && _e !== void 0 ? _e : '' },
+                    react_1.default.createElement("label", { htmlFor: (_c = props.id) !== null && _c !== void 0 ? _c : props.name, className: (_e = (_d = props === null || props === void 0 ? void 0 : props.customClasses) === null || _d === void 0 ? void 0 : _d.labelClassName) !== null && _e !== void 0 ? _e : '', style: { marginLeft: '5px' } },
                         props.noBorder !== false && props.noLabel !== true && react_1.default.createElement("span", null,
                             props.label,
                             " ",
@@ -96,7 +82,7 @@ const InputElemWrapper = (props) => {
                             " ",
                             ' '))) :
                 react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement("label", { htmlFor: (_f = props.id) !== null && _f !== void 0 ? _f : props.name, className: (_h = (_g = props === null || props === void 0 ? void 0 : props.customClasses) === null || _g === void 0 ? void 0 : _g.labelClassName) !== null && _h !== void 0 ? _h : '' },
+                    react_1.default.createElement("label", { htmlFor: (_f = props.id) !== null && _f !== void 0 ? _f : props.name, className: (_h = (_g = props === null || props === void 0 ? void 0 : props.customClasses) === null || _g === void 0 ? void 0 : _g.labelClassName) !== null && _h !== void 0 ? _h : '', style: { marginRight: '5px' } },
                         props.noBorder !== false && props.noLabel !== true && react_1.default.createElement("span", null,
                             props.label,
                             " ",
@@ -113,8 +99,8 @@ const InputElemWrapper = (props) => {
                             ' ')),
                     react_1.default.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? 'no-border' : ''}` }, props.children)));
         }
-    };
-    return WrapElem();
+    }, [props.value, props.options]);
+    return WrapElem;
     // return Wrapper as JSX.Element
 };
 exports.default = InputElemWrapper;

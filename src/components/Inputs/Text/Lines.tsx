@@ -1,25 +1,25 @@
-import React from "react";
-import { IFormFrameInjector, ILines } from "../../core";
+import React, { useMemo } from "react";
+import { ILines } from "../../core";
 import InputWrapper from "../../core/InputWrapper";
+import { useFormContext } from "react-hook-form";
 
 const Lines = (props: ILines) => {
+  const {watch, setValue} = useFormContext()
+  const _val = watch(props.name)
+  const val = useMemo(() => _val ,[_val])
+
   return (
     <InputWrapper {...props}>
-      {(IWprops: IFormFrameInjector) => {
-        console.log("[props] - ", props);
-        return (
-          <textarea
-            id={IWprops.name}
-            className={IWprops?.customClasses?.inputClassName ?? ""}
-            name={IWprops.name}
-            value={IWprops.value}
-            onChange={IWprops.onChange}
-            placeholder={IWprops.placeholder}
-            rows={props.rows ?? 3}
-            cols={props.cols}
-          />
-        );
-      }}
+      <textarea
+        id={props.name}
+        className={props?.customClasses?.inputClassName ?? ""}
+        name={props.name}
+        value={val}
+        onChange={(a) => setValue(props.name, a.target.value)}
+        placeholder={props.placeholder}
+        rows={props.rows ?? 3}
+        cols={props.cols}
+      />
     </InputWrapper>
   );
 };
