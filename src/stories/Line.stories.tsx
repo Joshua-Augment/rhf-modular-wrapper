@@ -26,7 +26,8 @@ LinesBootstrap.args = {
 
 export const LineWithButton = Template.bind({})
 LineWithButton.args = {
-  children : <Line 
+  children : <>
+  <Line 
     label="Line with Button" 
     name="line_button" 
     buttons={
@@ -42,6 +43,19 @@ LineWithButton.args = {
       }
     } 
   />
+  <Line 
+    label="Line with ReactNode Labels" 
+    name="line_button_reactElemetn" 
+    buttons={
+      {
+        left: [
+          {label:<h6>1</h6>,onClick: (a) => alert(`Value is ${a} From Button #1!`)},
+          {label:<h6>2</h6>,onClick: (a) => alert(`Value is ${a} From Button #2!`)},
+        ],
+      }
+    } 
+  />
+  </>
 }
 
 export const TextArea = Template.bind({})

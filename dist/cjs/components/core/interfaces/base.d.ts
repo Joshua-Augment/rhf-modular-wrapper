@@ -66,12 +66,12 @@ export interface IInputsBaseProps<T = any> {
             all?: JSX.Element;
         };
         left?: {
-            label: string;
+            label: React.ReactNode;
             onClick: (value: T) => void;
             customButton?: JSX.Element;
         }[];
         right?: {
-            label: string;
+            label: React.ReactNode;
             onClick: (value: T) => void;
             customButton?: JSX.Element;
         }[];
