@@ -10,7 +10,9 @@ const InputWrapper = (props: FormBaseInput) => {
 
   const watchValue = watch(props.name)
 
-  useEffect(()=> setValue(watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue])
+  useEffect(() => {if (watchValue === undefined) {contextSetValue(props.name,null)}},[watchValue])
+
+  useEffect(()=> setValue(watchValue === undefined ? null : watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue])
 
   // Set Value First if Available
   useEffect(()=>{ if (props.defaultValue) {contextSetValue(props.name, props.defaultValue);} },[props.defaultValue]) 
@@ -53,8 +55,8 @@ const InputWrapper = (props: FormBaseInput) => {
    }))
 
    const childrenInjected = React.cloneElement(props.children, {...props.children?.props, disabled : props.disabled})
-    
-    return <InputElemWrapper {...props} value={value} >
+  console.log(`Input ${props.name} - value : ${value}`)
+  return <InputElemWrapper {...props} value={value} >
       <>
         {WrapperElementLeft}
         {/* props.buttons && props.buttons.left && <WrapperElementLeft>

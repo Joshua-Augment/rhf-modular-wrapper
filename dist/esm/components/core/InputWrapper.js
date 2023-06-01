@@ -6,7 +6,10 @@ const InputWrapper = (props) => {
     const [value, setValue] = useState(undefined);
     const { getValues, watch, setValue: contextSetValue } = useFormContext();
     const watchValue = watch(props.name);
-    useEffect(() => setValue(watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue]);
+    useEffect(() => { if (watchValue === undefined) {
+        contextSetValue(props.name, null);
+    } }, [watchValue]);
+    useEffect(() => setValue(watchValue === undefined ? null : watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue]);
     // Set Value First if Available
     useEffect(() => { if (props.defaultValue) {
         contextSetValue(props.name, props.defaultValue);
@@ -43,6 +46,7 @@ const InputWrapper = (props) => {
             return React.createElement(ButtonElem, { key: `bl-${i}`, onClick: () => x.onClick(value), name: props.name, value: value }, x.label);
         }));
         const childrenInjected = React.cloneElement(props.children, Object.assign(Object.assign({}, (_o = props.children) === null || _o === void 0 ? void 0 : _o.props), { disabled: props.disabled }));
+        console.log(`Input ${props.name} - value : ${value}`);
         return React.createElement(InputElemWrapper, Object.assign({}, props, { value: value }),
             React.createElement(React.Fragment, null,
                 WrapperElementLeft,

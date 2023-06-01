@@ -34,6 +34,9 @@ require("react-quill/dist/quill.snow.css");
 const WYSIWYG = (props) => {
     const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
     const _val = watch(props.name);
+    (0, react_1.useEffect)(() => { if (val === undefined || val === null) {
+        setValue(props.name, '');
+    } }, [_val]);
     const val = (0, react_1.useMemo)(() => _val, [_val]);
     return (react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props),
         react_1.default.createElement(ReactQuillWrapper, Object.assign({}, props, { value: val, onChange: (a) => setValue(props.name, a) }))));

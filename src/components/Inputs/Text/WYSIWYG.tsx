@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, {useEffect, useMemo} from 'react'
 import { ILines } from "../../core";
 import InputWrapper from "../../core/InputWrapper";
 import { useFormContext } from "react-hook-form";
@@ -8,6 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 const WYSIWYG = (props:ILines) => {
   const {watch, setValue} = useFormContext()
   const _val = watch(props.name)
+  useEffect(()=>{if (val === undefined || val === null) {setValue(props.name, '')}},[_val])
   const val = useMemo(() => _val ,[_val])
 
   return (    

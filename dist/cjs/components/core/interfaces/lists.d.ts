@@ -30,5 +30,23 @@ export interface ITableList extends IBaseList {
     headerTemplate?: React.ReactNode;
     footerTemplate?: React.ReactNode;
 }
+export interface IInputToTableList extends ITableList {
+    children?: any;
+    inputName: string;
+    editingCaption?: string;
+    tableButtons?: {
+        add?: React.Component<any>;
+        edit?: React.ReactElement<any>;
+        remove?: React.ReactElement<any>;
+    };
+    tableWrappers?: {
+        addButtonWrapper?: React.Component<{
+            children: any;
+        }>;
+        tableActionsWrapper?: React.Component<{
+            children: any;
+        }>;
+    };
+}
 export type TMadeInputList = "wysiwyg" | "datepicker" | "select" | "select_async" | "textarea" | "custom" | "switch" | "yesno" | "dropzone";
 export type TListInputs = HTMLInputTypeAttribute | TMadeInputList;

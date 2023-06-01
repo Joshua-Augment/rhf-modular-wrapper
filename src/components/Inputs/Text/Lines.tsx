@@ -14,7 +14,7 @@ const Lines = (props: ILines) => {
         id={props.name}
         className={props?.customClasses?.inputClassName ?? ""}
         name={props.name}
-        value={val}
+        value={val === undefined ? '' : val}
         onChange={(a) => setValue(props.name, a.target.value)}
         placeholder={props.placeholder}
         rows={props.rows ?? 3}

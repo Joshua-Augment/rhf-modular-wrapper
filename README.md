@@ -113,6 +113,11 @@ Using the same method as the Basic List, you can also add in a template via the 
 
 Tablelist operates the same as <FormList />, with the exception that the inputs are generated as a table Element. a `headerTemplate` and `footerTemplate` prop is available to generate your own Header / Footer for the Table.
 
+#### InputListToTable <InputListToTable /> (New!)
+
+Following similar props to <TableList />, this allows you to use a standard Form which after filling up, you may "Submit" via the (Add Row) button to fill up a table. The data given in the table is a summary of the inputs, so object data will usually be represented by their `label` or `value` key. Suitable if a form like structure better fits the data but batch filling is needed. 
+
+
 ### Checkbox
 To use checkboxes, similar to native use include a name prop and value prop.
 

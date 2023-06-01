@@ -34,7 +34,10 @@ const InputWrapper = (props) => {
     const [value, setValue] = (0, react_1.useState)(undefined);
     const { getValues, watch, setValue: contextSetValue } = (0, react_hook_form_1.useFormContext)();
     const watchValue = watch(props.name);
-    (0, react_1.useEffect)(() => setValue(watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue]);
+    (0, react_1.useEffect)(() => { if (watchValue === undefined) {
+        contextSetValue(props.name, null);
+    } }, [watchValue]);
+    (0, react_1.useEffect)(() => setValue(watchValue === undefined ? null : watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue]);
     // Set Value First if Available
     (0, react_1.useEffect)(() => { if (props.defaultValue) {
         contextSetValue(props.name, props.defaultValue);
@@ -71,6 +74,7 @@ const InputWrapper = (props) => {
             return react_1.default.createElement(ButtonElem, { key: `bl-${i}`, onClick: () => x.onClick(value), name: props.name, value: value }, x.label);
         }));
         const childrenInjected = react_1.default.cloneElement(props.children, Object.assign(Object.assign({}, (_o = props.children) === null || _o === void 0 ? void 0 : _o.props), { disabled: props.disabled }));
+        console.log(`Input ${props.name} - value : ${value}`);
         return react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { value: value }),
             react_1.default.createElement(react_1.default.Fragment, null,
                 WrapperElementLeft,
