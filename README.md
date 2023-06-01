@@ -50,6 +50,21 @@ shouldUnregister | boolean | Unregisters an input value if the input is removed.
 shouldUseNativeValidation | boolean | If the native validation should be used instead | false
 delayError | number | Delay the error message by x milliseconds | undefined
 
+For any Input, the common props are
+|Prop | Type | Required(Y/N) |Description |
+|---|---|---| ---|
+| name | string | yes | Input Name. It becomes the submitted outputs key for the value. can be dot notated `line.data.first` for nested inputs |
+| label | string | no | Input Label. |
+| buttons | { wrapper ?: {left ?: JSX.Element, right ?: JSX.Element, all ?: JSX.Element},left ?: {label: string, onClick: (value: T) => void, customButton ?: JSX.Element}[],right ?: {label: string, onClick: (value: T) => void, customButton ?: JSX.Element}[],} | no | If Provided, will render Any number of buttons on the left or right side of the input. Buttons have an onClick which outputs the current input value. The buttons on either side are wrapped in a flex div, but the wrapper can be changed using the wrapper prop, provide a `wrapper.left`,`wrapper.right` for either side, or a `wrapper.all` for both sides. `wrapper.all` supplants either so take note. the buttons also have a customButton prop which allows for other Buttons to be used. The buttons will receive a name and value prop, corresponding to that of the input. |
+| inputWrapper | no |ComponentType<FormFrameWrapperProps> | A Custom wrapper for positioning the input, labels, and helper/error texts. Useful when wanting to change the input style | 
+| id | string | no | Id for the input| 
+|defaultValue | T | no | A default value injector for the input. |
+|disabled | boolean | no | To disable or enable an input|
+|reversedLabel | boolean | no  | If the label positioning needs to be reversed|
+|externalStateSetter | (a:T) => void | no | Useful if you need to extract the value from the input while not within the context of the <Form> element. |
+| helperText | string | no | To show a popup or some text to aid users in inputting data|
+|noLabel | boolean | no | To disabled the label from showing (Usually used in lists) |
+
 ## Types of Input
 
 ### Line

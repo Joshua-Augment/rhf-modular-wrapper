@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import InputElemWrapper from "./InputElemWrapper";
 import { FormBaseInput } from "./interfaces";
+import { Button } from "@mui/material";
 
 const InputWrapper = (props: FormBaseInput) => {
   const [value, setValue] = useState<any>(undefined)
@@ -25,7 +26,65 @@ const InputWrapper = (props: FormBaseInput) => {
   // const [_value, _setValue] = useState(null)
   // const methods = props.contextless === true ? {control:undefined, watch : (a:string) => null } : useFormContext();
   const child = useMemo(()=>{
-    return <InputElemWrapper {...props} value={value} >{props.children}</InputElemWrapper>
+    const Wrapper = (A ?: any, B ?:any, children ?: any) => {
+      if (A) {return <A>{children}</A>}
+      if (B) {return <B>{children}</B>}
+      return <div style={{display:'flex',flexDirection:'row'}}>{children}</div>
+    }
+    const WrapperElementLeft = Wrapper(props?.buttons?.wrapper?.left,props?.buttons?.wrapper?.all,props?.buttons?.left?.map((x,i) => {
+      const ButtonElem: React.ComponentType<{name?: string, value?: any}>|any = x.customButton || Button; // Use customButton or a default button
+
+     return <ButtonElem 
+       key={`bl-${i}`} 
+       onClick={() => x.onClick(value)}
+       name={props.name} 
+       value={value}
+     >{x.label}</ButtonElem>
+   }))
+
+    const WrapperElementRight = Wrapper(props?.buttons?.wrapper?.right,props?.buttons?.wrapper?.all,props?.buttons?.right?.map((x,i) => {
+      const ButtonElem: React.ComponentType<{name?: string, value?: any}>|any = x.customButton || Button; // Use customButton or a default button
+      return <ButtonElem 
+        key={`bl-${i}`} 
+        onClick={() => x.onClick(value)}
+        name={props.name} 
+        value={value}
+      >{x.label}</ButtonElem>
+   }))
+
+   const childrenInjected = React.cloneElement(props.children, {...props.children?.props, disabled : props.disabled})
+    
+    return <InputElemWrapper {...props} value={value} >
+      <>
+        {WrapperElementLeft}
+        {/* props.buttons && props.buttons.left && <WrapperElementLeft>
+          {props.buttons.left.map((x,i) => {
+             const ButtonElem: React.ComponentType<{name?: string, value?: any}>|any = x.customButton || Button; // Use customButton or a default button
+
+            return <ButtonElem 
+              key={`bl-${i}`} 
+              onClick={(value) => x.onClick(value)}
+              name={props.name} 
+              value={value}
+            >{x.label}</ButtonElem>
+          })}
+        </WrapperElementLeft> */}
+        {childrenInjected}
+        {/* props.buttons && props.buttons.right && <WrapperElementRight>
+          {props.buttons.right.map((x,i) => {
+            let ButtonElem:any = Button
+            if (x.customButton) {
+              ButtonElem = x.customButton
+            }
+
+            ButtonElem = React.cloneElement(ButtonElem, {...ButtonElem?.props, name: props.name, value: value, label: x.label})
+
+            return <ButtonElem key={`bl-${i}`} onClick={(value) => x.onClick(value)}>{x.label}</ButtonElem>
+          })}
+        </WrapperElementRight> */}
+        {WrapperElementRight}
+      </>
+    </InputElemWrapper>
   },[value, props?.options])
   
   
@@ -86,5 +145,6 @@ const InputWrapper = (props: FormBaseInput) => {
   //   />
   // );
 };
+
 
 export default InputWrapper;

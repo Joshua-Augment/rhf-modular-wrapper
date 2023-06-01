@@ -4,6 +4,10 @@
 .form-item-wrapper label, .form-label {  
   margin-bottom: 0.5rem;
 }
+.form-item-child-wrapper  {
+  display: flex;
+  flex-direction: row;
+}
 
 .form-item-child-wrapper textarea {  
   min-height: calc(1.5em + 0.75rem + 2px);

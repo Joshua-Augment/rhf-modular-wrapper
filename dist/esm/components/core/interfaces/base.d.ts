@@ -59,6 +59,23 @@ export type TInputInputHTML = TInputHTMLProps & {
 };
 export type TInputWrapperInputHTML = TInputWrapperHTML & TInputInputHTML;
 export interface IInputsBaseProps<T = any> {
+    buttons?: {
+        wrapper?: {
+            left?: JSX.Element;
+            right?: JSX.Element;
+            all?: JSX.Element;
+        };
+        left?: {
+            label: string;
+            onClick: (value: T) => void;
+            customButton?: JSX.Element;
+        }[];
+        right?: {
+            label: string;
+            onClick: (value: T) => void;
+            customButton?: JSX.Element;
+        }[];
+    };
     inputWrapper?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
     name: string;
     id?: string;
@@ -77,25 +94,6 @@ export interface IInputsBaseProps<T = any> {
     calculatedField?: {
         find: string[];
         calculate: (thisValue: T, foundFields: any[], allFields: any) => T;
-    };
-    validation?: {
-        required?: boolean | string;
-        max?: {
-            value: number;
-            message?: string;
-        };
-        maxLength?: {
-            value: number;
-            message?: string;
-        };
-        min?: {
-            value: number;
-            message?: string;
-        };
-        minLength?: {
-            value: number;
-            message?: string;
-        };
     };
     value?: any;
     onChange?: (a: any) => void;

@@ -41,17 +41,21 @@ const Select = (props: ISelect) => {
     return <InputWrapper {...props} noBorder options={options}>
       {props.isCreatable !== undefined ?  
     <SelectCreatableInput
+      styles={{container: (base) => ({...base, width:'100%'})}}
       onCreateOption={createNew}
       {...props}
       {...props.rsOptions}
       options={options}
+      isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
       value={val}
       onChange={(a:TSelectOption) => setValue(props.name, a)}
     /> :   
     <SelectInput
+      styles={{container: (base) => ({...base, width:'100%'})}}
       {...props}
       {...props.rsOptions}
       options={options}
+      isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
       value={val}
       onChange={(a:TSelectOption) => setValue(props.name, a)}
     />}

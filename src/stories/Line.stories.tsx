@@ -20,7 +20,28 @@ LinesBootstrap.args = {
     <Line label="Simple Form Input (Text)" name="line.text" placeholder="Simple Form Placeholder" />
     <Line label="Simple Form Input (Number)" name="line.number" placeholder="Simple Number Placeholder" type="number" />
     <Line label="Simple Form Input (Email)" name="line.email" placeholder="Simple Email Placeholder" type="email" />
+    <Line label="Simple Form Input (Disabled)" disabled name="line.disabled" placeholder="Simple Disabled Placeholder" type="text" />
   </>
+}
+
+export const LineWithButton = Template.bind({})
+LineWithButton.args = {
+  children : <Line 
+    label="Line with Button" 
+    name="line_button" 
+    buttons={
+      {
+        left: [
+          {label:'#1',onClick: (a) => alert(`Value is ${a} From Button #1!`)},
+          {label:'#2',onClick: (a) => alert(`Value is ${a} From Button #2!`)},
+        ],
+        right: [
+          {label:'#R1',onClick: (a) => alert(`Value is ${a} From Button #R1!`)},
+          {label:'#R2',onClick: (a) => alert(`Value is ${a} From Button #R2!`)},
+        ],
+      }
+    } 
+  />
 }
 
 export const TextArea = Template.bind({})

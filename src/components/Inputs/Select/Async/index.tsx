@@ -32,6 +32,7 @@ const AsyncSelect = (props: ISelectAsync) => {
     {
       props.isCreatable !== undefined ? (
       <AsyncCreatableSelectInput
+        styles={{container: (base) => ({...base, width:'100%'})}}
         onCreateOption={createNew}
         {...props}
         options={options}
@@ -42,6 +43,7 @@ const AsyncSelect = (props: ISelectAsync) => {
       />
     ) : (
       <AsyncSelectInput
+        styles={{container: (base) => ({...base, width:'100%'})}}
         {...props}
         options={options}
         isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}

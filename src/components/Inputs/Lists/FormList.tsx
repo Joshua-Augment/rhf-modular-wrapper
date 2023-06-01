@@ -10,8 +10,7 @@ const Row = styled.div`
   display:flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-right: -15px;
-  margin-left: -15px;
+  justify-content: space-between;
 `
 const Col = styled.div`
   flex: 0 0 ${({g}) => `${(g ?? 12) * 100/12}%`};

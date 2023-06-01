@@ -59,10 +59,11 @@ const Select = (props) => {
         }
     };
     const SelectElems = (0, react_1.useMemo)(() => {
+        var _a, _b, _c, _d, _e, _f;
         console.log("[SelectElems] -rendered", options);
         return react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { noBorder: true, options: options }), props.isCreatable !== undefined ?
-            react_1.default.createElement(creatable_1.default, Object.assign({ onCreateOption: createNew }, props, props.rsOptions, { options: options, value: val, onChange: (a) => setValue(props.name, a) })) :
-            react_1.default.createElement(react_select_1.default, Object.assign({}, props, props.rsOptions, { options: options, value: val, onChange: (a) => setValue(props.name, a) })));
+            react_1.default.createElement(creatable_1.default, Object.assign({ styles: { container: (base) => (Object.assign(Object.assign({}, base), { width: '100%' })) }, onCreateOption: createNew }, props, props.rsOptions, { options: options, isDisabled: (_c = (_b = (_a = props.rsOptions) === null || _a === void 0 ? void 0 : _a.isDisabled) !== null && _b !== void 0 ? _b : props.disabled) !== null && _c !== void 0 ? _c : false, value: val, onChange: (a) => setValue(props.name, a) })) :
+            react_1.default.createElement(react_select_1.default, Object.assign({ styles: { container: (base) => (Object.assign(Object.assign({}, base), { width: '100%' })) } }, props, props.rsOptions, { options: options, isDisabled: (_f = (_e = (_d = props.rsOptions) === null || _d === void 0 ? void 0 : _d.isDisabled) !== null && _e !== void 0 ? _e : props.disabled) !== null && _f !== void 0 ? _f : false, value: val, onChange: (a) => setValue(props.name, a) })));
     }, [options]);
     return (SelectElems);
 };

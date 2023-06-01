@@ -27,6 +27,13 @@ SimpleSelect.args = {
   ),
 };
 
+export const SimpleSelectDisabled = Template.bind({});
+SimpleSelectDisabled.args = {
+  children: (
+    <Select disabled label="Simple Select" name="select" options={BASE_SELECTS} />
+  ),
+};
+
 export const SimpleSelectCreatable = Template.bind({});
 SimpleSelectCreatable.args = {
   children: (
