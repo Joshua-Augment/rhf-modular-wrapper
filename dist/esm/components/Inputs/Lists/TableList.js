@@ -61,11 +61,10 @@ const TableList = (props) => {
         return fields.map((field, i) => generateRow(i));
     }, [fields, errors, val]);
     return (React.createElement(InputWrapper, Object.assign({}, props),
-        React.createElement("div", null,
-            React.createElement(Table, null,
-                (props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator,
-                React.createElement("tbody", null, bodyGenerator),
-                (props.header === 'footer' || props.header === 'header_footer') ? footerGenerator : (props.header === 'bottom' || props.header === 'both') && headerGenerator))));
+        React.createElement(Table, null,
+            (props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator,
+            React.createElement("tbody", null, bodyGenerator),
+            (props.header === 'footer' || props.header === 'header_footer') ? footerGenerator : (props.header === 'bottom' || props.header === 'both') && headerGenerator)));
 };
 export default TableList;
 //# sourceMappingURL=TableList.js.map

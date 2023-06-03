@@ -10,7 +10,10 @@ const InputWrapper = (props: FormBaseInput) => {
 
   const watchValue = watch(props.name)
 
-  useEffect(() => {if (watchValue === undefined) {contextSetValue(props.name,null)}},[watchValue])
+  // On Value change
+  useEffect(() => {
+    if (watchValue === undefined) {contextSetValue(props.name,null)}
+  },[watchValue])
 
   useEffect(()=> setValue(watchValue === undefined ? null : watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue])
 
@@ -22,7 +25,12 @@ const InputWrapper = (props: FormBaseInput) => {
 
     // Calculated Fields
     if (props.calculatedField) {
-      contextSetValue(props.name, props.calculatedField.calculate(value,getValues(props.calculatedField.find), getValues()))
+      if (props.calculatedField.isPromise === true) {
+        props.calculatedField.calculate(value,getValues(props.calculatedField.find), getValues())
+        .then(data => { contextSetValue(props.name, data) })
+      } else {
+        contextSetValue(props.name, props.calculatedField.calculate(value,getValues(props.calculatedField.find), getValues()))
+      }
     }
   }, [value])
   // const [_value, _setValue] = useState(null)
@@ -56,7 +64,7 @@ const InputWrapper = (props: FormBaseInput) => {
 
    const childrenInjected = React.cloneElement(props.children, {...props.children?.props, disabled : props.disabled})
   console.log(`Input ${props.name} - value : ${value}`)
-  return <InputElemWrapper {...props} value={value} >
+  return <InputElemWrapper {...props} disabled={props.disabled} value={value} >
       <>
         {WrapperElementLeft}
         {/* props.buttons && props.buttons.left && <WrapperElementLeft>

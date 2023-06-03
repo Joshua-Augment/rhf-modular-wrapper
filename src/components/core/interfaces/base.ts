@@ -85,14 +85,22 @@ export interface IInputsBaseProps<T=any> {
   noBorder ?: boolean,
   noLabel ?: boolean,
 
-  calculatedField ?: {
-    find : string[],
-    calculate : (thisValue : T, foundFields : any[], allFields: any ) => T
-  },
+  calculatedField ?: isCalculatedNoPromise<T> | isCalculatedPromise<T> ,
   value ?: any,
   onChange ?: (a:any) => void,
   [key: string]: any,
   [key :number]: any,  
+}
+
+type isCalculatedNoPromise<T> = {  
+  find : string[],     
+  isPromise ?: false,
+  calculate : (thisValue : T, foundFields : any[], allFields: any ) => T,
+}
+type isCalculatedPromise<T> = {
+  find : string[],   
+  isPromise : true,
+  calculate : (thisValue : T, foundFields : any[], allFields: any ) => Promise<T>,
 }
 export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {  
   children ?: any

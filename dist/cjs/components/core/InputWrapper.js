@@ -34,9 +34,12 @@ const InputWrapper = (props) => {
     const [value, setValue] = (0, react_1.useState)(undefined);
     const { getValues, watch, setValue: contextSetValue } = (0, react_hook_form_1.useFormContext)();
     const watchValue = watch(props.name);
-    (0, react_1.useEffect)(() => { if (watchValue === undefined) {
-        contextSetValue(props.name, null);
-    } }, [watchValue]);
+    // On Value change
+    (0, react_1.useEffect)(() => {
+        if (watchValue === undefined) {
+            contextSetValue(props.name, null);
+        }
+    }, [watchValue]);
     (0, react_1.useEffect)(() => setValue(watchValue === undefined ? null : watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue]);
     // Set Value First if Available
     (0, react_1.useEffect)(() => { if (props.defaultValue) {
@@ -49,7 +52,13 @@ const InputWrapper = (props) => {
         }
         // Calculated Fields
         if (props.calculatedField) {
-            contextSetValue(props.name, props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues()));
+            if (props.calculatedField.isPromise === true) {
+                props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues())
+                    .then(data => { contextSetValue(props.name, data); });
+            }
+            else {
+                contextSetValue(props.name, props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues()));
+            }
         }
     }, [value]);
     // const [_value, _setValue] = useState(null)
@@ -75,7 +84,7 @@ const InputWrapper = (props) => {
         }));
         const childrenInjected = react_1.default.cloneElement(props.children, Object.assign(Object.assign({}, (_o = props.children) === null || _o === void 0 ? void 0 : _o.props), { disabled: props.disabled }));
         console.log(`Input ${props.name} - value : ${value}`);
-        return react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { value: value }),
+        return react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { disabled: props.disabled, value: value }),
             react_1.default.createElement(react_1.default.Fragment, null,
                 WrapperElementLeft,
                 childrenInjected,

@@ -6,9 +6,12 @@ const InputWrapper = (props) => {
     const [value, setValue] = useState(undefined);
     const { getValues, watch, setValue: contextSetValue } = useFormContext();
     const watchValue = watch(props.name);
-    useEffect(() => { if (watchValue === undefined) {
-        contextSetValue(props.name, null);
-    } }, [watchValue]);
+    // On Value change
+    useEffect(() => {
+        if (watchValue === undefined) {
+            contextSetValue(props.name, null);
+        }
+    }, [watchValue]);
     useEffect(() => setValue(watchValue === undefined ? null : watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue]);
     // Set Value First if Available
     useEffect(() => { if (props.defaultValue) {
@@ -21,7 +24,13 @@ const InputWrapper = (props) => {
         }
         // Calculated Fields
         if (props.calculatedField) {
-            contextSetValue(props.name, props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues()));
+            if (props.calculatedField.isPromise === true) {
+                props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues())
+                    .then(data => { contextSetValue(props.name, data); });
+            }
+            else {
+                contextSetValue(props.name, props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues()));
+            }
         }
     }, [value]);
     // const [_value, _setValue] = useState(null)
@@ -47,7 +56,7 @@ const InputWrapper = (props) => {
         }));
         const childrenInjected = React.cloneElement(props.children, Object.assign(Object.assign({}, (_o = props.children) === null || _o === void 0 ? void 0 : _o.props), { disabled: props.disabled }));
         console.log(`Input ${props.name} - value : ${value}`);
-        return React.createElement(InputElemWrapper, Object.assign({}, props, { value: value }),
+        return React.createElement(InputElemWrapper, Object.assign({}, props, { disabled: props.disabled, value: value }),
             React.createElement(React.Fragment, null,
                 WrapperElementLeft,
                 childrenInjected,

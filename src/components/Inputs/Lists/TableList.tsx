@@ -61,15 +61,13 @@ const TableList = (props:ITableList) => {
 
   return (
     <InputWrapper {...props}  >
-      <div>
-        <Table>
-          {(props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator}
-          <tbody>
-            {bodyGenerator}
-          </tbody>
-          {(props.header === 'footer' || props.header === 'header_footer') ? footerGenerator : (props.header === 'bottom' || props.header === 'both') && headerGenerator}
-        </Table>
-      </div>
+      <Table>
+        {(props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator}
+        <tbody>
+          {bodyGenerator}
+        </tbody>
+        {(props.header === 'footer' || props.header === 'header_footer') ? footerGenerator : (props.header === 'bottom' || props.header === 'both') && headerGenerator}
+      </Table>
     </InputWrapper>
   )
 }
