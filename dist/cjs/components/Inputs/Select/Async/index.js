@@ -37,7 +37,7 @@ const AsyncSelect = (props) => {
     (0, react_1.useEffect)(() => { if (props.options && props.options.length > 0) {
         setOptions(props.options);
     } }, [props.options]);
-    const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
+    const { watch, setValue, getValues } = (0, react_hook_form_1.useFormContext)();
     const _val = watch(props.name);
     const val = (0, react_1.useMemo)(() => _val, [_val]);
     const createNew = (0, react_1.useCallback)((a) => {
@@ -56,7 +56,7 @@ const AsyncSelect = (props) => {
             }
         }
     }, []);
-    return react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { noBorder: true }), props.isCreatable !== undefined ? (react_1.default.createElement(async_creatable_1.default, Object.assign({ styles: { container: (base) => (Object.assign(Object.assign({}, base), { width: '100%' })) }, onCreateOption: createNew }, props, { options: options, isDisabled: (_d = (_c = (_b = props.rsOptions) === null || _b === void 0 ? void 0 : _b.isDisabled) !== null && _c !== void 0 ? _c : props.disabled) !== null && _d !== void 0 ? _d : false, value: val, onChange: (a) => setValue(props.name, a) }, props.rsOptions))) : (react_1.default.createElement(async_1.default, Object.assign({ styles: { container: (base) => (Object.assign(Object.assign({}, base), { width: '100%' })) } }, props, { options: options, isDisabled: (_g = (_f = (_e = props.rsOptions) === null || _e === void 0 ? void 0 : _e.isDisabled) !== null && _f !== void 0 ? _f : props.disabled) !== null && _g !== void 0 ? _g : false, value: val, onChange: (a) => setValue(props.name, a) }, props.rsOptions))));
+    return react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { noBorder: true }), props.isCreatable !== undefined ? (react_1.default.createElement(async_creatable_1.default, Object.assign({ styles: { container: (base) => (Object.assign(Object.assign({}, base), { width: '100%' })) }, onCreateOption: createNew }, props, { options: options, isDisabled: (_d = (_c = (_b = props.rsOptions) === null || _b === void 0 ? void 0 : _b.isDisabled) !== null && _c !== void 0 ? _c : props.disabled) !== null && _d !== void 0 ? _d : false, value: val, onChange: (a) => setValue(props.name, a) }, props.rsOptions, { loadOptions: (a, b) => props.allLoad ? props.allLoad(a, props.name, getValues(), b) : props.loadOptions(a, b) }))) : (react_1.default.createElement(async_1.default, Object.assign({ styles: { container: (base) => (Object.assign(Object.assign({}, base), { width: '100%' })) } }, props, { options: options, isDisabled: (_g = (_f = (_e = props.rsOptions) === null || _e === void 0 ? void 0 : _e.isDisabled) !== null && _f !== void 0 ? _f : props.disabled) !== null && _g !== void 0 ? _g : false, value: val, onChange: (a) => setValue(props.name, a) }, props.rsOptions, { loadOptions: (a, b) => props.allLoad ? props.allLoad(a, props.name, getValues(), b) : props.loadOptions(a, b) }))));
 };
 exports.default = AsyncSelect;
 //# sourceMappingURL=index.js.map

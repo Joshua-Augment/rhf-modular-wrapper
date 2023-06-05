@@ -46,7 +46,7 @@ const InputWrapper = (props: FormBaseInput) => {
 
      return <ButtonElem 
        key={`bl-${i}`} 
-       onClick={() => x.onClick(value)}
+       onClick={() => x.onClick(value, props.name, getValues())}
        name={props.name} 
        value={value}
      >{x.label}</ButtonElem>
@@ -56,7 +56,7 @@ const InputWrapper = (props: FormBaseInput) => {
       const ButtonElem: React.ComponentType<{name?: string, value?: any}>|any = x.customButton || Button; // Use customButton or a default button
       return <ButtonElem 
         key={`bl-${i}`} 
-        onClick={() => x.onClick(value)}
+        onClick={() => x.onClick(value, props.name, getValues())}
         name={props.name} 
         value={value}
       >{x.label}</ButtonElem>

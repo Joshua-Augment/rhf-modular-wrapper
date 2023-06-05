@@ -60,8 +60,8 @@ export type TInputWrapperInputHTML = TInputWrapperHTML & TInputInputHTML
 export interface IInputsBaseProps<T=any> {
   buttons ?: {
     wrapper ?: {left ?: JSX.Element, right ?: JSX.Element, all ?: JSX.Element},
-    left ?: {label: React.ReactNode, onClick: (value: T) => void, customButton ?: JSX.Element}[],
-    right ?: {label: React.ReactNode, onClick: (value: T) => void, customButton ?: JSX.Element}[],
+    left ?: {label: React.ReactNode, onClick: (value: T, name: string, all: any) => void, customButton ?: JSX.Element}[],
+    right ?: {label: React.ReactNode, onClick: (value: T, name: string, all: any) => void, customButton ?: JSX.Element}[],
   },
   inputWrapper ?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
   name : string,

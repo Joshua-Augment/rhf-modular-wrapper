@@ -6,7 +6,8 @@ export type TRSStyles = StylesConfig<any, any, GroupBase<TSelectOption>>
 export type TSelectGroup = {label: string, value: TSelectOption}
 
 export type RSOptionsAsync = {
-  loadOptions : (input: string, callback: (options: TSelectOption[]) => void) => void,
+  loadOptions : (input: string, callback: (options: TSelectOption[]) => void) => void ,
+  allLoad ?: (input:string, name: string, all: any, callback: (options: TSelectOption[]) => void) => void,
   defaultOptions ?: boolean,
   cachedOptions ?: boolean
 }

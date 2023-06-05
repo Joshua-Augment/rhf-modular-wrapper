@@ -8,7 +8,7 @@ const AsyncSelect = (props: ISelectAsync) => {
   const [options, setOptions] = useState<TSelectOption[]>(props.options ?? []);
   useEffect(()=> {if (props.options && props.options.length > 0) {setOptions(props.options)}},[props.options])
 
-  const {watch, setValue} = useFormContext()
+  const {watch, setValue, getValues} = useFormContext()
   const _val = watch(props.name)
   const val = useMemo(()=>_val,[_val])
 
@@ -40,6 +40,7 @@ const AsyncSelect = (props: ISelectAsync) => {
         value={val}
         onChange={(a:TSelectOption) => setValue(props.name, a)}
         {...props.rsOptions}
+        loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, getValues(),b) : props.loadOptions(a,b)}
       />
     ) : (
       <AsyncSelectInput
@@ -50,6 +51,7 @@ const AsyncSelect = (props: ISelectAsync) => {
         value={val}
         onChange={(a:TSelectOption) => setValue(props.name, a)}
         {...props.rsOptions}
+        loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, getValues(),b) : props.loadOptions(a,b)}
       />
     )
     }
