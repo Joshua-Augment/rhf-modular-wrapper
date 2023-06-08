@@ -10,14 +10,14 @@ const EmbedImageModal = (props) => {
         const URLSrc = imageURL !== null ? imageURL.value : undefined;
         const imageAttach = document.getElementById("image_attach");
         const Attach = imageAttach !== null ? imageAttach.files : undefined;
-        console.log("[AddImage] -a", a);
-        console.log("[AddImage] -", URLSrc);
-        console.log("[AddImage] -", Attach);
+        // console.log("[AddImage] -a", a);
+        // console.log("[AddImage] -", URLSrc);
+        // console.log("[AddImage] -", Attach);
         const payload = {
             altText: '',
             src: URLSrc ? URLSrc : Attach && Attach[0] !== null && Attach[0] !== undefined ? URL.createObjectURL(Attach[0]) : ''
         };
-        console.log("[DispatchImage]", editor.dispatchCommand(INSERT_IMAGE_COMMAND, payload));
+        // console.log("[DispatchImage]", editor.dispatchCommand(INSERT_IMAGE_COMMAND, payload));
     };
     return (React.createElement(BaseModal, { title: "Add Image", show: props.show, onClose: props.onClose },
         React.createElement("label", { htmlFor: 'image_url' }, "URL"),

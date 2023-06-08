@@ -6,19 +6,20 @@ import {
   InputWrapper,
   TSelectOption,
 } from "../../../core";
-import { useFormContext } from "react-hook-form";
+import { useInputValAndError } from "../../../core/hook/useInputValnError";
 
 const Select = (props: ISelect) => {
   const [options, setOptions] = useState<TSelectOption[]>(props.options ?? [])
   // Watch for changed options
   useEffect(()=> {
-    console.log("[options] - ",props.options)
+    // console.log("[options] - ",props.options)
     setOptions(props.options)
   },[props.options])
+  const {value, error, setValue} = useInputValAndError(props.name)
 
-  const {watch, setValue} = useFormContext()
-  const _val = watch(props.name)
-  const val = useMemo(()=>_val,[_val])
+  // const {watch, setValue} = useFormContext()
+  // const _val = watch(props.name)
+  // const val = useMemo(()=>_val,[_val])
 
   const createNew = (a: string) => {
     if (props.isCreatable !== undefined) {
@@ -37,7 +38,7 @@ const Select = (props: ISelect) => {
   }
 
   const SelectElems = useMemo(()=> {
-    console.log("[SelectElems] -rendered", options)
+    // console.log("[SelectElems] -rendered", options)
     return <InputWrapper {...props} noBorder options={options}>
       {props.isCreatable !== undefined ?  
     <SelectCreatableInput
@@ -47,7 +48,7 @@ const Select = (props: ISelect) => {
       {...props.rsOptions}
       options={options}
       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
-      value={val}
+      value={value}
       onChange={(a:TSelectOption) => setValue(props.name, a)}
     /> :   
     <SelectInput
@@ -56,11 +57,11 @@ const Select = (props: ISelect) => {
       {...props.rsOptions}
       options={options}
       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
-      value={val}
+      value={value}
       onChange={(a:TSelectOption) => setValue(props.name, a)}
     />}
     </InputWrapper>
-  },[options])
+  },[options, value, error])
 
   return (
     SelectElems

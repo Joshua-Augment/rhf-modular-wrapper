@@ -32,6 +32,7 @@ const styled_components_1 = __importDefault(require("styled-components"));
 const InputChooser_1 = __importDefault(require("../../core/InputChooser"));
 const fa_1 = require("react-icons/fa");
 const core_1 = require("../../core");
+const useInputValnError_1 = require("../../core/hook/useInputValnError");
 const Row = styled_components_1.default.div `
   display:flex;
   flex-wrap: wrap;
@@ -50,10 +51,11 @@ const iconStyle = {
     textAlign: 'right'
 };
 const FormList = (props) => {
-    const { control, watch } = (0, react_hook_form_1.useFormContext)();
+    const { value, error, control } = (0, useInputValnError_1.useInputValAndError)(props.name);
+    // const {control} = useFormContext()
     const { fields, append, insert, remove } = (0, react_hook_form_1.useFieldArray)({ control, name: props.name });
-    const _val = watch(props.name);
-    const val = (0, react_1.useMemo)(() => _val, [_val]);
+    // const _val = watch(props.name)
+    // const value = useMemo(() => _val ,[_val])
     const emptyRow = (0, react_1.useMemo)(() => {
         if (props.emptyRow) {
             return props.emptyRow;
@@ -71,7 +73,7 @@ const FormList = (props) => {
         const templateConverter = (children, i) => {
             return react_1.default.Children.map(children, child => {
                 var _a;
-                console.log("[TemplateConverter - ] -props ", child.props);
+                // console.log("[TemplateConverter - ] -props ",child.props)
                 // For the Inputs
                 if (child.props['data-name'] !== undefined) {
                     const input = props.items.filter(x => x.name === child.props['data-name']);
@@ -93,7 +95,6 @@ const FormList = (props) => {
                 if (child.props['data-remove'] !== undefined) {
                     return react_1.default.cloneElement(child, {
                         onClick: () => { if (fields.length > 1) {
-                            console.log("Removing....", i);
                             remove(i);
                         } },
                         isEnd: fields.length > 1
@@ -127,14 +128,13 @@ const FormList = (props) => {
                             } } }),
                         " ",
                         react_1.default.createElement(fa_1.FaMinusSquare, { style: Object.assign(Object.assign({}, iconStyle), { color: fields.length > 1 ? 'red' : 'maroon' }), onClick: () => { if (fields.length > 1) {
-                                console.log("Removing....", i);
                                 remove(i);
                             } } })));
             }
         });
-    }, [val]);
+    }, [value, error]);
     return (react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { noBorder: true }),
-        react_1.default.createElement("div", null, bodygenerator)));
+        react_1.default.createElement("div", { style: { width: '100%' } }, bodygenerator)));
 };
 exports.default = FormList;
 //# sourceMappingURL=FormList.js.map

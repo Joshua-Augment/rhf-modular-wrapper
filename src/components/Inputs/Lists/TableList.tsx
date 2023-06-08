@@ -41,7 +41,7 @@ const TableList = (props:ITableList) => {
   const generateRow = (i:number) => <tr key={`fw-${props.name}-${i}`}>
     {props.showIndex === true && <td>{i + 1}</td>}
     {props.items.map((item,iT) => <td key={`fw-${props.name}-${i}-${iT}-iew`} ><InputChooser {...item} noLabel name={`${props.name}.${i}.${item.name}`}/></td>)}
-    {props.fixed !== true && <td ><IconUp onClick={()=>insert(i+1,emptyRow)} /> {<IconDown onClick={()=>{console.log("[removing...]",i);remove(i)}}/>}</td>}
+    {props.fixed !== true && <td ><IconUp onClick={()=>insert(i+1,emptyRow)} /> {<IconDown onClick={()=>{remove(i)}}/>}</td>}
   </tr>
 
   const headerGenerator = useMemo(()=> props.headerTemplate ?? <thead><tr>
@@ -54,8 +54,8 @@ const TableList = (props:ITableList) => {
 
   // const bodyGenerator = useMemo(()=> fields.length === 0 ? generateRow(0) : fields.map((field,i) => generateRow(i)),[fields])
   const bodyGenerator = useMemo(()=> {
-    console.log("[bodyGenerator] - Fields",fields)
-    console.log("[bodyGenerator] - Final",fields.map((field,i) => generateRow(i)))
+    // console.log("[bodyGenerator] - Fields",fields)
+    // console.log("[bodyGenerator] - Final",fields.map((field,i) => generateRow(i)))
     return fields.map((field,i) => generateRow(i))
   },[fields, errors,val])
 

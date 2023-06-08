@@ -44,7 +44,7 @@ const TableList = (props) => {
         props.fixed !== true && React.createElement("td", null,
             React.createElement(IconUp, { onClick: () => insert(i + 1, emptyRow) }),
             " ",
-            React.createElement(IconDown, { onClick: () => { console.log("[removing...]", i); remove(i); } })));
+            React.createElement(IconDown, { onClick: () => { remove(i); } })));
     const headerGenerator = useMemo(() => {
         var _a;
         return (_a = props.headerTemplate) !== null && _a !== void 0 ? _a : React.createElement("thead", null,
@@ -56,8 +56,8 @@ const TableList = (props) => {
     const footerGenerator = useMemo(() => { var _a; return (_a = props.footerTemplate) !== null && _a !== void 0 ? _a : headerGenerator; }, []);
     // const bodyGenerator = useMemo(()=> fields.length === 0 ? generateRow(0) : fields.map((field,i) => generateRow(i)),[fields])
     const bodyGenerator = useMemo(() => {
-        console.log("[bodyGenerator] - Fields", fields);
-        console.log("[bodyGenerator] - Final", fields.map((field, i) => generateRow(i)));
+        // console.log("[bodyGenerator] - Fields",fields)
+        // console.log("[bodyGenerator] - Final",fields.map((field,i) => generateRow(i)))
         return fields.map((field, i) => generateRow(i));
     }, [fields, errors, val]);
     return (React.createElement(InputWrapper, Object.assign({}, props),

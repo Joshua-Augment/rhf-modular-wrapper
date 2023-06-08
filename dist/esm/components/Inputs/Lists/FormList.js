@@ -1,9 +1,10 @@
 import React, { useMemo, useEffect } from 'react';
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
 import styled from "styled-components";
 import InputChooser from '../../core/InputChooser';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
 import { InputWrapper } from '../../core';
+import { useInputValAndError } from '../../core/hook/useInputValnError';
 const Row = styled.div `
   display:flex;
   flex-wrap: wrap;
@@ -22,10 +23,11 @@ const iconStyle = {
     textAlign: 'right'
 };
 const FormList = (props) => {
-    const { control, watch } = useFormContext();
+    const { value, error, control } = useInputValAndError(props.name);
+    // const {control} = useFormContext()
     const { fields, append, insert, remove } = useFieldArray({ control, name: props.name });
-    const _val = watch(props.name);
-    const val = useMemo(() => _val, [_val]);
+    // const _val = watch(props.name)
+    // const value = useMemo(() => _val ,[_val])
     const emptyRow = useMemo(() => {
         if (props.emptyRow) {
             return props.emptyRow;
@@ -43,7 +45,7 @@ const FormList = (props) => {
         const templateConverter = (children, i) => {
             return React.Children.map(children, child => {
                 var _a;
-                console.log("[TemplateConverter - ] -props ", child.props);
+                // console.log("[TemplateConverter - ] -props ",child.props)
                 // For the Inputs
                 if (child.props['data-name'] !== undefined) {
                     const input = props.items.filter(x => x.name === child.props['data-name']);
@@ -65,7 +67,6 @@ const FormList = (props) => {
                 if (child.props['data-remove'] !== undefined) {
                     return React.cloneElement(child, {
                         onClick: () => { if (fields.length > 1) {
-                            console.log("Removing....", i);
                             remove(i);
                         } },
                         isEnd: fields.length > 1
@@ -99,14 +100,13 @@ const FormList = (props) => {
                             } } }),
                         " ",
                         React.createElement(FaMinusSquare, { style: Object.assign(Object.assign({}, iconStyle), { color: fields.length > 1 ? 'red' : 'maroon' }), onClick: () => { if (fields.length > 1) {
-                                console.log("Removing....", i);
                                 remove(i);
                             } } })));
             }
         });
-    }, [val]);
+    }, [value, error]);
     return (React.createElement(InputWrapper, Object.assign({}, props, { noBorder: true }),
-        React.createElement("div", null, bodygenerator)));
+        React.createElement("div", { style: { width: '100%' } }, bodygenerator)));
 };
 export default FormList;
 //# sourceMappingURL=FormList.js.map

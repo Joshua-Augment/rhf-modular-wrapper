@@ -10,11 +10,11 @@ const SingleDropdown = (props) => {
     });
     useEffect(() => {
         const handleClick = (event) => {
-            console.group("[handleClick]");
-            console.log("[DDBRef Contains] - ", DDBRef.current !== null ? DDBRef.current.contains(event.target) : 'null');
-            console.log("[Event Target] - ", event.target);
-            console.log("[DDB] - ", DDBRef.current);
-            console.groupEnd();
+            // console.group("[handleClick]");
+            // console.log("[DDBRef Contains] - ", DDBRef.current !== null ? DDBRef.current.contains(event.target) : 'null');
+            // console.log("[Event Target] - ", event.target);
+            // console.log("[DDB] - ", DDBRef.current);
+            // console.groupEnd();
             if (DDBRef.current &&
                 !DDBRef.current.contains(event.target) &&
                 currentState.open === true) {

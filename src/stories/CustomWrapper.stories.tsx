@@ -9,7 +9,7 @@ export default {
   component: Line
 } as ComponentMeta<typeof Line>; 
 
-const onSubmit = (a:any) => new Promise((resolve, reject) => resolve(console.log('FormSubmission:',a)))
+const onSubmit = (a:any) => new Promise((resolve, reject) => resolve(// console.log('FormSubmission:',a)))
 
 const InputWrapper = (props:{label:string, helperText:string, children:any}) => {
   return <div style={{background:'blue', textAlign:'center'}}>

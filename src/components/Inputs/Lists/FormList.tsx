@@ -1,10 +1,11 @@
 import React, { useMemo, useEffect } from 'react'
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
 import { IList } from '../../core/interfaces/lists';
 import styled from "styled-components"
 import InputChooser from '../../core/InputChooser';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
 import { InputWrapper } from '../../core';
+import { useInputValAndError } from '../../core/hook/useInputValnError';
 
 const Row = styled.div`
   display:flex;
@@ -26,10 +27,12 @@ const iconStyle:React.CSSProperties = {
 }
 
 const FormList = (props:IList) => {
-  const {control, watch} = useFormContext()
+  const {value, error, control } = useInputValAndError(props.name)
+  // const {control} = useFormContext()
   const {fields,append,insert,remove} = useFieldArray({control,name: props.name});
-  const _val = watch(props.name)
-  const val = useMemo(() => _val ,[_val])
+  // const _val = watch(props.name)
+  // const value = useMemo(() => _val ,[_val])
+
   const emptyRow = useMemo(()=>{
     if (props.emptyRow) {return props.emptyRow}
     else {
@@ -44,7 +47,7 @@ const FormList = (props:IList) => {
   const bodygenerator = useMemo(()=> {
     const templateConverter = (children, i) => {
       return React.Children.map(children, child => {
-        console.log("[TemplateConverter - ] -props ",child.props)
+        // console.log("[TemplateConverter - ] -props ",child.props)
         // For the Inputs
         if (child.props['data-name'] !== undefined) {
           const input = props.items.filter(x => x.name === child.props['data-name'])
@@ -63,7 +66,7 @@ const FormList = (props:IList) => {
 
         if (child.props['data-remove'] !== undefined) {
           return React.cloneElement(child, {
-            onClick:()=>{ if( fields.length > 1 ) {console.log("Removing....",i); remove(i)}},
+            onClick:()=>{ if( fields.length > 1 ) {remove(i)}},
             isEnd : fields.length > 1
           })
         }
@@ -90,15 +93,15 @@ const FormList = (props:IList) => {
         return  <Row key={`fw-${props.name}-${i}`}>
           {props.showIndex === true && <Col g={1}>{i + 1}</Col>}
           {props.items.map((item,iT) => <Col g={item.grid ?? 12 / (props.items.length + (props.showIndex ? 1 : 0) + (props.fixed !== true ? 1 : 0))} key={`fw-${props.name}-${i}-${iT}-iew`} ><InputChooser {...item} noBorder name={`${props.name}.${i}.${item.name}`}/></Col>)}
-          {props.fixed !== true && <Col g={1}><FaPlusSquare style={{...iconStyle, color : props.maxItems && fields.length >= props.maxItems ? 'olive' : 'green' }} onClick={()=>{if (!(props.maxItems && fields.length >= props.maxItems)){insert(i+1,emptyRow)}}} /> <FaMinusSquare style={{...iconStyle, color : fields.length > 1 ? 'red' : 'maroon'}} onClick={()=>{ if( fields.length > 1 ) {console.log("Removing....",i); remove(i)}}}/></Col>}
+          {props.fixed !== true && <Col g={1}><FaPlusSquare style={{...iconStyle, color : props.maxItems && fields.length >= props.maxItems ? 'olive' : 'green' }} onClick={()=>{if (!(props.maxItems && fields.length >= props.maxItems)){insert(i+1,emptyRow)}}} /> <FaMinusSquare style={{...iconStyle, color : fields.length > 1 ? 'red' : 'maroon'}} onClick={()=>{ if( fields.length > 1 ) { remove(i)}}}/></Col>}
         </Row>
       }
     })
-  },[val])
+  },[value, error])
 
   return (
     <InputWrapper {...props} noBorder>
-      <div>{bodygenerator}</div>
+      <div style={{width:'100%'}}>{bodygenerator}</div>
     </InputWrapper>
   )
 }

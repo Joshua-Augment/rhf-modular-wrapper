@@ -83,7 +83,7 @@ const DropzoneUploader = (props) => {
     (0, react_1.useEffect)(() => {
         if (props.value !== undefined && !(0, helpers_1.compareArrays)(val, props.value)) {
             const _files = [...props.value];
-            console.log("[useEffect] - dropzone", _files);
+            // console.log("[useEffect] - dropzone",_files)
             setValue(props.name, _files);
         }
     }, [props.value, val]);
@@ -93,7 +93,7 @@ const DropzoneUploader = (props) => {
         setValue(props.name, [...newFileList]);
     }, [JSON.stringify(acceptedFiles)]);
     const showPreview = (index) => {
-        console.log(`showPreview ${index}, `, props, val);
+        // console.log(`showPreview ${index}, `,props, val)
         if (props.newWindow) {
             window.open(URL.createObjectURL(val[index]), '_blank');
         }
@@ -124,7 +124,7 @@ const DropzoneUploader = (props) => {
 //   const [preview, setPreview] = useState<null|File>(null)
 //   useEffect(()=>{ if (props.value !== undefined && !compareArrays(files, props.value)) {
 //     const _files = [...props.value]
-//     console.log("[useEffect] - dropzone",_files)
+//     // console.log("[useEffect] - dropzone",_files)
 //     setFiles(_files)
 //     props.onChange(_files)
 //   }},[props.value, files])

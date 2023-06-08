@@ -17,9 +17,9 @@ const EmbedImageModal = (props) => {
         const URLSrc = imageURL !== null ? imageURL.value : undefined;
         const imageAttach = document.getElementById("image_url");
         const Attach = imageAttach !== null ? imageAttach.files : undefined;
-        console.log("[AddImage] -a", a);
-        console.log("[AddImage] -", URLSrc);
-        console.log("[AddImage] -", Attach);
+        // console.log("[AddImage] -a", a);
+        // console.log("[AddImage] -", URLSrc);
+        // console.log("[AddImage] -", Attach);
         const payload = { altText: '', src: URLSrc ? URLSrc :
                 Attach && Attach[0] !== null && Attach[0] !== undefined ? URL.createObjectURL(Attach[0]) : '' };
         editor.dispatchCommand(exports.INSERT_IMAGE_COMMAND, payload);

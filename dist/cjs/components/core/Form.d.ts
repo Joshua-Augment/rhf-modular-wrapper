@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldValues } from "react-hook-form/dist/types";
 import { FormFrameWrapperProps, IForm, ISubmitButton } from './interfaces';
+import "../styling/form_bootstrap.css";
 import "../styling/core.css";
 type TTemplateContext = {
     inputTemplate: null | React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;

@@ -84,7 +84,7 @@ const LexicalToolbar = () => {
     }, [editor]);
     // const applyStyleText = useCallback(
     //   (styles: Record<string, string>) => {
-    //     console.log("[applyStyleText] - Style : ",styles)
+    //     // console.log("[applyStyleText] - Style : ",styles)
     //     activeEditor.update(() => {
     //       const selection = $getSelection();
     //       if ($isRangeSelection(selection)) {

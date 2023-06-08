@@ -27,37 +27,43 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-const react_hook_form_1 = require("react-hook-form");
 const InputElemWrapper_1 = __importDefault(require("./InputElemWrapper"));
 const material_1 = require("@mui/material");
+const useInputValnError_1 = require("./hook/useInputValnError");
 const InputWrapper = (props) => {
-    const [value, setValue] = (0, react_1.useState)(undefined);
-    const { getValues, watch, setValue: contextSetValue } = (0, react_hook_form_1.useFormContext)();
-    const watchValue = watch(props.name);
+    // const [value, setValue] = useState<any>(undefined)
+    // const {getValues, watch, setValue: contextSetValue} = useFormContext() 
+    // const watchValue = watch(props.name)
+    const { value, setValue, getValues } = (0, useInputValnError_1.useInputValAndError)(props.name);
     // On Value change
-    (0, react_1.useEffect)(() => {
-        if (watchValue === undefined) {
-            contextSetValue(props.name, null);
-        }
-    }, [watchValue]);
-    (0, react_1.useEffect)(() => setValue(watchValue === undefined ? null : watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue]);
+    (0, react_1.useEffect)(() => { if (value === undefined) {
+        setValue(props.name, null);
+    } }, [value]);
+    // useEffect(() => {
+    //   if (watchValue === undefined) {contextSetValue(props.name,null)}
+    // },[watchValue])
+    // useEffect(()=> setValue(watchValue === undefined ? null : watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue])
     // Set Value First if Available
+    // useEffect(()=>{ if (props.defaultValue) {contextSetValue(props.name, props.defaultValue);} },[props.defaultValue]) 
     (0, react_1.useEffect)(() => { if (props.defaultValue) {
-        contextSetValue(props.name, props.defaultValue);
+        setValue(props.name, props.defaultValue);
     } }, [props.defaultValue]);
     (0, react_1.useEffect)(() => {
         // External Field
         if (props.externalStateSetter) {
-            props.externalStateSetter(watchValue !== null && watchValue !== void 0 ? watchValue : value);
+            props.externalStateSetter(value);
         }
+        // if(props.externalStateSetter) {props.externalStateSetter(watchValue ?? value)}
         // Calculated Fields
         if (props.calculatedField) {
             if (props.calculatedField.isPromise === true) {
                 props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues())
-                    .then(data => { contextSetValue(props.name, data); });
+                    // .then(data => { contextSetValue(props.name, data) })
+                    .then(data => { setValue(props.name, data); });
             }
             else {
-                contextSetValue(props.name, props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues()));
+                setValue(props.name, props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues()));
+                // contextSetValue(props.name, props.calculatedField.calculate(value,getValues(props.calculatedField.find), getValues()))
             }
         }
     }, [value]);
@@ -83,7 +89,7 @@ const InputWrapper = (props) => {
             return react_1.default.createElement(ButtonElem, { key: `bl-${i}`, onClick: () => x.onClick(value, props.name, getValues()), name: props.name, value: value }, x.label);
         }));
         const childrenInjected = react_1.default.cloneElement(props.children, Object.assign(Object.assign({}, (_o = props.children) === null || _o === void 0 ? void 0 : _o.props), { disabled: props.disabled }));
-        console.log(`Input ${props.name} - value : ${value}`);
+        // console.log(`Input ${props.name} - value : ${value}`)
         return react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { disabled: props.disabled, value: value }),
             react_1.default.createElement(react_1.default.Fragment, null,
                 WrapperElementLeft,

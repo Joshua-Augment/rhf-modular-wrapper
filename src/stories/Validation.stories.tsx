@@ -18,7 +18,7 @@ export const SimpleYupValidation = () => {
   })
 
   const _onSubmit = (a:any) => new Promise((resolve, reject) => {
-    console.log("[Raw Submit] - ",a)
+    // console.log("[Raw Submit] - ",a)
     setResponse(JSON.stringify(a,( key, value) => key == 'parent' ? null : value,2))
   })
 

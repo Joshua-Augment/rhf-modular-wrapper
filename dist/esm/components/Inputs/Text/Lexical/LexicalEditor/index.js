@@ -28,20 +28,20 @@ const LexicalEditor = (props) => {
     // LexicalOnChangePlugin!
     // const onChangeHandler = (editorState, editor) => {
     //   // const htmlString = $generateHtmlFromNodes(editor, null);
-    //   // console.log("[htmlstring] - ",htmlString);
+    //   // // console.log("[htmlstring] - ",htmlString);
     //   props.onChange(editorState)
     //   editorState.read(() => {
     //     // Read the contents of the EditorState here.
     //     const root = $getRoot();
     //     const selection = $getSelection();
-    //     console.log(root, selection);
+    //     // console.log(root, selection);
     //   });
     // }
     // Catch any errors that occur during Lexical updates and log them
     // or throw them as needed. If you don't throw them, Lexical will
     // try to recover gracefully without losing user data.
     const onError = (error) => {
-        console.error(error);
+        // console.error(error);
     };
     const initialConfig = {
         namespace: 'WYSIWYG_Editor',
@@ -59,14 +59,14 @@ const OnChangeHandler = ({ onChange }) => {
     const onChangeHandler = (state) => {
         editor.update(() => {
             const htmlString = $generateHtmlFromNodes(editor, null);
-            console.log("[htmlstring] - ", htmlString);
+            // console.log("[htmlstring] - ", htmlString);
             onChange(Object.assign(Object.assign({}, state), { "html": htmlString }));
         });
         state.read(() => {
             // Read the contents of the EditorState here.
             const root = $getRoot();
             const selection = $getSelection();
-            console.log(root, selection);
+            // console.log(root, selection);
         });
     };
     return React.createElement(OnChangePlugin, { onChange: onChangeHandler });

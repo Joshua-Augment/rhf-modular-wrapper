@@ -68,7 +68,7 @@ export const CheckboxGroupExampleVertical = () => {
   const [ready,setReady] = useState(false)
 
   const onSubmit = useCallback((a:any)=> new Promise((resolve,reject) =>{
-    console.log("[return values] - ",a)
+    // console.log("[return values] - ",a)
     setOutput(<p>{JSON.stringify(a)}</p>)
   }),[])
 

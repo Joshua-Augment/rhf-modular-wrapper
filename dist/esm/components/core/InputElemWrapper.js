@@ -3,8 +3,10 @@ import Tooltip from '@mui/material/Tooltip';
 import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
 import { ThemeContext } from './Form';
+import { useInputValAndError } from './hook/useInputValnError';
 const InputElemWrapper = (props) => {
     var _a, _b;
+    const { value, error } = useInputValAndError(props.name);
     const Wrapper = (_b = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : useContext(ThemeContext).inputTemplate) !== null && _b !== void 0 ? _b : null;
     // <div style={{position: 'relative'}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
     //     {
@@ -29,8 +31,8 @@ const InputElemWrapper = (props) => {
     //   </div>
     const WrapElem = useMemo(() => {
         var _a, _b, _c, _d, _e, _f, _g, _h;
-        console.log(`[WrapElem] - value for ${props.name} - `, props.value);
-        console.log(`[WrapElem] - child for ${props.name} - `, props.children);
+        // // console.log(`[WrapElem] - value for ${props.name} - `,props.value)
+        // console.log(`[WrapElem] - child for ${props.name} - `,props.children)
         if (Wrapper !== null && Wrapper !== undefined) {
             return React.createElement(Wrapper, Object.assign({}, props));
         }
@@ -49,7 +51,7 @@ const InputElemWrapper = (props) => {
                             " ",
                             ' '),
                         React.createElement("span", null,
-                            props.errors && React.createElement(Tooltip, { title: props.errors.message },
+                            error && React.createElement(Tooltip, { title: error.message },
                                 React.createElement(ErrorIcon, { style: { color: 'red', fontSize: '10px' } })),
                             " ",
                             ' '))) :
@@ -65,13 +67,13 @@ const InputElemWrapper = (props) => {
                             " ",
                             ' '),
                         React.createElement("span", null,
-                            props.errors && React.createElement(Tooltip, { title: props.errors.message },
+                            error && React.createElement(Tooltip, { title: error.message },
                                 React.createElement(ErrorIcon, { style: { color: 'red', fontSize: '10px' } })),
                             " ",
                             ' ')),
                     React.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? 'no-border' : ''}` }, props.children)));
         }
-    }, [props.value, props.options]);
+    }, [value, error, props.options]);
     return WrapElem;
     // return Wrapper as JSX.Element
 };

@@ -6,7 +6,7 @@ export const Template = ({defaultValues = {}, children}:{defaultValues?: any,chi
   const [response, setResponse] = useState<string|null>(null)
 
   const _onSubmit = (a:any) => new Promise((resolve, reject) => {
-    console.log("[Raw Submit] - ",a)
+    // console.log("[Raw Submit] - ",a)
     setResponse(JSON.stringify(a,( key, value) => key == 'parent' ? null : value,2))
   })
 
@@ -25,13 +25,13 @@ export const TemplateWithAsyncArray = ({children, item, key}: {children: Functio
 
   useEffect(()=>{
     setTimeout(()=>{
-      console.log("[Template Refreshed after 200 ms!]")
+      // console.log("[Template Refreshed after 200 ms!]")
       setValue(item)
     },200)
   },[])
 
   const _onSubmit = (a:any) => new Promise((resolve, reject) => {
-    console.log("[Raw Submit] - ",a)
+    // console.log("[Raw Submit] - ",a)
     setResponse(JSON.stringify(a,( key, value) => key == 'parent' ? null : value,2))
   })
 

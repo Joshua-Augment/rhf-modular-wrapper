@@ -34,7 +34,7 @@ const ColorPicker = (props) => {
         }
     }, [props.selectedColor]);
     const handleChange = (newColor) => {
-        console.log("[colorHandleChange] - color : ", newColor);
+        // console.log("[colorHandleChange] - color : ", newColor);
         setColor(newColor.hex);
         props.onColorChanged(newColor.hex);
     };

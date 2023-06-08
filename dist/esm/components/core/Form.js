@@ -1,17 +1,22 @@
-import React, { lazy, createContext, useMemo, useContext } from 'react';
+import React, { createContext, useMemo, useContext } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import "../styling/form_bootstrap.css";
 import "../styling/core.css";
 export const ThemeContext = createContext({ inputTemplate: null, buttonTemplate: null });
-const BSTheme = lazy(() => import('../styling/BootstrapTheme'));
-const MUITheme = lazy(() => import('../styling/MUITheme'));
-const ChosenTheme = ({ children, style }) => {
-    return (React.createElement(React.Fragment, null,
-        React.createElement(React.Suspense, { fallback: React.createElement(React.Fragment, null) },
-            (style === undefined || style == 'bootstrap') && React.createElement(BSTheme, null),
-            (style === 'mui') && React.createElement(MUITheme, null)),
-        children));
-};
+// const BSTheme = lazy(()=>import('../styling/BootstrapTheme'))
+// const MUITheme = lazy(()=>import('../styling/MUITheme'))
+// const ChosenTheme = ({children,style}:{children:any, style?:'bootstrap' | 'mui'}) => {
+//   return (
+//     <>
+//       <React.Suspense fallback={<></>}>
+//         {(style === undefined || style == 'bootstrap') && <BSTheme />}
+//         {(style === 'mui') && <MUITheme />}
+//       </React.Suspense>
+//       {children}
+//     </>
+//   )
+// }
 export const Form = (props) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j;
     const formID = useMemo(() => { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : `rhf-wc-f-${new Date().getTime()}`; }, []);
@@ -27,10 +32,9 @@ export const Form = (props) => {
         shouldUseNativeValidation: (_f = props.shouldUseNativeValidation) !== null && _f !== void 0 ? _f : false,
         delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined,
     });
-    return (React.createElement(ChosenTheme, { style: props.style },
-        React.createElement(ThemeContext.Provider, { value: { inputTemplate: (_h = props.inputWrapper) !== null && _h !== void 0 ? _h : null, buttonTemplate: (_j = props.buttonWrapper) !== null && _j !== void 0 ? _j : null } },
-            React.createElement(FormProvider, Object.assign({}, methods),
-                React.createElement("form", { onSubmit: methods.handleSubmit(props.onSubmit), id: formID }, props.children)))));
+    return (React.createElement(ThemeContext.Provider, { value: { inputTemplate: (_h = props.inputWrapper) !== null && _h !== void 0 ? _h : null, buttonTemplate: (_j = props.buttonWrapper) !== null && _j !== void 0 ? _j : null } },
+        React.createElement(FormProvider, Object.assign({}, methods),
+            React.createElement("form", { onSubmit: methods.handleSubmit(props.onSubmit), id: formID }, props.children))));
 };
 export const SubmitButton = (props) => {
     var _a, _b, _c;

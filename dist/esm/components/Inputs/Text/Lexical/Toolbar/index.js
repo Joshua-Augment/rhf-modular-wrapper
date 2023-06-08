@@ -77,7 +77,7 @@ const LexicalToolbar = () => {
     }, [editor, isLink]);
     // const applyStyleText = useCallback(
     //   (styles: Record<string, string>) => {
-    //     console.log("[applyStyleText] - Style : ",styles)
+    //     // console.log("[applyStyleText] - Style : ",styles)
     //     activeEditor.update(() => {
     //       const selection = $getSelection();
     //       if ($isRangeSelection(selection)) {
@@ -104,7 +104,7 @@ const LexicalToolbar = () => {
             React.createElement(FaBold, null)),
         React.createElement(SquareButton, { active: isItalic, onClick: () => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic") },
             React.createElement(FaItalic, null)),
-        React.createElement(SquareButton, { active: isUnderline, onClick: () => { console.log("Underline", editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")); } },
+        React.createElement(SquareButton, { active: isUnderline, onClick: () => { // console.log("Underline", editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")); } },
             React.createElement(FaUnderline, null)),
         React.createElement(SquareButton, { title: "Strike-through", active: isStrikethrough, onClick: () => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough") },
             React.createElement(FaStrikethrough, null)),
