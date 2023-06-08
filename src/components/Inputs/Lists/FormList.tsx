@@ -91,7 +91,7 @@ const FormList = (props:IList) => {
         let _props = props
         delete _props.children
 
-        const bodyTemplateWithProps = React.cloneElement(props.bodyTemplate, {...props, ...props.bodyTemplate.props})
+        const bodyTemplateWithProps = React.cloneElement(props.bodyTemplate(props), {...props, ...props.bodyTemplate(props).props})
         return templateConverter(bodyTemplateWithProps.props.children, i)
       } else {
         return  <Row key={`fw-${props.name}-${i}`}>
