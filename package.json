@@ -1,6 +1,6 @@
 {
   "name": "rhf-modular-wrapper",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Modular Wrapper for React Hook Form using context, plug and play smart components style",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
