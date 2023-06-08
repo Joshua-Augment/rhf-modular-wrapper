@@ -89,7 +89,7 @@ const FormList = (props) => {
             if (props.bodyTemplate !== undefined) {
                 let _props = props;
                 delete _props.children;
-                const bodyTemplateWithProps = React.cloneElement(props.bodyTemplate(props), Object.assign(Object.assign({}, props), props.bodyTemplate(props).props));
+                const bodyTemplateWithProps = React.cloneElement(props.bodyTemplate(props), Object.assign(Object.assign({}, props), { fields: field, index: i }));
                 return templateConverter(bodyTemplateWithProps.props.children, i);
             }
             else {
