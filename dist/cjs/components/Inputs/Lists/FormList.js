@@ -115,7 +115,10 @@ const FormList = (props) => {
         };
         return fields.map((field, i) => {
             if (props.bodyTemplate !== undefined) {
-                return templateConverter(props.bodyTemplate.props.children, i);
+                let _props = props;
+                delete _props.children;
+                const bodyTemplateWithProps = react_1.default.cloneElement(props.bodyTemplate, Object.assign(Object.assign({}, props), props.bodyTemplate.props));
+                return templateConverter(bodyTemplateWithProps.props.children, i);
             }
             else {
                 return react_1.default.createElement(Row, { key: `fw-${props.name}-${i}` },
