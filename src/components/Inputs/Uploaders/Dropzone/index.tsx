@@ -10,20 +10,25 @@ import { compareArrays } from '../../../core/helpers';
 import { useFormContext } from 'react-hook-form';
 
 const DropzoneContainer = styled.div`
-  padding:10px;
+  /* padding:10px; */
   margin: 5px 2px;
+  width:100%;
+  height:100%;
+  position:relative;
   background:#e0e0e0;
   border-radius: 2px;
 `
 
 const PreviewContainer = styled.div`
-  width:100%;
+  /* width:100%; */
   padding:5px;
+  margin:5px;
   background-color: #dfdada;
   box-sizing: border-box;
   border: 1px solid #777777;
 `
 const PreviewWrapper = styled.div`
+  z-index:1;
   width: 100%;
   display: flex;
   justify-content:space-between;
@@ -94,10 +99,12 @@ const DropzoneUploader = (props: IDropzoneUploader) => {
   return (<>    
     <PreviewModal file={preview} setFile={setPreview} /> 
     <InputWrapper {...props}>
-      <DropzoneContainer>
-        <div {...getRootProps()}>
-          <input {...getInputProps()} />
-          <p>{props.containerCaption ?? "Drag 'n' drop some files here, or click to select files"}</p>
+      <DropzoneContainer >
+        <div  style={{width: '100%', height: '100%', position:'relative', display:'flex',alignItems:'center',justifyContent: 'center'}} >
+          <div {...getRootProps()} style={{width: '100%', height: '100%', position:'relative', textAlign: 'center'}}>
+            <input {...getInputProps()} />
+            <p>{props.containerCaption ?? "Drag 'n' drop some files here, or click to select files"}</p>
+          </div>
         </div>
         
         {

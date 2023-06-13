@@ -8,19 +8,24 @@ import PreviewModal from './components/PreviewModal';
 import { compareArrays } from '../../../core/helpers';
 import { useFormContext } from 'react-hook-form';
 const DropzoneContainer = styled.div `
-  padding:10px;
+  /* padding:10px; */
   margin: 5px 2px;
+  width:100%;
+  height:100%;
+  position:relative;
   background:#e0e0e0;
   border-radius: 2px;
 `;
 const PreviewContainer = styled.div `
-  width:100%;
+  /* width:100%; */
   padding:5px;
+  margin:5px;
   background-color: #dfdada;
   box-sizing: border-box;
   border: 1px solid #777777;
 `;
 const PreviewWrapper = styled.div `
+  z-index:1;
   width: 100%;
   display: flex;
   justify-content:space-between;
@@ -85,9 +90,10 @@ const DropzoneUploader = (props) => {
         React.createElement(PreviewModal, { file: preview, setFile: setPreview }),
         React.createElement(InputWrapper, Object.assign({}, props),
             React.createElement(DropzoneContainer, null,
-                React.createElement("div", Object.assign({}, getRootProps()),
-                    React.createElement("input", Object.assign({}, getInputProps())),
-                    React.createElement("p", null, (_a = props.containerCaption) !== null && _a !== void 0 ? _a : "Drag 'n' drop some files here, or click to select files")),
+                React.createElement("div", { style: { width: '100%', height: '100%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+                    React.createElement("div", Object.assign({}, getRootProps(), { style: { width: '100%', height: '100%', position: 'relative', textAlign: 'center' } }),
+                        React.createElement("input", Object.assign({}, getInputProps())),
+                        React.createElement("p", null, (_a = props.containerCaption) !== null && _a !== void 0 ? _a : "Drag 'n' drop some files here, or click to select files"))),
                 val && val.length > 0 && React.createElement(PreviewViewer, Object.assign({}, props, { files: val, showPreview: showPreview, moveFile: moveFile, handleDelete: handleDelete }))))));
 };
 // const DropzoneHandler = (props: IDropzoneHandler) => {

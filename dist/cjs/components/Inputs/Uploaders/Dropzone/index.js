@@ -36,19 +36,24 @@ const PreviewModal_1 = __importDefault(require("./components/PreviewModal"));
 const helpers_1 = require("../../../core/helpers");
 const react_hook_form_1 = require("react-hook-form");
 const DropzoneContainer = styled_components_1.default.div `
-  padding:10px;
+  /* padding:10px; */
   margin: 5px 2px;
+  width:100%;
+  height:100%;
+  position:relative;
   background:#e0e0e0;
   border-radius: 2px;
 `;
 const PreviewContainer = styled_components_1.default.div `
-  width:100%;
+  /* width:100%; */
   padding:5px;
+  margin:5px;
   background-color: #dfdada;
   box-sizing: border-box;
   border: 1px solid #777777;
 `;
 const PreviewWrapper = styled_components_1.default.div `
+  z-index:1;
   width: 100%;
   display: flex;
   justify-content:space-between;
@@ -113,9 +118,10 @@ const DropzoneUploader = (props) => {
         react_1.default.createElement(PreviewModal_1.default, { file: preview, setFile: setPreview }),
         react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props),
             react_1.default.createElement(DropzoneContainer, null,
-                react_1.default.createElement("div", Object.assign({}, getRootProps()),
-                    react_1.default.createElement("input", Object.assign({}, getInputProps())),
-                    react_1.default.createElement("p", null, (_a = props.containerCaption) !== null && _a !== void 0 ? _a : "Drag 'n' drop some files here, or click to select files")),
+                react_1.default.createElement("div", { style: { width: '100%', height: '100%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+                    react_1.default.createElement("div", Object.assign({}, getRootProps(), { style: { width: '100%', height: '100%', position: 'relative', textAlign: 'center' } }),
+                        react_1.default.createElement("input", Object.assign({}, getInputProps())),
+                        react_1.default.createElement("p", null, (_a = props.containerCaption) !== null && _a !== void 0 ? _a : "Drag 'n' drop some files here, or click to select files"))),
                 val && val.length > 0 && react_1.default.createElement(PreviewViewer, Object.assign({}, props, { files: val, showPreview: showPreview, moveFile: moveFile, handleDelete: handleDelete }))))));
 };
 // const DropzoneHandler = (props: IDropzoneHandler) => {
