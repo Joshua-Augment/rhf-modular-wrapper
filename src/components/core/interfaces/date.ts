@@ -1,7 +1,7 @@
 import { FormBaseInput } from './base';
 
-export interface IDatePicker extends FormBaseInput<String> {
-  options ?: IDP_Base
+export interface IDatePicker extends FormBaseInput<string> {
+  options?: IDP_Base
 }
 
 export type IDP_Base = {
@@ -70,8 +70,8 @@ export type IDP_Base = {
   onCalendarClose?(): void;
   onCalendarOpen?(): void;
   onChange?(
-      date: any extends false | undefined ? Date | null : [Date | null, Date | null],
-      event: React.SyntheticEvent<any> | undefined,
+    date: any extends false | undefined ? Date | null : [Date | null, Date | null],
+    event: React.SyntheticEvent<any> | undefined,
   ): void;
   onChangeRaw?(event: React.FocusEvent<HTMLInputElement>): void;
   onClickOutside?(event: React.MouseEvent<HTMLDivElement>): void;
@@ -84,9 +84,9 @@ export type IDP_Base = {
   onMonthMouseLeave?: (() => void) | undefined;
   onSelect?(date: Date, event: React.SyntheticEvent<any> | undefined): void;
   onWeekSelect?(
-      firstDayOfWeek: Date,
-      weekNumber: string | number,
-      event: React.SyntheticEvent<any> | undefined,
+    firstDayOfWeek: Date,
+    weekNumber: string | number,
+    event: React.SyntheticEvent<any> | undefined,
   ): void;
   onYearChange?(date: Date): void;
   open?: boolean | undefined;

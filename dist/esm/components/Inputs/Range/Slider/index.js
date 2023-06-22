@@ -8,7 +8,7 @@ const Slider = (props) => {
     const _val = watch(props.name);
     const val = useMemo(() => _val, [_val]);
     return (React.createElement(InputWrapper, Object.assign({}, props),
-        React.createElement(RangeSlider, Object.assign({}, props, { value: val, onInput: (a) => setValue(props.name, a) }))));
+        React.createElement(RangeSlider, Object.assign({}, props, props.sliderOptions, { value: val, onInput: (a) => setValue(props.name, a) }))));
 };
 export default Slider;
 //# sourceMappingURL=index.js.map

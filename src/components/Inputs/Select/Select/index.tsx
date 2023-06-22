@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import SelectInput from "react-select";
 import SelectCreatableInput from "react-select/creatable";
 import {
+  IInputsBasePropsNoSetters,
   ISelect,
   InputWrapper,
   TSelectOption,
@@ -37,6 +38,11 @@ const Select = (props: ISelect) => {
     }
   }
 
+  const _props: IInputsBasePropsNoSetters = {...props}
+  delete _props.calculatedField
+  delete _props.externalStateSetter
+  delete _props.onInputChange
+
   const SelectElems = useMemo(()=> {
     // console.log("[SelectElems] -rendered", options)
     return <InputWrapper {...props} noBorder options={options}>
@@ -44,7 +50,7 @@ const Select = (props: ISelect) => {
     <SelectCreatableInput
       styles={{container: (base) => ({...base, width:'100%'})}}
       onCreateOption={createNew}
-      {...props}
+      {..._props}
       {...props.rsOptions}
       options={options}
       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
@@ -53,7 +59,7 @@ const Select = (props: ISelect) => {
     /> :   
     <SelectInput
       styles={{container: (base) => ({...base, width:'100%'})}}
-      {...props}
+      {..._props}
       {...props.rsOptions}
       options={options}
       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}

@@ -78,12 +78,24 @@ export const CheckboxGroupExampleVertical = () => {
     },400)
   },[])
 
+  const handleInputChange = (input:string, name: string, all: any, methods ?: any) => {
+    console.group('Handle Input Change')
+    console.log(`Handle Input Change! input : ${input}, name: ${name}`)
+    console.log(`Handle Input Change! all `,all)
+    console.log(`Handle Input Change! methods `,methods)
+
+    console.log(`Testing Method! Changing line_number ${all.line_number} + 1 ! `,methods.setValue('line_number', Number(all.line_number) + 1))
+    console.groupEnd()
+    
+    return 
+  }
+
   return <div>
     {output}
     {
       ready ? <Form onSubmit={onSubmit} defaultValues={defaultValues} yupSchema={yupValidation}>
-        <Line name="line_with_default_value" label="Line Input with default Value" value="This is a test Value" helperText="Line Input" />
-        <Line name="line" label="Line Input" helperText="Line Input" />
+        <Line name="line_with_default_value" label="Line Input with default Value" defaultValue="This is a test Value" helperText="Line Input" />
+        <Line onInputChange={handleInputChange} name="line" label="Line Input" helperText="Line Input" />
         <Line name="line_number" type="number" label="Line Input (Number)" helperText="Line Input (Number)" />
         <DatePicker name="datepicker" label="Date Picker" helperText="Date Picker" />
         <Select rsOptions={{isClearable:true}} name="select" helperText="Select" label="Select" options={BASE_SELECTS} />

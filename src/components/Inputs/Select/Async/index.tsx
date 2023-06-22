@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import AsyncSelectInput from "react-select/async";
 import AsyncCreatableSelectInput from "react-select/async-creatable";
-import { TSelectOption, ISelectAsync, InputWrapper,} from "../../../core";
+import { TSelectOption, ISelectAsync, InputWrapper, IInputsBasePropsNoSetters,} from "../../../core";
 import { useFormContext } from "react-hook-form";
 
 const AsyncSelect = (props: ISelectAsync) => {
@@ -27,6 +27,11 @@ const AsyncSelect = (props: ISelectAsync) => {
       }
     }
   }, []);
+
+  const _props: IInputsBasePropsNoSetters = {...props}
+  delete _props.calculatedField
+  delete _props.externalStateSetter
+  delete _props.onInputChange
   
   return <InputWrapper {...props} noBorder>
     {
@@ -34,7 +39,7 @@ const AsyncSelect = (props: ISelectAsync) => {
       <AsyncCreatableSelectInput
         styles={{container: (base) => ({...base, width:'100%'})}}
         onCreateOption={createNew}
-        {...props}
+        {..._props}
         options={options}
         isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
         value={val}
@@ -45,7 +50,7 @@ const AsyncSelect = (props: ISelectAsync) => {
     ) : (
       <AsyncSelectInput
         styles={{container: (base) => ({...base, width:'100%'})}}
-        {...props}
+        {..._props}
         options={options}
         isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
         value={val}

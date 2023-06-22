@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { FormBaseInput } from './base';
-export interface IDatePicker extends FormBaseInput<String> {
+export interface IDatePicker extends FormBaseInput<string> {
     options?: IDP_Base;
 }
 export type IDP_Base = {

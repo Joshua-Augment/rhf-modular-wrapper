@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { Uppy } from '@uppy/core';
 import { FormBaseInput, IFormFrameInjector, IInputsBaseProps } from './base';
-export interface IBaseUppy extends FormBaseInput<String[]> {
+export interface IBaseUppy extends FormBaseInput<string[]> {
     endpoint: string;
     metadata?: any;
 }

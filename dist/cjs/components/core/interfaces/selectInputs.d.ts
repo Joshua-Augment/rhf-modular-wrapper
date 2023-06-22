@@ -1,5 +1,9 @@
+import { RefAttributes } from 'react';
 import { IInputsBaseProps } from './';
-import { StylesConfig, GroupBase } from 'react-select';
+import { StylesConfig, GroupBase, Props } from 'react-select';
+import { AsyncProps } from 'react-select/async';
+import { AsyncCreatableProps } from 'react-select/async-creatable';
+import { CreatableProps } from 'react-select/creatable';
 export type TSelectOption = {
     label: string | number;
     value: any;
@@ -17,6 +21,10 @@ export type RSOptionsAsync = {
     cachedOptions?: boolean;
 };
 export type RSOptionsCreatable = {};
+export type RSBaseOptions<Option = any, IsMulti extends boolean = any, Group extends GroupBase<Option> = any> = Props<Option, IsMulti, Group>;
+export type RSAsyncOptions<Option = any, IsMulti extends boolean = any, Group extends GroupBase<Option> = any> = AsyncProps<Option, IsMulti, Group> & RefAttributes<RSBaseOptions<Option, IsMulti, Group>>;
+export type RSCreatableAsyncOptions<Option = any, IsMulti extends boolean = any, Group extends GroupBase<Option> = any> = AsyncCreatableProps<Option, IsMulti, Group> & RefAttributes<RSBaseOptions<Option, IsMulti, Group>>;
+export type RSCreatableOptions<Option = any, IsMulti extends boolean = any, Group extends GroupBase<Option> = any> = CreatableProps<Option, IsMulti, Group> & RefAttributes<RSBaseOptions<Option, IsMulti, Group>>;
 export type RSOptionsBase = {
     isMulti?: boolean;
     isSearchable?: boolean;
@@ -32,6 +40,10 @@ export interface BaseSelect extends IInputsBaseProps<TSelectOption | null> {
     isCreatable?: true | ((createdString: string) => Promise<TSelectOption>);
     rsOptions?: RSOptionsBase;
 }
+export type BaseSelectNotCreatable = {
+    isCreatable?: false;
+    rsOptions: RSBaseOptions;
+};
 export interface IOptionsSelectNotAsync {
     options: TSelectOption[];
 }

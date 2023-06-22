@@ -36,7 +36,7 @@ const Slider = (props) => {
     const _val = watch(props.name);
     const val = (0, react_1.useMemo)(() => _val, [_val]);
     return (react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props),
-        react_1.default.createElement(react_range_slider_input_1.default, Object.assign({}, props, { value: val, onInput: (a) => setValue(props.name, a) }))));
+        react_1.default.createElement(react_range_slider_input_1.default, Object.assign({}, props, props.sliderOptions, { value: val, onInput: (a) => setValue(props.name, a) }))));
 };
 exports.default = Slider;
 //# sourceMappingURL=index.js.map

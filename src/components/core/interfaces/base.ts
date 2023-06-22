@@ -1,4 +1,4 @@
-import { FieldValues, DeepPartial } from 'react-hook-form/dist/types';
+import { FieldValues, DeepPartial, UseFormReturn } from 'react-hook-form/dist/types';
 import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form/dist/types';
 export interface ISubmitButton {label ?: string; children ?: React.ReactNode;buttonClass ?: string; }
 
@@ -57,7 +57,8 @@ export type TInputInputHTML = TInputHTMLProps & {inputClass ?: string, inputStyl
 export type TInputWrapperInputHTML = TInputWrapperHTML & TInputInputHTML
 
 /* INPUTS */
-export interface IInputsBaseProps<T=any> {
+export interface IInputsBasePropsNoSetters<T=any> {
+
   buttons ?: {
     wrapper ?: {left ?: JSX.Element, right ?: JSX.Element, all ?: JSX.Element},
     left ?: {label: React.ReactNode, onClick: (value: T, name: string, all: any) => void, customButton ?: JSX.Element}[],
@@ -73,34 +74,38 @@ export interface IInputsBaseProps<T=any> {
 
   customClasses ?: FormInputClassNames,
   style ?: React.CSSProperties
-  reversedLabel ?: boolean, 
-  side ?: boolean,
 
-  externalStateSetter ?: (a: T) => void,
-
-  helperText ?: string
   label ?: string,
+  reversedLabel ?: boolean, 
+  helperText ?: string
   placeholder ?: string,
 
   noBorder ?: boolean,
   noLabel ?: boolean,
-
-  calculatedField ?: isCalculatedNoPromise<T> | isCalculatedPromise<T> ,
+  
   value ?: any,
   onChange ?: (a:any) => void,
+
   [key: string]: any,
-  [key :number]: any,  
+  [key :number]: any,
+}
+export interface IInputsBaseProps<T=any> extends IInputsBasePropsNoSetters<T> {
+
+  calculatedField ?: isCalculatedNoPromise<T> | isCalculatedPromise<T> ,
+  externalStateSetter ?: (a: T) => void,
+  onInputChange ?: (a:T, name: string, all: any, formMethods: UseFormReturn<FieldValues, any>) => void
+  
 }
 
 type isCalculatedNoPromise<T> = {  
   find : string[],     
   isPromise ?: false,
-  calculate : (thisValue : T, foundFields : any[], allFields: any ) => T,
+  calculate : (thisValue : T, thisName: string, foundFields : any[], allFields: any ) => T,
 }
 type isCalculatedPromise<T> = {
   find : string[],   
   isPromise : true,
-  calculate : (thisValue : T, foundFields : any[], allFields: any ) => Promise<T>,
+  calculate : (thisValue : T, thisName: string, foundFields : any[], allFields: any ) => Promise<T>,
 }
 export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {  
   children ?: any

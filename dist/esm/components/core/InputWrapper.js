@@ -1,12 +1,26 @@
-import React, { useEffect, useMemo } from "react";
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+import React, { useEffect, useMemo, useRef } from "react";
 import InputElemWrapper from "./InputElemWrapper";
 import { Button } from "@mui/material";
 import { useInputValAndError } from "./hook/useInputValnError";
 const InputWrapper = (props) => {
     // const [value, setValue] = useState<any>(undefined)
     // const {getValues, watch, setValue: contextSetValue} = useFormContext() 
+    var _a;
     // const watchValue = watch(props.name)
-    const { value, setValue, getValues } = useInputValAndError(props.name);
+    const firstUpdate = useRef(true);
+    const _b = useInputValAndError(props.name), { value, setValue, getValues, watch } = _b, rest = __rest(_b, ["value", "setValue", "getValues", "watch"]);
+    const watchCalculated = ((_a = props === null || props === void 0 ? void 0 : props.calculatedField) === null || _a === void 0 ? void 0 : _a.find) !== undefined ? watch(props.calculatedField.find) : null;
     // On Value change
     useEffect(() => { if (value === undefined) {
         setValue(props.name, null);
@@ -25,20 +39,27 @@ const InputWrapper = (props) => {
         if (props.externalStateSetter) {
             props.externalStateSetter(value);
         }
+        // On Input Change
+        if (props.onInputChange && !firstUpdate.current) {
+            props.onInputChange(value, props.name, getValues(), Object.assign(Object.assign({}, rest), { getValues, watch, setValue }));
+        }
+        firstUpdate.current = false;
+    }, [value]);
+    useEffect(() => {
         // if(props.externalStateSetter) {props.externalStateSetter(watchValue ?? value)}
         // Calculated Fields
         if (props.calculatedField) {
             if (props.calculatedField.isPromise === true) {
-                props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues())
+                props.calculatedField.calculate(value, props.name, getValues(props.calculatedField.find), getValues())
                     // .then(data => { contextSetValue(props.name, data) })
                     .then(data => { setValue(props.name, data); });
             }
             else {
-                setValue(props.name, props.calculatedField.calculate(value, getValues(props.calculatedField.find), getValues()));
+                setValue(props.name, props.calculatedField.calculate(value, props.name, getValues(props.calculatedField.find), getValues()));
                 // contextSetValue(props.name, props.calculatedField.calculate(value,getValues(props.calculatedField.find), getValues()))
             }
         }
-    }, [value]);
+    }, [watchCalculated]);
     // const [_value, _setValue] = useState(null)
     // const methods = props.contextless === true ? {control:undefined, watch : (a:string) => null } : useFormContext();
     const child = useMemo(() => {
