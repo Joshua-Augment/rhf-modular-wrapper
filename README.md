@@ -248,6 +248,9 @@ Currently more inputs are being planned out, including;
 
 1. 22 / 06 / 2023 - Added the onInputChange prop. For those using the calculatedField a minor breaking change will happen, now the 2nd argument is `current_name` representing the name of the input your calculated_field was called in. The foundFields and allFields are pushed further in.
 
+## Changelog
+
+1. 2.5.1 - Issue noticed with InputListToTable, where it renders with edit mode already on. Fixed and now edit works except with WYSIWYG Editor, which does not clear upon adding a new entry. Will be looked at further
 
 ## Final words
 

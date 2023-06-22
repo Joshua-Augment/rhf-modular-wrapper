@@ -4,6 +4,7 @@ import { ComponentMeta } from '@storybook/react';
 import {DatePicker, FormList, InputListtoTable, Line, Select, TableList, WYSIWYGEditor} from "../components";
 import { Template } from "./_story_template";
 import { Box } from "@mui/material";
+import * as yup from "yup"
 
 export default {
   title: 'Components/Inputs/Lists/FormList',
@@ -47,6 +48,13 @@ SimpleTableList.args =  {
 
 export const SimpleInputToTableList = Template.bind({})
 SimpleInputToTableList.args = {
+  schema : yup.object({
+    inputs: yup.object({
+      name : yup.string().required("NAME REQUIRED"),
+      email: yup.string().email("YUP HAVE TO ADD A VALID EMAIL"),
+      type1 : yup.mixed().test('test','PLEASE CHOOSE AN INPUT',(val) => val?.value !== undefined)
+    })
+  }),
   children : <InputListtoTable 
     label="Input List to Table" 
     items={[
