@@ -28,7 +28,7 @@ export const Form = (props) => {
         context: props.context,
         criteriaMode: (_c = props.criteriaMode) !== null && _c !== void 0 ? _c : "firstError",
         shouldFocusError: (_d = props.shouldFocusError) !== null && _d !== void 0 ? _d : true,
-        shouldUnregister: (_e = props.shouldUnregister) !== null && _e !== void 0 ? _e : false,
+        shouldUnregister: (_e = props.shouldUnregister) !== null && _e !== void 0 ? _e : true,
         shouldUseNativeValidation: (_f = props.shouldUseNativeValidation) !== null && _f !== void 0 ? _f : false,
         delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined,
     });

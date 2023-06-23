@@ -42,26 +42,18 @@ const InputElemWrapper_1 = __importDefault(require("./InputElemWrapper"));
 const material_1 = require("@mui/material");
 const useInputValnError_1 = require("./hook/useInputValnError");
 const InputWrapper = (props) => {
-    // const [value, setValue] = useState<any>(undefined)
-    // const {getValues, watch, setValue: contextSetValue} = useFormContext() 
     var _a;
-    // const watchValue = watch(props.name)
     const firstUpdate = (0, react_1.useRef)(true);
     const _b = (0, useInputValnError_1.useInputValAndError)(props.name), { value, setValue, getValues, watch } = _b, rest = __rest(_b, ["value", "setValue", "getValues", "watch"]);
     const watchCalculated = ((_a = props === null || props === void 0 ? void 0 : props.calculatedField) === null || _a === void 0 ? void 0 : _a.find) !== undefined ? watch(props.calculatedField.find) : null;
+    // console.log(`For ${props.name}, error : `,rest.error)
     // On Value change
-    (0, react_1.useEffect)(() => { if (value === undefined) {
-        setValue(props.name, null);
-    } }, [value]);
-    // useEffect(() => {
-    //   if (watchValue === undefined) {contextSetValue(props.name,null)}
-    // },[watchValue])
-    // useEffect(()=> setValue(watchValue === undefined ? null : watchValue), [typeof watchValue === 'object' ? JSON.stringify(watchValue) : watchValue])
-    // Set Value First if Available
-    // useEffect(()=>{ if (props.defaultValue) {contextSetValue(props.name, props.defaultValue);} },[props.defaultValue]) 
-    (0, react_1.useEffect)(() => { if (props.defaultValue) {
-        setValue(props.name, props.defaultValue);
-    } }, [props.defaultValue]);
+    (0, react_1.useEffect)(() => {
+        if (props.defaultValue !== undefined) {
+            // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
+            setValue(props.name, props.defaultValue);
+        }
+    }, [props.defaultValue]);
     (0, react_1.useEffect)(() => {
         // External Field
         if (props.externalStateSetter) {
@@ -80,11 +72,14 @@ const InputWrapper = (props) => {
             if (props.calculatedField.isPromise === true) {
                 props.calculatedField.calculate(value, props.name, getValues(props.calculatedField.find), getValues())
                     // .then(data => { contextSetValue(props.name, data) })
-                    .then(data => { setValue(props.name, data); });
+                    .then(data => {
+                    // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
+                    setValue(props.name, data);
+                });
             }
             else {
+                // console.log(`[Setting] Setting value for ${props.name} by calculation`)
                 setValue(props.name, props.calculatedField.calculate(value, props.name, getValues(props.calculatedField.find), getValues()));
-                // contextSetValue(props.name, props.calculatedField.calculate(value,getValues(props.calculatedField.find), getValues()))
             }
         }
     }, [watchCalculated]);

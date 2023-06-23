@@ -28,13 +28,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const InputWrapper_1 = __importDefault(require("../../core/InputWrapper"));
-const react_hook_form_1 = require("react-hook-form");
+const useInputValnError_1 = require("../../core/hook/useInputValnError");
 const Checkbox = (props) => {
-    const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
-    const _val = watch(props.name);
-    const val = (0, react_1.useMemo)(() => _val, [_val]);
+    const { value, setValue } = (0, useInputValnError_1.useInputValAndError)(props.name);
+    (0, react_1.useEffect)(() => { if (value === undefined || value === null || value === '') {
+        setValue(props.name, false);
+    } }, [value]);
+    // const {watch, setValue} = useFormContext()
+    // const _val = watch(props.name)
+    // const val = useMemo(() => _val ,[_val])
     return (react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props, { reversedLabel: true, customClasses: { wrapperClassName: 'form-check' }, style: { display: 'flex', alignItems: 'center' } }),
-        react_1.default.createElement("input", { id: props.name, type: "checkbox", name: props.name, checked: val, value: val, onChange: (a) => setValue(props.name, a.target.checked) })));
+        react_1.default.createElement("input", { id: props.name, type: "checkbox", name: props.name, checked: value, value: value, onChange: (a) => setValue(props.name, a.target.checked) })));
 };
 exports.default = Checkbox;
 //# sourceMappingURL=Checkbox.js.map

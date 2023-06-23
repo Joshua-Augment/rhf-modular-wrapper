@@ -29,24 +29,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const core_1 = require("../../core");
 const styled_components_1 = __importDefault(require("styled-components"));
-const react_hook_form_1 = require("react-hook-form");
+const useInputValnError_1 = require("../../core/hook/useInputValnError");
 const YesNo = (props) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
-    const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
-    const _val = watch(props.name);
-    const val = (0, react_1.useMemo)(() => _val, [_val]);
+    const { value, setValue } = (0, useInputValnError_1.useInputValAndError)(props.name);
+    (0, react_1.useEffect)(() => {
+        if (value === undefined || value === '') {
+            setValue(props.name, null);
+        }
+    }, [value]);
     const buttonHandler = (0, react_1.useCallback)((buttonVal, extHandler) => {
         if (extHandler) {
-            extHandler(val).then(a => { if (a) {
+            extHandler(value).then(a => { if (a) {
                 setValue(props.name, a);
             } });
         }
         else {
             setValue(props.name, buttonVal);
         }
-    }, []);
+    }, [value]);
     const buttonGenerator = (label, valueOfButton, extHandler, ButtonElem, color, key) => {
-        return react_1.default.createElement(ButtonElem, { className: props.inputClass, style: Object.assign({}, props.inputStyle), active: valueOfButton === val, key: key !== null && key !== void 0 ? key : `yng-${props.name}-${valueOfButton}`, type: "button", onClick: () => buttonHandler(valueOfButton, extHandler), bgColor: color }, label);
+        return react_1.default.createElement(ButtonElem, { className: props.inputClass, style: Object.assign({}, props.inputStyle), active: valueOfButton === value, key: key !== null && key !== void 0 ? key : `yng-${props.name}-${valueOfButton}`, type: "button", onClick: () => buttonHandler(valueOfButton, extHandler), bgColor: color }, label);
     };
     return (react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { id: `${props.name}`, noLabel: true, noBorder: true, customClasses: { wrapperClassName: 'form-check' } }),
         react_1.default.createElement("div", { style: Object.assign(Object.assign({ display: 'flex', width: 100 * (2 + (props.otherOptions ? props.otherOptions.length : 0)) }, props.wrapperStyle), props.style), className: `${props.className} ${props.wrapperClass}` },

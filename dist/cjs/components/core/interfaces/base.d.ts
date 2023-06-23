@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { FieldValues, DeepPartial, UseFormReturn } from 'react-hook-form/dist/types';
 import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form/dist/types';
 export interface ISubmitButton {
@@ -13,7 +13,7 @@ export interface IForm<T extends FieldValues> {
     id?: string;
     defaultValues?: DeepPartial<T>;
     resetOnComplete?: boolean;
-    onSubmit: (data: T) => Promise<any>;
+    onSubmit: (data: T, event?: React.BaseSyntheticEvent) => Promise<any>;
     children: JSX.Element[] | JSX.Element;
     mode?: keyof ValidationMode;
     reValidateMode?: "onBlur" | "onChange" | "onSubmit";

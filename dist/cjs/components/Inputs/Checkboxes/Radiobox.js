@@ -30,14 +30,20 @@ const react_1 = __importStar(require("react"));
 const InputWrapper_1 = __importDefault(require("../../core/InputWrapper"));
 const react_radio_buttons_1 = require("react-radio-buttons");
 require("../../styling/Radiobox.css");
-const react_hook_form_1 = require("react-hook-form");
+const useInputValnError_1 = require("../../core/hook/useInputValnError");
 const Radiobox = (props) => {
-    const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
-    const _val = watch(props.name);
-    const val = (0, react_1.useMemo)(() => _val, [_val]);
+    const { value, setValue } = (0, useInputValnError_1.useInputValAndError)(props.name);
+    // const {watch, setValue} = useFormContext()
+    // const _val = watch(props.name)
+    // const val = useMemo(() => _val ,[_val])
+    (0, react_1.useEffect)(() => {
+        if (value === undefined || value === '' || value === null) {
+            setValue(props.name, props.options[0].value);
+        }
+    }, [value]);
     return (react_1.default.createElement(InputWrapper_1.default, Object.assign({}, props, { id: `${props.name}`, noLabel: true, noBorder: true, customClasses: { wrapperClassName: 'form-check' } }),
         react_1.default.createElement("span", { className: "rb-item-wrapper" },
-            react_1.default.createElement(react_radio_buttons_1.RadioGroup, { horizontal: props.orientation === 'horizontal', onChange: (a) => setValue(props.name, a), value: val }, props.options.map((option, i) => (option.reversed ?
+            react_1.default.createElement(react_radio_buttons_1.RadioGroup, { horizontal: props.orientation === 'horizontal', onChange: (a) => setValue(props.name, a), value: value }, props.options.map((option, i) => (option.reversed ?
                 react_1.default.createElement(react_radio_buttons_1.ReversedRadioButton, { rootColor: "black", key: `${props.name}-opt-${i}`, value: option.value }, option.label) :
                 react_1.default.createElement(react_radio_buttons_1.RadioButton, { rootColor: "black", key: `${props.name}-opt-${i}`, value: option.value }, option.label)))))));
 };

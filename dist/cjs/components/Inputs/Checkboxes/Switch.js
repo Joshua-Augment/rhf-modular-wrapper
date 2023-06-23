@@ -29,15 +29,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const core_1 = require("../../core");
 const react_switch_1 = __importDefault(require("react-switch"));
-const react_hook_form_1 = require("react-hook-form");
+const useInputValnError_1 = require("../../core/hook/useInputValnError");
 const Switch = (props) => {
-    const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
-    const _val = watch(props.name);
-    const val = (0, react_1.useMemo)(() => _val, [_val]);
+    const { value, setValue } = (0, useInputValnError_1.useInputValAndError)(props.name);
+    (0, react_1.useEffect)(() => { if (value === null || value === undefined || value === '') {
+        setValue(props.name, false);
+    } }, [value]);
     return (react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { id: `${props.name}`, noBorder: true, customClasses: { wrapperClassName: 'form-check' } }),
         react_1.default.createElement("div", { className: `d-block ${props.wrapperClass}`, style: Object.assign({ display: 'flex', alignItems: 'center', flexDirection: 'column' }, props.wrapperStyle) },
-            react_1.default.createElement(react_switch_1.default, Object.assign({ className: props.inputClass, onChange: (a) => setValue(props.name, a), checked: val }, props.options)),
-            props.footLabel && react_1.default.createElement("div", { className: 'text-muted text-center' }, props.footLabel && (val ? props.footLabel[1] : props.footLabel[0])))));
+            react_1.default.createElement(react_switch_1.default, Object.assign({ className: props.inputClass, onChange: (a) => setValue(props.name, a), checked: value }, props.options)),
+            props.footLabel && react_1.default.createElement("div", { className: 'text-muted text-center' }, props.footLabel && (value ? props.footLabel[1] : props.footLabel[0])))));
 };
 // interface ISwitchContainer extends ISwitch,IFormFrameInjector {}
 // const SwitchContainer = (props:ISwitchContainer) => {
