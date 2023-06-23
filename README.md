@@ -253,6 +253,7 @@ Currently more inputs are being planned out, including;
 1. 2.5.1 - Issue noticed with InputListToTable, where it renders with edit mode already on. Fixed and now edit works except with WYSIWYG Editor, which does not clear upon adding a new entry. Will be looked at further
 2. 2.5.2 - Moved most value catches to a hook. Hook currently used internally but may be used externally, just make sure you are still within the confines of the <Form> context. The hook is called `useInputValAndError`, and it accepts one argument, which is  the input name. It provides the value and error for the said input, as well as all the useform methods. 
 An improvement somewhat made is that for InputListToTable, the input forms can be now validated before a new row is generated, but please keep in mind since we're using yup to add a clause to ignore validation if the fields are empty, as the form will still validate it together with the entire form on submission. Will work towards fixing this in the future.
+3. 2.5.3 - Sometimes InputListToTable has an error due to a undefined / null value. A guard added to prevent that
 
 ## Final words
 
