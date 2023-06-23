@@ -40,7 +40,7 @@ export const Form = <T extends FieldValues,>(props: IForm<T>) => {
     context: props.context,
     criteriaMode: props.criteriaMode ?? "firstError",
     shouldFocusError: props.shouldFocusError ?? true,
-    shouldUnregister: props.shouldUnregister ?? false,
+    shouldUnregister: props.shouldUnregister ?? true,
     shouldUseNativeValidation: props.shouldUseNativeValidation ?? false,
     delayError: props.delayError ?? undefined,
   });

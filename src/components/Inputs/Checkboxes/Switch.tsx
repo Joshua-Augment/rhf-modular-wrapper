@@ -1,19 +1,18 @@
-import React, { useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { InputWrapper, ISwitch } from '../../core'
 import {default as SwitchInput} from "react-switch";
-import { useFormContext } from 'react-hook-form';
+import { useInputValAndError } from '../../core/hook/useInputValnError';
 
 const Switch = (props:ISwitch) => {
-  
-  const {watch, setValue} = useFormContext()
-  const _val = watch(props.name)
-  const val = useMemo(() => _val ,[_val])
+  const {value, setValue} = useInputValAndError(props.name)
+
+  useEffect(()=>{ if (value === null || value === undefined || value === '') {setValue(props.name, false)} },[value])
 
   return (
     <InputWrapper {...props} id={`${props.name}`} noBorder customClasses={{wrapperClassName:'form-check'}}>
       <div className={`d-block ${props.wrapperClass}`} style={{display:'flex',alignItems: 'center',flexDirection: 'column',...props.wrapperStyle}}>
-        <SwitchInput className={props.inputClass} onChange={(a) => setValue(props.name, a)} checked={val} {...props.options} />
-        {props.footLabel && <div className='text-muted text-center'>{props.footLabel && (val ? props.footLabel[1] : props.footLabel[0])}</div>}
+        <SwitchInput className={props.inputClass} onChange={(a) => setValue(props.name, a)} checked={value} {...props.options} />
+        {props.footLabel && <div className='text-muted text-center'>{props.footLabel && (value ? props.footLabel[1] : props.footLabel[0])}</div>}
       </div>
     </InputWrapper>
   )

@@ -1,22 +1,23 @@
-import React, { useCallback,useMemo } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import {  InputWrapper, IYesNo } from '../../core'
 import styled from "styled-components"
-import { useFormContext } from 'react-hook-form'
+import { useInputValAndError } from '../../core/hook/useInputValnError'
 
 const YesNo = (props: IYesNo) => {
+  const {value, setValue} = useInputValAndError(props.name)
   
-  const {watch, setValue} = useFormContext()
-  const _val = watch(props.name)
-  const val = useMemo(() => _val ,[_val])
+  useEffect(()=>{
+    if (value === undefined || value === '') {setValue(props.name, null)}
+  },[value])
 
   const buttonHandler = useCallback((buttonVal: any, extHandler ?: ((someVal:string)=>Promise<boolean>))=>{
     if (extHandler) {
-      extHandler(val).then(a => {if (a) {setValue(props.name, a)}})
+      extHandler(value).then(a => {if (a) {setValue(props.name, a)}})
     } else {setValue(props.name, buttonVal)}
-  },[])
+  },[value])
 
   const buttonGenerator = (label: string, valueOfButton : any, extHandler : any, ButtonElem : React.FunctionComponent<any> & {children: any}, color: string, key ?: string) => {
-    return <ButtonElem className={props.inputClass} style={{...props.inputStyle}} active={valueOfButton === val} key={key ?? `yng-${props.name}-${valueOfButton}`} type="button" onClick={()=>buttonHandler(valueOfButton,extHandler)} bgColor={color}>
+    return <ButtonElem className={props.inputClass} style={{...props.inputStyle}} active={valueOfButton === value} key={key ?? `yng-${props.name}-${valueOfButton}`} type="button" onClick={()=>buttonHandler(valueOfButton,extHandler)} bgColor={color}>
       {label}
     </ButtonElem>
   }

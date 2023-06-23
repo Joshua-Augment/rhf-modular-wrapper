@@ -33,7 +33,7 @@ const yupValidation = yup.object({
   table_list: yup.array().of(yup.object({
     line: yup.string().required("INPUT REQUIRED"),
     number: yup.number().required("INPUT REQUIRED"),
-    yesno: yup.boolean().required("INPUT REQUIRED"),
+    yesno: yup.boolean().nullable().required("INPUT REQUIRED"),
     checkbox : yup.boolean().required("INPUT REQUIRED"),
     radiobox : yup.number().required("INPUT REQUIRED")
   })),
@@ -79,13 +79,13 @@ export const CheckboxGroupExampleVertical = () => {
   },[])
 
   const handleInputChange = (input:string, name: string, all: any, methods ?: any) => {
-    console.group('Handle Input Change')
-    console.log(`Handle Input Change! input : ${input}, name: ${name}`)
-    console.log(`Handle Input Change! all `,all)
-    console.log(`Handle Input Change! methods `,methods)
+  // console.group('Handle Input Change')
+  // console.log(`Handle Input Change! input : ${input}, name: ${name}`)
+  // console.log(`Handle Input Change! all `,all)
+  // console.log(`Handle Input Change! methods `,methods)
 
-    console.log(`Testing Method! Changing line_number ${all.line_number} + 1 ! `,methods.setValue('line_number', Number(all.line_number) + 1))
-    console.groupEnd()
+  // console.log(`Testing Method! Changing line_number ${all.line_number} + 1 ! `,methods.setValue('line_number', Number(all.line_number) + 1))
+  // console.groupEnd()
     
     return 
   }

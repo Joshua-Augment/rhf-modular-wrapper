@@ -33,6 +33,7 @@ export interface ITableList extends IBaseList {
 export interface IInputToTableList extends ITableList {
     children?: any;
     inputName: string;
+    inputsSchema?: any;
     editingCaption?: string;
     tableButtons?: {
         add?: React.Component<any>;

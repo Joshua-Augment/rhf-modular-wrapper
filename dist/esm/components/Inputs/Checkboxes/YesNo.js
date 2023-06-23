@@ -1,24 +1,27 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { InputWrapper } from '../../core';
 import styled from "styled-components";
-import { useFormContext } from 'react-hook-form';
+import { useInputValAndError } from '../../core/hook/useInputValnError';
 const YesNo = (props) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
-    const { watch, setValue } = useFormContext();
-    const _val = watch(props.name);
-    const val = useMemo(() => _val, [_val]);
+    const { value, setValue } = useInputValAndError(props.name);
+    useEffect(() => {
+        if (value === undefined || value === '') {
+            setValue(props.name, null);
+        }
+    }, [value]);
     const buttonHandler = useCallback((buttonVal, extHandler) => {
         if (extHandler) {
-            extHandler(val).then(a => { if (a) {
+            extHandler(value).then(a => { if (a) {
                 setValue(props.name, a);
             } });
         }
         else {
             setValue(props.name, buttonVal);
         }
-    }, []);
+    }, [value]);
     const buttonGenerator = (label, valueOfButton, extHandler, ButtonElem, color, key) => {
-        return React.createElement(ButtonElem, { className: props.inputClass, style: Object.assign({}, props.inputStyle), active: valueOfButton === val, key: key !== null && key !== void 0 ? key : `yng-${props.name}-${valueOfButton}`, type: "button", onClick: () => buttonHandler(valueOfButton, extHandler), bgColor: color }, label);
+        return React.createElement(ButtonElem, { className: props.inputClass, style: Object.assign({}, props.inputStyle), active: valueOfButton === value, key: key !== null && key !== void 0 ? key : `yng-${props.name}-${valueOfButton}`, type: "button", onClick: () => buttonHandler(valueOfButton, extHandler), bgColor: color }, label);
     };
     return (React.createElement(InputWrapper, Object.assign({}, props, { id: `${props.name}`, noLabel: true, noBorder: true, customClasses: { wrapperClassName: 'form-check' } }),
         React.createElement("div", { style: Object.assign(Object.assign({ display: 'flex', width: 100 * (2 + (props.otherOptions ? props.otherOptions.length : 0)) }, props.wrapperStyle), props.style), className: `${props.className} ${props.wrapperClass}` },

@@ -57,6 +57,16 @@ SimpleInputToTableList.args = {
   }),
   children : <InputListtoTable 
     label="Input List to Table" 
+    showIndex
+    headerTemplate={<tr>
+      <th></th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Date</th>
+      <th>Remarks</th>
+      <th>Type</th>
+      <th></th>
+    </tr>}
     items={[
       {name:'name', type:'text'},
       {name:'email', type:'email'},
