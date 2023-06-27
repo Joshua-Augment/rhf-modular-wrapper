@@ -76,7 +76,7 @@ export interface IInputsBasePropsNoSetters<T=any> {
   customClasses ?: FormInputClassNames,
   style ?: React.CSSProperties
 
-  label ?: string,
+  label ?: string | React.ReactNode,
   reversedLabel ?: boolean, 
   helperText ?: string
   placeholder ?: string,

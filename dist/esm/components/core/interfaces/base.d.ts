@@ -83,7 +83,7 @@ export interface IInputsBasePropsNoSetters<T = any> {
     disabled?: boolean;
     customClasses?: FormInputClassNames;
     style?: React.CSSProperties;
-    label?: string;
+    label?: string | React.ReactNode;
     reversedLabel?: boolean;
     helperText?: string;
     placeholder?: string;
