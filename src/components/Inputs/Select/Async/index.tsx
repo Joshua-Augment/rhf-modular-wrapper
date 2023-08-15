@@ -33,7 +33,7 @@ const AsyncSelect = (props: ISelectAsync) => {
   delete _props.externalStateSetter
   delete _props.onInputChange
   
-  return <InputWrapper {...props} noBorder>
+  return <InputWrapper type={props.type ?? 'select_async'} {...props} noBorder>
     {
       props.isCreatable !== undefined ? (
       <AsyncCreatableSelectInput

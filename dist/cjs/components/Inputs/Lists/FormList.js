@@ -51,6 +51,7 @@ const iconStyle = {
     textAlign: 'right'
 };
 const FormList = (props) => {
+    var _a;
     const { value, error, control } = (0, useInputValnError_1.useInputValAndError)(props.name);
     // const {control} = useFormContext()
     const { fields, append, insert, remove } = (0, react_hook_form_1.useFieldArray)({ control, name: props.name });
@@ -136,7 +137,7 @@ const FormList = (props) => {
             }
         });
     }, [value, error]);
-    return (react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props, { noBorder: true }),
+    return (react_1.default.createElement(core_1.InputWrapper, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'list' }, props, { noBorder: true }),
         react_1.default.createElement("div", { style: { width: '100%' } }, bodygenerator)));
 };
 exports.default = FormList;

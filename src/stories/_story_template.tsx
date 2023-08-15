@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "@storybook/addons"
 import { Form, SubmitButton } from "../components/core"
+import { useFormContext } from "react-hook-form";
 
 export const Template = ({defaultValues = {}, children, schema}:{schema ?: any, defaultValues?: any,children:React.ReactElement}) => {
   const [response, setResponse] = useState<string|null>(null)
@@ -13,10 +14,24 @@ export const Template = ({defaultValues = {}, children, schema}:{schema ?: any, 
   return <div>
     <p style={{margin:'10px',padding:'5px',border:'1px solid blue', borderRadius:'5px'}}>Submitted Object : {response}</p>
     <Form yupSchema={schema} onSubmit={_onSubmit} defaultValues={defaultValues}>
+      <ResetForm/>
     {children}
     <SubmitButton>Submit</SubmitButton>
   </Form>
 </div>
+}
+
+const ResetForm = () => {
+  const {reset, formState: {isSubmitted, isSubmitSuccessful}} = useFormContext()
+
+  useEffect(()=>{
+    if (isSubmitted && isSubmitSuccessful) {
+      console.log('Resetting form...')
+      reset()
+    }
+  },[isSubmitSuccessful, isSubmitted])
+
+  return <span data-reset="true" ></span>
 }
 
 export const TemplateWithAsyncArray = ({children, item, key}: {children: Function,item:any, key:string  }) => {

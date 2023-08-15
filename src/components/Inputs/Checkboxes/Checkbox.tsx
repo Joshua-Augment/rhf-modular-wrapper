@@ -12,7 +12,7 @@ const Checkbox = (props: ICheckbox) => {
   // const val = useMemo(() => _val ,[_val])
 
   return (    
-    <InputWrapper {...props} reversedLabel customClasses={{wrapperClassName:'form-check'}} style={{display:'flex', alignItems:'center'}}>
+    <InputWrapper type={props.type ?? 'checkbox'} {...props} reversedLabel customClasses={{wrapperClassName:'form-check'}} style={{display:'flex', alignItems:'center'}}>
       <input id={props.name} type="checkbox" name={props.name} checked={value} value={value} onChange={(a) => setValue(props.name, a.target.checked)} />
     </InputWrapper>
   )

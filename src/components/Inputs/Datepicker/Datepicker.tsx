@@ -15,7 +15,7 @@ const DatePicker = (props: IDatePicker) => {
   // console.log('DatePicker -  value', value)
 
   return (
-    <InputWrapper {...props} noBorder>
+    <InputWrapper type={props.type ?? 'datepicker'} {...props} noBorder>
       <DatePickerComponent selected={value} onChange={(a)=>setValue(props.name, a)} id={props.id} {...props.options}/>
     </InputWrapper>
   )

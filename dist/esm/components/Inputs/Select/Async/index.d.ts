@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { ISelectAsync } from "../../../core";
-declare const AsyncSelect: (props: ISelectAsync) => JSX.Element;
+declare const AsyncSelect: (props: ISelectAsync) => React.JSX.Element;
 export default AsyncSelect;

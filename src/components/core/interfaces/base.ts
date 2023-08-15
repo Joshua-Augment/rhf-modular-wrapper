@@ -1,11 +1,13 @@
 import React from 'react';
 import { FieldValues, DeepPartial, UseFormReturn } from 'react-hook-form/dist/types';
 import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form/dist/types';
+import { TListInputs } from './lists';
 export interface ISubmitButton {label ?: string; children ?: React.ReactNode;buttonClass ?: string; }
 
 export interface IForm<T extends FieldValues> {
   inputWrapper ?: React.ComponentType<FormFrameWrapperProps>,
   buttonWrapper ?: React.ComponentType<ISubmitButton>,
+  elements ?: { [key in TListInputs] ?: React.ReactElement<IInputsBasePropsNoSetters<any>>}
   style ?: 'bootstrap' | 'mui'
   id ?:string
   defaultValues ?: DeepPartial<T>, 
@@ -68,6 +70,8 @@ export interface IInputsBasePropsNoSetters<T=any> {
   inputWrapper ?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
   name : string,
   id ?: string,
+
+  element ?: React.ReactElement<IInputsBasePropsNoSetters<any>>,
 
   defaultValue ?: T,
 

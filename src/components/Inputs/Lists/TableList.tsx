@@ -60,7 +60,7 @@ const TableList = (props:ITableList) => {
   },[fields, errors,val])
 
   return (
-    <InputWrapper {...props}  >
+    <InputWrapper type={props.type ?? 'tablelist'} {...props}  >
       <Table>
         {(props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator}
         <tbody>

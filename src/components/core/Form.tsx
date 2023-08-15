@@ -7,13 +7,17 @@ import { FormFrameWrapperProps, IForm, ISubmitButton } from './interfaces';
 import "../styling/form_bootstrap.css"
 
 import "../styling/core.css"
+import { TListInputs } from './interfaces/lists';
 
 type TTemplateContext = {
   inputTemplate : null|React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
   buttonTemplate : null|React.ComponentType<ISubmitButton> | React.ComponentType<any>,
+  elements : null|{
+    [key in TListInputs] ?: React.ReactElement<any>
+  }
 }
 
-export const ThemeContext = createContext<TTemplateContext>({inputTemplate: null, buttonTemplate: null})
+export const ThemeContext = createContext<TTemplateContext>({inputTemplate: null, buttonTemplate: null, elements: null})
 
 // const BSTheme = lazy(()=>import('../styling/BootstrapTheme'))
 // const MUITheme = lazy(()=>import('../styling/MUITheme'))
@@ -35,7 +39,7 @@ export const Form = <T extends FieldValues,>(props: IForm<T>) => {
   const methods = useForm<T,any>({
     mode: props.mode ?? "onChange",
     reValidateMode: props.reValidateMode ?? 'onChange',
-    defaultValues: props.defaultValues,
+    defaultValues: props.defaultValues as any,
     resolver: props.yupSchema ? yupResolver(props.yupSchema) : undefined,
     context: props.context,
     criteriaMode: props.criteriaMode ?? "firstError",
@@ -45,7 +49,12 @@ export const Form = <T extends FieldValues,>(props: IForm<T>) => {
     delayError: props.delayError ?? undefined,
   });
   
-  return (<ThemeContext.Provider value={{inputTemplate:props.inputWrapper ?? null, buttonTemplate: props.buttonWrapper ?? null}} >
+  return (<ThemeContext.Provider 
+    value={{
+      inputTemplate:props.inputWrapper ?? null, 
+      buttonTemplate: props.buttonWrapper ?? null,
+      elements: props.elements ?? null
+    }} >
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(props.onSubmit)}
           id={formID}>

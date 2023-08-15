@@ -32,10 +32,11 @@ const react_range_slider_input_1 = __importDefault(require("react-range-slider-i
 require("react-range-slider-input/dist/style.css");
 const react_hook_form_1 = require("react-hook-form");
 const Slider = (props) => {
+    var _a;
     const { watch, setValue } = (0, react_hook_form_1.useFormContext)();
     const _val = watch(props.name);
     const val = (0, react_1.useMemo)(() => _val, [_val]);
-    return (react_1.default.createElement(core_1.InputWrapper, Object.assign({}, props),
+    return (react_1.default.createElement(core_1.InputWrapper, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'slider' }, props),
         react_1.default.createElement(react_range_slider_input_1.default, Object.assign({}, props, props.sliderOptions, { value: val, onInput: (a) => setValue(props.name, a) }))));
 };
 exports.default = Slider;

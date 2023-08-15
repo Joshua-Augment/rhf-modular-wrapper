@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import "../styling/form_bootstrap.css";
 import "../styling/core.css";
-export const ThemeContext = createContext({ inputTemplate: null, buttonTemplate: null });
+export const ThemeContext = createContext({ inputTemplate: null, buttonTemplate: null, elements: null });
 // const BSTheme = lazy(()=>import('../styling/BootstrapTheme'))
 // const MUITheme = lazy(()=>import('../styling/MUITheme'))
 // const ChosenTheme = ({children,style}:{children:any, style?:'bootstrap' | 'mui'}) => {
@@ -18,7 +18,7 @@ export const ThemeContext = createContext({ inputTemplate: null, buttonTemplate:
 //   )
 // }
 export const Form = (props) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     const formID = useMemo(() => { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : `rhf-wc-f-${new Date().getTime()}`; }, []);
     const methods = useForm({
         mode: (_a = props.mode) !== null && _a !== void 0 ? _a : "onChange",
@@ -32,7 +32,11 @@ export const Form = (props) => {
         shouldUseNativeValidation: (_f = props.shouldUseNativeValidation) !== null && _f !== void 0 ? _f : false,
         delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined,
     });
-    return (React.createElement(ThemeContext.Provider, { value: { inputTemplate: (_h = props.inputWrapper) !== null && _h !== void 0 ? _h : null, buttonTemplate: (_j = props.buttonWrapper) !== null && _j !== void 0 ? _j : null } },
+    return (React.createElement(ThemeContext.Provider, { value: {
+            inputTemplate: (_h = props.inputWrapper) !== null && _h !== void 0 ? _h : null,
+            buttonTemplate: (_j = props.buttonWrapper) !== null && _j !== void 0 ? _j : null,
+            elements: (_k = props.elements) !== null && _k !== void 0 ? _k : null
+        } },
         React.createElement(FormProvider, Object.assign({}, methods),
             React.createElement("form", { onSubmit: methods.handleSubmit(props.onSubmit), id: formID }, props.children))));
 };

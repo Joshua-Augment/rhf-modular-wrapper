@@ -10,7 +10,7 @@ const Lines = (props: ILines) => {
   // const val = useMemo(() => _val ,[_val])
 
   return (
-    <InputWrapper {...props}>
+    <InputWrapper type={props.type ?? 'lines'} {...props}>
       <textarea
         id={props.name}
         className={props?.customClasses?.inputClassName ?? ""}

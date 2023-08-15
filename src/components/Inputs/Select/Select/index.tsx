@@ -45,7 +45,7 @@ const Select = (props: ISelect) => {
 
   const SelectElems = useMemo(()=> {
     // console.log("[SelectElems] -rendered", options)
-    return <InputWrapper {...props} noBorder options={options}>
+    return <InputWrapper type={props.type ?? 'select'} {...props} noBorder options={options}>
       {props.isCreatable !== undefined ?  
     <SelectCreatableInput
       styles={{container: (base) => ({...base, width:'100%'})}}

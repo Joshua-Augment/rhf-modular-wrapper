@@ -8,7 +8,7 @@ export default {
   component: DatePicker
 } as ComponentMeta<typeof DatePicker>; 
 
-const onSubmit = (a:any) => new Promise((resolve, reject) => resolve(// console.log('FormSubmission:',a)))
+// const onSubmit = (a:any) => new Promise((resolve, reject) => resolve(// console.log('FormSubmission:',a)))
 
 export const SimpleDatePicker = Template.bind({}) 
 SimpleDatePicker.args = {

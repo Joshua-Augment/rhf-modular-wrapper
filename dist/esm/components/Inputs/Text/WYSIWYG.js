@@ -1,15 +1,18 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import InputWrapper from "../../core/InputWrapper";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useInputValAndError } from '../../core/hook/useInputValnError';
 const WYSIWYG = (props) => {
+    var _a;
     const { value, setValue } = useInputValAndError(props.name);
     // const {watch, setValue} = useFormContext()
     // const _val = watch(props.name)
-    // useEffect(()=>{if (val === undefined || val === null) {setValue(props.name, '')}},[_val])
+    useEffect(() => { if (value === undefined || value === null) {
+        setValue(props.name, '');
+    } }, [value]);
     // const val = useMemo(() => _val ,[_val])
-    return (React.createElement(InputWrapper, Object.assign({}, props),
+    return (React.createElement(InputWrapper, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'wysiwyg' }, props),
         React.createElement(ReactQuillWrapper, Object.assign({}, props, { value: value !== undefined && value !== null ? value : '', onChange: (a) => setValue(props.name, a) }))));
 };
 const ReactQuillWrapper = (props) => {

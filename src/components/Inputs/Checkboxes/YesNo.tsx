@@ -23,7 +23,7 @@ const YesNo = (props: IYesNo) => {
   }
 
   return (
-    <InputWrapper {...props} id={`${props.name}`} noLabel noBorder customClasses={{wrapperClassName:'form-check'}}>
+    <InputWrapper type={props.yesno} {...props} id={`${props.name}`} noLabel noBorder customClasses={{wrapperClassName:'form-check'}}>
       <div style={{display:'flex',width:100*(2+ (props.otherOptions ? props.otherOptions.length : 0)),...props.wrapperStyle, ...props.style}} className={`${props.className} ${props.wrapperClass}`} >
         {buttonGenerator((props.yes && props.yes.label) ?? 'Yes', props?.yes?.value ?? true,props.yes?.extHandler, props.yes?.element ?? Button,  props.yes?.color ?? 'green')}
         {buttonGenerator((props.no && props.no.label) ?? 'No', props?.no?.value ?? false,props.no?.extHandler, props.no?.element ?? Button, props.no?.color ?? 'red')}

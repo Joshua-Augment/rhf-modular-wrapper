@@ -18,7 +18,7 @@ const Radiobox = (props: IRadiobox) => {
   },[value])
 
   return (
-    <InputWrapper {...props} id={`${props.name}`} noLabel noBorder customClasses={{wrapperClassName:'form-check'}}>
+    <InputWrapper type={props.type ?? 'radiobox'} {...props} id={`${props.name}`} noLabel noBorder customClasses={{wrapperClassName:'form-check'}}>
       <span className="rb-item-wrapper">
         <RadioGroup horizontal={props.orientation === 'horizontal'} onChange={(a:any) => setValue(props.name,a)} value={value}>
         {

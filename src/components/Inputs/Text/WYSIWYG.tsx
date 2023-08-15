@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, {useEffect, useMemo} from 'react'
 import { ILines } from "../../core";
 import InputWrapper from "../../core/InputWrapper";
 import ReactQuill from 'react-quill';
@@ -9,11 +9,11 @@ const WYSIWYG = (props:ILines) => {
   const {value, setValue} = useInputValAndError(props.name)
   // const {watch, setValue} = useFormContext()
   // const _val = watch(props.name)
-  // useEffect(()=>{if (val === undefined || val === null) {setValue(props.name, '')}},[_val])
+  useEffect(()=>{if (value === undefined || value === null) {setValue(props.name, '')}},[value])
   // const val = useMemo(() => _val ,[_val])
 
   return (    
-    <InputWrapper {...props}>
+    <InputWrapper type={props.type ?? 'wysiwyg'} {...props}>
       <ReactQuillWrapper {...props} value={value !== undefined && value !== null ? value : ''} onChange={(a: string) => setValue(props.name,a)} />
     </InputWrapper>
   )

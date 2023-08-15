@@ -3,11 +3,12 @@ import { InputWrapper } from '../../core';
 import { default as SwitchInput } from "react-switch";
 import { useInputValAndError } from '../../core/hook/useInputValnError';
 const Switch = (props) => {
+    var _a;
     const { value, setValue } = useInputValAndError(props.name);
     useEffect(() => { if (value === null || value === undefined || value === '') {
         setValue(props.name, false);
     } }, [value]);
-    return (React.createElement(InputWrapper, Object.assign({}, props, { id: `${props.name}`, noBorder: true, customClasses: { wrapperClassName: 'form-check' } }),
+    return (React.createElement(InputWrapper, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'switch' }, props, { id: `${props.name}`, noBorder: true, customClasses: { wrapperClassName: 'form-check' } }),
         React.createElement("div", { className: `d-block ${props.wrapperClass}`, style: Object.assign({ display: 'flex', alignItems: 'center', flexDirection: 'column' }, props.wrapperStyle) },
             React.createElement(SwitchInput, Object.assign({ className: props.inputClass, onChange: (a) => setValue(props.name, a), checked: value }, props.options)),
             props.footLabel && React.createElement("div", { className: 'text-muted text-center' }, props.footLabel && (value ? props.footLabel[1] : props.footLabel[0])))));

@@ -5,9 +5,8 @@ import { Button } from "@mui/material";
 import { useInputValAndError } from "./hook/useInputValnError";
 
 const InputWrapper = (props: FormBaseInput) => {
-
   const firstUpdate = useRef(true)
-  const {value, setValue, getValues, watch, ...rest} = useInputValAndError(props.name)
+  const {value, error, setValue, getValues, watch, ...rest} = useInputValAndError(props.name)
 
   const watchCalculated = props?.calculatedField?.find !== undefined ? watch(props.calculatedField.find) : null
 
@@ -75,6 +74,7 @@ const InputWrapper = (props: FormBaseInput) => {
       >{x.label}</ButtonElem>
    }))
 
+
    const childrenInjected = React.cloneElement(props.children, {...props.children?.props, disabled : props.disabled})
   // console.log(`Input ${props.name} - value : ${value}`)
   return <InputElemWrapper {...props} disabled={props.disabled} value={value} >
@@ -108,7 +108,7 @@ const InputWrapper = (props: FormBaseInput) => {
         {WrapperElementRight}
       </>
     </InputElemWrapper>
-  },[value, props?.options])
+  },[value, props?.options, error])
   
   
 

@@ -5,30 +5,11 @@ import InfoIcon from '@mui/icons-material/Info';
 import { ThemeContext } from './Form';
 import { useInputValAndError } from './hook/useInputValnError';
 const InputElemWrapper = (props) => {
-    var _a, _b;
-    const { value, error } = useInputValAndError(props.name);
-    const Wrapper = (_b = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : useContext(ThemeContext).inputTemplate) !== null && _b !== void 0 ? _b : null;
-    // <div style={{position: 'relative'}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
-    //     {
-    //       props.reversedLabel === true ? 
-    //       <>
-    //         <div className={`form-item-child-wrapper ${props.noBorder ? 'no-border':''}`}>{props.children}</div>
-    //         {props.noLabel !== true && <label htmlFor={props.id ?? props.name} className={props?.customClasses?.labelClassName ?? ''}>
-    //           {props.noBorder !== false && <span>{props.label} {' '}</span>}
-    //           <span>{props.helperText && <Tooltip title={props.helperText}><InfoIcon style={{color:'blue',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //           <span>{props.errors && <Tooltip title={props.errors.message}><ErrorIcon style={{color:'red',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //         </label>}
-    //       </> :
-    //       <>             
-    //         {props.noLabel !== true && <label htmlFor={props.id ?? props.name} className={props?.customClasses?.labelClassName ?? ''}>
-    //           {props.noBorder !== false && <span>{props.label} {' '}</span>}
-    //           <span>{props.helperText && <Tooltip title={props.helperText}><InfoIcon style={{color:'blue',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //           <span>{props.errors && <Tooltip title={props.errors.message}><ErrorIcon style={{color:'red',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //         </label>}
-    //         <div className={`form-item-child-wrapper ${props.noBorder ? 'no-border':''}`}>{props.children}</div>
-    //       </>
-    //     }
-    //   </div>
+    var _a, _b, _c;
+    const theme = useContext(ThemeContext);
+    const { value, error, setValue } = useInputValAndError(props.name);
+    const Element = (_a = props.element) !== null && _a !== void 0 ? _a : (theme.elements !== null && theme.elements[props.type] !== undefined ? theme.elements[props.type] : null);
+    const Wrapper = (_c = (_b = props.inputWrapper) !== null && _b !== void 0 ? _b : theme.inputTemplate) !== null && _c !== void 0 ? _c : null;
     const WrapElem = useMemo(() => {
         var _a, _b, _c, _d, _e, _f, _g, _h;
         // // console.log(`[WrapElem] - value for ${props.name} - `,props.value)
@@ -74,7 +55,16 @@ const InputElemWrapper = (props) => {
                     React.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? 'no-border' : ''}` }, props.children)));
         }
     }, [value, error, props.options]);
-    return WrapElem;
+    const clonedElement = useMemo(() => {
+        console.log("clonedElement - ", Element);
+        if (Element !== undefined && Element !== null) {
+            return React.cloneElement(Element, Object.assign(Object.assign({}, props), { onChange: (a) => setValue(props.name, a), value: value, error: error }));
+        }
+        else {
+            return null;
+        }
+    }, [value, error]);
+    return clonedElement !== undefined && clonedElement !== null ? clonedElement : WrapElem;
     // return Wrapper as JSX.Element
 };
 export default InputElemWrapper;

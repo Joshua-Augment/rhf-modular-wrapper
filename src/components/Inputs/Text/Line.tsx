@@ -20,9 +20,10 @@ const Line = (props: LineInputProps) => {
   return (
     props?.type === "hidden" ?
       <input disabled={props.disabled} id={props.name} className={props?.customClasses?.inputClassName ?? ''} name={props.name} value={value !== undefined && value !== null ? value : ""} onChange={(a) => handleInput(a)} placeholder={props.placeholder} type={props.type ?? 'text'} /> :
-    <InputWrapper {...props}>
+    <InputWrapper type={props.type ?? 'line'} {...props}>
       <input disabled={props.disabled} id={props.name} className={props?.customClasses?.inputClassName ?? ''} name={props.name} value={value !== undefined && value !== null ? value : ""} onChange={(a) => handleInput(a)} placeholder={props.placeholder} type={props.type ?? 'text'} />
     </InputWrapper>
   )
 }
+
 export default Line

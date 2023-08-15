@@ -9,34 +9,13 @@ import { useInputValAndError } from './hook/useInputValnError';
 
 
 const InputElemWrapper = (props: FormFrameWrapperProps) => {
+  const theme = useContext(ThemeContext)
   
-  const {value, error} = useInputValAndError(props.name)
+  const {value, error, setValue} = useInputValAndError(props.name)
 
-  const Wrapper = props.inputWrapper ?? useContext(ThemeContext).inputTemplate ?? null
-
-  
-
-    // <div style={{position: 'relative'}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
-    //     {
-    //       props.reversedLabel === true ? 
-    //       <>
-    //         <div className={`form-item-child-wrapper ${props.noBorder ? 'no-border':''}`}>{props.children}</div>
-    //         {props.noLabel !== true && <label htmlFor={props.id ?? props.name} className={props?.customClasses?.labelClassName ?? ''}>
-    //           {props.noBorder !== false && <span>{props.label} {' '}</span>}
-    //           <span>{props.helperText && <Tooltip title={props.helperText}><InfoIcon style={{color:'blue',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //           <span>{props.errors && <Tooltip title={props.errors.message}><ErrorIcon style={{color:'red',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //         </label>}
-    //       </> :
-    //       <>             
-    //         {props.noLabel !== true && <label htmlFor={props.id ?? props.name} className={props?.customClasses?.labelClassName ?? ''}>
-    //           {props.noBorder !== false && <span>{props.label} {' '}</span>}
-    //           <span>{props.helperText && <Tooltip title={props.helperText}><InfoIcon style={{color:'blue',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //           <span>{props.errors && <Tooltip title={props.errors.message}><ErrorIcon style={{color:'red',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //         </label>}
-    //         <div className={`form-item-child-wrapper ${props.noBorder ? 'no-border':''}`}>{props.children}</div>
-    //       </>
-    //     }
-    //   </div>
+  const Element = props.element ?? 
+    (theme.elements !== null && theme.elements[props.type] !== undefined ? theme.elements[props.type] : null) 
+  const Wrapper = props.inputWrapper ?? theme.inputTemplate ?? null
   
   const WrapElem = useMemo(()=>{
     // // console.log(`[WrapElem] - value for ${props.name} - `,props.value)
@@ -67,8 +46,15 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
       </div>
     }
   },[value, error, props.options])
+
+  const clonedElement =  useMemo(()=>{
+    console.log("clonedElement - ", Element)
+    if (Element !== undefined && Element !== null) {
+      return React.cloneElement(Element as any, {...props, onChange: (a:any) => setValue(props.name, a), value : value, error: error})
+    } else {return null}
+  },[value, error])
   
-  return WrapElem
+  return clonedElement !== undefined && clonedElement !== null ? clonedElement : WrapElem
   // return Wrapper as JSX.Element
 }
 

@@ -9,7 +9,7 @@ const Switch = (props:ISwitch) => {
   useEffect(()=>{ if (value === null || value === undefined || value === '') {setValue(props.name, false)} },[value])
 
   return (
-    <InputWrapper {...props} id={`${props.name}`} noBorder customClasses={{wrapperClassName:'form-check'}}>
+    <InputWrapper type={props.type ?? 'switch'} {...props} id={`${props.name}`} noBorder customClasses={{wrapperClassName:'form-check'}}>
       <div className={`d-block ${props.wrapperClass}`} style={{display:'flex',alignItems: 'center',flexDirection: 'column',...props.wrapperStyle}}>
         <SwitchInput className={props.inputClass} onChange={(a) => setValue(props.name, a)} checked={value} {...props.options} />
         {props.footLabel && <div className='text-muted text-center'>{props.footLabel && (value ? props.footLabel[1] : props.footLabel[0])}</div>}

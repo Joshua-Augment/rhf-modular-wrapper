@@ -9,7 +9,7 @@ export declare const useInputValAndError: <T = any>(name: string) => {
     formState: import("react-hook-form").FormState<import("react-hook-form").FieldValues>;
     resetField: import("react-hook-form").UseFormResetField<import("react-hook-form").FieldValues>;
     reset: import("react-hook-form").UseFormReset<import("react-hook-form").FieldValues>;
-    handleSubmit: import("react-hook-form").UseFormHandleSubmit<import("react-hook-form").FieldValues>;
+    handleSubmit: import("react-hook-form").UseFormHandleSubmit<import("react-hook-form").FieldValues, undefined>;
     unregister: import("react-hook-form").UseFormUnregister<import("react-hook-form").FieldValues>;
     control: import("react-hook-form").Control<import("react-hook-form").FieldValues, any>;
     register: import("react-hook-form").UseFormRegister<import("react-hook-form").FieldValues>;

@@ -49,6 +49,7 @@ shouldFocusError | boolean | Should focus on the error element | true
 shouldUnregister | boolean | Unregisters an input value if the input is removed. If false, inputs value is kept even if the input is removed from DOM | false
 shouldUseNativeValidation | boolean | If the native validation should be used instead | false
 delayError | number | Delay the error message by x milliseconds | undefined
+elements | {[key: TListItem] : NewElement} | Changes the set element with a custom element. Similar to the as="" prop in other packages | undefined
 
 For any Input, the common props are
 |Prop | Type | Required(Y/N) |Description |
@@ -70,6 +71,7 @@ For any Input, the common props are
 |calculatedField | {isPromise ?: boolean, find ?: string[], calculate: (currentValue:T, currentName: string, foundFields: any[], allFields: any) => T \| Promise<T>} | no| Calculated fields allow automated filling up of the field based on some other value, for example, cost = unit price x quantity. the `find` argument is the other fields to watch for, and the calculation can return the value (if `isPromise` is undefined or false), or a Promise (if `isPromise` is true) if asynchronous calculations are needed (API Calls etc). |
 |externalStateSetter | (a:T) => void | no | Useful if you need to extract the value from the input while not within the context of the <Form> element. |
 | onInputChange | (inputValue:T, inputName: string, allValues: any, formMethods : useFormMethods ) => void | no | Helpful event handler that fires a function when your input changes. It ignores the first render (to prevent inputs that go from undefined -> null triggering the function). Any subsequent render is handled as usual. formMethods is an escape hatch for the methods of the react-hook-forms `useForm`, easier access for those that need to handle setting / getting form values programmatically.|
+elements | ReactElement | Changes the set element with a custom element. Similar to the as="" prop in other packages | undefined
 
 ## Types of Input
 

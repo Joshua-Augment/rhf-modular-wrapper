@@ -12,7 +12,7 @@ const Slider = (props: ISlider) => {
 
 
   return (
-    <InputWrapper {...props}>
+    <InputWrapper type={props.type ?? 'slider'} {...props}>
       <RangeSlider {...props} {...props.sliderOptions} value={val} onInput={(a:any) => setValue(props.name, a)} />
     </InputWrapper>
   )

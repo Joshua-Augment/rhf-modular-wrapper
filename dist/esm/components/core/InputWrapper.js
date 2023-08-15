@@ -16,7 +16,7 @@ import { useInputValAndError } from "./hook/useInputValnError";
 const InputWrapper = (props) => {
     var _a;
     const firstUpdate = useRef(true);
-    const _b = useInputValAndError(props.name), { value, setValue, getValues, watch } = _b, rest = __rest(_b, ["value", "setValue", "getValues", "watch"]);
+    const _b = useInputValAndError(props.name), { value, error, setValue, getValues, watch } = _b, rest = __rest(_b, ["value", "error", "setValue", "getValues", "watch"]);
     const watchCalculated = ((_a = props === null || props === void 0 ? void 0 : props.calculatedField) === null || _a === void 0 ? void 0 : _a.find) !== undefined ? watch(props.calculatedField.find) : null;
     // console.log(`For ${props.name}, error : `,rest.error)
     // On Value change
@@ -83,7 +83,7 @@ const InputWrapper = (props) => {
                 WrapperElementLeft,
                 childrenInjected,
                 WrapperElementRight));
-    }, [value, props === null || props === void 0 ? void 0 : props.options]);
+    }, [value, props === null || props === void 0 ? void 0 : props.options, error]);
     return child;
     // return (
     //   props.contextless ?

@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { TListItems } from './interfaces/lists';
-declare const InputChooser: (props: TListItems) => JSX.Element;
+declare const InputChooser: (props: TListItems) => React.JSX.Element;
 export default InputChooser;

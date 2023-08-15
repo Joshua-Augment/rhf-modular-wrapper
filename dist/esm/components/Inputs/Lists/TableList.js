@@ -20,6 +20,7 @@ const IconDown = styled(FaMinusSquare) `
   margin : 2px 5px;
 `;
 const TableList = (props) => {
+    var _a;
     const { watch, control, formState: { errors } } = useFormContext();
     const { fields, append, insert, remove } = useFieldArray({ control, name: props.name });
     const _val = watch(props.name);
@@ -60,7 +61,7 @@ const TableList = (props) => {
         // console.log("[bodyGenerator] - Final",fields.map((field,i) => generateRow(i)))
         return fields.map((field, i) => generateRow(i));
     }, [fields, errors, val]);
-    return (React.createElement(InputWrapper, Object.assign({}, props),
+    return (React.createElement(InputWrapper, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'tablelist' }, props),
         React.createElement(Table, null,
             (props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator,
             React.createElement("tbody", null, bodyGenerator),

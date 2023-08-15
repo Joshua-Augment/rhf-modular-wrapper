@@ -1,7 +1,7 @@
-/// <reference types="react" />
+import React from 'react';
 interface IPreviewModal {
     file: null | File;
     setFile: (a: null) => void;
 }
-declare const PreviewModal: (props: IPreviewModal) => JSX.Element;
+declare const PreviewModal: (props: IPreviewModal) => React.JSX.Element;
 export default PreviewModal;
