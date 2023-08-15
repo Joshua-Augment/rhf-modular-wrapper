@@ -1,5 +1,5 @@
 import React from 'react'
-import { DatePicker, Select,AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader } from '../Inputs'
+import { DatePicker, Select,AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList } from '../Inputs'
 import { TListItems } from './interfaces/lists'
 
 const InputChooser = (props: TListItems) => {
@@ -28,6 +28,10 @@ const InputChooser = (props: TListItems) => {
           return <AsyncSelect {...props} options={props.options} loadOptions={props.loadOptions} />
         case 'textarea':
           return <Lines {...props}/>
+        case "list":
+          return <FormList {...props} items={props.items} />
+        case "tablelist":
+          return <TableList {...props} items={props.items} />
         default:
           return <Line {...props}/>
     }

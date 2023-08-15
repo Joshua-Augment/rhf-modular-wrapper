@@ -70,6 +70,8 @@ export type TMadeInputList =
   | "switch"
   | "yesno"
   | "dropzone"
+  | "list"
+  | "tablelist"
 
 
 export type TListInputs = HTMLInputTypeAttribute | TMadeInputList

@@ -49,5 +49,5 @@ export interface IInputToTableList extends ITableList {
         }>;
     };
 }
-export type TMadeInputList = "wysiwyg" | "datepicker" | "select" | "select_async" | "textarea" | "custom" | "switch" | "yesno" | "dropzone";
+export type TMadeInputList = "wysiwyg" | "datepicker" | "select" | "select_async" | "textarea" | "custom" | "switch" | "yesno" | "dropzone" | "list" | "tablelist";
 export type TListInputs = HTMLInputTypeAttribute | TMadeInputList;

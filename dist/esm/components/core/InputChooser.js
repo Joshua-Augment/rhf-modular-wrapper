@@ -1,5 +1,5 @@
 import React from 'react';
-import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader } from '../Inputs';
+import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList } from '../Inputs';
 const InputChooser = (props) => {
     const OutputComponent = () => {
         switch (props.type) {
@@ -26,6 +26,10 @@ const InputChooser = (props) => {
                 return React.createElement(AsyncSelect, Object.assign({}, props, { options: props.options, loadOptions: props.loadOptions }));
             case 'textarea':
                 return React.createElement(Lines, Object.assign({}, props));
+            case "list":
+                return React.createElement(FormList, Object.assign({}, props, { items: props.items }));
+            case "tablelist":
+                return React.createElement(TableList, Object.assign({}, props, { items: props.items }));
             default:
                 return React.createElement(Line, Object.assign({}, props));
         }

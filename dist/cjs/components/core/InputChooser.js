@@ -31,6 +31,10 @@ const InputChooser = (props) => {
                 return react_1.default.createElement(Inputs_1.AsyncSelect, Object.assign({}, props, { options: props.options, loadOptions: props.loadOptions }));
             case 'textarea':
                 return react_1.default.createElement(Inputs_1.Lines, Object.assign({}, props));
+            case "list":
+                return react_1.default.createElement(Inputs_1.FormList, Object.assign({}, props, { items: props.items }));
+            case "tablelist":
+                return react_1.default.createElement(Inputs_1.TableList, Object.assign({}, props, { items: props.items }));
             default:
                 return react_1.default.createElement(Inputs_1.Line, Object.assign({}, props));
         }
