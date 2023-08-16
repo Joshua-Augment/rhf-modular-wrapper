@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "@storybook/addons"
-import { Form, SubmitButton } from "../components/core"
+import { Form, IForm, SubmitButton } from "../components/core"
 import { useFormContext } from "react-hook-form";
 
-export const Template = ({defaultValues = {}, children, schema}:{schema ?: any, defaultValues?: any,children:React.ReactElement}) => {
+export const Template = ({defaultValues = {}, children, schema, formProps = {}}:{schema ?: any, defaultValues?: any,children:React.ReactElement, formProps ?: any}) => {
   const [response, setResponse] = useState<string|null>(null)
 
   const _onSubmit = (a:any) => new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ export const Template = ({defaultValues = {}, children, schema}:{schema ?: any, 
 
   return <div>
     <p style={{margin:'10px',padding:'5px',border:'1px solid blue', borderRadius:'5px'}}>Submitted Object : {response}</p>
-    <Form yupSchema={schema} onSubmit={_onSubmit} defaultValues={defaultValues}>
+    <Form yupSchema={schema} onSubmit={_onSubmit} defaultValues={defaultValues} {...formProps}>
       <ResetForm/>
     {children}
     <SubmitButton>Submit</SubmitButton>

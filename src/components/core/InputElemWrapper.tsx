@@ -48,9 +48,8 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
   },[value, error, props.options])
 
   const clonedElement =  useMemo(()=>{
-    console.log("clonedElement - ", Element)
     if (Element !== undefined && Element !== null) {
-      return React.cloneElement(Element as any, {...props, onChange: (a:any) => setValue(props.name, a), value : value, error: error})
+      return React.cloneElement(<Element {...props} /> as any, {...props, onChange: (a:any) => setValue(props.name, a), value : value, error: error})
     } else {return null}
   },[value, error])
   

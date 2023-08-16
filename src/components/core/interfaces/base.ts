@@ -7,7 +7,7 @@ export interface ISubmitButton {label ?: string; children ?: React.ReactNode;but
 export interface IForm<T extends FieldValues> {
   inputWrapper ?: React.ComponentType<FormFrameWrapperProps>,
   buttonWrapper ?: React.ComponentType<ISubmitButton>,
-  elements ?: { [key in TListInputs] ?: React.ReactElement<IInputsBasePropsNoSetters<any>>}
+  elements ?: { [key in TListInputs] ?: React.ComponentType<IInputsBasePropsNoSetters<any>>}
   style ?: 'bootstrap' | 'mui'
   id ?:string
   defaultValues ?: DeepPartial<T>, 
@@ -71,7 +71,7 @@ export interface IInputsBasePropsNoSetters<T=any> {
   name : string,
   id ?: string,
 
-  element ?: React.ReactElement<IInputsBasePropsNoSetters<any>>,
+  element ?: React.ComponentType<IInputsBasePropsNoSetters<any>>,
 
   defaultValue ?: T,
 

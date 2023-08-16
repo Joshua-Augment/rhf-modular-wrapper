@@ -13,7 +13,7 @@ type TTemplateContext = {
   inputTemplate : null|React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
   buttonTemplate : null|React.ComponentType<ISubmitButton> | React.ComponentType<any>,
   elements : null|{
-    [key in TListInputs] ?: React.ReactElement<any>
+    [key in TListInputs] ?: React.ComponentType<any>
   }
 }
 

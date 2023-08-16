@@ -20,13 +20,36 @@ const CustInput = (props: any) =>{
     <div>{props.placeholder ?? 'No Placeholder!'}</div>
   </div>
 }
+const TextInput = (props: any) =>{
+  return <div style={{display:'flex',flexDirection: 'row'}}>
+    <div style={{background:'blue', color: 'white'}}>
+      {props.label ?? props.placeholder ?? ''} {' - '}
+      {props.value}
+    </div>
+    <input type="text" value={props.value} onChange={(e)=>props.onChange(e.target.value)} />
+    <div>{props.placeholder ?? 'No Placeholder!'}</div>
+  </div>
+}
 
 export const LinesBootstrap = Template.bind({}) 
 LinesBootstrap.args = {
   children : <>    
     <Line label="Simple Form Input (Text)" name="line.text" placeholder="Simple Form Placeholder" />
-    <Line element={<CustInput/>} label="Form Input (custom Element)" name="line.custom" placeholder="Special Placeholder" type="text" />
-    
+    <Line element={CustInput} label="Form Input (custom Element)" name="line.custom" placeholder="Special Placeholder" type="text" />    
+  </>
+}
+
+export const ThemedLine = Template.bind({}) 
+ThemedLine.args = {
+  formProps: {
+    elements: {
+      line: CustInput,
+      text: TextInput
+    }
+  },
+  children : <>    
+    <Line label="Simple Form Input (Text)" name="line.text" placeholder="Simple Form Placeholder" />
+    <Line label="Form Input (custom Element)" name="line.custom" type="text" />    
   </>
 }
 
