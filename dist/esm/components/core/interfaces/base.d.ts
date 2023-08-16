@@ -11,7 +11,7 @@ export interface IForm<T extends FieldValues> {
     inputWrapper?: React.ComponentType<FormFrameWrapperProps>;
     buttonWrapper?: React.ComponentType<ISubmitButton>;
     elements?: {
-        [key in TListInputs]?: React.ReactElement<IInputsBasePropsNoSetters<any>>;
+        [key in TListInputs]?: React.ComponentType<IInputsBasePropsNoSetters<any>>;
     };
     style?: 'bootstrap' | 'mui';
     id?: string;
@@ -83,7 +83,7 @@ export interface IInputsBasePropsNoSetters<T = any> {
     inputWrapper?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
     name: string;
     id?: string;
-    element?: React.ReactElement<IInputsBasePropsNoSetters<any>>;
+    element?: React.ComponentType<IInputsBasePropsNoSetters<any>>;
     defaultValue?: T;
     disabled?: boolean;
     customClasses?: FormInputClassNames;

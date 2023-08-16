@@ -56,9 +56,8 @@ const InputElemWrapper = (props) => {
         }
     }, [value, error, props.options]);
     const clonedElement = useMemo(() => {
-        console.log("clonedElement - ", Element);
         if (Element !== undefined && Element !== null) {
-            return React.cloneElement(Element, Object.assign(Object.assign({}, props), { onChange: (a) => setValue(props.name, a), value: value, error: error }));
+            return React.cloneElement(React.createElement(Element, Object.assign({}, props)), Object.assign(Object.assign({}, props), { onChange: (a) => setValue(props.name, a), value: value, error: error }));
         }
         else {
             return null;
