@@ -81,8 +81,8 @@ const TableList = (props) => {
                 props.showIndex === true && react_1.default.createElement("th", null),
                 props.items.map((item, key) => react_1.default.createElement("th", { key: `tl-${props.name}-${item.name}-th-${key}` }, item.label)),
                 props.fixed !== true && react_1.default.createElement("th", null)));
-    }, []);
-    const footerGenerator = (0, react_1.useMemo)(() => { var _a; return (_a = props.footerTemplate) !== null && _a !== void 0 ? _a : headerGenerator; }, []);
+    }, [props.headerTemplate]);
+    const footerGenerator = (0, react_1.useMemo)(() => { var _a; return (_a = props.footerTemplate) !== null && _a !== void 0 ? _a : headerGenerator; }, [props.footerTemplate]);
     // const bodyGenerator = useMemo(()=> fields.length === 0 ? generateRow(0) : fields.map((field,i) => generateRow(i)),[fields])
     const bodyGenerator = (0, react_1.useMemo)(() => {
         // console.log("[bodyGenerator] - Fields",fields)

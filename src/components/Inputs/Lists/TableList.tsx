@@ -48,9 +48,9 @@ const TableList = (props:ITableList) => {
     {props.showIndex === true && <th></th>}
     {props.items.map((item,key) => <th key={`tl-${props.name}-${item.name}-th-${key}`}>{item.label}</th>)}
     {props.fixed !== true && <th></th>}
-  </tr></thead>,[])
+  </tr></thead>,[props.headerTemplate])
 
-  const footerGenerator = useMemo(()=> props.footerTemplate ?? headerGenerator,[])
+  const footerGenerator = useMemo(()=> props.footerTemplate ?? headerGenerator,[props.footerTemplate])
 
   // const bodyGenerator = useMemo(()=> fields.length === 0 ? generateRow(0) : fields.map((field,i) => generateRow(i)),[fields])
   const bodyGenerator = useMemo(()=> {

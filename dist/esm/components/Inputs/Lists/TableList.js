@@ -53,8 +53,8 @@ const TableList = (props) => {
                 props.showIndex === true && React.createElement("th", null),
                 props.items.map((item, key) => React.createElement("th", { key: `tl-${props.name}-${item.name}-th-${key}` }, item.label)),
                 props.fixed !== true && React.createElement("th", null)));
-    }, []);
-    const footerGenerator = useMemo(() => { var _a; return (_a = props.footerTemplate) !== null && _a !== void 0 ? _a : headerGenerator; }, []);
+    }, [props.headerTemplate]);
+    const footerGenerator = useMemo(() => { var _a; return (_a = props.footerTemplate) !== null && _a !== void 0 ? _a : headerGenerator; }, [props.footerTemplate]);
     // const bodyGenerator = useMemo(()=> fields.length === 0 ? generateRow(0) : fields.map((field,i) => generateRow(i)),[fields])
     const bodyGenerator = useMemo(() => {
         // console.log("[bodyGenerator] - Fields",fields)
