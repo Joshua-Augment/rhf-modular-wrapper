@@ -91,7 +91,7 @@ const TableList = (props) => {
     }, [fields, errors, val]);
     return (react_1.default.createElement(core_1.InputWrapper, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'tablelist' }, props),
         react_1.default.createElement(Table, null,
-            (props.header === undefined || props.header === 'top' || props.header === 'both') && headerGenerator,
+            (props.header === undefined || props.header === 'top' || props.header === 'both' || props.header === 'header_footer') && headerGenerator,
             react_1.default.createElement("tbody", null, bodyGenerator),
             (props.header === 'footer' || props.header === 'header_footer') ? footerGenerator : (props.header === 'bottom' || props.header === 'both') && headerGenerator)));
 };
