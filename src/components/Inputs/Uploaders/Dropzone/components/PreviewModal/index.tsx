@@ -25,7 +25,7 @@ const PDFPagination = styled.p`
 
 const PreviewModal = (props: IPreviewModal) => {
   return (
-    <Dialog fullWidth maxWidth="xl" open={props.file !== null} onClose={()=>props.setFile(null)} aria-labelledby="thumbnail-title" aria-describedby="alert-dialog-description" > 
+    <Dialog transitionDuration={200} fullWidth maxWidth="xl" open={props.file !== null} onClose={()=>props.setFile(null)} aria-labelledby="thumbnail-title" aria-describedby="alert-dialog-description" > 
       <DialogTitle id="thumbnail-title">Upload Previewer</DialogTitle>
       <DialogContent>
         <p>{props.file !== null && props.file.name}</p>

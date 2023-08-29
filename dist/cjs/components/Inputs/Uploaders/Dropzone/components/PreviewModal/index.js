@@ -43,7 +43,7 @@ const PDFPagination = styled_components_1.default.p `
   font-size : 1.2em;
 `;
 const PreviewModal = (props) => {
-    return (react_1.default.createElement(material_1.Dialog, { fullWidth: true, maxWidth: "xl", open: props.file !== null, onClose: () => props.setFile(null), "aria-labelledby": "thumbnail-title", "aria-describedby": "alert-dialog-description" },
+    return (react_1.default.createElement(material_1.Dialog, { transitionDuration: 200, fullWidth: true, maxWidth: "xl", open: props.file !== null, onClose: () => props.setFile(null), "aria-labelledby": "thumbnail-title", "aria-describedby": "alert-dialog-description" },
         react_1.default.createElement(material_1.DialogTitle, { id: "thumbnail-title" }, "Upload Previewer"),
         react_1.default.createElement(material_1.DialogContent, null,
             react_1.default.createElement("p", null, props.file !== null && props.file.name),

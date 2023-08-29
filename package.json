@@ -52,6 +52,7 @@
     "@types/react-dom": "^18.0.10",
     "babel-loader": "^8.3.0",
     "copyfiles": "^2.4.1",
+    "fix-tsc-es-imports": "^0.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.2.3",
