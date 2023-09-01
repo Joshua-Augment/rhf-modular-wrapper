@@ -75,7 +75,7 @@ const InputWrapper = (props: FormBaseInput) => {
    }))
 
 
-   const childrenInjected = React.cloneElement(props.children, {...props.children?.props, disabled : props.disabled})
+   const childrenInjected = React.cloneElement(props.children, {...props.children?.props, disabled : props.disabled, type:props?.type??'line'})
   // console.log(`Input ${props.name} - value : ${value}`)
   return <InputElemWrapper {...props} disabled={props.disabled} value={value} >
       <>

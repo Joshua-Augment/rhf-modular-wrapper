@@ -58,7 +58,7 @@ const InputWrapper = (props) => {
     // const [_value, _setValue] = useState(null)
     // const methods = props.contextless === true ? {control:undefined, watch : (a:string) => null } : useFormContext();
     const child = useMemo(() => {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
         const Wrapper = (A, B, children) => {
             if (A) {
                 return React.createElement(A, null, children);
@@ -76,7 +76,7 @@ const InputWrapper = (props) => {
             const ButtonElem = x.customButton || Button; // Use customButton or a default button
             return React.createElement(ButtonElem, { key: `bl-${i}`, onClick: () => x.onClick(value, props.name, getValues()), name: props.name, value: value }, x.label);
         }));
-        const childrenInjected = React.cloneElement(props.children, Object.assign(Object.assign({}, (_o = props.children) === null || _o === void 0 ? void 0 : _o.props), { disabled: props.disabled }));
+        const childrenInjected = React.cloneElement(props.children, Object.assign(Object.assign({}, (_o = props.children) === null || _o === void 0 ? void 0 : _o.props), { disabled: props.disabled, type: (_p = props === null || props === void 0 ? void 0 : props.type) !== null && _p !== void 0 ? _p : 'line' }));
         // console.log(`Input ${props.name} - value : ${value}`)
         return React.createElement(InputElemWrapper, Object.assign({}, props, { disabled: props.disabled, value: value }),
             React.createElement(React.Fragment, null,
