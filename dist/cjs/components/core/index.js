@@ -17,11 +17,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InputWrapper = exports.InputElemWrapper = void 0;
+exports.InputChooser = exports.InputWrapper = exports.InputElemWrapper = void 0;
 __exportStar(require("./interfaces"), exports);
 __exportStar(require("./Form"), exports);
 var InputElemWrapper_1 = require("./InputElemWrapper");
 Object.defineProperty(exports, "InputElemWrapper", { enumerable: true, get: function () { return __importDefault(InputElemWrapper_1).default; } });
 var InputWrapper_1 = require("./InputWrapper");
 Object.defineProperty(exports, "InputWrapper", { enumerable: true, get: function () { return __importDefault(InputWrapper_1).default; } });
+var InputChooser_1 = require("./InputChooser");
+Object.defineProperty(exports, "InputChooser", { enumerable: true, get: function () { return __importDefault(InputChooser_1).default; } });
 //# sourceMappingURL=index.js.map
