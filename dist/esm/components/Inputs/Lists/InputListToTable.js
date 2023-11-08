@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from "styled-components";
 import parse from "html-react-parser";
-import { Button } from '@mui/material';
 import { useFieldArray } from 'react-hook-form';
 import { FaArrowDown, FaArrowUp, FaEdit, FaPlus, FaTrash } from 'react-icons/fa';
 import { Line } from '../Text';
@@ -49,10 +48,10 @@ const InputListToTable = (props) => {
             const prepareButtons = () => {
                 var _a, _b;
                 const REM = (_a = props.tableButtons) === null || _a === void 0 ? void 0 : _a.remove;
-                const RemoveButton = REM ? React.cloneElement(REM, Object.assign(Object.assign({}, REM.props), { onClick: () => { setEditMode(false); remove(i); } })) : React.createElement(Button, { type: "button", onClick: () => { setEditMode(false); remove(i); } },
+                const RemoveButton = REM ? React.cloneElement(REM, Object.assign(Object.assign({}, REM.props), { onClick: () => { setEditMode(false); remove(i); } })) : React.createElement("button", { type: "button", onClick: () => { setEditMode(false); remove(i); } },
                     React.createElement(FaTrash, null));
                 const EDIT = (_b = props.tableButtons) === null || _b === void 0 ? void 0 : _b.edit;
-                const EditButton = EDIT ? React.cloneElement(EDIT, Object.assign(Object.assign({}, EDIT.props), { onClick: () => edit(i) })) : React.createElement(Button, { type: "button", onClick: () => edit(i) },
+                const EditButton = EDIT ? React.cloneElement(EDIT, Object.assign(Object.assign({}, EDIT.props), { onClick: () => edit(i) })) : React.createElement("button", { type: "button", onClick: () => edit(i) },
                     React.createElement(FaEdit, null));
                 const buttons = [];
                 if (props.fixed !== true) {
@@ -164,13 +163,13 @@ const InputListToTable = (props) => {
         const buttonWrapper = (onClick, Wrapper, ElemA) => {
             if (Wrapper) {
                 return React.createElement(Wrapper, null, ElemA ? React.createElement(ElemA, { isEdit: editMode, onClick: () => onClick(), type: "button" }, ElemA.children) :
-                    React.createElement(Button, { onClick: () => onClick(), type: "button" },
+                    React.createElement("button", { onClick: () => onClick(), type: "button" },
                         React.createElement(FaPlus, null),
                         editMode ? 'Edit Row' : 'New Row'));
             }
             else {
                 return React.createElement("div", { style: { marginTop: '10px', textAlign: 'right' } }, ElemA ? React.createElement(ElemA, { isEdit: editMode, onClick: () => onClick(), type: "button" }, ElemA.children) :
-                    React.createElement(Button, { onClick: () => onClick(), type: "button" },
+                    React.createElement("button", { onClick: () => onClick(), type: "button" },
                         React.createElement(FaPlus, null),
                         editMode ? 'Edit Row' : 'New Row'));
             }

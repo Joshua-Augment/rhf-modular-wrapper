@@ -32,14 +32,14 @@ LineWithButton.args = {
     name="line_button" 
     buttons={
       {
-        left: [
-          {label:'#1',onClick: (a) => alert(`Value is ${a} From Button #1!`)},
-          {label:'#2',onClick: (a) => alert(`Value is ${a} From Button #2!`)},
-        ],
-        right: [
-          {label:'#R1',onClick: (a) => alert(`Value is ${a} From Button #R1!`)},
-          {label:'#R2',onClick: (a) => alert(`Value is ${a} From Button #R2!`)},
-        ],
+        left: () => <div>
+          <button onClick={(a) => alert(`Value is ${a} From Button #1!`)}>#L1</button>
+          <button onClick={(a) => alert(`Value is ${a} From Button #2!`)}>#L2</button>
+        </div>,
+        right: () => <div>
+          <button onClick={(a) => alert(`Value is ${a} From Button #R1!`)}>#R1</button>
+          <button onClick={(a) => alert(`Value is ${a} From Button #R2!`)}>#R2</button>
+        </div>
       }
     } 
   />
@@ -48,10 +48,10 @@ LineWithButton.args = {
     name="line_button_reactElemetn" 
     buttons={
       {
-        left: [
-          {label:<h6>1</h6>,onClick: (a) => alert(`Value is ${a} From Button #1!`)},
-          {label:<h6>2</h6>,onClick: (a) => alert(`Value is ${a} From Button #2!`)},
-        ],
+        left: (value, name) => <div>
+          <button onClick={(a) => alert(`Value is ${value} for Input ${name} From Button #1!`)}>#L1</button>
+          <button onClick={(a) => alert(`Value is ${value} for Input ${name} From Button #2!`)}>#L2</button>
+        </div>,
       }
     } 
   />

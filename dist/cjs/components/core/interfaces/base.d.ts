@@ -69,16 +69,8 @@ export interface IInputsBasePropsNoSetters<T = any> {
             right?: JSX.Element;
             all?: JSX.Element;
         };
-        left?: {
-            label: React.ReactNode;
-            onClick: (value: T, name: string, all: any) => void;
-            customButton?: JSX.Element;
-        }[];
-        right?: {
-            label: React.ReactNode;
-            onClick: (value: T, name: string, all: any) => void;
-            customButton?: JSX.Element;
-        }[];
+        left?: (value: T, name: string, all: any) => JSX.Element;
+        right?: (value: T, name: string, all: any) => JSX.Element;
     };
     inputWrapper?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
     name: string;

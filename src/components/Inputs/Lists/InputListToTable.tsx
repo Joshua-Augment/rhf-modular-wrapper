@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react'
 import styled from "styled-components"
 import { IInputToTableList, TListInputs } from '../../core/interfaces/lists'
 import parse from "html-react-parser";
-import { Button } from '@mui/material'
 import { useFieldArray } from 'react-hook-form'
 import { FaArrowDown, FaArrowUp, FaEdit, FaPlus, FaTrash } from 'react-icons/fa'
 import { Line } from '../Text'
@@ -50,9 +49,9 @@ const InputListToTable = (props: IInputToTableList) => {
     const ActionsWrapper = (i: number, A?:any, children ?: any, ) => {
       const prepareButtons = () => {
         const REM = props.tableButtons?.remove
-        const RemoveButton =  REM ?  React.cloneElement(REM, {...REM.props, onClick: () => {setEditMode(false); remove(i)}})  : <Button type="button" onClick={() => {setEditMode(false); remove(i)}}><FaTrash /></Button>
+        const RemoveButton =  REM ?  React.cloneElement(REM, {...REM.props, onClick: () => {setEditMode(false); remove(i)}})  : <button type="button" onClick={() => {setEditMode(false); remove(i)}}><FaTrash /></button>
         const EDIT = props.tableButtons?.edit
-        const EditButton = EDIT ? React.cloneElement(EDIT, {...EDIT.props, onClick:()=>edit(i)}) : <Button type="button" onClick={() => edit(i)}><FaEdit /></Button>
+        const EditButton = EDIT ? React.cloneElement(EDIT, {...EDIT.props, onClick:()=>edit(i)}) : <button type="button" onClick={() => edit(i)}><FaEdit /></button>
         const buttons:JSX.Element[] = []
         if (props.fixed !== true) {buttons.push(RemoveButton)}
         buttons.push(EditButton)
@@ -163,14 +162,14 @@ const InputListToTable = (props: IInputToTableList) => {
         return <Wrapper>
           {
             ElemA ? <ElemA isEdit={editMode} onClick={()=>onClick()} type="button" >{ElemA.children}</ElemA> :
-            <Button onClick={()=>onClick()} type="button" ><FaPlus />{editMode ? 'Edit Row' : 'New Row'}</Button>
+            <button onClick={()=>onClick()} type="button" ><FaPlus />{editMode ? 'Edit Row' : 'New Row'}</button>
           }
         </Wrapper>
       } else {
         return <div style={{marginTop:'10px', textAlign:'right'}}>
           {
             ElemA ? <ElemA isEdit={editMode} onClick={()=>onClick()} type="button" >{ElemA.children}</ElemA> :
-            <Button onClick={()=>onClick()} type="button" ><FaPlus />{editMode ? 'Edit Row' : 'New Row'}</Button>
+            <button onClick={()=>onClick()} type="button" ><FaPlus />{editMode ? 'Edit Row' : 'New Row'}</button>
           }
         </div>
       }

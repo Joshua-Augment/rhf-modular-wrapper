@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import InputElemWrapper from "./InputElemWrapper";
 import { FormBaseInput } from "./interfaces";
-import { Button } from "@mui/material";
 import { useInputValAndError } from "./hook/useInputValnError";
 
 const InputWrapper = (props: FormBaseInput) => {
@@ -53,26 +52,17 @@ const InputWrapper = (props: FormBaseInput) => {
       if (B) {return <B>{children}</B>}
       return <div style={{display:'flex',flexDirection:'row'}}>{children}</div>
     }
-    const WrapperElementLeft = Wrapper(props?.buttons?.wrapper?.left,props?.buttons?.wrapper?.all,props?.buttons?.left?.map((x,i) => {
-      const ButtonElem: React.ComponentType<{name?: string, value?: any}>|any = x.customButton || Button; // Use customButton or a default button
+    const WrapperElementLeft = props?.buttons?.left ? Wrapper(
+      props?.buttons?.wrapper?.left,
+      props?.buttons?.wrapper?.all,
+      props?.buttons?.left? props.buttons.left(value, props.name, getValues) : null
+    ) : null
 
-     return <ButtonElem 
-       key={`bl-${i}`} 
-       onClick={() => x.onClick(value, props.name, getValues())}
-       name={props.name} 
-       value={value}
-     >{x.label}</ButtonElem>
-   }))
-
-    const WrapperElementRight = Wrapper(props?.buttons?.wrapper?.right,props?.buttons?.wrapper?.all,props?.buttons?.right?.map((x,i) => {
-      const ButtonElem: React.ComponentType<{name?: string, value?: any}>|any = x.customButton || Button; // Use customButton or a default button
-      return <ButtonElem 
-        key={`bl-${i}`} 
-        onClick={() => x.onClick(value, props.name, getValues())}
-        name={props.name} 
-        value={value}
-      >{x.label}</ButtonElem>
-   }))
+    const WrapperElementRight = props?.buttons?.right ? Wrapper(
+      props?.buttons?.wrapper?.right,
+      props?.buttons?.wrapper?.all,      
+      props?.buttons?.right? props.buttons.right(value, props.name, getValues) : null
+    ) : null
 
 
    const childrenInjected = React.cloneElement(props.children, {...props.children?.props, disabled : props.disabled, type:props?.type??'line'})
@@ -80,31 +70,7 @@ const InputWrapper = (props: FormBaseInput) => {
   return <InputElemWrapper {...props} disabled={props.disabled} value={value} >
       <>
         {WrapperElementLeft}
-        {/* props.buttons && props.buttons.left && <WrapperElementLeft>
-          {props.buttons.left.map((x,i) => {
-             const ButtonElem: React.ComponentType<{name?: string, value?: any}>|any = x.customButton || Button; // Use customButton or a default button
-
-            return <ButtonElem 
-              key={`bl-${i}`} 
-              onClick={(value) => x.onClick(value)}
-              name={props.name} 
-              value={value}
-            >{x.label}</ButtonElem>
-          })}
-        </WrapperElementLeft> */}
         {childrenInjected}
-        {/* props.buttons && props.buttons.right && <WrapperElementRight>
-          {props.buttons.right.map((x,i) => {
-            let ButtonElem:any = Button
-            if (x.customButton) {
-              ButtonElem = x.customButton
-            }
-
-            ButtonElem = React.cloneElement(ButtonElem, {...ButtonElem?.props, name: props.name, value: value, label: x.label})
-
-            return <ButtonElem key={`bl-${i}`} onClick={(value) => x.onClick(value)}>{x.label}</ButtonElem>
-          })}
-        </WrapperElementRight> */}
         {WrapperElementRight}
       </>
     </InputElemWrapper>
@@ -113,60 +79,6 @@ const InputWrapper = (props: FormBaseInput) => {
   
 
   return child
-
-  // return (
-  //   props.contextless ?
-  //   // Since this does not live in a form there is no form context, as such just store the state in the wrapper itself
-  //   // to maintain the input as a controlled input
-  //   <InputElemWrapper
-  //     {...props}
-  //     value={_value}
-  //     onChange={_setValue}
-  // >
-  //   {child &&
-  //     child({
-  //       ...props,
-  //       value : _value,
-  //       onChange : _setValue,
-  //       onBlur : ()=>false,
-  //       isTouched: _value !== null,
-  //       isDirty: _value !== null,
-  //       error : undefined,
-  //       disabled : props.disabled,
-  //       ref : undefined,
-  //     })}
-  // </InputElemWrapper> : 
-  // // Control is handled by the Controller Element instead
-  //   <Controller
-  //     control={methods.control}
-  //     name={props.name}
-  //     render={({
-  //       field: { onChange, onBlur, value, name, ref },
-  //       fieldState: { invalid, isTouched, isDirty, error },
-  //       formState,
-  //     }) => (
-  //       <InputElemWrapper
-  //         {...props}
-  //         value={value === undefined ? props.defaultValue : value}
-  //         onChange={onChange}
-  //         errors={error}
-  //       >
-  //         {child &&
-  //           child({
-  //             ...props,
-  //             value,
-  //             onChange,
-  //             onBlur,
-  //             isTouched,
-  //             isDirty,
-  //             error,
-  //             disabled : props.disabled,
-  //             ref,
-  //           })}
-  //       </InputElemWrapper>
-  //     )}
-  //   />
-  // );
 };
 
 

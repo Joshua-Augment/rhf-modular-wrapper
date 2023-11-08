@@ -39,7 +39,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const InputElemWrapper_1 = __importDefault(require("./InputElemWrapper"));
-const material_1 = require("@mui/material");
 const useInputValnError_1 = require("./hook/useInputValnError");
 const InputWrapper = (props) => {
     var _a;
@@ -96,14 +95,8 @@ const InputWrapper = (props) => {
             }
             return react_1.default.createElement("div", { style: { display: 'flex', flexDirection: 'row' } }, children);
         };
-        const WrapperElementLeft = Wrapper((_b = (_a = props === null || props === void 0 ? void 0 : props.buttons) === null || _a === void 0 ? void 0 : _a.wrapper) === null || _b === void 0 ? void 0 : _b.left, (_d = (_c = props === null || props === void 0 ? void 0 : props.buttons) === null || _c === void 0 ? void 0 : _c.wrapper) === null || _d === void 0 ? void 0 : _d.all, (_f = (_e = props === null || props === void 0 ? void 0 : props.buttons) === null || _e === void 0 ? void 0 : _e.left) === null || _f === void 0 ? void 0 : _f.map((x, i) => {
-            const ButtonElem = x.customButton || material_1.Button; // Use customButton or a default button
-            return react_1.default.createElement(ButtonElem, { key: `bl-${i}`, onClick: () => x.onClick(value, props.name, getValues()), name: props.name, value: value }, x.label);
-        }));
-        const WrapperElementRight = Wrapper((_h = (_g = props === null || props === void 0 ? void 0 : props.buttons) === null || _g === void 0 ? void 0 : _g.wrapper) === null || _h === void 0 ? void 0 : _h.right, (_k = (_j = props === null || props === void 0 ? void 0 : props.buttons) === null || _j === void 0 ? void 0 : _j.wrapper) === null || _k === void 0 ? void 0 : _k.all, (_m = (_l = props === null || props === void 0 ? void 0 : props.buttons) === null || _l === void 0 ? void 0 : _l.right) === null || _m === void 0 ? void 0 : _m.map((x, i) => {
-            const ButtonElem = x.customButton || material_1.Button; // Use customButton or a default button
-            return react_1.default.createElement(ButtonElem, { key: `bl-${i}`, onClick: () => x.onClick(value, props.name, getValues()), name: props.name, value: value }, x.label);
-        }));
+        const WrapperElementLeft = ((_a = props === null || props === void 0 ? void 0 : props.buttons) === null || _a === void 0 ? void 0 : _a.left) ? Wrapper((_c = (_b = props === null || props === void 0 ? void 0 : props.buttons) === null || _b === void 0 ? void 0 : _b.wrapper) === null || _c === void 0 ? void 0 : _c.left, (_e = (_d = props === null || props === void 0 ? void 0 : props.buttons) === null || _d === void 0 ? void 0 : _d.wrapper) === null || _e === void 0 ? void 0 : _e.all, ((_f = props === null || props === void 0 ? void 0 : props.buttons) === null || _f === void 0 ? void 0 : _f.left) ? props.buttons.left(value, props.name, getValues) : null) : null;
+        const WrapperElementRight = ((_g = props === null || props === void 0 ? void 0 : props.buttons) === null || _g === void 0 ? void 0 : _g.right) ? Wrapper((_j = (_h = props === null || props === void 0 ? void 0 : props.buttons) === null || _h === void 0 ? void 0 : _h.wrapper) === null || _j === void 0 ? void 0 : _j.right, (_l = (_k = props === null || props === void 0 ? void 0 : props.buttons) === null || _k === void 0 ? void 0 : _k.wrapper) === null || _l === void 0 ? void 0 : _l.all, ((_m = props === null || props === void 0 ? void 0 : props.buttons) === null || _m === void 0 ? void 0 : _m.right) ? props.buttons.right(value, props.name, getValues) : null) : null;
         const childrenInjected = react_1.default.cloneElement(props.children, Object.assign(Object.assign({}, (_o = props.children) === null || _o === void 0 ? void 0 : _o.props), { disabled: props.disabled, type: (_p = props === null || props === void 0 ? void 0 : props.type) !== null && _p !== void 0 ? _p : 'line' }));
         // console.log(`Input ${props.name} - value : ${value}`)
         return react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { disabled: props.disabled, value: value }),
@@ -113,59 +106,6 @@ const InputWrapper = (props) => {
                 WrapperElementRight));
     }, [value, props === null || props === void 0 ? void 0 : props.options, error]);
     return child;
-    // return (
-    //   props.contextless ?
-    //   // Since this does not live in a form there is no form context, as such just store the state in the wrapper itself
-    //   // to maintain the input as a controlled input
-    //   <InputElemWrapper
-    //     {...props}
-    //     value={_value}
-    //     onChange={_setValue}
-    // >
-    //   {child &&
-    //     child({
-    //       ...props,
-    //       value : _value,
-    //       onChange : _setValue,
-    //       onBlur : ()=>false,
-    //       isTouched: _value !== null,
-    //       isDirty: _value !== null,
-    //       error : undefined,
-    //       disabled : props.disabled,
-    //       ref : undefined,
-    //     })}
-    // </InputElemWrapper> : 
-    // // Control is handled by the Controller Element instead
-    //   <Controller
-    //     control={methods.control}
-    //     name={props.name}
-    //     render={({
-    //       field: { onChange, onBlur, value, name, ref },
-    //       fieldState: { invalid, isTouched, isDirty, error },
-    //       formState,
-    //     }) => (
-    //       <InputElemWrapper
-    //         {...props}
-    //         value={value === undefined ? props.defaultValue : value}
-    //         onChange={onChange}
-    //         errors={error}
-    //       >
-    //         {child &&
-    //           child({
-    //             ...props,
-    //             value,
-    //             onChange,
-    //             onBlur,
-    //             isTouched,
-    //             isDirty,
-    //             error,
-    //             disabled : props.disabled,
-    //             ref,
-    //           })}
-    //       </InputElemWrapper>
-    //     )}
-    //   />
-    // );
 };
 exports.default = InputWrapper;
 //# sourceMappingURL=InputWrapper.js.map

@@ -38,7 +38,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const html_react_parser_1 = __importDefault(require("html-react-parser"));
-const material_1 = require("@mui/material");
 const react_hook_form_1 = require("react-hook-form");
 const fa_1 = require("react-icons/fa");
 const Text_1 = require("../Text");
@@ -77,10 +76,10 @@ const InputListToTable = (props) => {
             const prepareButtons = () => {
                 var _a, _b;
                 const REM = (_a = props.tableButtons) === null || _a === void 0 ? void 0 : _a.remove;
-                const RemoveButton = REM ? react_1.default.cloneElement(REM, Object.assign(Object.assign({}, REM.props), { onClick: () => { setEditMode(false); remove(i); } })) : react_1.default.createElement(material_1.Button, { type: "button", onClick: () => { setEditMode(false); remove(i); } },
+                const RemoveButton = REM ? react_1.default.cloneElement(REM, Object.assign(Object.assign({}, REM.props), { onClick: () => { setEditMode(false); remove(i); } })) : react_1.default.createElement("button", { type: "button", onClick: () => { setEditMode(false); remove(i); } },
                     react_1.default.createElement(fa_1.FaTrash, null));
                 const EDIT = (_b = props.tableButtons) === null || _b === void 0 ? void 0 : _b.edit;
-                const EditButton = EDIT ? react_1.default.cloneElement(EDIT, Object.assign(Object.assign({}, EDIT.props), { onClick: () => edit(i) })) : react_1.default.createElement(material_1.Button, { type: "button", onClick: () => edit(i) },
+                const EditButton = EDIT ? react_1.default.cloneElement(EDIT, Object.assign(Object.assign({}, EDIT.props), { onClick: () => edit(i) })) : react_1.default.createElement("button", { type: "button", onClick: () => edit(i) },
                     react_1.default.createElement(fa_1.FaEdit, null));
                 const buttons = [];
                 if (props.fixed !== true) {
@@ -192,13 +191,13 @@ const InputListToTable = (props) => {
         const buttonWrapper = (onClick, Wrapper, ElemA) => {
             if (Wrapper) {
                 return react_1.default.createElement(Wrapper, null, ElemA ? react_1.default.createElement(ElemA, { isEdit: editMode, onClick: () => onClick(), type: "button" }, ElemA.children) :
-                    react_1.default.createElement(material_1.Button, { onClick: () => onClick(), type: "button" },
+                    react_1.default.createElement("button", { onClick: () => onClick(), type: "button" },
                         react_1.default.createElement(fa_1.FaPlus, null),
                         editMode ? 'Edit Row' : 'New Row'));
             }
             else {
                 return react_1.default.createElement("div", { style: { marginTop: '10px', textAlign: 'right' } }, ElemA ? react_1.default.createElement(ElemA, { isEdit: editMode, onClick: () => onClick(), type: "button" }, ElemA.children) :
-                    react_1.default.createElement(material_1.Button, { onClick: () => onClick(), type: "button" },
+                    react_1.default.createElement("button", { onClick: () => onClick(), type: "button" },
                         react_1.default.createElement(fa_1.FaPlus, null),
                         editMode ? 'Edit Row' : 'New Row'));
             }
