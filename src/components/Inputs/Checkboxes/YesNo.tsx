@@ -1,38 +1,36 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import {  InputWrapper, IYesNo } from '../../core'
 import styled from "styled-components"
-import { useInputValAndError } from '../../core/hook/useInputValnError'
 
-const YesNo = (props: IYesNo) => {
-  const {value, setValue} = useInputValAndError(props.name)
-  
-  useEffect(()=>{
-    if (value === undefined || value === '') {setValue(props.name, null)}
-  },[value])
+const YesNo = (props: IYesNo) => {  
 
-  const buttonHandler = useCallback((buttonVal: any, extHandler ?: ((someVal:string)=>Promise<boolean>))=>{
+  return (
+    <InputWrapper type={props.yesno} {...props} id={`${props.name}`} noLabel noBorder customClasses={{wrapperClassName:'form-check'}}>
+      <_YesNo {...props} />
+    </InputWrapper>
+  )
+}
+
+const _YesNo = (props:any) => {
+  const buttonHandler = (buttonVal: any, extHandler ?: ((someVal:string)=>Promise<boolean>))=>{
     if (extHandler) {
-      extHandler(value).then(a => {if (a) {setValue(props.name, a)}})
-    } else {setValue(props.name, buttonVal)}
-  },[value])
+      extHandler(props.value).then(a => {if (a) {props.onChange(a)}})
+    } else {props.onChange(buttonVal)}
+  }
 
   const buttonGenerator = (label: string, valueOfButton : any, extHandler : any, ButtonElem : React.FunctionComponent<any> & {children: any}, color: string, key ?: string) => {
-    return <ButtonElem className={props.inputClass} style={{...props.inputStyle}} active={valueOfButton === value} key={key ?? `yng-${props.name}-${valueOfButton}`} type="button" onClick={()=>buttonHandler(valueOfButton,extHandler)} bgColor={color}>
+    return <ButtonElem className={props.inputClass} style={{...props.inputStyle}} active={valueOfButton === props.value} key={key ?? `yng-${props.name}-${valueOfButton}`} type="button" onClick={()=>buttonHandler(valueOfButton,extHandler)} bgColor={color}>
       {label}
     </ButtonElem>
   }
 
-  return (
-    <InputWrapper type={props.yesno} {...props} id={`${props.name}`} noLabel noBorder customClasses={{wrapperClassName:'form-check'}}>
-      <div style={{display:'flex',width:100*(2+ (props.otherOptions ? props.otherOptions.length : 0)),...props.wrapperStyle, ...props.style}} className={`${props.className} ${props.wrapperClass}`} >
-        {buttonGenerator((props.yes && props.yes.label) ?? 'Yes', props?.yes?.value ?? true,props.yes?.extHandler, props.yes?.element ?? Button,  props.yes?.color ?? 'green')}
-        {buttonGenerator((props.no && props.no.label) ?? 'No', props?.no?.value ?? false,props.no?.extHandler, props.no?.element ?? Button, props.no?.color ?? 'red')}
-        {
-          props.otherOptions && props.otherOptions.map((option,i) => buttonGenerator(option.label ?? `Option ${i}`,option.value ?? i, option.extHandler, option.element ?? Button, option.color ?? '#22ffff4', `yn-${props.name}-eo-${i}`))
-        }   
-      </div>
-    </InputWrapper>
-  )
+  return <div style={{display:'flex',width:100*(2+ (props.otherOptions ? props.otherOptions.length : 0)),...props.wrapperStyle, ...props.style}} className={`${props.className} ${props.wrapperClass}`} >
+  {buttonGenerator((props.yes && props.yes.label) ?? 'Yes', props?.yes?.value ?? true,props.yes?.extHandler, props.yes?.element ?? Button,  props.yes?.color ?? 'green')}
+  {buttonGenerator((props.no && props.no.label) ?? 'No', props?.no?.value ?? false,props.no?.extHandler, props.no?.element ?? Button, props.no?.color ?? 'red')}
+  {
+    props.otherOptions && props.otherOptions.map((option,i) => buttonGenerator(option.label ?? `Option ${i}`,option.value ?? i, option.extHandler, option.element ?? Button, option.color ?? '#22ffff4', `yn-${props.name}-eo-${i}`))
+  }   
+</div>
 }
 
 const Button = styled.button`
@@ -40,9 +38,11 @@ const Button = styled.button`
   border-radius: 5px;
   border-color: ${({active}) => active ? 'black' : 'transparent'};
   margin: 5px;
-  background-color: ${({bgColor}) => bgColor ?? '#44b5ee2'};
-  color: ${({active}) => active ? 'black' : 'white'};;
+  font-size: 1.2em;
+  background-color: ${({bgColor, active}) => active ? (bgColor ?? '#44b5ee2') : 'gainsboro'};
+  color: ${({active, bgColor}) => active ? 'white' : (bgColor ?? '#44b5ee2')};;
   width:100%;
+  font-weight: bold;
   cursor: pointer;
   transition : all 0.3s ease-in-out;
   box-shadow: none;
@@ -50,7 +50,7 @@ const Button = styled.button`
 
   &:hover {
     filter : brightness(110%);    
-    box-shadow: 1px 1px 10px 1px #989696;
+    box-shadow: 1px 1px 10px 1px ${({active, bgColor}) => active ? (bgColor ?? '#44b5ee2') : '#989696'};
   }
 `
 

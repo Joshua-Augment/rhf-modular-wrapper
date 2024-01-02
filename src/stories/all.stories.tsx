@@ -67,10 +67,10 @@ export const CheckboxGroupExampleVertical = () => {
 
   const [ready,setReady] = useState(false)
 
-  const onSubmit = useCallback((a:any)=> new Promise((resolve,reject) =>{
+  const onSubmit = (a:any)=> new Promise((resolve,reject) =>{
     // console.log("[return values] - ",a)
     setOutput(<p>{JSON.stringify(a)}</p>)
-  }),[])
+  })
 
   const loadingOptions = useCallback((a:any, callback:any)=> {
     setTimeout(() => {
@@ -91,6 +91,7 @@ export const CheckboxGroupExampleVertical = () => {
   }
 
   return <div>
+    <p>Default Values : {JSON.stringify(defaultValues)}</p>
     {output}
     {
       ready ? <Form onSubmit={onSubmit} defaultValues={defaultValues} yupSchema={yupValidation}>
@@ -99,7 +100,7 @@ export const CheckboxGroupExampleVertical = () => {
         <Line name="line_number" type="number" label="Line Input (Number)" helperText="Line Input (Number)" />
         <DatePicker name="datepicker" label="Date Picker" helperText="Date Picker" />
         <Select rsOptions={{isClearable:true}} name="select" helperText="Select" label="Select" options={BASE_SELECTS} />
-        <AsyncSelect rsOptions={{isClearable:true}} name="select_async" helperText="Async Select" label="Async Select" loadOptions={loadingOptions} />
+        <AsyncSelect rsOptions={{isClearable:true}} name="select_async" helperText="Async Select" label="Async Select" loadOptions={loadingOptions} defaultOptions />
         <DropzoneUploader name="dropzone" label="Dropzone" helperText="Dropzone" />
         <Switch label="Switch" name="switch" footLabel={['NO','YES']} helperText="Switch" /> 
         <TableList name="table_list" helperText="Table List" label="Table List" 

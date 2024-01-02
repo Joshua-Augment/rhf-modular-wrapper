@@ -14,13 +14,33 @@ export default {
 
 // const onSubmit = (a:any) => new Promise((resolve, reject) => resolve(// console.log('FormSubmission:',a)))
 
-export const LinesBootstrap = Template.bind({}) 
+export const LinesBootstrap = Template.bind({
+  defaultValues: {
+    line: {
+      textDef : 'Default Value Given'
+    }
+  }
+}) 
 LinesBootstrap.args = {
+  defaultValues: {
+    line: {
+      textDef : 'Default Value Given',
+      numberDef: 4,
+      emailDef: '2@s.com'
+    }
+  },
   children : <>    
-    <Line label="Simple Form Input (Text)" name="line.text" placeholder="Simple Form Placeholder" />
+    {/* <Line label="Simple Form Input (Text)" name="line.text" placeholder="Simple Form Placeholder" /> */}
+    <Line label="Simple Form Input (Text) - Default Value" name="line.textDef" placeholder="Simple Form Placeholder" />
+    <Line label="Simple Form Input (Number) - Default Value" name="line.numberDef" placeholder="Simple Number Placeholder" type="number" />
+    <Line label="Simple Form Input (Email) - Default Value" name="line.emailDef" placeholder="Simple Email Placeholder" type="email" />
+    <Line label="Simple Form Input (Disabled) - Default Value" disabled name="line.disabledDef" placeholder="Simple Disabled Placeholder" type="text" /> 
+    <Line label="Simple Form Input (Text) - Default Value 2" name="textDef" placeholder="Simple Form Placeholder" />
     <Line label="Simple Form Input (Number)" name="line.number" placeholder="Simple Number Placeholder" type="number" />
     <Line label="Simple Form Input (Email)" name="line.email" placeholder="Simple Email Placeholder" type="email" />
     <Line label="Simple Form Input (Disabled)" disabled name="line.disabled" placeholder="Simple Disabled Placeholder" type="text" />
+    {/* 
+    */}
   </>
 }
 
@@ -60,16 +80,33 @@ LineWithButton.args = {
 
 export const TextArea = Template.bind({})
 TextArea.args = {
+  defaultValues : {
+    lines: {
+      textDef : 'Testing Default Values',
+      longDef: 'Testing Long Text Area Default Values',
+      wideDef: 'Testing Wide Text Area Default Values',
+    }
+  },
   children : <>    
     <Lines label="Simple Form Input (Textarea)" name="lines.text" placeholder="Simple Textarea Placeholder" />
     <Lines label="Simple Form Input (Textarea) Long" rows={10} name="lines.long" placeholder="Simple Textarea Placeholder" />
     <Lines label="Simple Form Input (Textarea) Wide" cols={100} name="lines.wide" placeholder="Simple Textarea Placeholder" />
+
+    <Lines label="Simple Form Input (Textarea)" name="lines.textDef" placeholder="Simple Textarea Placeholder" />
+    <Lines label="Simple Form Input (Textarea) Long" rows={10} name="lines.longDef" placeholder="Simple Textarea Placeholder" />
+    <Lines label="Simple Form Input (Textarea) Wide" cols={100} name="lines.wideDef" placeholder="Simple Textarea Placeholder" />
   </>
 }
 
 export const WYSIWYGEditor = Template.bind({}) 
 WYSIWYGEditor.args = {
-  children : <WYSIWYG label="Simple Form Input (WYSIWYG Editor)" name="wysiwyg" placeholder="Text Placeholder" />
+  defaultValues : {
+    wysiwygDef : '<p>Test</p><p><b>Bold></b><'
+  },
+  children : <>
+    <WYSIWYG label="Simple Form Input (WYSIWYG Editor)" name="wysiwyg" placeholder="Text Placeholder" />
+    <WYSIWYG label="Simple Form Input (WYSIWYG Editor) with Default Values" name="wysiwygDef" placeholder="Text Placeholder" />
+  </>
 }
 
 export const WYSIWYGEditorWhenStateChanges = () => {

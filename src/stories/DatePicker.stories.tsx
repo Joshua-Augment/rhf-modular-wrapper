@@ -12,7 +12,15 @@ export default {
 
 export const SimpleDatePicker = Template.bind({}) 
 SimpleDatePicker.args = {
-  children : <DatePicker label="Simple Form Input (Text)" name="simple_datepicker" />}
+  defaultValues : {
+    simple_datepickerDef : new Date(),
+  },
+  children : <>
+    <DatePicker label="Simple Form Input (Text)" name="simple_datepicker" />
+    <DatePicker label="Simple Form Input (Text) With Default Value" name="simple_datepickerDef" />
+  </>
+}
+
 
 export const SimpleTimePicker = Template.bind({}) 
 SimpleTimePicker.args = {

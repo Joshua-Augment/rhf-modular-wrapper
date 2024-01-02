@@ -34,6 +34,8 @@ const useInputValnError_1 = require("../../core/hook/useInputValnError");
 const WYSIWYG = (props) => {
     var _a;
     const { value, setValue } = (0, useInputValnError_1.useInputValAndError)(props.name);
+    console.log('[WYSIWYG Value] - ', value);
+    console.log('[WYSIWYG Prop.Value] - ', props.value);
     // const {watch, setValue} = useFormContext()
     // const _val = watch(props.name)
     (0, react_1.useEffect)(() => { if (value === undefined || value === null) {
@@ -41,7 +43,7 @@ const WYSIWYG = (props) => {
     } }, [value]);
     // const val = useMemo(() => _val ,[_val])
     return (react_1.default.createElement(InputWrapper_1.default, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'wysiwyg' }, props),
-        react_1.default.createElement(ReactQuillWrapper, Object.assign({}, props, { value: value !== undefined && value !== null ? value : '', onChange: (a) => setValue(props.name, a) }))));
+        react_1.default.createElement(ReactQuillWrapper, Object.assign({}, props))));
 };
 const ReactQuillWrapper = (props) => {
     const toolbarOptions = (0, react_1.useMemo)(() => ([
@@ -60,7 +62,7 @@ const ReactQuillWrapper = (props) => {
         [{ 'align': [] }],
         ['clean'] // remove formatting button
     ]), []);
-    return react_1.default.createElement(react_quill_1.default, { theme: 'snow', modules: { toolbar: toolbarOptions }, onChange: props.onChange });
+    return react_1.default.createElement(react_quill_1.default, { theme: 'snow', modules: { toolbar: toolbarOptions }, onChange: (a) => props.onChange(a), value: props.value });
 };
 exports.default = WYSIWYG;
 //# sourceMappingURL=WYSIWYG.js.map

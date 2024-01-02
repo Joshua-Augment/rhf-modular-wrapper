@@ -7,6 +7,8 @@ import { useInputValAndError } from '../../core/hook/useInputValnError';
 
 const WYSIWYG = (props:ILines) => {
   const {value, setValue} = useInputValAndError(props.name)
+  console.log('[WYSIWYG Value] - ',value)
+  console.log('[WYSIWYG Prop.Value] - ',props.value)
   // const {watch, setValue} = useFormContext()
   // const _val = watch(props.name)
   useEffect(()=>{if (value === undefined || value === null) {setValue(props.name, '')}},[value])
@@ -14,7 +16,7 @@ const WYSIWYG = (props:ILines) => {
 
   return (    
     <InputWrapper type={props.type ?? 'wysiwyg'} {...props}>
-      <ReactQuillWrapper {...props} value={value !== undefined && value !== null ? value : ''} onChange={(a: string) => setValue(props.name,a)} />
+      <ReactQuillWrapper {...props} /* value={value !== undefined && value !== null ? value : ''} */ /* onChange={(a: string) => setValue(props.name,a)} */ />
     </InputWrapper>
   )
 }
@@ -41,7 +43,12 @@ const ReactQuillWrapper = (props : any) => {
     ['clean']                                         // remove formatting button
   ]),[]);
 
-  return <ReactQuill theme={'snow'} modules={{toolbar : toolbarOptions}} onChange={props.onChange}  />
+  return <ReactQuill 
+    theme={'snow'} 
+    modules={{toolbar : toolbarOptions}} 
+    onChange={(a:any) => props.onChange(a)}  
+    value={props.value}
+  />
 }
 
 export default WYSIWYG

@@ -15,5 +15,11 @@ SimpleSwitch.args = {
 }
 export const SimpleSwitchFoot = Template.bind({}) 
 SimpleSwitchFoot.args = {
-  children : <Switch name="switch" label="Switch Item"  footLabel={["On", "Off"]} />
+  defaultValues :{
+    switchDef: true
+  },
+  children : <>
+    <Switch name="switch" label="Switch Item"  footLabel={["Off", "On"]} />
+    <Switch name="switchDef" label="Switch Item (Default Values)"  footLabel={["Off", "On"]} />
+  </>
 }
