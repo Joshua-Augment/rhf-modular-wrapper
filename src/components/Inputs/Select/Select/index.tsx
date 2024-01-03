@@ -62,6 +62,36 @@ const _Select = (props: any) => {
     }
   }
 
+  return props.isCreatable !== undefined ?
+    <SelectCreatableInput
+      styles={{container: (base) => ({...base, width:'100%'})}}
+      onCreateOption={createNew}
+      onBlur={props.onBlur}
+      {...props}
+      {...props.rsOptions}
+      options={options}
+      error={props.error}
+      isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
+      name={props.name}
+      value={props.value}
+      onChange={(a) => props.onChange(a)}
+      // value={value}
+      // onChange={(a:TSelectOption) => setValue(props.name, a)}
+    /> :   
+  <SelectInput
+    styles={{container: (base) => ({...base, width:'100%'})}}
+    {...props}
+    {...props.rsOptions}
+    options={options}
+    onBlur={props.onBlur}
+    error={props.error}
+    isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false} 
+    name={props.name}
+    value={props.value}
+    onChange={(a) => props.onChange(a)}
+    // value={value}
+    // onChange={(a:TSelectOption) => setValue(props.name, a)}
+    />
   return <Controller      
       control={props.control}
       name={props.name}

@@ -26,7 +26,7 @@ const ResetForm = () => {
 
   useEffect(()=>{
     if (isSubmitted && isSubmitSuccessful) {
-      console.log('Resetting form...')
+      // console.log('Resetting form...')
       reset()
     }
   },[isSubmitSuccessful, isSubmitted])

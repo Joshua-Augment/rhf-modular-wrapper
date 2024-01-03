@@ -18,9 +18,18 @@ const Checkbox = (props: ICheckbox) => {
 }
 
 const _Checkbox = (props: any) => {
+  // console.log(`[_Checkbox] Name : ${props.name} - `, props)
   // useEffect(()=>{ if (props.value === undefined || props.value === null || props.value === '') { props.onChange( false) } },[props.value])
 
-  return <input id={props.name} type="checkbox" name={props.name} checked={props.value} value={props.value} onChange={(a) => props.onChange(a.target.checked)} />
+  return <input 
+    id={props.name} 
+    type="checkbox" 
+    checked={props.value} 
+    {...props.register(props.name)}
+    /* name={props.name} 
+    value={props.value} 
+    onChange={(a) => props.onChange(a.target.checked)}  */
+  />
 }
 
 export default Checkbox

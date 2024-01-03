@@ -4,11 +4,12 @@ import InputWrapper from "../../core/InputWrapper";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useInputValAndError } from '../../core/hook/useInputValnError';
+import { Controller } from 'react-hook-form';
 
 const WYSIWYG = (props:ILines) => {
   const {value, setValue} = useInputValAndError(props.name)
-  console.log('[WYSIWYG Value] - ',value)
-  console.log('[WYSIWYG Prop.Value] - ',props.value)
+  // console.log('[WYSIWYG Value] - ',value)
+  // console.log('[WYSIWYG Prop.Value] - ',props.value)
   // const {watch, setValue} = useFormContext()
   // const _val = watch(props.name)
   useEffect(()=>{if (value === undefined || value === null) {setValue(props.name, '')}},[value])
@@ -48,7 +49,19 @@ const ReactQuillWrapper = (props : any) => {
     modules={{toolbar : toolbarOptions}} 
     onChange={(a:any) => props.onChange(a)}  
     value={props.value}
+    onBlur={props.onBlur}
   />
+  // return <Controller 
+  //   name={props.name}
+  //   control={props.control}
+  //   render={({field: {value,onChange, onBlur}}) => <ReactQuill 
+  //     theme={'snow'} 
+  //     modules={{toolbar : toolbarOptions}} 
+  //     onChange={(a:any) => onChange(a)}  
+  //     value={value}
+  //     onBlur={onBlur}
+  //   />}
+  // />
 }
 
 export default WYSIWYG

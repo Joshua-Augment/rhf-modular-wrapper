@@ -27,7 +27,7 @@ const Switch = (props:ISwitch) => {
 }
 
 const _Switch = (props: any) => {
-  console.log(`[Switch] ${props.name} (Current : ${props.value})`,props)
+  // console.log(`[Switch] ${props.name} (Current : ${props.value})`,props)
   return <div className={`d-block ${props.wrapperClass}`} style={{display:'flex',alignItems: 'center',flexDirection: 'column',...props.wrapperStyle}}>
     <SwitchInput 
       {...props?.options ?? {}} 

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef } from "react";
 import InputElemWrapper from "./InputElemWrapper";
 import { FormBaseInput } from "./interfaces";
 import { useInputValAndError } from "./hook/useInputValnError";
+import { Controller } from "react-hook-form";
 
 const InputWrapper = (props: FormBaseInput) => {
   const firstUpdate = useRef(true)
@@ -12,8 +13,8 @@ const InputWrapper = (props: FormBaseInput) => {
 // console.log(`For ${props.name}, error : `,rest.error)
   // On Value change
   useEffect(()=>{ if (props.defaultValue !== undefined) {
-  console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
-    rest.setValue(props.name, props.defaultValue);
+  // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
+    rest.setValue('inputWrapper - DefaultValue', props.defaultValue);
   } },[props.defaultValue]) 
   
   useEffect(()=>{  
@@ -40,11 +41,11 @@ const InputWrapper = (props: FormBaseInput) => {
         // .then(data => { contextSetValue(props.name, data) })
         .then(data => {
           // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
-           rest.setValue(props.name, data) 
+           rest.setValue('InputWrapper CalculatedField [Promise] ', data) 
         })
       } else {
         // console.log(`[Setting] Setting value for ${props.name} by calculation`)
-        rest.setValue(props.name, props.calculatedField.calculate(value,props.name,rest.getValues(props.calculatedField.find), rest.getValues()))
+        rest.setValue('InputWrapper Calculated Field [No Promise]', props.calculatedField.calculate(value,props.name,rest.getValues(props.calculatedField.find), rest.getValues()))
       }
     }
   }, [watchCalculated])
@@ -82,18 +83,32 @@ const InputWrapper = (props: FormBaseInput) => {
 
   // console.log('props - ',props)
   // const serializedProps = JSON.stringify({...props, options : props?.options ?? [], children: props.children?.props,  })  
-  const childrenInjected = useMemo(()=> React.cloneElement(
+  // const childrenInjected = useMemo(()=> React.cloneElement(
+  //   props.children, 
+  //   {
+  //     ...props.children?.props, 
+  //     disabled : props.disabled, 
+  //     type:props?.type??'line',
+  //     onChange : (a:any) => rest.setValue('InputWrapper onChange [cloneElement] ', a),
+  //     value: value,
+  //     error: error,
+  //     source : 'InputWrapper',
+  //     ...rest
+  //   }), [value, error, props])
+  
+  const childrenInjected = React.cloneElement(
     props.children, 
     {
       ...props.children?.props, 
       disabled : props.disabled, 
       type:props?.type??'line',
-      onChange : (a:any) => rest.setValue(props.name, a),
+      onChange : (a:any) => rest.setValue('InputWrapper onChange [cloneElement] ', a),
       value: value,
       error: error,
+      source : 'InputWrapper',
       ...rest
-    }), [value, error, props])
-  
+    })
+
   const Wrapper = (A ?: any, B ?:any, children ?: any) => {
     if (A) {return <A>{children}</A>}
     if (B) {return <B>{children}</B>}
@@ -115,7 +130,24 @@ const InputWrapper = (props: FormBaseInput) => {
   return <InputElemWrapper {...props} disabled={props.disabled} value={value} >
   <>
     {WrapperElementLeft}
-    {childrenInjected}
+    <Controller 
+      name={props.name}
+      control={rest.control}
+      render={({field, formState}) => React.cloneElement(
+        props.children, 
+        {
+          ...props.children?.props, 
+          ...rest,
+          disabled : props.disabled, 
+          type:props?.type??'line',
+          onChange : field.onChange,
+          onBlur : field.onBlur,
+          value: field.value,
+          error: formState.errors?.[field.name],
+          source : 'InputWrapper',
+        })}
+    />
+    {/* childrenInjected */}
     {WrapperElementRight}
   </>
 </InputElemWrapper>

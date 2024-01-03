@@ -16,6 +16,14 @@ RadioboxSimple.args =  {
   children : <Radiobox label="Simple Radiobox One" options={[{value:'one',label:'One'},{value:'two',label:'Two'},{value:'three',label:'Three'}]} name="radiobox" />
 }
 
+export const RadioboxSimpleDefault = Template.bind({})
+RadioboxSimpleDefault.args =  {
+  defaultValues: {
+    radiobox : "three"  
+  },
+  children : <Radiobox label="Simple Radiobox One" options={[{value:'one',label:'One'},{value:'two',label:'Two'},{value:'three',label:'Three'}]} name="radiobox" />
+}
+
 export const RadioboxGroupHorizontal = Template.bind({})  
 RadioboxGroupHorizontal.args = {
   children : <Radiobox orientation="horizontal" label="Simple Radiobox One" options={[{value:'one',label:'One'},{value:'two',label:'Two'},{value:'three',label:'Three'}]} name="radiobox" />

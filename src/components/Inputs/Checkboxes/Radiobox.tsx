@@ -20,7 +20,9 @@ const Radiobox = (props: IRadiobox) => {
 }
 
 const _Radiobox = (props: any) => {
+  // console.log('[_Radiobox] - props  ',props)
   useEffect(()=> {
+    // console.log('[_Radiobox] - props useEffect ', props)
     if (props.value === undefined || props.value === '' || props.value === null) {
       props.onChange(props.options[0].value)
     }

@@ -5,7 +5,6 @@ import InputWrapper from '../../core/InputWrapper'
 
 const Line = (props: LineInputProps) => {
   // const {value, setValue} = useInputValAndError(props.name)
-console.log(`Line - ${props.name} - props : `,props)
   // useEffect(()=>{
   //   if (props.type === 'number' && props.value === '') {       
   //   // console.log(`[Setting] Setting value for ${props.name} in line from ${value} to ${props.type === 'number' ? 0 : ''}`)

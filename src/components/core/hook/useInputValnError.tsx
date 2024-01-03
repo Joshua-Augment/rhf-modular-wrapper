@@ -4,13 +4,14 @@ import { useFormContext } from "react-hook-form"
 export const useInputValAndError = <T=any,>(name :string) => {
   const methods = useFormContext()
 
-  const highjackedSetValue = (value: any) => {
-    console.log(`[HighJackedSetValue] ${name} - `,value)
+  const highjackedSetValue = (_name:string, value: any) => {
+    //console.log(`[HighJackedSetValue] Called from : ${_name} - `,value)
     methods.setValue(name, value)
   }
 
-  const _val:T = methods.watch(name)
+  const value:T = methods.watch(name)
 
+  //console.log('[useInputValAndError] - ',value)
   // console.log(`[useInputValAndError - Value _val for ${name} ] : [Undefined?${_val === undefined?'Y':'N'}] [Null?${_val === null?'Y':'N'}]`,_val)
   // console.log(`[useInputValAndError - getValues in ${name} ] : `,methods.getValues())
   
@@ -20,8 +21,8 @@ export const useInputValAndError = <T=any,>(name :string) => {
   // }, [_val])
 
   const {error: _error} = methods.getFieldState(name, methods.formState)
-  const error = useMemo(()=>  Array.isArray(_error) ? undefined : _error ,[_error, _val])
+  const error = useMemo(()=>  Array.isArray(_error) ? undefined : _error ,[_error, value])
   
-  return { value: _val, error, ...methods, setValue : (name:string, value:any) => highjackedSetValue(value)  }
+  return { value: value, error, ...methods, setValue : (name:string, value:any) => highjackedSetValue(name, value)  }
 }
 

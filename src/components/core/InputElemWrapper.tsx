@@ -5,6 +5,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import { FormFrameWrapperProps } from './interfaces';
 import { ThemeContext } from './Form';
 import { useInputValAndError } from './hook/useInputValnError';
+import { Controller } from 'react-hook-form';
 
 
 
@@ -81,15 +82,33 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
     React.cloneElement(<Element {...props} /> as any, {
       ...props,  
       children: null,
-      onChange: (a:any) => rest.setValue(props.name, a), 
-      ...rest,
+      onChange: (a:any) => rest.setValue('InputElemWrapper - clonedElement ', a), 
+      ...rest,      
+      source : 'InputElemWrapper',
       value : value, 
       error: error
     }) : 
     null
 
   
-  return clonedElement !== undefined && clonedElement !== null ? clonedElement : WrapElem
+  return Element !== undefined && Element !== null ? 
+    <Controller 
+      name={props.name}
+      control={rest.control}
+      render={({field,formState}) => React.cloneElement(
+        <Element {...props} /> as any, 
+        {
+          ...props,  
+          ...rest,      
+          children: null,
+          onChange: field.onChange, 
+          value : field.value, 
+          name: field.name,
+          source : 'InputElemWrapper',
+          error: formState.errors?.[field.name]
+        })}
+    />
+  : WrapElem
   // return Wrapper as JSX.Element
 }
 

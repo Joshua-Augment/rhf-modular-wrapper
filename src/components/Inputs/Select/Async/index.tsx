@@ -46,7 +46,7 @@ const AsyncSelect = (props: ISelectAsync) => {
 };
  
 const _AsyncSelect = (props: any) => {
-  console.log(`[Select] [${props.name}] props : `,props)
+  // console.log(`[Select] [${props.name}] props : `,props)
   const [options, setOptions] = useState<TSelectOption[]>(props.options ?? [])
 
   useEffect(()=> {
@@ -69,6 +69,34 @@ const _AsyncSelect = (props: any) => {
       }
     }
   }
+
+  return props.isCreatable !== undefined ? 
+  <AsyncCreatableSelectInput
+    styles={{container: (base) => ({...base, width:'100%'})}}
+    onCreateOption={createNew}
+    {...props}
+    options={options}
+    isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
+    name={props.name}
+    value={props.value}
+    onChange={(a) => props.onChange(a)}
+    error={props.error}
+    {...props.rsOptions}
+    loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, props.getValues(),b) : props.loadOptions(a,b)}
+  />
+: 
+  <AsyncSelectInput
+    styles={{container: (base) => ({...base, width:'100%'})}}
+    {...props}
+    options={options}
+    isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
+    name={props.name}
+    value={props.value}
+    onChange={(a) => props.onChange(a)}
+    error={props.error}
+    {...props.rsOptions}
+    loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, props.getValues(),b) : props.loadOptions(a,b)}
+  /> 
   
   return <Controller      
     control={props.control}
