@@ -35,10 +35,11 @@ export type RSOptionsBase = {
     menuIsOpen?: boolean;
     placeholder?: string;
     styles?: TRSStyles;
+    [key: string]: any;
 };
 export interface BaseSelect extends IInputsBaseProps<TSelectOption | null> {
     isCreatable?: true | ((createdString: string) => Promise<TSelectOption>);
-    rsOptions?: RSOptionsBase;
+    rsOptions?: RSBaseOptions;
 }
 export type BaseSelectNotCreatable = {
     isCreatable?: false;
