@@ -40,7 +40,9 @@ const Radiobox = (props) => {
         react_1.default.createElement(_Radiobox, Object.assign({}, props))));
 };
 const _Radiobox = (props) => {
+    // console.log('[_Radiobox] - props  ',props)
     (0, react_1.useEffect)(() => {
+        // console.log('[_Radiobox] - props useEffect ', props)
         if (props.value === undefined || props.value === '' || props.value === null) {
             props.onChange(props.options[0].value);
         }

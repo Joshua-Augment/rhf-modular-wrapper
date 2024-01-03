@@ -15,6 +15,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
 import { ThemeContext } from './Form';
 import { useInputValAndError } from './hook/useInputValnError';
+import { Controller } from 'react-hook-form';
 const InputElemWrapper = (props) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
     const theme = useContext(ThemeContext);
@@ -92,12 +93,23 @@ const InputElemWrapper = (props) => {
     //     return React.cloneElement(<Element {...props} /> as any, {...props, onChange: (a:any) => setValue(props.name, a), value : value, error: error})
     //   } else {return null}
     // },[value, error])
-    const clonedElement = Element !== undefined && Element !== null ?
-        React.cloneElement(React.createElement(Element, Object.assign({}, props)), Object.assign(Object.assign(Object.assign(Object.assign({}, props), { children: Array.isArray(props.children) ?
-                (props.children.filter(x => (x === null || x === void 0 ? void 0 : x.props) && (x === null || x === void 0 ? void 0 : x.props.name) === props.name).length > 0 ? null : props.children) :
-                (props.children.props.name === props.name ? null : props.children), onChange: (a) => rest.setValue(props.name, a) }), rest), { value: value, error: error })) :
-        null;
-    return clonedElement !== undefined && clonedElement !== null ? clonedElement : WrapElem;
+    /* const clonedElement = Element !== undefined && Element !== null ?
+      React.cloneElement(<Element {...props} /> as any, {
+        ...props,
+        children: null,
+        onChange: (a:any) => rest.setValue('InputElemWrapper - clonedElement ', a),
+        ...rest,
+        source : 'InputElemWrapper',
+        value : value,
+        error: error
+      }) :
+      null */
+    return Element !== undefined && Element !== null ?
+        React.createElement(Controller, { name: props.name, control: rest.control, render: ({ field, formState }) => {
+                var _a;
+                return React.cloneElement(React.createElement(Element, Object.assign({}, props)), Object.assign(Object.assign(Object.assign({}, props), rest), { children: null, onChange: field.onChange, value: field.value, name: field.name, source: 'InputElemWrapper', error: (_a = formState.errors) === null || _a === void 0 ? void 0 : _a[field.name] }));
+            } })
+        : WrapElem;
     // return Wrapper as JSX.Element
 };
 export default React.memo(InputElemWrapper);

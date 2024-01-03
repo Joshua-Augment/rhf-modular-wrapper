@@ -78,7 +78,7 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
   //   } else {return null}
   // },[value, error])
 
-  const clonedElement = Element !== undefined && Element !== null ?
+  /* const clonedElement = Element !== undefined && Element !== null ?
     React.cloneElement(<Element {...props} /> as any, {
       ...props,  
       children: null,
@@ -88,7 +88,7 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
       value : value, 
       error: error
     }) : 
-    null
+    null */
 
   
   return Element !== undefined && Element !== null ? 

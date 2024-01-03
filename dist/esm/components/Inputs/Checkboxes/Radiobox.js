@@ -12,7 +12,9 @@ const Radiobox = (props) => {
         React.createElement(_Radiobox, Object.assign({}, props))));
 };
 const _Radiobox = (props) => {
+    // console.log('[_Radiobox] - props  ',props)
     useEffect(() => {
+        // console.log('[_Radiobox] - props useEffect ', props)
         if (props.value === undefined || props.value === '' || props.value === null) {
             props.onChange(props.options[0].value);
         }

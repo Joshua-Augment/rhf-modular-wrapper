@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, /* useMemo, */ useRef } from "react";
 import InputElemWrapper from "./InputElemWrapper";
 import { FormBaseInput } from "./interfaces";
 import { useInputValAndError } from "./hook/useInputValnError";
@@ -96,7 +96,7 @@ const InputWrapper = (props: FormBaseInput) => {
   //     ...rest
   //   }), [value, error, props])
   
-  const childrenInjected = React.cloneElement(
+  /* const childrenInjected = React.cloneElement(
     props.children, 
     {
       ...props.children?.props, 
@@ -107,7 +107,7 @@ const InputWrapper = (props: FormBaseInput) => {
       error: error,
       source : 'InputWrapper',
       ...rest
-    })
+    }) */
 
   const Wrapper = (A ?: any, B ?:any, children ?: any) => {
     if (A) {return <A>{children}</A>}

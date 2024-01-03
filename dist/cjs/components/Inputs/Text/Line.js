@@ -7,15 +7,14 @@ const react_1 = __importDefault(require("react"));
 const InputWrapper_1 = __importDefault(require("../../core/InputWrapper"));
 // import { useInputValAndError } from '../../core/hook/useInputValnError'
 const Line = (props) => {
-    var _a;
     // const {value, setValue} = useInputValAndError(props.name)
-    console.log(`Line - ${props.name} - props : `, props);
     // useEffect(()=>{
     //   if (props.type === 'number' && props.value === '') {       
     //   // console.log(`[Setting] Setting value for ${props.name} in line from ${value} to ${props.type === 'number' ? 0 : ''}`)
     //     props.setValue(props.name, props.type === 'number' ? 0 : '') 
     //   }
     // },[props.value])
+    var _a;
     // const handleInput = (a:any) => {
     // // console.log(`[Setting] Value changed! for ${props.name} in line from ${value} to ${a.target.value}`)
     //   setValue(props.name, a.target.value)

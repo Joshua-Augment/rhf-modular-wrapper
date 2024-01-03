@@ -9,9 +9,10 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, /* useMemo, */ useRef } from "react";
 import InputElemWrapper from "./InputElemWrapper";
 import { useInputValAndError } from "./hook/useInputValnError";
+import { Controller } from "react-hook-form";
 const InputWrapper = (props) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
     const firstUpdate = useRef(true);
@@ -21,8 +22,8 @@ const InputWrapper = (props) => {
     // On Value change
     useEffect(() => {
         if (props.defaultValue !== undefined) {
-            console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
-            rest.setValue(props.name, props.defaultValue);
+            // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
+            rest.setValue('inputWrapper - DefaultValue', props.defaultValue);
         }
     }, [props.defaultValue]);
     useEffect(() => {
@@ -47,12 +48,12 @@ const InputWrapper = (props) => {
                     // .then(data => { contextSetValue(props.name, data) })
                     .then(data => {
                     // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
-                    rest.setValue(props.name, data);
+                    rest.setValue('InputWrapper CalculatedField [Promise] ', data);
                 });
             }
             else {
                 // console.log(`[Setting] Setting value for ${props.name} by calculation`)
-                rest.setValue(props.name, props.calculatedField.calculate(value, props.name, rest.getValues(props.calculatedField.find), rest.getValues()));
+                rest.setValue('InputWrapper Calculated Field [No Promise]', props.calculatedField.calculate(value, props.name, rest.getValues(props.calculatedField.find), rest.getValues()));
             }
         }
     }, [watchCalculated]);
@@ -86,10 +87,30 @@ const InputWrapper = (props) => {
     // },[value, props?.options, error])
     // console.log('props - ',props)
     // const serializedProps = JSON.stringify({...props, options : props?.options ?? [], children: props.children?.props,  })  
-    const childrenInjected = useMemo(() => {
-        var _a, _b;
-        return React.cloneElement(props.children, Object.assign(Object.assign(Object.assign({}, (_a = props.children) === null || _a === void 0 ? void 0 : _a.props), { disabled: props.disabled, type: (_b = props === null || props === void 0 ? void 0 : props.type) !== null && _b !== void 0 ? _b : 'line', onChange: (a) => rest.setValue(props.name, a), value: value, error: error }), rest));
-    }, [value, error, props]);
+    // const childrenInjected = useMemo(()=> React.cloneElement(
+    //   props.children, 
+    //   {
+    //     ...props.children?.props, 
+    //     disabled : props.disabled, 
+    //     type:props?.type??'line',
+    //     onChange : (a:any) => rest.setValue('InputWrapper onChange [cloneElement] ', a),
+    //     value: value,
+    //     error: error,
+    //     source : 'InputWrapper',
+    //     ...rest
+    //   }), [value, error, props])
+    /* const childrenInjected = React.cloneElement(
+      props.children,
+      {
+        ...props.children?.props,
+        disabled : props.disabled,
+        type:props?.type??'line',
+        onChange : (a:any) => rest.setValue('InputWrapper onChange [cloneElement] ', a),
+        value: value,
+        error: error,
+        source : 'InputWrapper',
+        ...rest
+      }) */
     const Wrapper = (A, B, children) => {
         if (A) {
             return React.createElement(A, null, children);
@@ -105,7 +126,10 @@ const InputWrapper = (props) => {
     return React.createElement(InputElemWrapper, Object.assign({}, props, { disabled: props.disabled, value: value }),
         React.createElement(React.Fragment, null,
             WrapperElementLeft,
-            childrenInjected,
+            React.createElement(Controller, { name: props.name, control: rest.control, render: ({ field, formState }) => {
+                    var _a, _b, _c;
+                    return React.cloneElement(props.children, Object.assign(Object.assign(Object.assign({}, (_a = props.children) === null || _a === void 0 ? void 0 : _a.props), rest), { disabled: props.disabled, type: (_b = props === null || props === void 0 ? void 0 : props.type) !== null && _b !== void 0 ? _b : 'line', onChange: field.onChange, onBlur: field.onBlur, value: field.value, error: (_c = formState.errors) === null || _c === void 0 ? void 0 : _c[field.name], source: 'InputWrapper' }));
+                } }),
             WrapperElementRight));
 };
 export default InputWrapper;

@@ -16,8 +16,9 @@ const Checkbox = (props) => {
         react_1.default.createElement(_Checkbox, Object.assign({}, props))));
 };
 const _Checkbox = (props) => {
+    // console.log(`[_Checkbox] Name : ${props.name} - `, props)
     // useEffect(()=>{ if (props.value === undefined || props.value === null || props.value === '') { props.onChange( false) } },[props.value])
-    return react_1.default.createElement("input", { id: props.name, type: "checkbox", name: props.name, checked: props.value, value: props.value, onChange: (a) => props.onChange(a.target.checked) });
+    return react_1.default.createElement("input", Object.assign({ id: props.name, type: "checkbox", checked: props.value }, props.register(props.name)));
 };
 exports.default = Checkbox;
 //# sourceMappingURL=Checkbox.js.map

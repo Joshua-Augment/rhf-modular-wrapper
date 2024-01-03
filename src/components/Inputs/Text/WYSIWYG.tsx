@@ -4,7 +4,7 @@ import InputWrapper from "../../core/InputWrapper";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useInputValAndError } from '../../core/hook/useInputValnError';
-import { Controller } from 'react-hook-form';
+// import { Controller } from 'react-hook-form';
 
 const WYSIWYG = (props:ILines) => {
   const {value, setValue} = useInputValAndError(props.name)

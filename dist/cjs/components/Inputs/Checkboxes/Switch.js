@@ -20,7 +20,7 @@ const Switch = (props) => {
 };
 const _Switch = (props) => {
     var _a, _b;
-    console.log(`[Switch] ${props.name} (Current : ${props.value})`, props);
+    // console.log(`[Switch] ${props.name} (Current : ${props.value})`,props)
     return react_1.default.createElement("div", { className: `d-block ${props.wrapperClass}`, style: Object.assign({ display: 'flex', alignItems: 'center', flexDirection: 'column' }, props.wrapperStyle) },
         react_1.default.createElement(react_switch_1.default, Object.assign({}, (_a = props === null || props === void 0 ? void 0 : props.options) !== null && _a !== void 0 ? _a : {}, { className: props === null || props === void 0 ? void 0 : props.inputClass, onChange: (a) => props.onChange(a), checked: (_b = props.value) !== null && _b !== void 0 ? _b : false })),
         props.footLabel && react_1.default.createElement("div", { className: 'text-muted text-center' }, props.footLabel && (props.value ? props.footLabel[1] : props.footLabel[0])));

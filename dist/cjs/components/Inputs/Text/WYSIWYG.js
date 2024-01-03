@@ -31,11 +31,12 @@ const InputWrapper_1 = __importDefault(require("../../core/InputWrapper"));
 const react_quill_1 = __importDefault(require("react-quill"));
 require("react-quill/dist/quill.snow.css");
 const useInputValnError_1 = require("../../core/hook/useInputValnError");
+// import { Controller } from 'react-hook-form';
 const WYSIWYG = (props) => {
     var _a;
     const { value, setValue } = (0, useInputValnError_1.useInputValAndError)(props.name);
-    console.log('[WYSIWYG Value] - ', value);
-    console.log('[WYSIWYG Prop.Value] - ', props.value);
+    // console.log('[WYSIWYG Value] - ',value)
+    // console.log('[WYSIWYG Prop.Value] - ',props.value)
     // const {watch, setValue} = useFormContext()
     // const _val = watch(props.name)
     (0, react_1.useEffect)(() => { if (value === undefined || value === null) {
@@ -62,7 +63,18 @@ const ReactQuillWrapper = (props) => {
         [{ 'align': [] }],
         ['clean'] // remove formatting button
     ]), []);
-    return react_1.default.createElement(react_quill_1.default, { theme: 'snow', modules: { toolbar: toolbarOptions }, onChange: (a) => props.onChange(a), value: props.value });
+    return react_1.default.createElement(react_quill_1.default, { theme: 'snow', modules: { toolbar: toolbarOptions }, onChange: (a) => props.onChange(a), value: props.value, onBlur: props.onBlur });
+    // return <Controller 
+    //   name={props.name}
+    //   control={props.control}
+    //   render={({field: {value,onChange, onBlur}}) => <ReactQuill 
+    //     theme={'snow'} 
+    //     modules={{toolbar : toolbarOptions}} 
+    //     onChange={(a:any) => onChange(a)}  
+    //     value={value}
+    //     onBlur={onBlur}
+    //   />}
+    // />
 };
 exports.default = WYSIWYG;
 //# sourceMappingURL=WYSIWYG.js.map
