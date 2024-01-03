@@ -11,7 +11,7 @@ import { useInputValAndError } from './hook/useInputValnError';
 const InputElemWrapper = (props: FormFrameWrapperProps) => {
   const theme = useContext(ThemeContext)
   
-  const {value, error, setValue} = useInputValAndError(props.name)
+  const {value, error, ...rest} = useInputValAndError(props.name)
 
   const Element = props.element ?? 
     (theme.elements !== null && theme.elements[props.type] !== undefined ? theme.elements[props.type] : null) 
@@ -78,7 +78,16 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
   // },[value, error])
 
   const clonedElement = Element !== undefined && Element !== null ?
-    React.cloneElement(<Element {...props} /> as any, {...props, onChange: (a:any) => setValue(props.name, a), value : value, error: error}) : 
+    React.cloneElement(<Element {...props} /> as any, {
+      ...props,  
+      children: Array.isArray(props.children) ? 
+        (props.children.filter(x => x?.props && x?.props.name === props.name).length > 0 ? null : props.children) :
+        (props.children.props.name === props.name ? null : props.children),
+      onChange: (a:any) => rest.setValue(props.name, a), 
+      ...rest,
+      value : value, 
+      error: error
+    }) : 
     null
 
   

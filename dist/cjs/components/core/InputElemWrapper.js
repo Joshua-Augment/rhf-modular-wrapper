@@ -22,6 +22,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -35,7 +46,7 @@ const useInputValnError_1 = require("./hook/useInputValnError");
 const InputElemWrapper = (props) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
     const theme = (0, react_1.useContext)(Form_1.ThemeContext);
-    const { value, error, setValue } = (0, useInputValnError_1.useInputValAndError)(props.name);
+    const _m = (0, useInputValnError_1.useInputValAndError)(props.name), { value, error } = _m, rest = __rest(_m, ["value", "error"]);
     const Element = (_a = props.element) !== null && _a !== void 0 ? _a : (theme.elements !== null && theme.elements[props.type] !== undefined ? theme.elements[props.type] : null);
     const Wrapper = (_c = (_b = props.inputWrapper) !== null && _b !== void 0 ? _b : theme.inputTemplate) !== null && _c !== void 0 ? _c : null;
     const WrapElem = Wrapper !== null && Wrapper !== undefined ?
@@ -110,7 +121,9 @@ const InputElemWrapper = (props) => {
     //   } else {return null}
     // },[value, error])
     const clonedElement = Element !== undefined && Element !== null ?
-        react_1.default.cloneElement(react_1.default.createElement(Element, Object.assign({}, props)), Object.assign(Object.assign({}, props), { onChange: (a) => setValue(props.name, a), value: value, error: error })) :
+        react_1.default.cloneElement(react_1.default.createElement(Element, Object.assign({}, props)), Object.assign(Object.assign(Object.assign(Object.assign({}, props), { children: Array.isArray(props.children) ?
+                (props.children.filter(x => (x === null || x === void 0 ? void 0 : x.props) && (x === null || x === void 0 ? void 0 : x.props.name) === props.name).length > 0 ? null : props.children) :
+                (props.children.props.name === props.name ? null : props.children), onChange: (a) => rest.setValue(props.name, a) }), rest), { value: value, error: error })) :
         null;
     return clonedElement !== undefined && clonedElement !== null ? clonedElement : WrapElem;
     // return Wrapper as JSX.Element
