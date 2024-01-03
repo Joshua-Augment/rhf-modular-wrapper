@@ -80,9 +80,7 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
   const clonedElement = Element !== undefined && Element !== null ?
     React.cloneElement(<Element {...props} /> as any, {
       ...props,  
-      children: Array.isArray(props.children) ? 
-        (props.children.filter(x => x?.props && x?.props.name === props.name).length > 0 ? null : props.children) :
-        (props.children.props.name === props.name ? null : props.children),
+      children: null,
       onChange: (a:any) => rest.setValue(props.name, a), 
       ...rest,
       value : value, 
