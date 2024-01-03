@@ -31,7 +31,7 @@ export interface IForm<T extends FieldValues> {
 }
 export interface FormFrameWrapperProps<T = any> extends IInputsBaseProps<T> {
     errors?: FieldError;
-    children: JSX.Element;
+    children: JSX.Element | JSX.Element[];
     value: T;
 }
 export interface IFormFrameInjector<T = any> extends FormFrameWrapperProps<T> {

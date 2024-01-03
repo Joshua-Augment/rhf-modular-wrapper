@@ -86,4 +86,4 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
   // return Wrapper as JSX.Element
 }
 
-export default InputElemWrapper
+export default React.memo(InputElemWrapper)

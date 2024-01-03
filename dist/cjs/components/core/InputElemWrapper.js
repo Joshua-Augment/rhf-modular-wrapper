@@ -115,5 +115,5 @@ const InputElemWrapper = (props) => {
     return clonedElement !== undefined && clonedElement !== null ? clonedElement : WrapElem;
     // return Wrapper as JSX.Element
 };
-exports.default = InputElemWrapper;
+exports.default = react_1.default.memo(InputElemWrapper);
 //# sourceMappingURL=InputElemWrapper.js.map

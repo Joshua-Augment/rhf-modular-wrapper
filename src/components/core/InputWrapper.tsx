@@ -12,7 +12,7 @@ const InputWrapper = (props: FormBaseInput) => {
 // console.log(`For ${props.name}, error : `,rest.error)
   // On Value change
   useEffect(()=>{ if (props.defaultValue !== undefined) {
-  // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
+  console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
     rest.setValue(props.name, props.defaultValue);
   } },[props.defaultValue]) 
   
@@ -104,7 +104,6 @@ const InputWrapper = (props: FormBaseInput) => {
     props?.buttons?.wrapper?.all,
     props?.buttons?.left? props.buttons.left(value, props.name, rest.getValues) : null
   ) : null
-
   const WrapperElementRight = props?.buttons?.right ? Wrapper(
     props?.buttons?.wrapper?.right,
     props?.buttons?.wrapper?.all,      

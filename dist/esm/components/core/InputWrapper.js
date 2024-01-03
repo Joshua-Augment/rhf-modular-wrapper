@@ -21,7 +21,7 @@ const InputWrapper = (props) => {
     // On Value change
     useEffect(() => {
         if (props.defaultValue !== undefined) {
-            // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
+            console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
             rest.setValue(props.name, props.defaultValue);
         }
     }, [props.defaultValue]);

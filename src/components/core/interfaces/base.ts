@@ -27,7 +27,7 @@ export interface IForm<T extends FieldValues> {
 
 export interface FormFrameWrapperProps<T=any> extends IInputsBaseProps<T>  {
   errors ?: FieldError,
-  children : JSX.Element,
+  children : JSX.Element | JSX.Element[] ,
   // onChange : Function,
   value : T
   // defaultValue ?: T

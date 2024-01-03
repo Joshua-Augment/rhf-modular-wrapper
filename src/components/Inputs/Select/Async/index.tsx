@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AsyncSelectInput from "react-select/async";
 import AsyncCreatableSelectInput from "react-select/async-creatable";
 import { TSelectOption, ISelectAsync, InputWrapper, IInputsBasePropsNoSetters,} from "../../../core";
+import { Controller } from "react-hook-form";
 
 
 const AsyncSelect = (props: ISelectAsync) => {
@@ -68,8 +69,42 @@ const _AsyncSelect = (props: any) => {
       }
     }
   }
-
-  return props.isCreatable !== undefined ? (
+  
+  return <Controller      
+    control={props.control}
+    name={props.name}
+    defaultValue={props.defaultValue}
+    render={ ({field: {name, value, onChange, onBlur}, formState: {errors}}) => (
+      props.isCreatable !== undefined ? 
+        <AsyncCreatableSelectInput
+          styles={{container: (base) => ({...base, width:'100%'})}}
+          onCreateOption={createNew}
+          {...props}
+          options={options}
+          isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
+          name={name}
+          value={value}
+          onChange={(a) => onChange(a)}
+          {...props.rsOptions}
+          loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, props.getValues(),b) : props.loadOptions(a,b)}
+        />
+      : 
+        <AsyncSelectInput
+          styles={{container: (base) => ({...base, width:'100%'})}}
+          {...props}
+          options={options}
+          isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
+          name={name}
+          value={value}
+          onChange={(a) => onChange(a)}
+          {...props.rsOptions}
+          loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, props.getValues(),b) : props.loadOptions(a,b)}
+        />  
+      )}
+    />
+  
+  
+  props.isCreatable !== undefined ? (
     <AsyncCreatableSelectInput
       styles={{container: (base) => ({...base, width:'100%'})}}
       onCreateOption={createNew}

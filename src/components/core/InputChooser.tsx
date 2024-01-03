@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { DatePicker, Select,AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList } from '../Inputs'
 import { TListItems } from './interfaces/lists'
 
 const InputChooser = (props: TListItems) => {
-  const OutputComponent = ()=>{
+  const OutputComponent = useMemo(()=>{
       switch(props.type) {
         case 'custom':
           const Elem = props.elem
@@ -35,9 +35,9 @@ const InputChooser = (props: TListItems) => {
         default:
           return <Line {...props}/>
     }
-  }
+  },[])
 
-  return OutputComponent()
+  return OutputComponent
 }
 
 export default InputChooser

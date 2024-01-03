@@ -42,9 +42,39 @@ const mappedFields:any[][] = [
     {name: 'line', type: 'line', label: 'Test Line', placeholder: 'Write Something...'}
   ],
 ]
+
 MappedInputChooser.args = {
   children : <div style={{display:'flex', flexDirection:'row',}}>{mappedFields.map((field,i) => <div style={{padding:'10px',width:'100%',flex:1}} key={i}>
     {field.map(_field =>  <InputChooser {..._field} name={`${_field.name}-${i}`} label={`${_field.label}-${i}`} key={_field.name} />)}
   </div>)}</div>
 }
 
+
+export const SimpleWithDefaults = Template.bind({}) 
+SimpleWithDefaults.args = {
+  defaultValues: {
+    inputChooserLine : "Default Value for Text",
+    inputChooserAsyncSelect : {label: "Default Value for Async select", value: 998},
+    inputChooserSelect : {label: "Default Value for select", value: 999}
+  },
+  children : <>
+    <InputChooser cacheOptions defaultOptions type="select_async" label="Select Async using Input Chooser" loadOptions={(a,b) => loadOptions(a,b)} name="inputChooserAsyncSelect" />
+    <InputChooser cacheOptions defaultOptions type="select" label="Select using Input Chooser" options={baseOptions} name="inputChooserSelect" />
+    <InputChooser cacheOptions defaultOptions type="line" label="Text using Input Chooser" loadOptions={(a,b) => loadOptions(a,b)} name="inputChooserLine" />
+  </>
+}
+
+export const MappedWithDefaults = Template.bind({})
+MappedWithDefaults.args = {
+  defaultValues : {
+    'line-0' : 'Test Default Line 0',
+    'line-1' : 'Test Default Line 1',
+    'normal-0' : {label: 'Test Default Normal 0', value: 1},
+    'normal-1' : {label: 'Test Default Normal 1', value: 2},
+    'async-0' : {label: 'Test Default Async 0', value: 3},
+    'async-1' : {label: 'Test Default Async 1', value: 4},
+  },
+  children : <div style={{display:'flex', flexDirection:'row',}}>{mappedFields.map((field,i) => <div style={{padding:'10px',width:'100%',flex:1}} key={i}>
+    {field.map(_field =>  <InputChooser {..._field} name={`${_field.name}-${i}`} label={`${_field.label}-${i}`} key={_field.name} />)}
+  </div>)}</div>
+}
