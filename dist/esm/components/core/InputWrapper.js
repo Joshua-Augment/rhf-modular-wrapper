@@ -128,6 +128,7 @@ const InputWrapper = (props) => {
     const WrapperElementRight = ((_l = props === null || props === void 0 ? void 0 : props.buttons) === null || _l === void 0 ? void 0 : _l.right) ? Wrapper((_o = (_m = props === null || props === void 0 ? void 0 : props.buttons) === null || _m === void 0 ? void 0 : _m.wrapper) === null || _o === void 0 ? void 0 : _o.right, (_q = (_p = props === null || props === void 0 ? void 0 : props.buttons) === null || _p === void 0 ? void 0 : _p.wrapper) === null || _q === void 0 ? void 0 : _q.all, ((_r = props === null || props === void 0 ? void 0 : props.buttons) === null || _r === void 0 ? void 0 : _r.right) ? props.buttons.right(value, props.name, rest.getValues) : null) : null;
     const ChosenElement = Element !== undefined && Element !== null ? Element : props === null || props === void 0 ? void 0 : props.children;
     // console.log(`[InputWrapper - ${props.name}] - injected props`,childrenInjected.props)
+    console.log('[_chosenElement] - ', ChosenElement, props);
     return React.createElement(InputElemWrapper, Object.assign({}, props, { disabled: props.disabled, value: value }),
         React.createElement(React.Fragment, null,
             WrapperElementLeft,
