@@ -235,6 +235,56 @@ The prop `sliderOptions` may be used as standard props of the `react-range-slide
 ```jsx
  <Slider name="test_slider" label="Test slider" min={1} max={10} steps={2}/>
 ```
+
+### Custom Elements
+To add a custom element plug-and-play style, simply add it to the elements prop of the `<Form>` element. You may use either InputChooser or replacing existing elements. You may use the interface `CustomElementBaseInput` on your element for to aid in setting the props
+
+#### Replacing existing elements
+
+```jsx
+
+  const App = () => {
+
+    return <Form 
+    elements={{
+      line: CustomElement
+    }}
+  >
+    <Line {...props} />
+  </Form>
+
+  }
+
+  // CustomElementBaseInput Interface outputs the methods of react-hook-form, 
+  // as well as value, error, and an onchange that is specific to the input name
+  const CustomElement = (props : CustomElementBaseInput) => {
+    return <SomeNewInputElement 
+      name={props.name}
+      value={props.value}
+      onChange={(a) => props.onChange(a)} /*NOTE. Give the onchange here a value and not an event!*/
+    />
+  }
+```
+
+#### InputChooser
+
+```jsx
+
+  const App = () => {
+
+    return <Form 
+      elements={{
+        custom1: CustomElem1,
+        custom2: CustomElem2
+      }}
+    >
+    <InputChooser {...propsforCustomElem1} type="custom1" /* The type here corresponds with the key of the element in the Forms elements props*/ />
+    <InputChooser {...propsforCustomElem2} type="custom2" />
+  </Form>
+
+  }
+```
+
 ## Planned Upgrades
 
 Currently more inputs are being planned out, including; 

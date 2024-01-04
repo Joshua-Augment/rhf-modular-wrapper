@@ -120,6 +120,13 @@ export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {
   children ?: any
 }
 
+export interface CustomElementBaseInput<T=any> extends UseFormReturn {
+  type : string,
+  value : T,
+  onChange : (value : T) => void,
+  error ?: FieldError 
+}
+
 
 export type HTMLInputTypeAttribute =
 | 'button'

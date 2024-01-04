@@ -176,8 +176,6 @@ const InputWrapper = (props: FormBaseInput) => {
           onBlur : field.onBlur,
           value: field.value,
           error: error,
-          // error: formState.errors?.[field.name],
-          source : 'InputWrapper',
         }) : 
         React.cloneElement(
           props.children, 
@@ -190,8 +188,6 @@ const InputWrapper = (props: FormBaseInput) => {
             onBlur : field.onBlur,
             value: field.value,
             error: error,
-            // error: formState.errors?.[field.name],
-            source : 'InputWrapper',
           })}
       />
     }
