@@ -5,7 +5,7 @@ export const useInputValAndError = <T=any,>(name :string) => {
   const methods = useFormContext()
 
   const highjackedSetValue = (_name:string, value: any) => {
-    //console.log(`[HighJackedSetValue] Called from : ${_name} - `,value)
+    console.log(`[HighJackedSetValue] Called from : ${_name} - `,value)
     methods.setValue(name, value)
   }
 

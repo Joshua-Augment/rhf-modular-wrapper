@@ -93,6 +93,8 @@ export interface IInputsBasePropsNoSetters<T=any> {
   value ?: any,
   onChange ?: (a:any) => void,
 
+  fields ?: any,
+  type ?: string,
   [key: string]: any,
   [key :number]: any,
 }

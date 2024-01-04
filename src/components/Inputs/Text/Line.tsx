@@ -32,7 +32,7 @@ const _Line = (props: any) => {
   //     props.onChange(e.target.value)
   //   }
   // }
-  // console.log(`_Line - ${props.name} [value : ${props.value}] props : `,props)
+  console.log(`_Line - ${props.name} [value : ${props.value}] props : `,props)
   return <input 
     disabled={props.disabled} 
     id={props.name} 

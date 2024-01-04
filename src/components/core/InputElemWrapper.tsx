@@ -5,21 +5,20 @@ import InfoIcon from '@mui/icons-material/Info';
 import { FormFrameWrapperProps } from './interfaces';
 import { ThemeContext } from './Form';
 import { useInputValAndError } from './hook/useInputValnError';
-import { Controller } from 'react-hook-form';
 
 
 
 const InputElemWrapper = (props: FormFrameWrapperProps) => {
-  const theme = useContext(ThemeContext)
-  
   const {value, error, ...rest} = useInputValAndError(props.name)
+  
+  const theme = useContext(ThemeContext)
 
-  const Element = props.element ?? 
-    (theme.elements !== null && theme.elements[props.type] !== undefined ? theme.elements[props.type] : null) 
+  // const Element = props.element ?? 
+  //   (theme.elements !== null && theme.elements[props.type] !== undefined ? theme.elements[props.type] : null) 
   const Wrapper = props.inputWrapper ?? theme.inputTemplate ?? null
   
   const WrapElem = Wrapper !== null && Wrapper !== undefined ? 
-    <Wrapper {...props} /> : 
+    <Wrapper {...props} value={value} {...rest} /> : 
     <div style={{position: 'relative', ...props.style}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
         {
           props.reversedLabel === true ? 
@@ -90,8 +89,8 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
     }) : 
     null */
 
-  
-  return Element !== undefined && Element !== null ? 
+  return WrapElem;
+  /* return Element !== undefined && Element !== null ? 
     <Controller 
       name={props.name}
       control={rest.control}
@@ -108,7 +107,7 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
           error: formState.errors?.[field.name]
         })}
     />
-  : WrapElem
+  : WrapElem */
   // return Wrapper as JSX.Element
 }
 

@@ -1,10 +1,15 @@
-import React, { useEffect, /* useMemo, */ useRef } from "react";
+import React, { useContext, useEffect, /* useMemo, */ useRef } from "react";
 import InputElemWrapper from "./InputElemWrapper";
 import { FormBaseInput } from "./interfaces";
 import { useInputValAndError } from "./hook/useInputValnError";
 import { Controller } from "react-hook-form";
+import { ThemeContext } from "./Form";
 
 const InputWrapper = (props: FormBaseInput) => {
+  const theme = useContext(ThemeContext)
+
+  const Element = props.element ?? (theme.elements !== null && theme.elements[props.type ?? 'line'] !== undefined ? theme.elements[props.type ?? 'line'] : null) 
+  
   const firstUpdate = useRef(true)
   const {value, error, ...rest} = useInputValAndError(props.name)
 
@@ -130,23 +135,40 @@ const InputWrapper = (props: FormBaseInput) => {
   return <InputElemWrapper {...props} disabled={props.disabled} value={value} >
   <>
     {WrapperElementLeft}
-    <Controller 
-      name={props.name}
-      control={rest.control}
-      render={({field, formState}) => React.cloneElement(
-        props.children, 
-        {
-          ...props.children?.props, 
-          ...rest,
-          disabled : props.disabled, 
-          type:props?.type??'line',
-          onChange : field.onChange,
-          onBlur : field.onBlur,
-          value: field.value,
-          error: formState.errors?.[field.name],
-          source : 'InputWrapper',
-        })}
-    />
+    {
+      (props?.type ?? "line").toLowerCase().includes("list") ?
+      React.cloneElement(
+      Element ?? props.children, 
+      {
+        ...props.children?.props, 
+        ...rest,
+        disabled : props.disabled, 
+        type:props?.type??'line',
+        onChange : (a) => rest.setValue('FromController',a),
+        value: value,
+        error: error,
+        // error: formState.errors?.[field.name],
+        source : 'InputWrapper',
+      }) :
+      <Controller 
+        name={props.name}
+        control={rest.control}
+        render={({field, formState}) => React.cloneElement(
+          Element ?? props.children, 
+          {
+            ...props.children?.props, 
+            ...rest,
+            disabled : props.disabled, 
+            type:props?.type??'line',
+            onChange : (a) => rest.setValue('FromController',a),
+            onBlur : field.onBlur,
+            value: field.value,
+            error: error,
+            // error: formState.errors?.[field.name],
+            source : 'InputWrapper',
+          })}
+      />
+    }
     {/* childrenInjected */}
     {WrapperElementRight}
   </>

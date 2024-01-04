@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 export const useInputValAndError = (name) => {
     const methods = useFormContext();
     const highjackedSetValue = (_name, value) => {
-        //console.log(`[HighJackedSetValue] Called from : ${_name} - `,value)
+        console.log(`[HighJackedSetValue] Called from : ${_name} - `, value);
         methods.setValue(name, value);
     };
     const value = methods.watch(name);
