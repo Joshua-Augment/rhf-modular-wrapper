@@ -154,9 +154,9 @@ const InputWrapper = (props) => {
     };
     const WrapperElementLeft = ((_e = props === null || props === void 0 ? void 0 : props.buttons) === null || _e === void 0 ? void 0 : _e.left) ? Wrapper((_g = (_f = props === null || props === void 0 ? void 0 : props.buttons) === null || _f === void 0 ? void 0 : _f.wrapper) === null || _g === void 0 ? void 0 : _g.left, (_j = (_h = props === null || props === void 0 ? void 0 : props.buttons) === null || _h === void 0 ? void 0 : _h.wrapper) === null || _j === void 0 ? void 0 : _j.all, ((_k = props === null || props === void 0 ? void 0 : props.buttons) === null || _k === void 0 ? void 0 : _k.left) ? props.buttons.left(value, props.name, rest.getValues) : null) : null;
     const WrapperElementRight = ((_l = props === null || props === void 0 ? void 0 : props.buttons) === null || _l === void 0 ? void 0 : _l.right) ? Wrapper((_o = (_m = props === null || props === void 0 ? void 0 : props.buttons) === null || _m === void 0 ? void 0 : _m.wrapper) === null || _o === void 0 ? void 0 : _o.right, (_q = (_p = props === null || props === void 0 ? void 0 : props.buttons) === null || _p === void 0 ? void 0 : _p.wrapper) === null || _q === void 0 ? void 0 : _q.all, ((_r = props === null || props === void 0 ? void 0 : props.buttons) === null || _r === void 0 ? void 0 : _r.right) ? props.buttons.right(value, props.name, rest.getValues) : null) : null;
-    const ChosenElement = Element !== undefined && Element !== null ? Element : props === null || props === void 0 ? void 0 : props.children;
+    const ChosenElement = Element !== undefined && Element !== null ? Element : null;
     // console.log(`[InputWrapper - ${props.name}] - injected props`,childrenInjected.props)
-    console.log('[_chosenElement] - ', ChosenElement, props);
+    // console.log('[_chosenElement] - ',ChosenElement, props)
     return react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { disabled: props.disabled, value: value }),
         react_1.default.createElement(react_1.default.Fragment, null,
             WrapperElementLeft,

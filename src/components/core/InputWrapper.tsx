@@ -132,9 +132,9 @@ const InputWrapper = (props: FormBaseInput) => {
     props?.buttons?.right? props.buttons.right(value, props.name, rest.getValues) : null
   ) : null
 
-  const ChosenElement = Element !== undefined && Element !== null ? Element :  props?.children
+  const ChosenElement:any = Element !== undefined && Element !== null ? Element : null
     // console.log(`[InputWrapper - ${props.name}] - injected props`,childrenInjected.props)
-  console.log('[_chosenElement] - ',ChosenElement, props)
+  // console.log('[_chosenElement] - ',ChosenElement, props)
   return <InputElemWrapper {...props} disabled={props.disabled} value={value} >
   <>
     {WrapperElementLeft}
