@@ -6,7 +6,7 @@ const react_hook_form_1 = require("react-hook-form");
 const useInputValAndError = (name) => {
     const methods = (0, react_hook_form_1.useFormContext)();
     const highjackedSetValue = (_name, value) => {
-        //console.log(`[HighJackedSetValue] Called from : ${_name} - `,value)
+        console.log(`[HighJackedSetValue] Called from : ${_name} - `, value);
         methods.setValue(name, value);
     };
     const value = methods.watch(name);

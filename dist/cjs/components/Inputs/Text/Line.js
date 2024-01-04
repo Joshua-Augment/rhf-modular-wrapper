@@ -33,7 +33,7 @@ const _Line = (props) => {
     //     props.onChange(e.target.value)
     //   }
     // }
-    // console.log(`_Line - ${props.name} [value : ${props.value}] props : `,props)
+    console.log(`_Line - ${props.name} [value : ${props.value}] props : `, props);
     return react_1.default.createElement("input", Object.assign({ disabled: props.disabled, id: props.name, className: (_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.inputClassName) !== null && _b !== void 0 ? _b : '' }, props.register(props.name), { 
         // name={props.name} 
         // value={props.value !== undefined && props.value !== null ? props.value : ""} 
