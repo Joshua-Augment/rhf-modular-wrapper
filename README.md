@@ -7,9 +7,9 @@ This readme will be updated further as we go along, as this is my first time wri
 
 
 ## Use Case (TLDR)
-While each Input has a `contextless` prop  that allows it to be used as a standalone input, most of them work within a ``` <Form> ``` component as shown
+Wrap all form elements in the `<Form>` component as shown
 
-```
+```jsx
 const onSubmit = (returnObjects: any) => new Promise<any>((resolve, reject) => {})
 const defaultValues = {name: 'James'}
 
