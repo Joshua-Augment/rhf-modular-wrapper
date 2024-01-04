@@ -7,8 +7,10 @@ import { ThemeContext } from "./Form";
 
 const InputWrapper = (props: FormBaseInput) => {
   const theme = useContext(ThemeContext)
-
-  const Element = props.element ?? (theme.elements !== null && theme.elements[props.type ?? 'line'] !== undefined ? theme.elements[props.type ?? 'line'] : null) 
+  const Element = props.element ?? (
+    theme.elements !== null && theme.elements[props.type ?? 'line'] !== undefined ? 
+      theme.elements[props.type ?? 'line'] : null
+  ) 
   
   const firstUpdate = useRef(true)
   const {value, error, ...rest} = useInputValAndError(props.name)
@@ -130,15 +132,26 @@ const InputWrapper = (props: FormBaseInput) => {
     props?.buttons?.right? props.buttons.right(value, props.name, rest.getValues) : null
   ) : null
 
-  // console.log(`[InputWrapper - ${props.name}] - injected props`,childrenInjected.props)
+  const ChosenElement = Element !== undefined && Element !== null ? Element :  props?.children
+    // console.log(`[InputWrapper - ${props.name}] - injected props`,childrenInjected.props)
 
   return <InputElemWrapper {...props} disabled={props.disabled} value={value} >
   <>
     {WrapperElementLeft}
     {
       (props?.type ?? "line").toLowerCase().includes("list") ?
-      React.cloneElement(
-      Element ?? props.children, 
+      ChosenElement ? ChosenElement({
+        ...props.children?.props, 
+        ...rest,
+        disabled : props.disabled, 
+        type:props?.type??'line',
+        onChange : (a) => rest.setValue('FromController',a),
+        value: value,
+        error: error,
+        // error: formState.errors?.[field.name],
+        source : 'InputWrapper',
+      }) : React.cloneElement(
+        props.children, 
       {
         ...props.children?.props, 
         ...rest,
@@ -153,8 +166,21 @@ const InputWrapper = (props: FormBaseInput) => {
       <Controller 
         name={props.name}
         control={rest.control}
-        render={({field, formState}) => React.cloneElement(
-          Element ?? props.children, 
+        render={({field, formState}) => ChosenElement ? 
+        ChosenElement({
+          ...props.children?.props, 
+          ...rest,
+          disabled : props.disabled, 
+          type:props?.type??'line',
+          onChange : (a) => rest.setValue('FromController',a),
+          onBlur : field.onBlur,
+          value: field.value,
+          error: error,
+          // error: formState.errors?.[field.name],
+          source : 'InputWrapper',
+        }) : 
+        React.cloneElement(
+          props.children, 
           {
             ...props.children?.props, 
             ...rest,
