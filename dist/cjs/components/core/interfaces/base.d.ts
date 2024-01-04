@@ -111,5 +111,11 @@ type isCalculatedPromise<T> = {
 export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {
     children?: any;
 }
+export interface CustomElementBaseInput<T = any> extends UseFormReturn {
+    type: string;
+    value: T;
+    onChange: (value: T) => void;
+    error?: FieldError;
+}
 export type HTMLInputTypeAttribute = 'button' | 'checkbox' | 'color' | 'date' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | (string & {});
 export {};

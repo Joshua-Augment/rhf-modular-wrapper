@@ -15,11 +15,12 @@ import { useInputValAndError } from "./hook/useInputValnError";
 import { Controller } from "react-hook-form";
 import { ThemeContext } from "./Form";
 const InputWrapper = (props) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
     const theme = useContext(ThemeContext);
-    const Element = (_a = props.element) !== null && _a !== void 0 ? _a : (theme.elements !== null && theme.elements[(_b = props.type) !== null && _b !== void 0 ? _b : 'line'] !== undefined ? theme.elements[(_c = props.type) !== null && _c !== void 0 ? _c : 'line'] : null);
+    const Element = (_a = props.element) !== null && _a !== void 0 ? _a : (theme.elements !== null && theme.elements[(_b = props.type) !== null && _b !== void 0 ? _b : 'line'] !== undefined ?
+        theme.elements[(_c = props.type) !== null && _c !== void 0 ? _c : 'line'] : null);
     const firstUpdate = useRef(true);
-    const _v = useInputValAndError(props.name), { value, error } = _v, rest = __rest(_v, ["value", "error"]);
+    const _x = useInputValAndError(props.name), { value, error } = _x, rest = __rest(_x, ["value", "error"]);
     const watchCalculated = ((_d = props === null || props === void 0 ? void 0 : props.calculatedField) === null || _d === void 0 ? void 0 : _d.find) !== undefined ? rest.watch(props.calculatedField.find) : null;
     // console.log(`For ${props.name}, error : `,rest.error)
     // On Value change
@@ -125,19 +126,22 @@ const InputWrapper = (props) => {
     };
     const WrapperElementLeft = ((_e = props === null || props === void 0 ? void 0 : props.buttons) === null || _e === void 0 ? void 0 : _e.left) ? Wrapper((_g = (_f = props === null || props === void 0 ? void 0 : props.buttons) === null || _f === void 0 ? void 0 : _f.wrapper) === null || _g === void 0 ? void 0 : _g.left, (_j = (_h = props === null || props === void 0 ? void 0 : props.buttons) === null || _h === void 0 ? void 0 : _h.wrapper) === null || _j === void 0 ? void 0 : _j.all, ((_k = props === null || props === void 0 ? void 0 : props.buttons) === null || _k === void 0 ? void 0 : _k.left) ? props.buttons.left(value, props.name, rest.getValues) : null) : null;
     const WrapperElementRight = ((_l = props === null || props === void 0 ? void 0 : props.buttons) === null || _l === void 0 ? void 0 : _l.right) ? Wrapper((_o = (_m = props === null || props === void 0 ? void 0 : props.buttons) === null || _m === void 0 ? void 0 : _m.wrapper) === null || _o === void 0 ? void 0 : _o.right, (_q = (_p = props === null || props === void 0 ? void 0 : props.buttons) === null || _p === void 0 ? void 0 : _p.wrapper) === null || _q === void 0 ? void 0 : _q.all, ((_r = props === null || props === void 0 ? void 0 : props.buttons) === null || _r === void 0 ? void 0 : _r.right) ? props.buttons.right(value, props.name, rest.getValues) : null) : null;
+    const ChosenElement = Element !== undefined && Element !== null ? Element : props === null || props === void 0 ? void 0 : props.children;
     // console.log(`[InputWrapper - ${props.name}] - injected props`,childrenInjected.props)
     return React.createElement(InputElemWrapper, Object.assign({}, props, { disabled: props.disabled, value: value }),
         React.createElement(React.Fragment, null,
             WrapperElementLeft,
             ((_s = props === null || props === void 0 ? void 0 : props.type) !== null && _s !== void 0 ? _s : "line").toLowerCase().includes("list") ?
-                React.cloneElement(Element !== null && Element !== void 0 ? Element : props.children, Object.assign(Object.assign(Object.assign({}, (_t = props.children) === null || _t === void 0 ? void 0 : _t.props), rest), { disabled: props.disabled, type: (_u = props === null || props === void 0 ? void 0 : props.type) !== null && _u !== void 0 ? _u : 'line', onChange: (a) => rest.setValue('FromController', a), value: value, error: error, 
+                ChosenElement ? ChosenElement(Object.assign(Object.assign(Object.assign({}, (_t = props.children) === null || _t === void 0 ? void 0 : _t.props), rest), { disabled: props.disabled, type: (_u = props === null || props === void 0 ? void 0 : props.type) !== null && _u !== void 0 ? _u : 'line', onChange: (a) => rest.setValue('FromController', a), value: value, error: error, 
+                    // error: formState.errors?.[field.name],
+                    source: 'InputWrapper' })) : React.cloneElement(props.children, Object.assign(Object.assign(Object.assign({}, (_v = props.children) === null || _v === void 0 ? void 0 : _v.props), rest), { disabled: props.disabled, type: (_w = props === null || props === void 0 ? void 0 : props.type) !== null && _w !== void 0 ? _w : 'line', onChange: (a) => rest.setValue('FromController', a), value: value, error: error, 
                     // error: formState.errors?.[field.name],
                     source: 'InputWrapper' })) :
                 React.createElement(Controller, { name: props.name, control: rest.control, render: ({ field, formState }) => {
-                        var _a, _b;
-                        return React.cloneElement(Element !== null && Element !== void 0 ? Element : props.children, Object.assign(Object.assign(Object.assign({}, (_a = props.children) === null || _a === void 0 ? void 0 : _a.props), rest), { disabled: props.disabled, type: (_b = props === null || props === void 0 ? void 0 : props.type) !== null && _b !== void 0 ? _b : 'line', onChange: (a) => rest.setValue('FromController', a), onBlur: field.onBlur, value: field.value, error: error, 
-                            // error: formState.errors?.[field.name],
-                            source: 'InputWrapper' }));
+                        var _a, _b, _c, _d;
+                        return ChosenElement ?
+                            ChosenElement(Object.assign(Object.assign(Object.assign({}, (_a = props.children) === null || _a === void 0 ? void 0 : _a.props), rest), { disabled: props.disabled, type: (_b = props === null || props === void 0 ? void 0 : props.type) !== null && _b !== void 0 ? _b : 'line', onChange: (a) => rest.setValue('FromController', a), onBlur: field.onBlur, value: field.value, error: error })) :
+                            React.cloneElement(props.children, Object.assign(Object.assign(Object.assign({}, (_c = props.children) === null || _c === void 0 ? void 0 : _c.props), rest), { disabled: props.disabled, type: (_d = props === null || props === void 0 ? void 0 : props.type) !== null && _d !== void 0 ? _d : 'line', onChange: (a) => rest.setValue('FromController', a), onBlur: field.onBlur, value: field.value, error: error }));
                     } }),
             WrapperElementRight));
 };
