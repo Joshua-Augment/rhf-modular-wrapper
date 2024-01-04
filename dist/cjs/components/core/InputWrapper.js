@@ -45,22 +45,26 @@ const Form_1 = require("./Form");
 const InputWrapper = (props) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
     const theme = (0, react_1.useContext)(Form_1.ThemeContext);
-    const Element = (_a = props.element) !== null && _a !== void 0 ? _a : (theme.elements !== null && theme.elements[(_b = props.type) !== null && _b !== void 0 ? _b : 'line'] !== undefined ?
-        theme.elements[(_c = props.type) !== null && _c !== void 0 ? _c : 'line'] : null);
+    const Element = (_a = props.element) !== null && _a !== void 0 ? _a : (theme.elements !== null &&
+        theme.elements[(_b = props.type) !== null && _b !== void 0 ? _b : "line"] !== undefined
+        ? theme.elements[(_c = props.type) !== null && _c !== void 0 ? _c : "line"]
+        : null);
     const firstUpdate = (0, react_1.useRef)(true);
     const _x = (0, useInputValnError_1.useInputValAndError)(props.name), { value, error } = _x, rest = __rest(_x, ["value", "error"]);
-    const watchCalculated = ((_d = props === null || props === void 0 ? void 0 : props.calculatedField) === null || _d === void 0 ? void 0 : _d.find) !== undefined ? rest.watch(props.calculatedField.find) : null;
+    const watchCalculated = ((_d = props === null || props === void 0 ? void 0 : props.calculatedField) === null || _d === void 0 ? void 0 : _d.find) !== undefined
+        ? rest.watch(props.calculatedField.find)
+        : null;
     // console.log(`For ${props.name}, error : `,rest.error)
     // On Value change
     (0, react_1.useEffect)(() => {
         if (props.defaultValue !== undefined) {
             // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
-            rest.setValue('inputWrapper - DefaultValue', props.defaultValue);
+            rest.setValue("inputWrapper - DefaultValue", props.defaultValue);
         }
     }, [props.defaultValue]);
     (0, react_1.useEffect)(() => {
         // // Make sure value isnt undefined
-        // if (value === undefined) {rest.setValue(props.name, null)}  
+        // if (value === undefined) {rest.setValue(props.name, null)}
         // External Field
         if (props.externalStateSetter) {
             props.externalStateSetter(value);
@@ -76,16 +80,17 @@ const InputWrapper = (props) => {
         // Calculated Fields
         if (props.calculatedField) {
             if (props.calculatedField.isPromise === true) {
-                props.calculatedField.calculate(value, props.name, rest.getValues(props.calculatedField.find), rest.getValues())
+                props.calculatedField
+                    .calculate(value, props.name, rest.getValues(props.calculatedField.find), rest.getValues())
                     // .then(data => { contextSetValue(props.name, data) })
-                    .then(data => {
+                    .then((data) => {
                     // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
-                    rest.setValue('InputWrapper CalculatedField [Promise] ', data);
+                    rest.setValue("InputWrapper CalculatedField [Promise] ", data);
                 });
             }
             else {
                 // console.log(`[Setting] Setting value for ${props.name} by calculation`)
-                rest.setValue('InputWrapper Calculated Field [No Promise]', props.calculatedField.calculate(value, props.name, rest.getValues(props.calculatedField.find), rest.getValues()));
+                rest.setValue("InputWrapper Calculated Field [No Promise]", props.calculatedField.calculate(value, props.name, rest.getValues(props.calculatedField.find), rest.getValues()));
             }
         }
     }, [watchCalculated]);
@@ -104,7 +109,7 @@ const InputWrapper = (props) => {
     //   ) : null
     //   const WrapperElementRight = props?.buttons?.right ? Wrapper(
     //     props?.buttons?.wrapper?.right,
-    //     props?.buttons?.wrapper?.all,      
+    //     props?.buttons?.wrapper?.all,
     //     props?.buttons?.right? props.buttons.right(value, props.name, getValues) : null
     //   ) : null
     //  const childrenInjected = React.cloneElement(props.children, {...props.children?.props, disabled : props.disabled, type:props?.type??'line'})
@@ -118,12 +123,12 @@ const InputWrapper = (props) => {
     //   </InputElemWrapper>
     // },[value, props?.options, error])
     // console.log('props - ',props)
-    // const serializedProps = JSON.stringify({...props, options : props?.options ?? [], children: props.children?.props,  })  
+    // const serializedProps = JSON.stringify({...props, options : props?.options ?? [], children: props.children?.props,  })
     // const childrenInjected = useMemo(()=> React.cloneElement(
-    //   props.children, 
+    //   props.children,
     //   {
-    //     ...props.children?.props, 
-    //     disabled : props.disabled, 
+    //     ...props.children?.props,
+    //     disabled : props.disabled,
     //     type:props?.type??'line',
     //     onChange : (a:any) => rest.setValue('InputWrapper onChange [cloneElement] ', a),
     //     value: value,
@@ -150,29 +155,35 @@ const InputWrapper = (props) => {
         if (B) {
             return react_1.default.createElement(B, null, children);
         }
-        return react_1.default.createElement("div", { style: { display: 'flex', flexDirection: 'row' } }, children);
+        return (react_1.default.createElement("div", { style: { display: "flex", flexDirection: "row" } }, children));
     };
-    const WrapperElementLeft = ((_e = props === null || props === void 0 ? void 0 : props.buttons) === null || _e === void 0 ? void 0 : _e.left) ? Wrapper((_g = (_f = props === null || props === void 0 ? void 0 : props.buttons) === null || _f === void 0 ? void 0 : _f.wrapper) === null || _g === void 0 ? void 0 : _g.left, (_j = (_h = props === null || props === void 0 ? void 0 : props.buttons) === null || _h === void 0 ? void 0 : _h.wrapper) === null || _j === void 0 ? void 0 : _j.all, ((_k = props === null || props === void 0 ? void 0 : props.buttons) === null || _k === void 0 ? void 0 : _k.left) ? props.buttons.left(value, props.name, rest.getValues) : null) : null;
-    const WrapperElementRight = ((_l = props === null || props === void 0 ? void 0 : props.buttons) === null || _l === void 0 ? void 0 : _l.right) ? Wrapper((_o = (_m = props === null || props === void 0 ? void 0 : props.buttons) === null || _m === void 0 ? void 0 : _m.wrapper) === null || _o === void 0 ? void 0 : _o.right, (_q = (_p = props === null || props === void 0 ? void 0 : props.buttons) === null || _p === void 0 ? void 0 : _p.wrapper) === null || _q === void 0 ? void 0 : _q.all, ((_r = props === null || props === void 0 ? void 0 : props.buttons) === null || _r === void 0 ? void 0 : _r.right) ? props.buttons.right(value, props.name, rest.getValues) : null) : null;
+    const WrapperElementLeft = ((_e = props === null || props === void 0 ? void 0 : props.buttons) === null || _e === void 0 ? void 0 : _e.left)
+        ? Wrapper((_g = (_f = props === null || props === void 0 ? void 0 : props.buttons) === null || _f === void 0 ? void 0 : _f.wrapper) === null || _g === void 0 ? void 0 : _g.left, (_j = (_h = props === null || props === void 0 ? void 0 : props.buttons) === null || _h === void 0 ? void 0 : _h.wrapper) === null || _j === void 0 ? void 0 : _j.all, ((_k = props === null || props === void 0 ? void 0 : props.buttons) === null || _k === void 0 ? void 0 : _k.left)
+            ? props.buttons.left(value, props.name, rest.getValues)
+            : null)
+        : null;
+    const WrapperElementRight = ((_l = props === null || props === void 0 ? void 0 : props.buttons) === null || _l === void 0 ? void 0 : _l.right)
+        ? Wrapper((_o = (_m = props === null || props === void 0 ? void 0 : props.buttons) === null || _m === void 0 ? void 0 : _m.wrapper) === null || _o === void 0 ? void 0 : _o.right, (_q = (_p = props === null || props === void 0 ? void 0 : props.buttons) === null || _p === void 0 ? void 0 : _p.wrapper) === null || _q === void 0 ? void 0 : _q.all, ((_r = props === null || props === void 0 ? void 0 : props.buttons) === null || _r === void 0 ? void 0 : _r.right)
+            ? props.buttons.right(value, props.name, rest.getValues)
+            : null)
+        : null;
     const ChosenElement = Element !== undefined && Element !== null ? Element : null;
     // console.log(`[InputWrapper - ${props.name}] - injected props`,childrenInjected.props)
     // console.log('[_chosenElement] - ',ChosenElement, props)
-    return react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { disabled: props.disabled, value: value }),
+    return (react_1.default.createElement(InputElemWrapper_1.default, Object.assign({}, props, { disabled: props.disabled, value: value }),
         react_1.default.createElement(react_1.default.Fragment, null,
             WrapperElementLeft,
-            ((_s = props === null || props === void 0 ? void 0 : props.type) !== null && _s !== void 0 ? _s : "line").toLowerCase().includes("list") ?
-                ChosenElement ? ChosenElement(Object.assign(Object.assign(Object.assign({}, (_t = props.children) === null || _t === void 0 ? void 0 : _t.props), rest), { disabled: props.disabled, type: (_u = props === null || props === void 0 ? void 0 : props.type) !== null && _u !== void 0 ? _u : 'line', onChange: (a) => rest.setValue('FromController', a), value: value, error: error, 
-                    // error: formState.errors?.[field.name],
-                    source: 'InputWrapper' })) : react_1.default.cloneElement(props.children, Object.assign(Object.assign(Object.assign({}, (_v = props.children) === null || _v === void 0 ? void 0 : _v.props), rest), { disabled: props.disabled, type: (_w = props === null || props === void 0 ? void 0 : props.type) !== null && _w !== void 0 ? _w : 'line', onChange: (a) => rest.setValue('FromController', a), value: value, error: error, 
-                    // error: formState.errors?.[field.name],
-                    source: 'InputWrapper' })) :
-                react_1.default.createElement(react_hook_form_1.Controller, { name: props.name, control: rest.control, render: ({ field, formState }) => {
-                        var _a, _b, _c, _d;
-                        return ChosenElement ?
-                            ChosenElement(Object.assign(Object.assign(Object.assign({}, (_a = props.children) === null || _a === void 0 ? void 0 : _a.props), rest), { disabled: props.disabled, type: (_b = props === null || props === void 0 ? void 0 : props.type) !== null && _b !== void 0 ? _b : 'line', onChange: (a) => rest.setValue('FromController', a), onBlur: field.onBlur, value: field.value, error: error })) :
-                            react_1.default.cloneElement(props.children, Object.assign(Object.assign(Object.assign({}, (_c = props.children) === null || _c === void 0 ? void 0 : _c.props), rest), { disabled: props.disabled, type: (_d = props === null || props === void 0 ? void 0 : props.type) !== null && _d !== void 0 ? _d : 'line', onChange: (a) => rest.setValue('FromController', a), onBlur: field.onBlur, value: field.value, error: error }));
-                    } }),
-            WrapperElementRight));
+            ((_s = props === null || props === void 0 ? void 0 : props.type) !== null && _s !== void 0 ? _s : "line").toLowerCase().includes("list") ? (ChosenElement ? (ChosenElement(Object.assign(Object.assign(Object.assign({}, (_t = props.children) === null || _t === void 0 ? void 0 : _t.props), rest), { disabled: props.disabled, type: (_u = props === null || props === void 0 ? void 0 : props.type) !== null && _u !== void 0 ? _u : "line", onChange: (a) => rest.setValue(props.name, a), value: value, error: error, 
+                // error: formState.errors?.[field.name],
+                source: "InputWrapper" }))) : (react_1.default.cloneElement(props.children, Object.assign(Object.assign(Object.assign({}, (_v = props.children) === null || _v === void 0 ? void 0 : _v.props), rest), { disabled: props.disabled, type: (_w = props === null || props === void 0 ? void 0 : props.type) !== null && _w !== void 0 ? _w : "line", onChange: (a) => rest.setValue(props.name, a), value: value, error: error, 
+                // error: formState.errors?.[field.name],
+                source: "InputWrapper" })))) : (react_1.default.createElement(react_hook_form_1.Controller, { name: props.name, control: rest.control, render: ({ field, formState }) => {
+                    var _a, _b, _c, _d;
+                    return ChosenElement
+                        ? ChosenElement(Object.assign(Object.assign(Object.assign({}, (_a = props.children) === null || _a === void 0 ? void 0 : _a.props), rest), { disabled: props.disabled, type: (_b = props === null || props === void 0 ? void 0 : props.type) !== null && _b !== void 0 ? _b : "line", onChange: (a) => rest.setValue(props.name, a), onBlur: field.onBlur, value: field.value, error: error }))
+                        : react_1.default.cloneElement(props.children, Object.assign(Object.assign(Object.assign({}, (_c = props.children) === null || _c === void 0 ? void 0 : _c.props), rest), { disabled: props.disabled, type: (_d = props === null || props === void 0 ? void 0 : props.type) !== null && _d !== void 0 ? _d : "line", onChange: (a) => rest.setValue(props.name, a), onBlur: field.onBlur, value: field.value, error: error }));
+                } })),
+            WrapperElementRight)));
 };
 exports.default = InputWrapper;
 //# sourceMappingURL=InputWrapper.js.map
