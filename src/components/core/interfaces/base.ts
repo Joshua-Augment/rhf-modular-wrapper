@@ -120,11 +120,11 @@ export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {
   children ?: any
 }
 
-export interface CustomElementBaseInput<T=any> extends UseFormReturn {
+export interface CustomElementBaseInput<T=any> extends UseFormReturn,IInputsBaseProps<T> {
   type : string,
   value : T,
   onChange : (value : T) => void,
-  error ?: FieldError 
+  error ?: FieldError,
 }
 
 

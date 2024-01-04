@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ComponentMeta } from '@storybook/react';
-import {Form, DatePicker,Switch, Line, Select, TSelectOption, DropzoneUploader, SubmitButton, AsyncSelect, TableList} from "../components"
+import {Form, DatePicker,Switch, Line, Select, TSelectOption, DropzoneUploader, SubmitButton, AsyncSelect, TableList, CustomElementBaseInput} from "../components"
 import { Template } from "./_story_template";
 import * as yup from "yup"
 
@@ -60,7 +60,7 @@ export const CustomInputTest = () => {
 
 }
 
-const CustomInput = (props: any) => {
+const CustomInput = (props: CustomElementBaseInput) => {
   console.log("Custom Input props : ",props)
   return <div style={{padding:'5px', backgroundColor:'gainsboro'}}>
     <input 
