@@ -8,6 +8,7 @@ export interface IForm<T extends FieldValues> {
   buttonWrapper ?: React.ComponentType<ISubmitButton>,
   elements ?: { [key:string] : any}
   style ?: 'bootstrap' | 'mui'
+  debug ?: boolean,
   id ?:string
   defaultValues ?: DeepPartial<T>, 
   resetOnComplete ?: boolean,

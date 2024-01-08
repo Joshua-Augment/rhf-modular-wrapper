@@ -15,9 +15,10 @@ type TTemplateContext = {
   elements : null|{
     [key in TListInputs] ?: React.ComponentType<any>
   }
+  debug : boolean
 }
 
-export const ThemeContext = createContext<TTemplateContext>({inputTemplate: null, buttonTemplate: null, elements: null})
+export const ThemeContext = createContext<TTemplateContext>({debug:false, inputTemplate: null, buttonTemplate: null, elements: null})
 
 // const BSTheme = lazy(()=>import('../styling/BootstrapTheme'))
 // const MUITheme = lazy(()=>import('../styling/MUITheme'))
@@ -53,7 +54,8 @@ export const Form = <T extends FieldValues,>(props: IForm<T>) => {
     value={{
       inputTemplate:props.inputWrapper ?? null, 
       buttonTemplate: props.buttonWrapper ?? null,
-      elements: props.elements ?? null
+      elements: props.elements ?? null,
+      debug : props.debug ?? false
     }} >
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(props.onSubmit)}
