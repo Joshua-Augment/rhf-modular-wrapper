@@ -10,6 +10,7 @@ type TTemplateContext = {
     elements: null | {
         [key in TListInputs]?: React.ComponentType<any>;
     };
+    debug: boolean;
 };
 export declare const ThemeContext: React.Context<TTemplateContext>;
 export declare const Form: <T extends FieldValues>(props: IForm<T>) => React.JSX.Element;

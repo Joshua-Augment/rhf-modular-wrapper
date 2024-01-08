@@ -13,6 +13,7 @@ export interface IForm<T extends FieldValues> {
         [key: string]: any;
     };
     style?: 'bootstrap' | 'mui';
+    debug?: boolean;
     id?: string;
     defaultValues?: DeepPartial<T>;
     resetOnComplete?: boolean;

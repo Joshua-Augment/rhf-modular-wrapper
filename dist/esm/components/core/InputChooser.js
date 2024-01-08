@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React /* , { useMemo }  */ from 'react';
 import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList } from '../Inputs';
 const InputChooser = (props) => {
-    const OutputComponent = useMemo(() => {
+    const OutputComponent = () => {
         switch (props.type) {
             case 'custom':
                 const Elem = props.elem;
@@ -33,8 +33,8 @@ const InputChooser = (props) => {
             default:
                 return React.createElement(Line, Object.assign({}, props));
         }
-    }, []);
-    return OutputComponent;
+    };
+    return OutputComponent();
 };
 export default InputChooser;
 //# sourceMappingURL=InputChooser.js.map
