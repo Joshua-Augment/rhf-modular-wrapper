@@ -27,8 +27,17 @@ const _Select = (props) => {
     var _a, _b, _c, _d, _e, _f, _g;
     const [options, setOptions] = useState((_a = props.options) !== null && _a !== void 0 ? _a : []);
     useEffect(() => {
-        // console.log("[options] - ",props.options)
-        setOptions(props.options);
+        if (props.options && Array.isArray(props.options)) {
+            const omitOptions = props.omitOptions;
+            console.log('omitOptions', omitOptions);
+            if (omitOptions && Array.isArray(omitOptions)) {
+                const _filter = omitOptions.map(x => (typeof x === 'string' || typeof x === 'number') ? x : x === null || x === void 0 ? void 0 : x.value);
+                setOptions(props.options.filter(x => !_filter.includes(x.value)));
+            }
+            else {
+                setOptions(props.options);
+            }
+        }
     }, [props.options]);
     const createNew = (a) => {
         if (props.isCreatable !== undefined) {

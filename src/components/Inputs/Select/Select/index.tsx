@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SelectInput from "react-select";
 import SelectCreatableInput from "react-select/creatable";
 import {
+  BaseSelect,
   IInputsBasePropsNoSetters,
   ISelect,
   InputWrapper,
@@ -42,8 +43,17 @@ const _Select = (props: any) => {
   const [options, setOptions] = useState<TSelectOption[]>(props.options ?? [])
 
   useEffect(()=> {
-    // console.log("[options] - ",props.options)
-    setOptions(props.options)
+    if (props.options && Array.isArray(props.options)) {
+      const omitOptions:BaseSelect['omitOptions'] = props.omitOptions
+      console.log('omitOptions', omitOptions)
+      if (omitOptions && Array.isArray(omitOptions)) {
+        const _filter = omitOptions.map(x => (typeof x ==='string' || typeof x === 'number') ? x : x?.value as string|number)
+        setOptions((props.options as TSelectOption[]).filter(x => !_filter.includes(x.value)))
+        
+      } else {
+        setOptions(props.options)
+      }
+    }
   },[props.options])
 
   const createNew = (a: string) => {
@@ -59,7 +69,7 @@ const _Select = (props: any) => {
           props.onChange(opt);
         });
       }
-    }
+    } 
   }
 
   return props.isCreatable !== undefined ?
@@ -74,7 +84,7 @@ const _Select = (props: any) => {
       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
       name={props.name}
       value={props.value}
-      onChange={(a) => props.onChange(a)}
+      onChange={(a) => props.onChange(a)} 
       // value={value}
       // onChange={(a:TSelectOption) => setValue(props.name, a)}
     /> :   

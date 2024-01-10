@@ -37,9 +37,12 @@ export type RSOptionsBase = {
     styles?: TRSStyles;
     [key: string]: any;
 };
-export interface BaseSelect extends IInputsBaseProps<TSelectOption | null> {
+export interface _BaseSelect extends Partial<Props> {
+}
+export interface BaseSelect extends IInputsBaseProps<TSelectOption | null>, Partial<Omit<Props, 'name' | 'onChange' | 'onInputChange' | 'placeholder' | 'defaultValue' | 'value' | 'options'>> {
     isCreatable?: true | ((createdString: string) => Promise<TSelectOption>);
     rsOptions?: RSBaseOptions;
+    omitOptions?: (TSelectOption | string | number)[];
 }
 export type BaseSelectNotCreatable = {
     isCreatable?: false;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AsyncSelectInput from "react-select/async";
 import AsyncCreatableSelectInput from "react-select/async-creatable";
-import { TSelectOption, ISelectAsync, InputWrapper, IInputsBasePropsNoSetters,} from "../../../core";
+import { TSelectOption, ISelectAsync, InputWrapper, IInputsBasePropsNoSetters, BaseSelect,} from "../../../core";
 
 const AsyncSelect = (props: ISelectAsync) => {
   const _props: IInputsBasePropsNoSetters = {...props}
@@ -68,6 +68,16 @@ const _AsyncSelect = (props: any) => {
     }
   }
 
+  const omitHandler = (options: TSelectOption[], callback: Function) => {
+    const omitOptions:BaseSelect['omitOptions'] = props.omitOptions
+      if (omitOptions && Array.isArray(omitOptions)) {
+        const _filter = omitOptions.map(x => (typeof x ==='string' || typeof x === 'number') ? x : x?.value as string|number)
+        callback(options.filter(x => !_filter.includes(x.value)))        
+      } else {
+        callback(options)
+      }
+  }
+
   return props.isCreatable !== undefined ? 
   <AsyncCreatableSelectInput
     styles={{container: (base) => ({...base, width:'100%'})}}
@@ -80,7 +90,7 @@ const _AsyncSelect = (props: any) => {
     onChange={(a) => props.onChange(a)}
     error={props.error}
     {...props.rsOptions}
-    loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, props.getValues(),b) : props.loadOptions(a,b)}
+    loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, props.getValues(),(retOptions:any) => omitHandler(retOptions,b)) : props.loadOptions(a,(retOptions:any) => omitHandler(retOptions,b))}
   />
 : 
   <AsyncSelectInput
@@ -93,7 +103,7 @@ const _AsyncSelect = (props: any) => {
     onChange={(a) => props.onChange(a)}
     error={props.error}
     {...props.rsOptions}
-    loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, props.getValues(),b) : props.loadOptions(a,b)}
+    loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, props.getValues(),(retOptions:any) => omitHandler(retOptions,b)) : props.loadOptions(a,(retOptions:any) => omitHandler(retOptions,b))}
   /> 
   
   // return <Controller      
