@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, /* useMemo, */ useRef } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, /* useMemo, */ useRef } from "react";
 import InputElemWrapper from "./InputElemWrapper";
 import { FormBaseInput } from "./interfaces";
 import { useInputValAndError } from "./hook/useInputValnError";
@@ -7,12 +7,13 @@ import { ThemeContext } from "./Form";
 
 const InputWrapper = (props: FormBaseInput) => {
   const theme = useContext(ThemeContext);
-  const Element =
-    props.element ??
-    (theme.elements !== null &&
-    theme.elements[props.type ?? "line"] !== undefined
-      ? theme.elements[props.type ?? "line"]
-      : null);
+  const Element = useMemo(() => 
+  props.element ??
+  (theme.elements !== null &&
+  theme.elements[props.type ?? "line"] !== undefined
+    ? theme.elements[props.type ?? "line"]
+    : null
+  ),[props?.element, theme.elements]);
 
   const firstUpdate = useRef(true);
   const { value, error, ...rest } = useInputValAndError(props.name);
@@ -48,7 +49,6 @@ const InputWrapper = (props: FormBaseInput) => {
   }, [value]);
 
   useEffect(() => {
-    // if(props.externalStateSetter) {props.externalStateSetter(watchValue ?? value)}
 
     // Calculated Fields
     if (props.calculatedField) {
@@ -63,12 +63,12 @@ const InputWrapper = (props: FormBaseInput) => {
           // .then(data => { contextSetValue(props.name, data) })
           .then((data) => {
             // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
-            rest.setValue("InputWrapper CalculatedField [Promise] ", data);
+            rest.setValue(props.name, data);
           });
       } else {
         // console.log(`[Setting] Setting value for ${props.name} by calculation`)
         rest.setValue(
-          "InputWrapper Calculated Field [No Promise]",
+          props.name,
           props.calculatedField.calculate(
             value,
             props.name,
@@ -79,64 +79,6 @@ const InputWrapper = (props: FormBaseInput) => {
       }
     }
   }, [watchCalculated]);
-  // const [_value, _setValue] = useState(null)
-  // const methods = props.contextless === true ? {control:undefined, watch : (a:string) => null } : useFormContext();
-  // const child = useMemo(()=>{
-  //   const Wrapper = (A ?: any, B ?:any, children ?: any) => {
-  //     if (A) {return <A>{children}</A>}
-  //     if (B) {return <B>{children}</B>}
-  //     return <div style={{display:'flex',flexDirection:'row'}}>{children}</div>
-  //   }
-  //   const WrapperElementLeft = props?.buttons?.left ? Wrapper(
-  //     props?.buttons?.wrapper?.left,
-  //     props?.buttons?.wrapper?.all,
-  //     props?.buttons?.left? props.buttons.left(value, props.name, getValues) : null
-  //   ) : null
-
-  //   const WrapperElementRight = props?.buttons?.right ? Wrapper(
-  //     props?.buttons?.wrapper?.right,
-  //     props?.buttons?.wrapper?.all,
-  //     props?.buttons?.right? props.buttons.right(value, props.name, getValues) : null
-  //   ) : null
-
-  //  const childrenInjected = React.cloneElement(props.children, {...props.children?.props, disabled : props.disabled, type:props?.type??'line'})
-  // // console.log(`Input ${props.name} - value : ${value}`)
-  // return <InputElemWrapper {...props} disabled={props.disabled} value={value} >
-  //     <>
-  //       {WrapperElementLeft}
-  //       {childrenInjected}
-  //       {WrapperElementRight}
-  //     </>
-  //   </InputElemWrapper>
-  // },[value, props?.options, error])
-
-  // console.log('props - ',props)
-  // const serializedProps = JSON.stringify({...props, options : props?.options ?? [], children: props.children?.props,  })
-  // const childrenInjected = useMemo(()=> React.cloneElement(
-  //   props.children,
-  //   {
-  //     ...props.children?.props,
-  //     disabled : props.disabled,
-  //     type:props?.type??'line',
-  //     onChange : (a:any) => rest.setValue('InputWrapper onChange [cloneElement] ', a),
-  //     value: value,
-  //     error: error,
-  //     source : 'InputWrapper',
-  //     ...rest
-  //   }), [value, error, props])
-
-  /* const childrenInjected = React.cloneElement(
-    props.children, 
-    {
-      ...props.children?.props, 
-      disabled : props.disabled, 
-      type:props?.type??'line',
-      onChange : (a:any) => rest.setValue('InputWrapper onChange [cloneElement] ', a),
-      value: value,
-      error: error,
-      source : 'InputWrapper',
-      ...rest
-    }) */
 
   const Wrapper = (A?: any, B?: any, children?: any) => {
     if (A) {
@@ -148,30 +90,32 @@ const InputWrapper = (props: FormBaseInput) => {
     return (
       <div style={{ display: "flex", flexDirection: "row" }}>{children}</div>
     );
-  };
-  const WrapperElementLeft = props?.buttons?.left
-    ? Wrapper(
-        props?.buttons?.wrapper?.left,
-        props?.buttons?.wrapper?.all,
-        props?.buttons?.left
-          ? props.buttons.left(value, props.name, rest.getValues)
-          : null
-      )
-    : null;
-  const WrapperElementRight = props?.buttons?.right
-    ? Wrapper(
-        props?.buttons?.wrapper?.right,
-        props?.buttons?.wrapper?.all,
-        props?.buttons?.right
-          ? props.buttons.right(value, props.name, rest.getValues)
-          : null
-      )
-    : null;
+  }
 
-  const ChosenElement: any =
-    Element !== undefined && Element !== null ? Element : null;
-  // console.log(`[InputWrapper - ${props.name}] - injected props`,childrenInjected.props)
-  // console.log('[_chosenElement] - ',ChosenElement, props)
+  const WrapperElementLeft = useMemo(()=> props?.buttons?.left
+  ? Wrapper(
+      props?.buttons?.wrapper?.left,
+      props?.buttons?.wrapper?.all,
+      props?.buttons?.left
+        ? props.buttons.left(value, props.name, rest.getValues)
+        : null
+    )
+  : null, [props?.buttons?.left, props?.buttons?.wrapper?.left, props?.buttons?.wrapper?.all]);
+  
+  const WrapperElementRight = useMemo(()=>props?.buttons?.right
+  ? Wrapper(
+      props?.buttons?.wrapper?.right,
+      props?.buttons?.wrapper?.all,
+      props?.buttons?.right
+        ? props.buttons.right(value, props.name, rest.getValues)
+        : null
+    )
+  : null,[props?.buttons?.right, props?.buttons?.wrapper?.right, props?.buttons?.wrapper?.all]);
+
+  let _props = props
+  
+  const ChosenElement: any = useMemo(()=>Element !== undefined && Element !== null ? Element : null, [Element, value, error?.message, props?.label, props?.value, props?.options, props?.items]);
+
   return (
     <InputElemWrapper {...props} disabled={props.disabled} value={value}>
       <>
@@ -238,4 +182,4 @@ const InputWrapper = (props: FormBaseInput) => {
   );
 };
 
-export default InputWrapper;
+export default React.memo(InputWrapper);

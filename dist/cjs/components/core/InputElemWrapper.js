@@ -44,114 +44,45 @@ const Info_1 = __importDefault(require("@mui/icons-material/Info"));
 const Form_1 = require("./Form");
 const useInputValnError_1 = require("./hook/useInputValnError");
 const InputElemWrapper = (props) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
-    const _l = (0, useInputValnError_1.useInputValAndError)(props.name), { value, error } = _l, rest = __rest(_l, ["value", "error"]);
+    console.log(`[InputElementWrapper] - props `, props);
+    let _props = Object.assign({}, props);
+    _props.children = undefined;
+    const _a = (0, useInputValnError_1.useInputValAndError)(props.name), { value, error } = _a, rest = __rest(_a, ["value", "error"]);
     const theme = (0, react_1.useContext)(Form_1.ThemeContext);
-    // const Element = props.element ?? 
-    //   (theme.elements !== null && theme.elements[props.type] !== undefined ? theme.elements[props.type] : null) 
-    const Wrapper = (_b = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : theme.inputTemplate) !== null && _b !== void 0 ? _b : null;
-    const WrapElem = Wrapper !== null && Wrapper !== undefined ?
-        react_1.default.createElement(Wrapper, Object.assign({}, props, { value: value }, rest)) :
-        react_1.default.createElement("div", { style: Object.assign({ position: 'relative' }, props.style), className: `form-item-wrapper ${(_d = (_c = props === null || props === void 0 ? void 0 : props.customClasses) === null || _c === void 0 ? void 0 : _c.wrapperClassName) !== null && _d !== void 0 ? _d : ''}` }, props.reversedLabel === true ?
-            react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? 'no-border' : ''}` }, props.children),
-                react_1.default.createElement("label", { htmlFor: (_e = props.id) !== null && _e !== void 0 ? _e : props.name, className: (_g = (_f = props === null || props === void 0 ? void 0 : props.customClasses) === null || _f === void 0 ? void 0 : _f.labelClassName) !== null && _g !== void 0 ? _g : '', style: { marginLeft: '5px' } },
-                    props.noBorder !== false && props.noLabel !== true && react_1.default.createElement("span", null,
-                        props.label,
-                        " ",
-                        ' '),
-                    react_1.default.createElement("span", null,
-                        props.helperText && react_1.default.createElement(Tooltip_1.default, { title: props.helperText },
-                            react_1.default.createElement(Info_1.default, { style: { color: 'blue', fontSize: '10px' } })),
-                        " ",
-                        ' '),
-                    react_1.default.createElement("span", null,
-                        error && react_1.default.createElement(Tooltip_1.default, { title: error.message },
-                            react_1.default.createElement(Error_1.default, { style: { color: 'red', fontSize: '10px' } })),
-                        " ",
-                        ' '))) :
-            react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("label", { htmlFor: (_h = props.id) !== null && _h !== void 0 ? _h : props.name, className: (_k = (_j = props === null || props === void 0 ? void 0 : props.customClasses) === null || _j === void 0 ? void 0 : _j.labelClassName) !== null && _k !== void 0 ? _k : '', style: { marginRight: '5px' } },
-                    props.noBorder !== false && props.noLabel !== true && react_1.default.createElement("span", null,
-                        props.label,
-                        " ",
-                        ' '),
-                    react_1.default.createElement("span", null,
-                        props.helperText && react_1.default.createElement(Tooltip_1.default, { title: props.helperText },
-                            react_1.default.createElement(Info_1.default, { style: { color: 'blue', fontSize: '10px' } })),
-                        " ",
-                        ' '),
-                    react_1.default.createElement("span", null,
-                        error && react_1.default.createElement(Tooltip_1.default, { title: error.message },
-                            react_1.default.createElement(Error_1.default, { style: { color: 'red', fontSize: '10px' } })),
-                        " ",
-                        ' ')),
-                react_1.default.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? 'no-border' : ''}` }, props.children)));
-    // const WrapElem = useMemo(()=>{
-    //   // // console.log(`[WrapElem] - value for ${props.name} - `,props.value)
-    //   // console.log(`[WrapElem] - child for ${props.name} - `,props.children)
-    //   if (Wrapper !== null && Wrapper !== undefined) {
-    //     return <Wrapper {...props} />
-    //   } else {
-    //     return <div style={{position: 'relative', ...props.style}} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ''}`} >
-    //       {
-    //         props.reversedLabel === true ? 
-    //         <>
-    //           <div className={`form-item-child-wrapper ${props.noBorder ? 'no-border':''}`}>{props.children}</div>
-    //           {<label htmlFor={props.id ?? props.name} className={props?.customClasses?.labelClassName ?? ''} style={{marginLeft:'5px'}}>
-    //             {props.noBorder !== false && props.noLabel !== true && <span>{props.label} {' '}</span>}
-    //             <span>{props.helperText && <Tooltip title={props.helperText}><InfoIcon style={{color:'blue',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //             <span>{error && <Tooltip title={error.message}><ErrorIcon style={{color:'red',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //           </label>}
-    //         </> :
-    //         <>             
-    //           {<label htmlFor={props.id ?? props.name} className={props?.customClasses?.labelClassName ?? ''} style={{marginRight:'5px'}}>
-    //             {props.noBorder !== false && props.noLabel !== true && <span>{props.label} {' '}</span>}
-    //             <span>{props.helperText && <Tooltip title={props.helperText}><InfoIcon style={{color:'blue',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //             <span>{error && <Tooltip title={error.message}><ErrorIcon style={{color:'red',fontSize:'10px'}} /></Tooltip>} {' '}</span>
-    //           </label>}
-    //           <div className={`form-item-child-wrapper ${props.noBorder ? 'no-border':''}`}>{props.children}</div>
-    //         </>
-    //       }
-    //     </div>
-    //   }
-    // },[value, error, props.options])
-    // const clonedElement =  useMemo(()=>{
-    //   if (Element !== undefined && Element !== null) {
-    //     return React.cloneElement(<Element {...props} /> as any, {...props, onChange: (a:any) => setValue(props.name, a), value : value, error: error})
-    //   } else {return null}
-    // },[value, error])
-    /* const clonedElement = Element !== undefined && Element !== null ?
-      React.cloneElement(<Element {...props} /> as any, {
-        ...props,
-        children: null,
-        onChange: (a:any) => rest.setValue('InputElemWrapper - clonedElement ', a),
-        ...rest,
-        source : 'InputElemWrapper',
-        value : value,
-        error: error
-      }) :
-      null */
+    // const Element = props.element ??
+    //   (theme.elements !== null && theme.elements[props.type] !== undefined ? theme.elements[props.type] : null)
+    const Wrapper = (0, react_1.useMemo)(() => { var _a, _b; return (_b = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : theme.inputTemplate) !== null && _b !== void 0 ? _b : null; }, [props.helperText, props.label, props.noLabel, props.placeholder, value, error === null || error === void 0 ? void 0 : error.message, props === null || props === void 0 ? void 0 : props.inputWrapper, theme === null || theme === void 0 ? void 0 : theme.inputTemplate]);
+    const WrapElem = (0, react_1.useMemo)(() => {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
+        return Wrapper !== null && Wrapper !== undefined ? (react_1.default.createElement(Wrapper, Object.assign({}, props, { value: value }, rest))) : (react_1.default.createElement("div", { style: Object.assign({ position: "relative" }, props.style), className: `form-item-wrapper ${(_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.wrapperClassName) !== null && _b !== void 0 ? _b : ""}` }, props.reversedLabel === true ? (react_1.default.createElement(react_1.default.Fragment, null,
+            react_1.default.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? "no-border" : ""}` }, props.children),
+            react_1.default.createElement("label", { htmlFor: (_c = props.id) !== null && _c !== void 0 ? _c : props.name, className: (_e = (_d = props === null || props === void 0 ? void 0 : props.customClasses) === null || _d === void 0 ? void 0 : _d.labelClassName) !== null && _e !== void 0 ? _e : "", style: { marginLeft: "5px" } },
+                props.noBorder !== false && props.noLabel !== true && react_1.default.createElement("span", null,
+                    props.label,
+                    " "),
+                react_1.default.createElement("span", null,
+                    props.helperText && (react_1.default.createElement(Tooltip_1.default, { title: props.helperText },
+                        react_1.default.createElement(Info_1.default, { style: { color: "blue", fontSize: "10px" } }))),
+                    " "),
+                react_1.default.createElement("span", null,
+                    error && (react_1.default.createElement(Tooltip_1.default, { title: error.message },
+                        react_1.default.createElement(Error_1.default, { style: { color: "red", fontSize: "10px" } }))),
+                    " ")))) : (react_1.default.createElement(react_1.default.Fragment, null,
+            react_1.default.createElement("label", { htmlFor: (_f = props.id) !== null && _f !== void 0 ? _f : props.name, className: (_h = (_g = props === null || props === void 0 ? void 0 : props.customClasses) === null || _g === void 0 ? void 0 : _g.labelClassName) !== null && _h !== void 0 ? _h : "", style: { marginRight: "5px" } },
+                props.noBorder !== false && props.noLabel !== true && react_1.default.createElement("span", null,
+                    props.label,
+                    " "),
+                react_1.default.createElement("span", null,
+                    props.helperText && (react_1.default.createElement(Tooltip_1.default, { title: props.helperText },
+                        react_1.default.createElement(Info_1.default, { style: { color: "blue", fontSize: "10px" } }))),
+                    " "),
+                react_1.default.createElement("span", null,
+                    error && (react_1.default.createElement(Tooltip_1.default, { title: error.message },
+                        react_1.default.createElement(Error_1.default, { style: { color: "red", fontSize: "10px" } }))),
+                    " ")),
+            react_1.default.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? "no-border" : ""}` }, props.children)))));
+    }, [value, error === null || error === void 0 ? void 0 : error.message, props.element, JSON.stringify(_props)]);
     return WrapElem;
-    /* return Element !== undefined && Element !== null ?
-      <Controller
-        name={props.name}
-        control={rest.control}
-        render={({field,formState}) => React.cloneElement(
-          <Element {...props} /> as any,
-          {
-            ...props,
-            ...rest,
-            children: null,
-            onChange: field.onChange,
-            value : field.value,
-            name: field.name,
-            source : 'InputElemWrapper',
-            error: formState.errors?.[field.name]
-          })}
-      />
-    : WrapElem */
-    // return Wrapper as JSX.Element
 };
 exports.default = react_1.default.memo(InputElemWrapper);
 //# sourceMappingURL=InputElemWrapper.js.map

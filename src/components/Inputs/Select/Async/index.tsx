@@ -1,46 +1,12 @@
 import React, { useEffect, useState } from "react";
 import AsyncSelectInput from "react-select/async";
 import AsyncCreatableSelectInput from "react-select/async-creatable";
-import { TSelectOption, ISelectAsync, InputWrapper, IInputsBasePropsNoSetters, BaseSelect,} from "../../../core";
+import { TSelectOption, ISelectAsync, InputWrapper, BaseSelect,} from "../../../core";
 
-const AsyncSelect = (props: ISelectAsync) => {
-  const _props: IInputsBasePropsNoSetters = {...props}
-  delete _props.calculatedField
-  delete _props.externalStateSetter
-  delete _props.onInputChange
-  
+const AsyncSelect = (props: ISelectAsync) => {  
   return <InputWrapper type={props.type ?? 'select_async'} {...props} noBorder>
     <_AsyncSelect {...props} />
   </InputWrapper>
-
-  // return <InputWrapper type={props.type ?? 'select_async'} {...props} noBorder>
-  //   {
-  //     props.isCreatable !== undefined ? (
-  //     <AsyncCreatableSelectInput
-  //       styles={{container: (base) => ({...base, width:'100%'})}}
-  //       onCreateOption={createNew}
-  //       {..._props}
-  //       options={options}
-  //       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
-  //       value={val}
-  //       onChange={(a:TSelectOption) => setValue(props.name, a)}
-  //       {...props.rsOptions}
-  //       loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, getValues(),b) : props.loadOptions(a,b)}
-  //     />
-  //   ) : (
-  //     <AsyncSelectInput
-  //       styles={{container: (base) => ({...base, width:'100%'})}}
-  //       {..._props}
-  //       options={options}
-  //       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
-  //       value={val}
-  //       onChange={(a:TSelectOption) => setValue(props.name, a)}
-  //       {...props.rsOptions}
-  //       loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, getValues(),b) : props.loadOptions(a,b)}
-  //     />
-  //   )
-  //   }
-  // </InputWrapper>
 };
  
 const _AsyncSelect = (props: any) => {

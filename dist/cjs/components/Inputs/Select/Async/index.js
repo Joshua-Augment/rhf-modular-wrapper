@@ -32,40 +32,8 @@ const async_creatable_1 = __importDefault(require("react-select/async-creatable"
 const core_1 = require("../../../core");
 const AsyncSelect = (props) => {
     var _a;
-    const _props = Object.assign({}, props);
-    delete _props.calculatedField;
-    delete _props.externalStateSetter;
-    delete _props.onInputChange;
     return react_1.default.createElement(core_1.InputWrapper, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'select_async' }, props, { noBorder: true }),
         react_1.default.createElement(_AsyncSelect, Object.assign({}, props)));
-    // return <InputWrapper type={props.type ?? 'select_async'} {...props} noBorder>
-    //   {
-    //     props.isCreatable !== undefined ? (
-    //     <AsyncCreatableSelectInput
-    //       styles={{container: (base) => ({...base, width:'100%'})}}
-    //       onCreateOption={createNew}
-    //       {..._props}
-    //       options={options}
-    //       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
-    //       value={val}
-    //       onChange={(a:TSelectOption) => setValue(props.name, a)}
-    //       {...props.rsOptions}
-    //       loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, getValues(),b) : props.loadOptions(a,b)}
-    //     />
-    //   ) : (
-    //     <AsyncSelectInput
-    //       styles={{container: (base) => ({...base, width:'100%'})}}
-    //       {..._props}
-    //       options={options}
-    //       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
-    //       value={val}
-    //       onChange={(a:TSelectOption) => setValue(props.name, a)}
-    //       {...props.rsOptions}
-    //       loadOptions={(a,b) => props.allLoad ? props.allLoad(a, props.name, getValues(),b) : props.loadOptions(a,b)}
-    //     />
-    //   )
-    //   }
-    // </InputWrapper>
 };
 const _AsyncSelect = (props) => {
     var _a, _b, _c, _d, _e, _f, _g;

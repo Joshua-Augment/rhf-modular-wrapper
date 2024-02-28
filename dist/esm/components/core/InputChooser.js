@@ -1,7 +1,10 @@
-import React /* , { useMemo }  */ from 'react';
+import React, { useMemo } /* , { useMemo }  */ from 'react';
 import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList } from '../Inputs';
+import Logger from './Logger';
 const InputChooser = (props) => {
-    const OutputComponent = () => {
+    const OutputComponent = useMemo(() => {
+        Logger.info(`Choosing Input`, 'InputChooser', 'start');
+        Logger.info(null, null, 'end');
         switch (props.type) {
             case 'custom':
                 const Elem = props.elem;
@@ -33,8 +36,8 @@ const InputChooser = (props) => {
             default:
                 return React.createElement(Line, Object.assign({}, props));
         }
-    };
-    return OutputComponent();
+    }, [props === null || props === void 0 ? void 0 : props.items, props === null || props === void 0 ? void 0 : props.name, props.type, props === null || props === void 0 ? void 0 : props.options, props.placeholder, props.value, props.defaultValue]);
+    return OutputComponent;
 };
-export default InputChooser;
+export default React.memo(InputChooser);
 //# sourceMappingURL=InputChooser.js.map

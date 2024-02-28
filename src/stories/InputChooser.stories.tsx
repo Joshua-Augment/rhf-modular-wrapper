@@ -57,6 +57,23 @@ MappedInputChooser.args = {
   </div>)}</div>
 }
 
+const _loopedFields:any[][] = []
+for (let i=0;i < 50; i++) {
+  _loopedFields.push([
+    {name: `async_${i}`, type: 'select_async', label: `Test async ${i}`, cacheOptions:true, defaultOptions: true,loadOptions: (a,b) => loadOptions(a,b)},
+    {name: `normal_${i}`, type: 'select', label: `Test Select ${i}`, options : baseOptions},
+    {name: `line_${i}`, type: 'line', label: `Test Line ${i}`, placeholder: 'Write Something...'}
+  ])
+}
+
+
+export const LoopedInputChooser = Template.bind({})
+LoopedInputChooser.args = {
+  children : <div style={{display:'flex', flexDirection:'row',}}>{_loopedFields.map((field,i) => <div style={{padding:'10px',width:'100%',flex:1}} key={i}>
+    {field.map(_field =>  <InputChooser {..._field} name={`${_field.name}-${i}`} label={`${_field.label}-${i}`} key={_field.name} />)}
+  </div>)}</div>
+}
+
 
 export const SimpleWithDefaults = Template.bind({}) 
 SimpleWithDefaults.args = {
