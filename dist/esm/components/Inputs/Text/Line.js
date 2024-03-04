@@ -23,7 +23,6 @@ const Line = (props) => {
 };
 const _Line = (props) => {
     var _a, _b, _c;
-    console.log(`[Line Props] - `, props);
     Logger.info(props, 'Line', 'start');
     Logger.info(null, null, 'end');
     return React.createElement("input", Object.assign({ disabled: props.disabled, id: props.name, className: (_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.inputClassName) !== null && _b !== void 0 ? _b : '' }, props.register(props.name), { 

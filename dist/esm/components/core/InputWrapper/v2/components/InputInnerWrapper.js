@@ -101,75 +101,24 @@ const InputInnerWrapper = (props) => {
             : null;
     }, [(_g = props === null || props === void 0 ? void 0 : props.buttons) === null || _g === void 0 ? void 0 : _g.right, (_j = (_h = props === null || props === void 0 ? void 0 : props.buttons) === null || _h === void 0 ? void 0 : _h.wrapper) === null || _j === void 0 ? void 0 : _j.right, (_l = (_k = props === null || props === void 0 ? void 0 : props.buttons) === null || _k === void 0 ? void 0 : _k.wrapper) === null || _l === void 0 ? void 0 : _l.all]);
     Logger.info(`Setting Chosen Element`, `${_propsName} - InputWrapperv2`);
-    const ChosenElement = useMemo(() => {
-        Logger.info(`useMemo`, `Chosen Element`, "start");
-        const _chosenElement = props.inputElement;
-        Logger.info(null, null, "end");
-        return _chosenElement;
-    }, [props.inputElement]);
+    const ChosenElement = props.inputElement;
     const Wrapper = useMemo(() => _propsInputWrapper, [_propsInputWrapper]);
-    // const ChildComponent = useMemo(
-    //   () => (
-    //     <React.Fragment key={props.name}>
-    //       {WrapperElementLeft}
-    //       {ChosenElement
-    //         ? ChosenElement({
-    //             ...props.children?.props,
-    //             ...methods,
-    //             disabled: props.disabled,
-    //             type: props?.type ?? "line",
-    //             onChange: (a) => methods.setValue(props.name, a),
-    //             value: value,
-    //             error: error,
-    //             // error: formState.errors?.[field.name],
-    //             source: "InputWrapper",
-    //           })
-    //         : React.cloneElement(props.children, {
-    //             ...props.children?.props,
-    //             ...methods,
-    //             disabled: props.disabled,
-    //             type: props?.type ?? "line",
-    //             onChange: (a) => methods.setValue(props.name, a),
-    //             value: value,
-    //             error: error,
-    //             // error: formState.errors?.[field.name],
-    //             source: "InputWrapper",
-    //           })}
-    //       {/* childrenInjected */}
-    //       {WrapperElementRight}
-    //     </React.Fragment>
-    //   ),
-    //   [value, props.options, props.items, props.label]
-    // );
     const ChildComponent = React.createElement(React.Fragment, { key: props.name },
         WrapperElementLeft,
         ChosenElement
-            ? ChosenElement(Object.assign(Object.assign(Object.assign({}, (_m = props.children) === null || _m === void 0 ? void 0 : _m.props), methods), { disabled: props.disabled, type: (_o = props === null || props === void 0 ? void 0 : props.type) !== null && _o !== void 0 ? _o : "line", onChange: (a) => methods.setValue(props.name, a), value: value, error: error, 
+            ? ChosenElement(Object.assign(Object.assign(Object.assign({}, (_m = props.children) === null || _m === void 0 ? void 0 : _m.props), methods), { disabled: props.disabled, type: (_o = props === null || props === void 0 ? void 0 : props.type) !== null && _o !== void 0 ? _o : "line", onChange: (a) => { var _a, _b; return methods.setValue(props.name, a, { shouldValidate: (_a = props.shouldValidateOnChange) !== null && _a !== void 0 ? _a : false, shouldDirty: (_b = props.shouldDirtyOnChange) !== null && _b !== void 0 ? _b : false }); }, value: value, error: error, 
                 // error: formState.errors?.[field.name],
                 source: "InputWrapper" }))
-            : React.cloneElement(props.children, Object.assign(Object.assign(Object.assign({}, (_p = props.children) === null || _p === void 0 ? void 0 : _p.props), methods), { disabled: props.disabled, type: (_q = props === null || props === void 0 ? void 0 : props.type) !== null && _q !== void 0 ? _q : "line", onChange: (a) => methods.setValue(props.name, a), value: value, error: error, 
+            : React.cloneElement(props.children, Object.assign(Object.assign(Object.assign({}, (_p = props.children) === null || _p === void 0 ? void 0 : _p.props), methods), { disabled: props.disabled, type: (_q = props === null || props === void 0 ? void 0 : props.type) !== null && _q !== void 0 ? _q : "line", onChange: (a) => { var _a, _b; return methods.setValue(props.name, a, { shouldValidate: (_a = props.shouldValidateOnChange) !== null && _a !== void 0 ? _a : false, shouldDirty: (_b = props.shouldDirtyOnChange) !== null && _b !== void 0 ? _b : false }); }, value: value, error: error, 
                 // error: formState.errors?.[field.name],
                 source: "InputWrapper" })),
         WrapperElementRight);
-    // const WrapElem = useMemo(
-    //   () =>
-    //     Wrapper !== null && Wrapper !== undefined ? (
-    //       <Wrapper {...props} value={value} {...props.formMethods} children={ChildComponent} />
-    //     ) : <DefaultInputWrapper {...props}>{ChildComponent}</DefaultInputWrapper>,
-    //   [props.label, props.noLabel, value  ]
-    // );
     Logger.info(null, null, "end");
-    // const injectProps = useMemo(()=>({
-    //   ...props,
-    //   value : value,
-    //   theme: null,
-    //   ...methods
-    // }), [value, props.options, props.items, props.label, props.disabled,props.type])
-    const injectProps = Object.assign(Object.assign(Object.assign(Object.assign({}, props), { value: value, theme: null }), methods), { formState });
+    const injectProps = Object.assign(Object.assign(Object.assign(Object.assign({}, props), { value: value, error: error, theme: null }), methods), { formState });
     return React.createElement(ChosenWrapper, { Wrapper: Wrapper, Default: DefaultInputWrapper, props: Object.assign(Object.assign({}, injectProps), { children: ChildComponent }) });
 };
 const ChosenWrapper = React.memo(({ Wrapper, Default, props }) => {
     return Wrapper ? React.createElement(Wrapper, Object.assign({}, props)) : React.createElement(Default, Object.assign({}, props));
 });
-export default React.memo(InputInnerWrapper);
+export default InputInnerWrapper;
 //# sourceMappingURL=InputInnerWrapper.js.map

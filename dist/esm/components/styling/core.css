@@ -20,3 +20,14 @@
 .ql-container {
   height: auto;
 }
+
+.form-item-helper-text {
+  font-size : 0.8em;
+  color: gray;
+}
+
+.form-item-error-text {
+  font-size : 0.9em;
+  color: red;
+  font-weight: bold;
+}

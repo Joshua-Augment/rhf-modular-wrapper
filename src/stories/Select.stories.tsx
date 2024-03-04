@@ -119,9 +119,11 @@ export const SimpleSelectwithState = () => {
   const [options, setOptions] = useState<TSelectOption[]>([])
 
   useEffect(()=>{
-    setTimeout(()=>{
+    const timeout = setTimeout(()=>{
       setOptions(BASE_SELECTS)
     },1000)
+
+    return () => clearTimeout(timeout)
   },[])
 
   const _onSubmit = (a:any) => new Promise((resolve, reject) => {
@@ -137,6 +139,7 @@ export const SimpleSelectwithState = () => {
       label="Simple Select"
       name="select"
     />
+    <p>Options : {JSON.stringify(options)}</p>
     <SubmitButton>Submit</SubmitButton>
   </Form>
 </div>

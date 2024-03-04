@@ -6,10 +6,6 @@ export const useInputValAndError = <T=any,>(name :string) => {
   Logger.info(`Name : ${name}`,"useInputValAndError","start")
   const methods = useFormContext()
 
-  const highjackedSetValue = (_name:string, value: any) => {
-    methods.setValue(_name, value)
-  }
-
   const value:T = useWatch({name: name, defaultValue: null}) ?? null
   Logger.info(`Value : ${String(value)}`,"useInputValAndError")
 
@@ -22,10 +18,11 @@ export const useInputValAndError = <T=any,>(name :string) => {
   // }, [_val])
 
   const {errors, ...allFormStates} = useFormState()
-  const error = useMemo(()=>  errors[name] ?? null ,[errors?.[name], value])
+  const error = useMemo(()=>  errors[name] ?? null ,[errors?.[name]?.message, value])
+  console.log(errors)
   Logger.info(`Error : ${error?.message}`,"useInputValAndError")
   Logger.info(null,null,'end')
   
-  return { value: value, error, ..._methods, formState: {errors, ...allFormStates}, setValue : (name:string, value:any) => highjackedSetValue(name, value)  }
+  return { value: value, error, ..._methods, formState: {errors, ...allFormStates} }
 }
 

@@ -93,13 +93,15 @@ export interface IInputsBasePropsNoSetters<T=any> {
   value ?: any,
   onChange ?: (a:any) => void,
 
+  shouldValidateOnChange ?: boolean,
+  shouldDirtyOnChange ?: boolean,
+
   fields ?: any,
   type ?: string,
   [key: string]: any,
   [key :number]: any,
 }
 export interface IInputsBaseProps<T=any> extends IInputsBasePropsNoSetters<T> {
-
   calculatedField ?: isCalculatedNoPromise<T> | isCalculatedPromise<T> ,
   externalStateSetter ?: (a: T) => void,
   onInputChange ?: (a:T, name: string, all: any, formMethods: UseFormReturn<FieldValues, any>) => void

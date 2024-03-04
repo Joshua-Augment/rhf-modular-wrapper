@@ -1,11 +1,8 @@
 import React from "react";
 import { IInputInnerWrapper } from "./InputInnerWrapper";
-import { Tooltip } from "@mui/material";
-import ErrorIcon from "@mui/icons-material/Error";
-import InfoIcon from "@mui/icons-material/Info";
 
 const DefaultInputWrapper = (props: IInputInnerWrapper) => {
-  console.log(`value for ${props.name}  - ${typeof props.value} - `, props.value);
+  console.log('[DefaultInputWrapper] - Props : ',props)
   return (
     <div style={{ position: "relative", ...props.style }} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ""}`}>
       {props.reversedLabel === true ? (
@@ -14,21 +11,15 @@ const DefaultInputWrapper = (props: IInputInnerWrapper) => {
           {
             <label htmlFor={props.id ?? props.name} className={props?.customClasses?.labelClassName ?? ""} style={{ marginLeft: "5px" }}>
               {props.noBorder !== false && props.noLabel !== true && <span>{props.label} </span>}
-              <span>
+              <span className='form-item-helper-text'>
                 {props.helperText && (
-                  <Tooltip title={props.helperText}>
-                    <InfoIcon style={{ color: "blue", fontSize: "10px" }} />
-                  </Tooltip>
-                )}{" "}
-              </span>
-              <span>
-                {props.error && (
-                  <Tooltip title={props.error.message}>
-                    <ErrorIcon style={{ color: "red", fontSize: "10px" }} />
-                  </Tooltip>
+                  props.helperText
                 )}{" "}
               </span>
             </label>
+          }
+          {
+            props.error && <span className="form-item-error-text">{props.error.message}</span>
           }
         </React.Fragment>
       ) : (
@@ -36,23 +27,17 @@ const DefaultInputWrapper = (props: IInputInnerWrapper) => {
           {
             <label htmlFor={props.id ?? props.name} className={props?.customClasses?.labelClassName ?? ""} style={{ marginRight: "5px" }}>
               {props.noBorder !== false && props.noLabel !== true && <span>{props.label} </span>}
-              <span>
+              <span className='form-item-helper-text'>
                 {props.helperText && (
-                  <Tooltip title={props.helperText}>
-                    <InfoIcon style={{ color: "blue", fontSize: "10px" }} />
-                  </Tooltip>
-                )}{" "}
-              </span>
-              <span>
-                {props.error && (
-                  <Tooltip title={props.error.message}>
-                    <ErrorIcon style={{ color: "red", fontSize: "10px" }} />
-                  </Tooltip>
+                  props.helperText
                 )}{" "}
               </span>
             </label>
           }
           <div className={`form-item-child-wrapper ${props.noBorder ? "no-border" : ""}`}>{props.children}</div>
+          {
+            props.error && <span className="form-item-error-text">{props.error.message}</span>
+          }
         </React.Fragment>
       )}
     </div>

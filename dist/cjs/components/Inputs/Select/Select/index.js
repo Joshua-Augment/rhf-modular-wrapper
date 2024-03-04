@@ -40,21 +40,17 @@ const Select = (props) => {
     delete _props.calculatedField;
     delete _props.externalStateSetter;
     delete _props.onInputChange;
-    // const SelectElems = useMemo(()=> {    
-    //   // Watch for changed options
-    //   // console.log("[SelectElems] -rendered", options)
-    //   return <InputWrapper type={props.type ?? 'select'} {...props} noBorder options={options}>
-    //     <_Select {..._props} />
-    //   </InputWrapper>
-    // },[options, value, error])
     return react_1.default.createElement(core_1.InputWrapper, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'select' }, props, { noBorder: true }),
         react_1.default.createElement(_Select, Object.assign({}, _props)));
 };
 const _Select = (props) => {
     var _a, _b, _c, _d, _e, _f, _g;
     const [options, setOptions] = (0, react_1.useState)((_a = props.options) !== null && _a !== void 0 ? _a : []);
+    const _options = props.options.map(x => x.value).join(',');
+    // Synchronization
+    (0, react_1.useEffect)(() => { setOptions(props.options); }, [_options]);
     const omitOptions = props.omitOptions;
-    const omitFilter = (0, react_1.useMemo)(() => omitOptions ? omitOptions.map(x => (typeof x === 'string' || typeof x === 'number') ? x : x === null || x === void 0 ? void 0 : x.value) : null, []);
+    const omitFilter = (0, react_1.useMemo)(() => omitOptions ? omitOptions.map(x => (typeof x === 'string' || typeof x === 'number') ? x : x === null || x === void 0 ? void 0 : x.value) : null, [omitOptions]);
     const filteredOmittedOptions = options.filter(x => {
         if (omitFilter) {
             return !omitFilter.includes(x.value);

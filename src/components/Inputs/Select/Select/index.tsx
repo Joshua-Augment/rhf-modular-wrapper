@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import SelectInput from "react-select";
 import SelectCreatableInput from "react-select/creatable";
 import {
@@ -23,16 +23,6 @@ const Select = (props: ISelect) => {
   delete _props.externalStateSetter
   delete _props.onInputChange
 
-  // const SelectElems = useMemo(()=> {    
-  //   // Watch for changed options
-    
-  //   // console.log("[SelectElems] -rendered", options)
-
-  //   return <InputWrapper type={props.type ?? 'select'} {...props} noBorder options={options}>
-  //     <_Select {..._props} />
-  //   </InputWrapper>
-  // },[options, value, error])
-
   return <InputWrapper type={props.type ?? 'select'} {...props} noBorder >
   <_Select {..._props} />
 </InputWrapper>;
@@ -40,8 +30,13 @@ const Select = (props: ISelect) => {
 
 const _Select = (props: any) => {
   const [options, setOptions] = useState<TSelectOption[]>(props.options ?? [])
+  const _options = props.options.map(x => x.value).join(',')
+
+  // Synchronization
+  useEffect(()=>{setOptions(props.options)},[_options])
+  
   const omitOptions:BaseSelect['omitOptions'] = props.omitOptions
-  const omitFilter = useMemo(()=>omitOptions ? omitOptions.map(x => (typeof x ==='string' || typeof x === 'number') ? x : x?.value as string|number) : null,[])
+  const omitFilter = useMemo(()=>omitOptions ? omitOptions.map(x => (typeof x ==='string' || typeof x === 'number') ? x : x?.value as string|number) : null,[omitOptions])
 
   
   const filteredOmittedOptions = options.filter(x => {

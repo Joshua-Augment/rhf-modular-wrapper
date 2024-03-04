@@ -27,7 +27,6 @@ const Line = (props: LineInputProps) => {
 }
 
 const _Line = (props: any) => {
-  console.log(`[Line Props] - `,props)
   Logger.info(props,'Line','start')
   Logger.info(null,null,'end')
   return <input 

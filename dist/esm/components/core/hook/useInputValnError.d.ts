@@ -20,12 +20,12 @@ export declare const useInputValAndError: <T = any>(name: string) => {
         }>>;
         errors: import("react-hook-form").FieldErrors<import("react-hook-form").FieldValues>;
     };
-    setValue: (name: string, value: any) => void;
     watch: import("react-hook-form").UseFormWatch<import("react-hook-form").FieldValues>;
     getValues: import("react-hook-form").UseFormGetValues<import("react-hook-form").FieldValues>;
     getFieldState: import("react-hook-form").UseFormGetFieldState<import("react-hook-form").FieldValues>;
     setError: import("react-hook-form").UseFormSetError<import("react-hook-form").FieldValues>;
     clearErrors: import("react-hook-form").UseFormClearErrors<import("react-hook-form").FieldValues>;
+    setValue: import("react-hook-form").UseFormSetValue<import("react-hook-form").FieldValues>;
     trigger: import("react-hook-form").UseFormTrigger<import("react-hook-form").FieldValues>;
     resetField: import("react-hook-form").UseFormResetField<import("react-hook-form").FieldValues>;
     reset: import("react-hook-form").UseFormReset<import("react-hook-form").FieldValues>;

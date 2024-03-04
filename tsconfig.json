@@ -16,5 +16,5 @@
     "target": "ES6"
   },
   "exclude": ["src/stories"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/components/Inputs/Text/index.ts", "src/**/**/*.css"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/components/Inputs/Text/index.ts", "src/**/**/*.css", "src/components/core/InputWrapper/v1/index.bak"]
 }

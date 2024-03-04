@@ -9,7 +9,6 @@ export interface IInputInnerWrapper extends FormBaseInput {
 }
 
 const InputInnerWrapper = (props: IInputInnerWrapper) => {
-  
   const { value, error, formState,  ...methods } = useInputValAndError(props.name);
   const {
     inputWrapper : _propsInputWrapper,
@@ -120,49 +119,10 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
   }, [props?.buttons?.right, props?.buttons?.wrapper?.right, props?.buttons?.wrapper?.all]);
 
   Logger.info(`Setting Chosen Element`, `${_propsName} - InputWrapperv2`);
- 
-  const ChosenElement: any = useMemo(() => {
-    Logger.info(`useMemo`, `Chosen Element`, "start");
-    const _chosenElement = props.inputElement
-    Logger.info(null, null, "end");
-    return _chosenElement;
-  }, [props.inputElement]);
+
+  const ChosenElement = props.inputElement
 
   const Wrapper: any = useMemo(() => _propsInputWrapper, [_propsInputWrapper]);
-
-  // const ChildComponent = useMemo(
-  //   () => (
-  //     <React.Fragment key={props.name}>
-  //       {WrapperElementLeft}
-  //       {ChosenElement
-  //         ? ChosenElement({
-  //             ...props.children?.props,
-  //             ...methods,
-  //             disabled: props.disabled,
-  //             type: props?.type ?? "line",
-  //             onChange: (a) => methods.setValue(props.name, a),
-  //             value: value,
-  //             error: error,
-  //             // error: formState.errors?.[field.name],
-  //             source: "InputWrapper",
-  //           })
-  //         : React.cloneElement(props.children, {
-  //             ...props.children?.props,
-  //             ...methods,
-  //             disabled: props.disabled,
-  //             type: props?.type ?? "line",
-  //             onChange: (a) => methods.setValue(props.name, a),
-  //             value: value,
-  //             error: error,
-  //             // error: formState.errors?.[field.name],
-  //             source: "InputWrapper",
-  //           })}
-  //       {/* childrenInjected */}
-  //       {WrapperElementRight}
-  //     </React.Fragment>
-  //   ),
-  //   [value, props.options, props.items, props.label]
-  // );
 
   const ChildComponent = <React.Fragment key={props.name}>
   {WrapperElementLeft}
@@ -172,7 +132,7 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
         ...methods,
         disabled: props.disabled,
         type: props?.type ?? "line",
-        onChange: (a) => methods.setValue(props.name, a),
+        onChange: (a) => methods.setValue(props.name, a, {shouldValidate: props.shouldValidateOnChange ?? false, shouldDirty: props.shouldDirtyOnChange ?? false}),
         value: value,
         error: error,
         // error: formState.errors?.[field.name],
@@ -183,36 +143,21 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
         ...methods,
         disabled: props.disabled,
         type: props?.type ?? "line",
-        onChange: (a) => methods.setValue(props.name, a),
+        onChange: (a) => methods.setValue(props.name, a, {shouldValidate: props.shouldValidateOnChange ?? false, shouldDirty: props.shouldDirtyOnChange ?? false}),
         value: value,
         error: error,
         // error: formState.errors?.[field.name],
         source: "InputWrapper",
       })}
-  {/* childrenInjected */}
-  {WrapperElementRight}
-</React.Fragment>
-
-  // const WrapElem = useMemo(
-  //   () =>
-  //     Wrapper !== null && Wrapper !== undefined ? (
-  //       <Wrapper {...props} value={value} {...props.formMethods} children={ChildComponent} />
-  //     ) : <DefaultInputWrapper {...props}>{ChildComponent}</DefaultInputWrapper>,
-  //   [props.label, props.noLabel, value  ]
-  // );
+    {WrapperElementRight}
+  </React.Fragment>
 
   Logger.info(null, null, "end");
-
-  // const injectProps = useMemo(()=>({
-  //   ...props,
-  //   value : value,
-  //   theme: null,
-  //   ...methods
-  // }), [value, props.options, props.items, props.label, props.disabled,props.type])
 
   const injectProps = {
     ...props,
     value: value,
+    error: error,
     theme: null,
     ...methods,
     formState
@@ -225,4 +170,4 @@ const ChosenWrapper = React.memo(({ Wrapper, Default, props }: { Wrapper?: any |
   return Wrapper ? <Wrapper {...props} /> : <Default {...props} />;
 });
 
-export default React.memo(InputInnerWrapper);
+export default InputInnerWrapper;
