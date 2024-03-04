@@ -4,7 +4,7 @@ import Logger from "../Logger"
 
 export const useInputValAndError = <T=any,>(name :string) => {
   Logger.info(`Name : ${name}`,"useInputValAndError","start")
-  const methods = useFormContext()
+  const {control, ...methods} = useFormContext()
 
   const value:T = useWatch({name: name, defaultValue: null}) ?? null
   Logger.info(`Value : ${String(value)}`,"useInputValAndError")
@@ -17,12 +17,12 @@ export const useInputValAndError = <T=any,>(name :string) => {
   //   return _val === undefined ? null : _val
   // }, [_val])
 
-  const {errors, ...allFormStates} = useFormState()
+  const {errors, dirtyFields, touchedFields, isValidating, isSubmitting,  ...allFormStates} = useFormState()
   const error = useMemo(()=>  errors[name] ?? null ,[errors?.[name]?.message, value])
   console.log(errors)
   Logger.info(`Error : ${error?.message}`,"useInputValAndError")
   Logger.info(null,null,'end')
   
-  return { value: value, error, ..._methods, formState: {errors, ...allFormStates} }
+  return { value: value, error, ..._methods, formState: {errors, ...allFormStates, isTouched: touchedFields[name] ?? null} }
 }
 

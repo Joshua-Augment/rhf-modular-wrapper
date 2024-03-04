@@ -27,9 +27,9 @@ const iconStyle:React.CSSProperties = {
 }
 
 const FormList = (props:IList) => {
-  const {value, error, control } = useInputValAndError(props.name)
+  const {value, error } = useInputValAndError(props.name)
   // const {control} = useFormContext()
-  const {fields,append,insert,remove} = useFieldArray({control,name: props.name});
+  const {fields,append,insert,remove} = useFieldArray({name: props.name});
   // const _val = watch(props.name)
   // const value = useMemo(() => _val ,[_val])
 

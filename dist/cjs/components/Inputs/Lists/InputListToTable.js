@@ -50,8 +50,8 @@ const Table = styled_components_1.default.table `
 const InputListToTable = (props) => {
     var _a;
     const [editMode, setEditMode] = (0, react_1.useState)(false);
-    const { value, /* register, unregister, */ getValues, setValue, control, watch, resetField, trigger } = (0, useInputValnError_1.useInputValAndError)(props.name);
-    const { fields, append, move, remove, update } = (0, react_hook_form_1.useFieldArray)({ control, name: props.name });
+    const { value, /* register, unregister, */ getValues, setValue, watch, resetField, trigger } = (0, useInputValnError_1.useInputValAndError)(props.name);
+    const { fields, append, move, remove, update } = (0, react_hook_form_1.useFieldArray)({ name: props.name });
     const __idWatch = watch(`${props.inputName}.__id`);
     const inputNameCheck = watch(props.inputName);
     // useEffect(()=> unregister(props.inputName) ,[])

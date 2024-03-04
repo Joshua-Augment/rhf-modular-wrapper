@@ -52,9 +52,9 @@ const iconStyle = {
 };
 const FormList = (props) => {
     var _a;
-    const { value, error, control } = (0, useInputValnError_1.useInputValAndError)(props.name);
+    const { value, error } = (0, useInputValnError_1.useInputValAndError)(props.name);
     // const {control} = useFormContext()
-    const { fields, append, insert, remove } = (0, react_hook_form_1.useFieldArray)({ control, name: props.name });
+    const { fields, append, insert, remove } = (0, react_hook_form_1.useFieldArray)({ name: props.name });
     // const _val = watch(props.name)
     // const value = useMemo(() => _val ,[_val])
     const emptyRow = (0, react_1.useMemo)(() => {

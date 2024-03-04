@@ -1,23 +1,16 @@
 export declare const useInputValAndError: <T = any>(name: string) => {
     formState: {
+        isTouched: any;
         isDirty: boolean;
         isLoading: boolean;
         isSubmitted: boolean;
         isSubmitSuccessful: boolean;
-        isSubmitting: boolean;
-        isValidating: boolean;
         isValid: boolean;
         disabled: boolean;
         submitCount: number;
         defaultValues?: Readonly<{
             [x: string]: any;
         }> | undefined;
-        dirtyFields: Partial<Readonly<{
-            [x: string]: any;
-        }>>;
-        touchedFields: Partial<Readonly<{
-            [x: string]: any;
-        }>>;
         errors: import("react-hook-form").FieldErrors<import("react-hook-form").FieldValues>;
     };
     watch: import("react-hook-form").UseFormWatch<import("react-hook-form").FieldValues>;
@@ -31,7 +24,6 @@ export declare const useInputValAndError: <T = any>(name: string) => {
     reset: import("react-hook-form").UseFormReset<import("react-hook-form").FieldValues>;
     handleSubmit: import("react-hook-form").UseFormHandleSubmit<import("react-hook-form").FieldValues, import("react-hook-form").FieldValues>;
     unregister: import("react-hook-form").UseFormUnregister<import("react-hook-form").FieldValues>;
-    control: import("react-hook-form").Control<import("react-hook-form").FieldValues, any, import("react-hook-form").FieldValues>;
     register: import("react-hook-form").UseFormRegister<import("react-hook-form").FieldValues>;
     setFocus: import("react-hook-form").UseFormSetFocus<import("react-hook-form").FieldValues>;
     value: T;
