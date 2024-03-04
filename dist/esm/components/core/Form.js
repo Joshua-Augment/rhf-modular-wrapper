@@ -18,7 +18,7 @@ export const ThemeContext = createContext({ debug: false, inputTemplate: null, b
 //   )
 // }
 export const Form = (props) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+    var _a, _b, _c, _d, _e, _f, _g;
     const formID = useMemo(() => { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : `rhf-wc-f-${new Date().getTime()}`; }, []);
     const methods = useForm({
         mode: (_a = props.mode) !== null && _a !== void 0 ? _a : "onChange",
@@ -32,11 +32,15 @@ export const Form = (props) => {
         shouldUseNativeValidation: (_f = props.shouldUseNativeValidation) !== null && _f !== void 0 ? _f : false,
         delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined,
     });
+    const inputWrapper = useMemo(() => { var _a; return (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : null; }, []);
+    const buttonTemplate = useMemo(() => { var _a; return (_a = props.buttonWrapper) !== null && _a !== void 0 ? _a : null; }, []);
+    const elements = useMemo(() => { var _a; return (_a = props.elements) !== null && _a !== void 0 ? _a : null; }, []);
+    const debug = useMemo(() => { var _a; return (_a = props.debug) !== null && _a !== void 0 ? _a : false; }, []);
     return (React.createElement(ThemeContext.Provider, { value: {
-            inputTemplate: (_h = props.inputWrapper) !== null && _h !== void 0 ? _h : null,
-            buttonTemplate: (_j = props.buttonWrapper) !== null && _j !== void 0 ? _j : null,
-            elements: (_k = props.elements) !== null && _k !== void 0 ? _k : null,
-            debug: (_l = props.debug) !== null && _l !== void 0 ? _l : false
+            inputTemplate: inputWrapper,
+            buttonTemplate: buttonTemplate,
+            elements: elements,
+            debug: debug
         } },
         React.createElement(FormProvider, Object.assign({}, methods),
             React.createElement("form", { onSubmit: methods.handleSubmit(props.onSubmit), id: formID }, props.children))));

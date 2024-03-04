@@ -25,7 +25,7 @@ const InputWrapper = (props) => {
             : null);
     }, [props === null || props === void 0 ? void 0 : props.element, theme.elements]);
     const firstUpdate = useRef(true);
-    const _s = useInputValAndError(props.name), { value, error } = _s, rest = __rest(_s, ["value", "error"]);
+    const _s = useInputValAndError(props.name), { value, error, formState } = _s, rest = __rest(_s, ["value", "error", "formState"]);
     const watchCalculated = ((_a = props === null || props === void 0 ? void 0 : props.calculatedField) === null || _a === void 0 ? void 0 : _a.find) !== undefined
         ? rest.watch(props.calculatedField.find)
         : null;
@@ -46,7 +46,7 @@ const InputWrapper = (props) => {
         }
         // On Input Change
         if (props.onInputChange && !firstUpdate.current) {
-            props.onInputChange(value, props.name, rest.getValues(), Object.assign({}, rest));
+            props.onInputChange(value, props.name, rest.getValues(), Object.assign(Object.assign({}, rest), { formState: formState }));
         }
         firstUpdate.current = false;
     }, [value]);

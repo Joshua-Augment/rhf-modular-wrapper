@@ -25,7 +25,7 @@ const InputElemWrapper = (props) => {
     //   (theme.elements !== null && theme.elements[props.type] !== undefined ? theme.elements[props.type] : null)
     const Wrapper = useMemo(() => { var _a, _b; return (_b = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : theme.inputTemplate) !== null && _b !== void 0 ? _b : null; }, [props.helperText, props.label, props.noLabel, props.placeholder, value, error === null || error === void 0 ? void 0 : error.message, props === null || props === void 0 ? void 0 : props.inputWrapper, theme === null || theme === void 0 ? void 0 : theme.inputTemplate]);
     const WrapElem = useMemo(() => {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
         return Wrapper !== null && Wrapper !== undefined ? (React.createElement(Wrapper, Object.assign({}, props, { value: value }, rest))) : (React.createElement("div", { style: Object.assign({ position: "relative" }, props.style), className: `form-item-wrapper ${(_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.wrapperClassName) !== null && _b !== void 0 ? _b : ""}` }, props.reversedLabel === true ? (React.createElement(React.Fragment, null,
             React.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? "no-border" : ""}` }, props.children),
             React.createElement("label", { htmlFor: (_c = props.id) !== null && _c !== void 0 ? _c : props.name, className: (_e = (_d = props === null || props === void 0 ? void 0 : props.customClasses) === null || _d === void 0 ? void 0 : _d.labelClassName) !== null && _e !== void 0 ? _e : "", style: { marginLeft: "5px" } },
@@ -37,10 +37,10 @@ const InputElemWrapper = (props) => {
                         React.createElement(InfoIcon, { style: { color: "blue", fontSize: "10px" } }))),
                     " "),
                 React.createElement("span", null,
-                    error && (React.createElement(Tooltip, { title: error.message },
+                    error && (React.createElement(Tooltip, { title: (_f = error === null || error === void 0 ? void 0 : error.message) !== null && _f !== void 0 ? _f : '' },
                         React.createElement(ErrorIcon, { style: { color: "red", fontSize: "10px" } }))),
                     " ")))) : (React.createElement(React.Fragment, null,
-            React.createElement("label", { htmlFor: (_f = props.id) !== null && _f !== void 0 ? _f : props.name, className: (_h = (_g = props === null || props === void 0 ? void 0 : props.customClasses) === null || _g === void 0 ? void 0 : _g.labelClassName) !== null && _h !== void 0 ? _h : "", style: { marginRight: "5px" } },
+            React.createElement("label", { htmlFor: (_g = props.id) !== null && _g !== void 0 ? _g : props.name, className: (_j = (_h = props === null || props === void 0 ? void 0 : props.customClasses) === null || _h === void 0 ? void 0 : _h.labelClassName) !== null && _j !== void 0 ? _j : "", style: { marginRight: "5px" } },
                 props.noBorder !== false && props.noLabel !== true && React.createElement("span", null,
                     props.label,
                     " "),
@@ -49,7 +49,7 @@ const InputElemWrapper = (props) => {
                         React.createElement(InfoIcon, { style: { color: "blue", fontSize: "10px" } }))),
                     " "),
                 React.createElement("span", null,
-                    error && (React.createElement(Tooltip, { title: error.message },
+                    error && (React.createElement(Tooltip, { title: (_k = error === null || error === void 0 ? void 0 : error.message) !== null && _k !== void 0 ? _k : '' },
                         React.createElement(ErrorIcon, { style: { color: "red", fontSize: "10px" } }))),
                     " ")),
             React.createElement("div", { className: `form-item-child-wrapper ${props.noBorder ? "no-border" : ""}` }, props.children)))));

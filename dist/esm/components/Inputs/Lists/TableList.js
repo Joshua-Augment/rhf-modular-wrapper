@@ -58,7 +58,6 @@ const _Table = (props) => {
             return obj;
         }
     }, []);
-    console.log('[fields] - ', fields);
     useEffect(() => { if (fields.length === 0) {
         append(emptyRow);
     } });

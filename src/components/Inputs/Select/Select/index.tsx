@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import SelectInput from "react-select";
 import SelectCreatableInput from "react-select/creatable";
 import {
@@ -8,7 +8,6 @@ import {
   InputWrapper,
   TSelectOption,
 } from "../../../core";
-import { Controller } from "react-hook-form";
 
 const Select = (props: ISelect) => {
   // const {value, error, setValue} = useInputValAndError(props.name)

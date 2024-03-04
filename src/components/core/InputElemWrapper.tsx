@@ -43,7 +43,7 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
                   </span>
                   <span>
                     {error && (
-                      <Tooltip title={error.message}>
+                      <Tooltip title={(error?.message as string) ?? ''}>
                         <ErrorIcon style={{ color: "red", fontSize: "10px" }} />
                       </Tooltip>
                     )}{" "}
@@ -65,7 +65,7 @@ const InputElemWrapper = (props: FormFrameWrapperProps) => {
                   </span>
                   <span>
                     {error && (
-                      <Tooltip title={error.message}>
+                      <Tooltip title={(error?.message as string) ?? ''}>
                         <ErrorIcon style={{ color: "red", fontSize: "10px" }} />
                       </Tooltip>
                     )}{" "}

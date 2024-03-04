@@ -26,6 +26,6 @@ export const useInputValAndError = <T=any,>(name :string) => {
   Logger.info(`Error : ${error?.message}`,"useInputValAndError")
   Logger.info(null,null,'end')
   
-  return { value: value, error, ..._methods, formState: allFormStates, setValue : (name:string, value:any) => highjackedSetValue(name, value)  }
+  return { value: value, error, ..._methods, formState: {errors, ...allFormStates}, setValue : (name:string, value:any) => highjackedSetValue(name, value)  }
 }
 
