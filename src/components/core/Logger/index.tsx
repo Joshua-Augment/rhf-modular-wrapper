@@ -8,7 +8,9 @@ const COLOURS = {
 class Log {
   private debug = true
 
-  generateMessage(level: 'trace' | 'info' | 'warn' | 'error', message : unknown, source : string| null, group ?: 'start' | 'end') {
+  
+
+  generateMessage(level: 'trace' | 'info' | 'warn' | 'error', message : unknown | unknown[], source : string| null, group ?: 'start' | 'end') {
     if (!this.debug) {return}
 
     var textColor = COLOURS[level];
@@ -33,19 +35,19 @@ class Log {
 
   }
 
-  trace(message: unknown, source: string | null, group ?: 'start' | 'end') {
+  trace(message: unknown | unknown[], source: string | null, group ?: 'start' | 'end') {
     return this.generateMessage('trace', message, source, group);
   }
 
-  info(message: unknown, source: string | null, group ?: 'start' | 'end') {
+  info(message: unknown | unknown[], source: string | null, group ?: 'start' | 'end') {
     return this.generateMessage('info', message, source, group);
   }
 
-  warn(message: unknown, source: string | null, group ?: 'start' | 'end') {
+  warn(message: unknown | unknown[], source: string | null, group ?: 'start' | 'end') {
     return this.generateMessage('warn', message, source, group);
   }
 
-  error(message: unknown, source: string | null, group ?: 'start' | 'end') {
+  error(message: unknown | unknown[], source: string | null, group ?: 'start' | 'end') {
     return this.generateMessage('error', message, source, group);
   }
 }

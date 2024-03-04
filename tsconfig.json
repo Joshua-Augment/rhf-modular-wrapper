@@ -1,4 +1,3 @@
-
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
@@ -17,5 +16,5 @@
     "target": "ES6"
   },
   "exclude": ["src/stories"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/components/Inputs/Text/index.ts", "src/**/**/*.css", "src/components/core/InputWrapper.bak", "src/components/core/InputElemWrapper.bak", "src/components/core/InputWrapper.bak1"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/components/Inputs/Text/index.ts", "src/**/**/*.css"]
 }

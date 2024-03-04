@@ -9,7 +9,7 @@ import "../styling/form_bootstrap.css"
 import "../styling/core.css"
 import { TListInputs } from './interfaces/lists';
 
-type TTemplateContext = {
+export type TTemplateContext = {
   inputTemplate : null|React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
   buttonTemplate : null|React.ComponentType<ISubmitButton> | React.ComponentType<any>,
   elements : null|{
@@ -49,13 +49,18 @@ export const Form = <T extends FieldValues,>(props: IForm<T>) => {
     shouldUseNativeValidation: props.shouldUseNativeValidation ?? false,
     delayError: props.delayError ?? undefined,
   });
+
+  const inputWrapper = useMemo(() => props.inputWrapper ?? null,[])
+  const buttonTemplate = useMemo(() => props.buttonWrapper ?? null,[])
+  const elements = useMemo(() => props.elements ?? null,[])
+  const debug = useMemo(() => props.debug ?? false,[])
   
   return (<ThemeContext.Provider 
     value={{
-      inputTemplate:props.inputWrapper ?? null, 
-      buttonTemplate: props.buttonWrapper ?? null,
-      elements: props.elements ?? null,
-      debug : props.debug ?? false
+      inputTemplate:inputWrapper, 
+      buttonTemplate: buttonTemplate,
+      elements: elements,
+      debug : debug
     }} >
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(props.onSubmit)}

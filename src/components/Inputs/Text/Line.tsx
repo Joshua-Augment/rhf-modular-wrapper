@@ -1,6 +1,7 @@
 import React from 'react'
 import { LineInputProps } from '../../core'
 import InputWrapper from '../../core/InputWrapper'
+import Logger from '../../core/Logger'
 // import { useInputValAndError } from '../../core/hook/useInputValnError'
 
 const Line = (props: LineInputProps) => {
@@ -26,13 +27,9 @@ const Line = (props: LineInputProps) => {
 }
 
 const _Line = (props: any) => {
-  // const handleChange = (e:any) => {
-  //   console.log(`_Line (HandleChange) - ${props.name} - props : `,e.target.value)
-  //   if (props.onChange) {
-  //     props.onChange(e.target.value)
-  //   }
-  // }
-  console.log(`_Line - ${props.name} [value : ${props.value}] props : `,props)
+  console.log(`[Line Props] - `,props)
+  Logger.info(props,'Line','start')
+  Logger.info(null,null,'end')
   return <input 
     disabled={props.disabled} 
     id={props.name} 

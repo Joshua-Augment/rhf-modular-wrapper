@@ -65,8 +65,6 @@ const _Table = (props: any) => {
     }
   },[])
 
-  console.log('[fields] - ',fields)
-
   useEffect(()=> {if (fields.length === 0) { append(emptyRow)}})
 
   /* const generateRow = (field: any, i:number) => <TableTRTemplate key={`fw-${props.name}-${field.id}`}>

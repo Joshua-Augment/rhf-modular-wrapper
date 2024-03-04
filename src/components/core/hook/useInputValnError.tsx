@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { useFormContext } from "react-hook-form"
+import { useFormContext, useFormState, useWatch } from "react-hook-form"
 import Logger from "../Logger"
 
 export const useInputValAndError = <T=any,>(name :string) => {
@@ -10,23 +10,22 @@ export const useInputValAndError = <T=any,>(name :string) => {
     methods.setValue(_name, value)
   }
 
-  const value:T = methods.watch(name)
+  const value:T = useWatch({name: name, defaultValue: null}) ?? null
   Logger.info(`Value : ${String(value)}`,"useInputValAndError")
 
-  //console.log('[useInputValAndError] - ',value)
-  // console.log(`[useInputValAndError - Value _val for ${name} ] : [Undefined?${_val === undefined?'Y':'N'}] [Null?${_val === null?'Y':'N'}]`,_val)
-  // console.log(`[useInputValAndError - getValues in ${name} ] : `,methods.getValues())
+  const _methods = useMemo(() => methods,[])
+
   
   // const value = useMemo(()=> {
   //   if (_val === undefined) {highjackedSetValue(null)}  
   //   return _val === undefined ? null : _val
   // }, [_val])
 
-  const {error: _error} = methods.getFieldState(name, methods.formState)
-  const error = useMemo(()=>  Array.isArray(_error) ? undefined : _error ,[_error, value])
+  const {errors, ...allFormStates} = useFormState()
+  const error = useMemo(()=>  errors[name] ?? null ,[errors?.[name], value])
   Logger.info(`Error : ${error?.message}`,"useInputValAndError")
   Logger.info(null,null,'end')
   
-  return { value: value, error, ...methods, setValue : (name:string, value:any) => highjackedSetValue(name, value)  }
+  return { value: value, error, ..._methods, formState: allFormStates, setValue : (name:string, value:any) => highjackedSetValue(name, value)  }
 }
 
