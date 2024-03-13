@@ -1,17 +1,14 @@
 export declare const useInputValAndError: <T = any>(name: string) => {
     formState: {
-        isTouched: any;
         isDirty: boolean;
         isLoading: boolean;
-        isSubmitted: boolean;
-        isSubmitSuccessful: boolean;
         isValid: boolean;
         disabled: boolean;
+        isSubmitSuccessful: boolean;
+        isSubmitted: boolean;
+        isSubmitting: boolean;
+        isValidating: boolean;
         submitCount: number;
-        defaultValues?: Readonly<{
-            [x: string]: any;
-        }> | undefined;
-        errors: import("react-hook-form").FieldErrors<import("react-hook-form").FieldValues>;
     };
     watch: import("react-hook-form").UseFormWatch<import("react-hook-form").FieldValues>;
     getValues: import("react-hook-form").UseFormGetValues<import("react-hook-form").FieldValues>;

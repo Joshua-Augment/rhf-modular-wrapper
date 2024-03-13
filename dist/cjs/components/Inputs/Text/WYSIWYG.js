@@ -31,50 +31,35 @@ const InputWrapper_1 = __importDefault(require("../../core/InputWrapper"));
 const react_quill_1 = __importDefault(require("react-quill"));
 require("react-quill/dist/quill.snow.css");
 const useInputValnError_1 = require("../../core/hook/useInputValnError");
-// import { Controller } from 'react-hook-form';
 const WYSIWYG = (props) => {
     var _a;
     const { value, setValue } = (0, useInputValnError_1.useInputValAndError)(props.name);
-    // console.log('[WYSIWYG Value] - ',value)
-    // console.log('[WYSIWYG Prop.Value] - ',props.value)
-    // const {watch, setValue} = useFormContext()
-    // const _val = watch(props.name)
-    (0, react_1.useEffect)(() => { if (value === undefined || value === null) {
-        setValue(props.name, '');
-    } }, [value]);
-    // const val = useMemo(() => _val ,[_val])
-    return (react_1.default.createElement(InputWrapper_1.default, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'wysiwyg' }, props),
+    (0, react_1.useEffect)(() => {
+        if (value === undefined || value === null) {
+            setValue(props.name, "");
+        }
+    }, [value]);
+    return (react_1.default.createElement(InputWrapper_1.default, Object.assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "wysiwyg" }, props),
         react_1.default.createElement(ReactQuillWrapper, Object.assign({}, props))));
 };
 const ReactQuillWrapper = (props) => {
-    const toolbarOptions = (0, react_1.useMemo)(() => ([
-        ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'code-block'],
-        ['link', 'image'],
-        [{ 'header': 1 }, { 'header': 2 }],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-        [{ 'script': 'sub' }, { 'script': 'super' }],
-        [{ 'indent': '-1' }, { 'indent': '+1' }],
-        [{ 'direction': 'rtl' }],
-        [{ 'size': ['small', false, 'large', 'huge'] }],
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-        ['clean'] // remove formatting button
-    ]), []);
-    return react_1.default.createElement(react_quill_1.default, { theme: 'snow', modules: { toolbar: toolbarOptions }, onChange: (a) => props.onChange(a), value: props.value, onBlur: props.onBlur });
-    // return <Controller 
-    //   name={props.name}
-    //   control={props.control}
-    //   render={({field: {value,onChange, onBlur}}) => <ReactQuill 
-    //     theme={'snow'} 
-    //     modules={{toolbar : toolbarOptions}} 
-    //     onChange={(a:any) => onChange(a)}  
-    //     value={value}
-    //     onBlur={onBlur}
-    //   />}
-    // />
+    const toolbarOptions = (0, react_1.useMemo)(() => [
+        ["bold", "italic", "underline", "strike"],
+        ["blockquote", "code-block"],
+        ["link", "image"],
+        [{ header: 1 }, { header: 2 }],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ script: "sub" }, { script: "super" }],
+        [{ indent: "-1" }, { indent: "+1" }],
+        [{ direction: "rtl" }],
+        [{ size: ["small", false, "large", "huge"] }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ color: [] }, { background: [] }],
+        [{ font: [] }],
+        [{ align: [] }],
+        ["clean"], // remove formatting button
+    ], []);
+    return (react_1.default.createElement(react_quill_1.default, Object.assign({ theme: "snow", modules: { toolbar: toolbarOptions }, onChange: (a) => props.onChange && props.onChange(a), value: props.value, onBlur: props.onBlur }, props.quillProps)));
 };
 exports.default = WYSIWYG;
 //# sourceMappingURL=WYSIWYG.js.map

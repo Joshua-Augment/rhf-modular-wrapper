@@ -6,7 +6,7 @@ const COLOURS = {
 };
 
 class Log {
-  private debug = true
+  private debug = false
 
   
 

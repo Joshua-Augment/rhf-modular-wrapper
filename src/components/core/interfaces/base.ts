@@ -1,12 +1,13 @@
 import React from 'react';
 import { FieldValues, DeepPartial, UseFormReturn } from 'react-hook-form/dist/types';
 import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form/dist/types';
+import { TListInputs } from './lists';
 export interface ISubmitButton {label ?: string; children ?: React.ReactNode;buttonClass ?: string; }
 
 export interface IForm<T extends FieldValues> {
   inputWrapper ?: React.ComponentType<FormFrameWrapperProps>,
   buttonWrapper ?: React.ComponentType<ISubmitButton>,
-  elements ?: { [key:string] : any}
+  elements ?: Record<TListInputs,React.ComponentType<any>>;
   style ?: 'bootstrap' | 'mui'
   debug ?: boolean,
   id ?:string
@@ -28,18 +29,14 @@ export interface IForm<T extends FieldValues> {
 export interface FormFrameWrapperProps<T=any> extends IInputsBaseProps<T>  {
   errors ?: FieldError,
   children : JSX.Element | JSX.Element[] ,
-  // onChange : Function,
   value : T
-  // defaultValue ?: T
 }
 
 export interface IFormFrameInjector<T=any> extends FormFrameWrapperProps<T> {
   value : T, 
   onChange : (e:T) => void, 
-  onBlur : (e:any) => any, 
-  isTouched : boolean, 
-  isDirty : boolean, 
-  error : any, 
+  onBlur : (e:any) => void, 
+  error ?: string|null, 
   ref : any,
   disabled ?:boolean
 }
@@ -66,8 +63,6 @@ export interface IInputsBasePropsNoSetters<T=any> {
     wrapper ?: {left ?: JSX.Element, right ?: JSX.Element, all ?: JSX.Element},
     left ?: (value: T, name: string, all: any) => JSX.Element,
     right ?: (value: T, name: string, all: any) => JSX.Element,
-    // left ?: {label: React.ReactNode, onClick: (value: T, name: string, all: any) => void, customButton ?: JSX.Element}[],
-    // right ?: {label: React.ReactNode, onClick: (value: T, name: string, all: any) => void, customButton ?: JSX.Element}[],
   },
   inputWrapper ?: React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
   name : string,

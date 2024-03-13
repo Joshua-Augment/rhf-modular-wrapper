@@ -1,12 +1,16 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import Logger from "../../../Logger";
-import { useWatch } from "react-hook-form";
+import { UseFormReturn, useWatch } from "react-hook-form";
 import { FormBaseInput } from "../../../interfaces";
 import DefaultInputWrapper from "./DefaultInputWrapper";
 import { useInputValAndError } from "../../../hook/useInputValnError";
 
 export interface IInputInnerWrapper extends FormBaseInput {
 }
+
+export type InputWraperChildProps = {
+  
+} & IInputInnerWrapper & Omit<UseFormReturn,'control'>
 
 const InputInnerWrapper = (props: IInputInnerWrapper) => {
   const { value, error, formState,  ...methods } = useInputValAndError(props.name);
@@ -135,7 +139,6 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
         onChange: (a) => methods.setValue(props.name, a, {shouldValidate: props.shouldValidateOnChange ?? false, shouldDirty: props.shouldDirtyOnChange ?? false}),
         value: value,
         error: error,
-        // error: formState.errors?.[field.name],
         source: "InputWrapper",
       })
     : React.cloneElement(props.children, {
@@ -146,7 +149,6 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
         onChange: (a) => methods.setValue(props.name, a, {shouldValidate: props.shouldValidateOnChange ?? false, shouldDirty: props.shouldDirtyOnChange ?? false}),
         value: value,
         error: error,
-        // error: formState.errors?.[field.name],
         source: "InputWrapper",
       })}
     {WrapperElementRight}

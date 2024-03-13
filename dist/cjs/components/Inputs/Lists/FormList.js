@@ -115,11 +115,12 @@ const FormList = (props) => {
             });
         };
         return fields.map((field, i) => {
+            var _a;
             if (props.bodyTemplate !== undefined) {
                 let _props = props;
                 delete _props.children;
                 const bodyTemplateWithProps = react_1.default.cloneElement(props.bodyTemplate(Object.assign({ fields: field, index: i }, props)), Object.assign({ fields: field, index: i }, props));
-                return templateConverter(bodyTemplateWithProps.props.children, i);
+                return templateConverter((_a = bodyTemplateWithProps.props) === null || _a === void 0 ? void 0 : _a.children, i);
             }
             else {
                 return react_1.default.createElement(Row, { key: `fw-${props.name}-${i}` },

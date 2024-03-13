@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldValues, DeepPartial, UseFormReturn } from 'react-hook-form/dist/types';
 import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form/dist/types';
+import { TListInputs } from './lists';
 export interface ISubmitButton {
     label?: string;
     children?: React.ReactNode;
@@ -9,9 +10,7 @@ export interface ISubmitButton {
 export interface IForm<T extends FieldValues> {
     inputWrapper?: React.ComponentType<FormFrameWrapperProps>;
     buttonWrapper?: React.ComponentType<ISubmitButton>;
-    elements?: {
-        [key: string]: any;
-    };
+    elements?: Record<TListInputs, React.ComponentType<any>>;
     style?: 'bootstrap' | 'mui';
     debug?: boolean;
     id?: string;
@@ -37,10 +36,8 @@ export interface FormFrameWrapperProps<T = any> extends IInputsBaseProps<T> {
 export interface IFormFrameInjector<T = any> extends FormFrameWrapperProps<T> {
     value: T;
     onChange: (e: T) => void;
-    onBlur: (e: any) => any;
-    isTouched: boolean;
-    isDirty: boolean;
-    error: any;
+    onBlur: (e: any) => void;
+    error?: string | null;
     ref: any;
     disabled?: boolean;
 }

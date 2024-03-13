@@ -6,7 +6,7 @@ const COLOURS = {
 };
 class Log {
     constructor() {
-        this.debug = true;
+        this.debug = false;
     }
     generateMessage(level, message, source, group) {
         if (!this.debug) {

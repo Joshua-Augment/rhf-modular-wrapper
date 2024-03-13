@@ -36,7 +36,7 @@ export interface IBaseList extends IInputsBaseProps<any> {
 }
 
 export interface IList extends IBaseList {
-  bodyTemplate ?: (props:IList) => React.ReactElement
+  bodyTemplate ?: (props:IList) => React.ReactElement | Element | any
 }
 export interface ITableList extends IBaseList {
   header ?: 'none' | 'top' | 'bottom' | 'both' | 'footer' | 'header_footer'
@@ -74,4 +74,4 @@ export type TMadeInputList =
   | "tablelist"
 
 
-export type TListInputs = HTMLInputTypeAttribute | TMadeInputList
+export type TListInputs = HTMLInputTypeAttribute | TMadeInputList | string

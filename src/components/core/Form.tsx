@@ -12,28 +12,11 @@ import { TListInputs } from './interfaces/lists';
 export type TTemplateContext = {
   inputTemplate : null|React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>,
   buttonTemplate : null|React.ComponentType<ISubmitButton> | React.ComponentType<any>,
-  elements : null|{
-    [key in TListInputs] ?: React.ComponentType<any>
-  }
+  elements : Record<TListInputs, React.ComponentType<any>>
   debug : boolean
 }
 
-export const ThemeContext = createContext<TTemplateContext>({debug:false, inputTemplate: null, buttonTemplate: null, elements: null})
-
-// const BSTheme = lazy(()=>import('../styling/BootstrapTheme'))
-// const MUITheme = lazy(()=>import('../styling/MUITheme'))
-
-// const ChosenTheme = ({children,style}:{children:any, style?:'bootstrap' | 'mui'}) => {
-//   return (
-//     <>
-//       <React.Suspense fallback={<></>}>
-//         {(style === undefined || style == 'bootstrap') && <BSTheme />}
-//         {(style === 'mui') && <MUITheme />}
-//       </React.Suspense>
-//       {children}
-//     </>
-//   )
-// }
+export const ThemeContext = createContext<TTemplateContext>({debug:false, inputTemplate: null, buttonTemplate: null, elements: {}})
 
 export const Form = <T extends FieldValues,>(props: IForm<T>) => {
   const formID = useMemo(()=> props.id ?? `rhf-wc-f-${new Date().getTime()}`,[])
@@ -52,7 +35,7 @@ export const Form = <T extends FieldValues,>(props: IForm<T>) => {
 
   const inputWrapper = useMemo(() => props.inputWrapper ?? null,[])
   const buttonTemplate = useMemo(() => props.buttonWrapper ?? null,[])
-  const elements = useMemo(() => props.elements ?? null,[])
+  const elements = useMemo(() => props.elements ?? {},[])
   const debug = useMemo(() => props.debug ?? false,[])
   
   return (<ThemeContext.Provider 

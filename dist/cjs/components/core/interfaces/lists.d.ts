@@ -23,7 +23,7 @@ export interface IBaseList extends IInputsBaseProps<any> {
     maxItems?: number;
 }
 export interface IList extends IBaseList {
-    bodyTemplate?: (props: IList) => React.ReactElement;
+    bodyTemplate?: (props: IList) => React.ReactElement | Element | any;
 }
 export interface ITableList extends IBaseList {
     header?: 'none' | 'top' | 'bottom' | 'both' | 'footer' | 'header_footer';
@@ -50,4 +50,4 @@ export interface IInputToTableList extends ITableList {
     };
 }
 export type TMadeInputList = "wysiwyg" | "datepicker" | "select" | "select_async" | "textarea" | "custom" | "switch" | "yesno" | "dropzone" | "list" | "tablelist";
-export type TListInputs = HTMLInputTypeAttribute | TMadeInputList;
+export type TListInputs = HTMLInputTypeAttribute | TMadeInputList | string;

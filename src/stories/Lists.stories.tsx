@@ -21,7 +21,7 @@ TemplateFormList.args = {
   children : <FormList 
     showIndex label="Simple List" 
     name="list" 
-    bodyTemplate={<div>
+    bodyTemplate={() =><div>
       <div data-add >Add </div>
       <div style={{display:'flex',margin:'5px', background:'blue'}}>
         <div data-name="date" />
@@ -77,12 +77,12 @@ SimpleInputToTableList.args = {
     inputName="inputs"
     name="data"
     >
-      <Box>
+      <div>
         <Line name="inputs.name" label="Name" />
         <Line name="inputs.email" type="email" label="Email" />
         <DatePicker name="inputs.date" label="Date" />
         <WYSIWYGEditor name="inputs.remarks" label="Remarks" helperText="Optional Remarks if Any"/>
         <Select name="inputs.type1" options={[{value:1,label:'#1'},{value:2,label:'#2'},{value:3,label:'#3'}]} label="Type 1" />
-      </Box>
+      </div>
     </InputListtoTable>
 }

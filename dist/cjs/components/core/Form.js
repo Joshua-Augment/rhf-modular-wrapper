@@ -29,20 +29,7 @@ const react_hook_form_1 = require("react-hook-form");
 const yup_1 = require("@hookform/resolvers/yup");
 require("../styling/form_bootstrap.css");
 require("../styling/core.css");
-exports.ThemeContext = (0, react_1.createContext)({ debug: false, inputTemplate: null, buttonTemplate: null, elements: null });
-// const BSTheme = lazy(()=>import('../styling/BootstrapTheme'))
-// const MUITheme = lazy(()=>import('../styling/MUITheme'))
-// const ChosenTheme = ({children,style}:{children:any, style?:'bootstrap' | 'mui'}) => {
-//   return (
-//     <>
-//       <React.Suspense fallback={<></>}>
-//         {(style === undefined || style == 'bootstrap') && <BSTheme />}
-//         {(style === 'mui') && <MUITheme />}
-//       </React.Suspense>
-//       {children}
-//     </>
-//   )
-// }
+exports.ThemeContext = (0, react_1.createContext)({ debug: false, inputTemplate: null, buttonTemplate: null, elements: {} });
 const Form = (props) => {
     var _a, _b, _c, _d, _e, _f, _g;
     const formID = (0, react_1.useMemo)(() => { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : `rhf-wc-f-${new Date().getTime()}`; }, []);
@@ -60,7 +47,7 @@ const Form = (props) => {
     });
     const inputWrapper = (0, react_1.useMemo)(() => { var _a; return (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : null; }, []);
     const buttonTemplate = (0, react_1.useMemo)(() => { var _a; return (_a = props.buttonWrapper) !== null && _a !== void 0 ? _a : null; }, []);
-    const elements = (0, react_1.useMemo)(() => { var _a; return (_a = props.elements) !== null && _a !== void 0 ? _a : null; }, []);
+    const elements = (0, react_1.useMemo)(() => { var _a; return (_a = props.elements) !== null && _a !== void 0 ? _a : {}; }, []);
     const debug = (0, react_1.useMemo)(() => { var _a; return (_a = props.debug) !== null && _a !== void 0 ? _a : false; }, []);
     return (react_1.default.createElement(exports.ThemeContext.Provider, { value: {
             inputTemplate: inputWrapper,
