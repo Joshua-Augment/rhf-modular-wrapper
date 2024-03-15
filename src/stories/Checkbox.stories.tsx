@@ -1,22 +1,24 @@
 import React, { useState } from "react";
-import { ComponentMeta } from '@storybook/react';
-import {Form, SubmitButton, Checkbox, CheckboxGroup } from "../components/"
+import { ComponentMeta } from "@storybook/react";
+import { Form, SubmitButton, Checkbox, CheckboxGroup } from "../components/";
 
 import { Template } from "./_story_template";
 
 export default {
-  title: 'Components/Inputs/Checkbox',
-  component: Checkbox
-} as ComponentMeta<typeof Checkbox>; 
+  title: "Components/Inputs/Checkbox",
+  component: Checkbox,
+} as ComponentMeta<typeof Checkbox>;
 
-export const CheckboxSimple = Template.bind({})
+export const CheckboxSimple = Template.bind({});
 CheckboxSimple.args = {
-  children : <>
-    <Checkbox label="Simple Checkbox One" name="checkbox.one" />
-    <Checkbox label="Simple Checkbox Two" name="checkbox.two" />
-    <Checkbox label="Simple Checkbox Three" name="checkbox.three" />
-  </>
-} 
+  children: (
+    <>
+      <Checkbox label="Simple Checkbox One" name="checkbox.one" />
+      <Checkbox label="Simple Checkbox Two" name="checkbox.two" />
+      <Checkbox label="Simple Checkbox Three" name="checkbox.three" />
+    </>
+  ),
+};
 // {
 //   children : <>
 //     <Checkbox label="Simple Checkbox One" name="checkbox.one" />
@@ -25,28 +27,36 @@ CheckboxSimple.args = {
 //   </>
 // }
 
-export const CheckboxGroupExample = Template.bind({})  
-CheckboxGroupExample.args = { 
-  children : <CheckboxGroup title='Checkbox Group with Title - Horizontal Layout'>      
-    <Checkbox label="Simple Checkbox One" name="checkbox.one" />
-    <Checkbox label="Simple Checkbox Two" name="checkbox.two" />
-    <Checkbox label="Simple Checkbox Three" name="checkbox.three" />
-  </CheckboxGroup>
- }
+export const CheckboxGroupExample = Template.bind({});
+CheckboxGroupExample.args = {
+  children: (
+    <CheckboxGroup title="Checkbox Group with Title - Horizontal Layout">
+      <Checkbox label="Simple Checkbox One" name="checkbox.one" />
+      <Checkbox label="Simple Checkbox Two" name="checkbox.two" />
+      <Checkbox label="Simple Checkbox Three" name="checkbox.three" />
+    </CheckboxGroup>
+  ),
+};
 
-export const CheckboxGroupExampleVertical = Template.bind({}) 
+export const CheckboxGroupExampleVertical = Template.bind({});
 CheckboxGroupExampleVertical.args = {
-  children : <CheckboxGroup title='Checkbox Group with Title - Vertical Layout' orientation="vertical">      
-    <Checkbox label="Simple Checkbox One" name="checkbox.one" />
-    <Checkbox label="Simple Checkbox Two" name="checkbox.two" />
-    <Checkbox label="Simple Checkbox Three" name="checkbox.three" />
-  </CheckboxGroup>}
+  children: (
+    <CheckboxGroup
+      title="Checkbox Group with Title - Vertical Layout"
+      orientation="vertical"
+    >
+      <Checkbox label="Simple Checkbox One" name="checkbox.one" />
+      <Checkbox label="Simple Checkbox Two" name="checkbox.two" />
+      <Checkbox label="Simple Checkbox Three" name="checkbox.three" />
+    </CheckboxGroup>
+  ),
+};
 
-// export const CheckboxGroupExampleVertical = () => {  
+// export const CheckboxGroupExampleVertical = () => {
 //   return <>
 //   <p>Submit Object : </p>
 //   <Form onSubmit={onSubmit} >
-//     <CheckboxGroup title='Checkbox Group with Title - Vertical Layout' orientation="vertical">      
+//     <CheckboxGroup title='Checkbox Group with Title - Vertical Layout' orientation="vertical">
 //       <Checkbox label="Simple Checkbox One" name="checkbox.one" />
 //       <Checkbox label="Simple Checkbox Two" name="checkbox.two" />
 //       <Checkbox label="Simple Checkbox Three" name="checkbox.three" />
