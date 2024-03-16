@@ -1,6 +1,6 @@
 {
   "name": "rhf-modular-wrapper",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Modular Wrapper for React Hook Form using context, plug and play smart components style",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,12 +14,12 @@
   },
   "scripts": {
     "start": "storybook dev -p 6006",
-    "rollup": "rollup -c",    
+    "rollup": "rollup -c",
     "build": "npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs",
     "build-patch": "npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version patch && npm publish",
     "build-minor": "npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version minor && npm publish",
     "build-major": "npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version major && npm publish",
-    "build:esm-css" : "npm run build:esm && npm run copy-esm",
+    "build:esm-css": "npm run build:esm && npm run copy-esm",
     "build:esm": "tsc",
     "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
     "storybook": "storybook dev -p 6006",
