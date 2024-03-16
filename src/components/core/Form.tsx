@@ -20,7 +20,7 @@ export const ThemeContext = createContext<TTemplateContext>({debug:false, inputT
 
 export const Form = <T extends FieldValues,>(props: IForm<T>) => {
   const formID = useMemo(()=> props.id ?? `rhf-wc-f-${new Date().getTime()}`,[])
-  const methods = useForm<T,any>({
+  const methods = useForm<T,any>({    
     mode: props.mode ?? "onChange",
     reValidateMode: props.reValidateMode ?? 'onChange',
     defaultValues: props.defaultValues as any,

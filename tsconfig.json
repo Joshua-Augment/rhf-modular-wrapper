@@ -10,7 +10,7 @@
     "lib": ["ES5", "ES2015", "ES2022", "ES2016", "DOM", "ESNext"],
     "types": ["node"],
     "module": "ESNext",
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "noEmit":false,
     "moduleResolution": "node",
     "noImplicitAny": false,
