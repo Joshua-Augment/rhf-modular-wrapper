@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import AsyncSelectInput from "react-select/async";
 import AsyncCreatableSelectInput from "react-select/async-creatable";
-import { TSelectOption, ISelectAsync, InputWrapper, BaseSelect,} from "../../../core";
+import { TSelectOption, ISelectAsync, BaseSelect} from "../../../core";
+import InputWrapper from "../../../core/InputWrapper";
 
 const AsyncSelect = (props: ISelectAsync) => {  
   return <InputWrapper type={props.type ?? 'select_async'} {...props} noBorder>

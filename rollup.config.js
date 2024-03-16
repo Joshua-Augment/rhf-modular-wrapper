@@ -1,7 +1,7 @@
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
-
+import scss from "rollup-plugin-scss";
 // To handle css files
 import postcss from "rollup-plugin-postcss";
 
@@ -14,6 +14,7 @@ import commonjs from "@rollup/plugin-commonjs";
 export default [
   {
     input: "src/index.ts",
+    external: ["styling"],
     output: [
       /* {
         file: packageJson.main,
@@ -27,13 +28,17 @@ export default [
       },
     ],
     plugins: [
-      
       peerDepsExternal(),
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
-      postcss(),
-      
+      postcss({
+        minimize: true,
+        modules: true,
+        extract: true,
+        extensions: [".css"],
+      }),
+      scss(),
       terser(),
       // commonjs({
       //   ignoreGlobal: true,
