@@ -1,4 +1,3 @@
-import React from 'react'
 import { ICheckboxes } from '../../core'
 
 const CheckboxGroup = (props: ICheckboxes) => {

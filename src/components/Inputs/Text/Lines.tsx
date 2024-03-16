@@ -1,4 +1,3 @@
-import React from "react";
 import { ILines } from "../../core";
 import InputWrapper from "../../core/InputWrapper";
 

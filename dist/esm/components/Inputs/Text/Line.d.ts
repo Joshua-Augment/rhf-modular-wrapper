@@ -1,4 +1,3 @@
-import React from "react";
 import { LineInputProps } from "../../core";
-declare const Line: (props: LineInputProps) => React.JSX.Element;
+declare const Line: (props: LineInputProps) => import("react/jsx-runtime").JSX.Element;
 export default Line;

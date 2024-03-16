@@ -1,4 +1,3 @@
-import React from "react";
 import { FormBaseInput } from "../../interfaces";
-declare const InputWrapperv2: (props: FormBaseInput) => React.JSX.Element;
+declare const InputWrapperv2: (props: FormBaseInput) => import("react/jsx-runtime").JSX.Element;
 export default InputWrapperv2;

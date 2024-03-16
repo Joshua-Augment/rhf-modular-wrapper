@@ -1,6 +1,0 @@
-.rb-item-wrapper > div > div > div  {
-  align-items: center;
-}
-.rb-item-wrapper > div > div > div > div:first-child {
-  padding-right : 5px;
-}

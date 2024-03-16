@@ -1,4 +1,3 @@
-import React from "react";
 import { ILines } from "../../core";
-declare const Lines: (props: ILines) => React.JSX.Element;
+declare const Lines: (props: ILines) => import("react/jsx-runtime").JSX.Element;
 export default Lines;

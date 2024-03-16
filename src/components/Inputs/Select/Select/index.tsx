@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SelectInput from "react-select";
 import SelectCreatableInput from "react-select/creatable";
 import {
   BaseSelect,
   IInputsBasePropsNoSetters,
-  ISelect,
-  InputWrapper,
+  ISelect,  
   TSelectOption,
 } from "../../../core";
+import InputWrapper from "../../../core/InputWrapper";
 
 const Select = (props: ISelect) => {
   // const {value, error, setValue} = useInputValAndError(props.name)

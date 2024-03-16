@@ -1,4 +1,4 @@
-import React, { useMemo,  useEffect } from 'react'
+import { useMemo,  useEffect } from 'react'
 import { useFieldArray } from 'react-hook-form';
 import { ITableList } from '../../core/interfaces/lists';
 import InputChooser from '../../core/InputChooser';

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { arrayMoveImmutable } from "array-move";
 import { FaCaretDown, FaCaretUp, FaEye, FaTrash } from "react-icons/fa";

@@ -1,4 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 import { FieldValues } from "react-hook-form/dist/types";
 import { FormFrameWrapperProps, IForm, ISubmitButton } from './interfaces';
 import "../styling/form_bootstrap.css";
@@ -10,6 +10,6 @@ export type TTemplateContext = {
     elements: Record<TListInputs, React.ComponentType<any>>;
     debug: boolean;
 };
-export declare const ThemeContext: React.Context<TTemplateContext>;
-export declare const Form: <T extends FieldValues>(props: IForm<T>) => React.JSX.Element;
-export declare const SubmitButton: (props: ISubmitButton) => React.JSX.Element;
+export declare const ThemeContext: import("react").Context<TTemplateContext>;
+export declare const Form: <T extends FieldValues>(props: IForm<T>) => import("react/jsx-runtime").JSX.Element;
+export declare const SubmitButton: (props: ISubmitButton) => import("react/jsx-runtime").JSX.Element;

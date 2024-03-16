@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AsyncSelectInput from "react-select/async";
 import AsyncCreatableSelectInput from "react-select/async-creatable";
 import { TSelectOption, ISelectAsync, InputWrapper, BaseSelect,} from "../../../core";

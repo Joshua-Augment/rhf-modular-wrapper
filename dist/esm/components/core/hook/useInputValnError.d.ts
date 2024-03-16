@@ -1,6 +1,5 @@
 export declare const useInputValAndError: <T = any>(name: string) => {
     formState: {
-        isDirty: boolean;
         isLoading: boolean;
         isValid: boolean;
         disabled: boolean;

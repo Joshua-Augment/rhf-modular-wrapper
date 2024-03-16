@@ -17,15 +17,12 @@ export const SimpleSwitchFoot = Template.bind({});
 SimpleSwitchFoot.args = {
   defaultValues: {
     switchDef: true,
+    switch: 1,
   },
   children: (
     <>
       <Switch name="switch" label="Switch Item" footLabel={["Off", "On"]} />
-      <Switch
-        name="switchDef"
-        label="Switch Item (Default Values)"
-        footLabel={["Off", "On"]}
-      />
+      <Switch name="switchDef" label="Switch Item (Default Values)" footLabel={["Off", "On"]} />
     </>
   ),
 };

@@ -1,4 +1,3 @@
-import React from 'react'
 import { IDatePicker,  } from '../../core'
 import InputWrapper from '../../core/InputWrapper'
 import DatePickerComponent from "react-datepicker";

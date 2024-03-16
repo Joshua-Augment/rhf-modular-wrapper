@@ -1,5 +1,6 @@
 import React from 'react'
-import {  InputWrapper, IYesNo } from '../../core'
+import { IYesNo } from '../../core';
+import InputWrapper from "../../core/InputWrapper";
 import styled from "styled-components"
 
 const YesNo = (props: IYesNo) => {  
@@ -33,24 +34,24 @@ const _YesNo = (props:any) => {
 </div>
 }
 
-const Button = styled.button`
+const Button:any = styled.button`
   padding: 10px;
   border-radius: 5px;
-  border-color: ${({active}) => active ? 'black' : 'transparent'};
+  border-color: ${({active}:any) => active ? 'black' : 'transparent'};
   margin: 5px;
   font-size: 1.2em;
-  background-color: ${({bgColor, active}) => active ? (bgColor ?? '#44b5ee2') : 'gainsboro'};
-  color: ${({active, bgColor}) => active ? 'white' : (bgColor ?? '#44b5ee2')};;
+  background-color: ${({bgColor, active}:any) => active ? (bgColor ?? '#44b5ee2') : 'gainsboro'};
+  color: ${({active, bgColor}:any) => active ? 'white' : (bgColor ?? '#44b5ee2')};;
   width:100%;
   font-weight: bold;
   cursor: pointer;
   transition : all 0.3s ease-in-out;
   box-shadow: none;
-  filter: brightness(${({active}) => active ? '110%' : '100%'});
+  filter: brightness(${({active}:any) => active ? '110%' : '100%'});
 
   &:hover {
     filter : brightness(110%);    
-    box-shadow: 1px 1px 10px 1px ${({active, bgColor}) => active ? (bgColor ?? '#44b5ee2') : '#989696'};
+    box-shadow: 1px 1px 10px 1px ${({active, bgColor}:any) => active ? (bgColor ?? '#44b5ee2') : '#989696'};
   }
 `
 

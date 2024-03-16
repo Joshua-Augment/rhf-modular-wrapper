@@ -1,4 +1,3 @@
-import React from 'react'
 import { InputWrapper, ISlider } from '../../../core'
 import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';

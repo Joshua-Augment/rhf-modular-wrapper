@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import  { useEffect, useMemo } from "react";
 import { IWYSIWYG } from "../../core";
 import InputWrapper from "../../core/InputWrapper";
 import ReactQuill from "react-quill";

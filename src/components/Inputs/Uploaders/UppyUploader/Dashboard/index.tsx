@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import Uppy from "@uppy/core"
 import {IUppyUploader} from "../../../../core";
 import UppyDashboardInstance from "./UppyDashboardInstance";

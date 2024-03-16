@@ -1,4 +1,4 @@
-import React, { useMemo }/* , { useMemo }  */from 'react'
+import { memo, useMemo }/* , { useMemo }  */from 'react'
 import { DatePicker, Select,AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList } from '../Inputs'
 import { TListItems } from './interfaces/lists'
 import Logger from './Logger'
@@ -43,4 +43,4 @@ const InputChooser = (props: TListItems) => {
   return OutputComponent
 }
 
-export default React.memo(InputChooser)
+export default memo(InputChooser)

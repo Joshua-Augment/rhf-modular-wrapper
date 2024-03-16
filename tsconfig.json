@@ -1,19 +1,23 @@
 {
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "lib": ["ES5", "ES2015", "ES2022", "ES2016", "DOM", "ESNext"],
     "types": ["node"],
-    "module": "es2022",
+    "module": "ESNext",
+    "emitDeclarationOnly": true,
+    "noEmit":false,
     "moduleResolution": "node",
     "noImplicitAny": false,
     "noUnusedLocals": true,
     "outDir": "dist/esm",
     "sourceMap": true,
     "strict": true,
-    "target": "ES6"
+    "target": "ES6",
+    "typeRoots": ["node_modules/@types"]
   },
   "exclude": ["src/stories"],
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/**/*.css",]

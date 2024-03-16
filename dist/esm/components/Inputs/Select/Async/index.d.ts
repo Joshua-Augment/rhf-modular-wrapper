@@ -1,4 +1,3 @@
-import React from "react";
 import { ISelectAsync } from "../../../core";
-declare const AsyncSelect: (props: ISelectAsync) => React.JSX.Element;
+declare const AsyncSelect: (props: ISelectAsync) => import("react/jsx-runtime").JSX.Element;
 export default AsyncSelect;

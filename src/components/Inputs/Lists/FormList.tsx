@@ -13,9 +13,9 @@ const Row = styled.div`
   align-items: center;
   justify-content: space-between;
 `
-const Col = styled.div`
-  flex: 0 0 ${({g}) => `${(g ?? 12) * 100/12}%`};
-  width : ${({g}) => `${(g ?? 12) * 100/12}%`};
+const Col:any = styled.div`
+  flex: 0 0 ${({g}: any) => `${(g ?? 12) * 100/12}%`};
+  width : ${({g}: any) => `${(g ?? 12) * 100/12}%`};
   padding-right : 5px;
 
 `

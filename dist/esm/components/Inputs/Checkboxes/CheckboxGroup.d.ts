@@ -1,4 +1,3 @@
-import React from 'react';
 import { ICheckboxes } from '../../core';
-declare const CheckboxGroup: (props: ICheckboxes) => React.JSX.Element;
+declare const CheckboxGroup: (props: ICheckboxes) => import("react/jsx-runtime").JSX.Element;
 export default CheckboxGroup;

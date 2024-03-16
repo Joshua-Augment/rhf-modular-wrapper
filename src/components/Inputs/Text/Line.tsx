@@ -1,4 +1,3 @@
-import React from "react";
 import { LineInputProps } from "../../core";
 import InputWrapper from "../../core/InputWrapper";
 import Logger from "../../core/Logger";

@@ -1,4 +1,3 @@
-import React from "react";
 import { IUppyUploader } from "../../../../core";
-declare const UppyDashboardUploader: (props: IUppyUploader) => React.JSX.Element;
+declare const UppyDashboardUploader: (props: IUppyUploader) => import("react/jsx-runtime").JSX.Element;
 export default UppyDashboardUploader;
