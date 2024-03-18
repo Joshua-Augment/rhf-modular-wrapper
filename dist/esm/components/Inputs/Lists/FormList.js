@@ -17,10 +17,10 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { useMemo, useEffect } from 'react';
 import { useFieldArray } from 'react-hook-form';
 import styled from "styled-components";
-import InputChooser from '../../core/InputChooser.js';
+import InputChooser from '../../core/InputChooser';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
-import { InputWrapper } from '../../core/index.js';
-import { useInputValAndError } from '../../core/hook/useInputValnError.js';
+import { InputWrapper } from '../../core/index';
+import { useInputValAndError } from '../../core/hook/useInputValnError';
 var Row = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display:flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n"], ["\n  display:flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n"])));
 var Col = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  flex: 0 0 ", ";\n  width : ", ";\n  padding-right : 5px;\n\n"], ["\n  flex: 0 0 ", ";\n  width : ", ";\n  padding-right : 5px;\n\n"])), function (_a) {
     var g = _a.g;

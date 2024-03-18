@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useFormContext, useFormState, useWatch } from "react-hook-form";
-import Logger from "../Logger";
+import Logger from "../Logger/index";
 
 export const useInputValAndError = <T = any,>(name: string) => {
   Logger.info(`Name : ${name}`, "useInputValAndError", "start");

@@ -10,7 +10,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import InputWrapper from "../../core/InputWrapper/index.js";
+import InputWrapper from "../../core/InputWrapper/index";
 import { default as SwitchInput } from "react-switch";
 var Switch = function (props) {
     var _a;

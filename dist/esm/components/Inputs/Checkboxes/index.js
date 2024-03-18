@@ -1,6 +1,6 @@
-export { default as Checkbox } from "./Checkbox.js";
-export { default as Radiobox } from "./Radiobox.js";
-export { default as CheckboxGroup } from "./CheckboxGroup.js";
-export { default as YesNo } from "./YesNo.js";
-export { default as Switch } from "./Switch.js";
+export { default as Checkbox } from "./Checkbox";
+export { default as Radiobox } from "./Radiobox";
+export { default as CheckboxGroup } from "./CheckboxGroup";
+export { default as YesNo } from "./YesNo";
+export { default as Switch } from "./Switch";
 //# sourceMappingURL=index.js.map

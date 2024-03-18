@@ -1,3 +1,3 @@
-export { default as DropzoneUploader } from "./Dropzone.js";
-export * from "./UppyUploader.js";
+export { default as DropzoneUploader } from "./Dropzone";
+export * from "./UppyUploader";
 //# sourceMappingURL=index.js.map

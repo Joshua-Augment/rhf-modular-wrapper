@@ -11,8 +11,8 @@ var __assign = (this && this.__assign) || function () {
 };
 import { jsx as _jsx } from "react/jsx-runtime";
 import { memo, useMemo /* , { useMemo }  */ } from "react";
-import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList, } from "../Inputs/index.js";
-import Logger from "./Logger/index.js";
+import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList, } from "../Inputs/index";
+import Logger from "./Logger/index";
 var InputChooser = function (props) {
     var OutputComponent = useMemo(function () {
         Logger.info("Choosing Input", "InputChooser", "start");

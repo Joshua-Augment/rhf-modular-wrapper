@@ -10,7 +10,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import InputWrapper from "../../core/InputWrapper/index.js";
+import InputWrapper from "../../core/InputWrapper/index";
 var Lines = function (props) {
     var _a;
     return (_jsx(InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "lines" }, props, { children: _jsx(_Lines, __assign({}, props)) })));

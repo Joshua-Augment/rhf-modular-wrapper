@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { useEffect } from "react";
-import InputWrapper from "../../core/InputWrapper/index.js";
+import InputWrapper from "../../core/InputWrapper/index";
 import "../../styling/Radiobox.css";
 var Radiobox = function (props) {
     var _a;

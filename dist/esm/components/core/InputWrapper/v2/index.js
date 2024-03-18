@@ -11,9 +11,9 @@ var __assign = (this && this.__assign) || function () {
 };
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useContext } from "react";
-import { ThemeContext } from "../../Form.js";
-import Logger from "../../Logger/index.js";
-import InputInnerWrapper from "./components/InputInnerWrapper.js";
+import { ThemeContext } from "../../Form";
+import Logger from "../../Logger/index";
+import InputInnerWrapper from "./components/InputInnerWrapper";
 var InputWrapperv2 = function (props) {
     var _a, _b, _c, _d;
     Logger.info("Value - ".concat(typeof props.value === 'object' ? JSON.stringify(props.value) : props.value), "".concat(props.name, " - InputWrapperv2"), "start");

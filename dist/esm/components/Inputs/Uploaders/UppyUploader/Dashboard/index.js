@@ -11,8 +11,8 @@ var __assign = (this && this.__assign) || function () {
 };
 import { jsx as _jsx } from "react/jsx-runtime";
 import Uppy from "@uppy/core";
-import UppyDashboardInstance from "./UppyDashboardInstance.js";
-import InputWrapper from "../../../../core/InputWrapper/index.js";
+import UppyDashboardInstance from "./UppyDashboardInstance";
+import InputWrapper from "../../../../core/InputWrapper/index";
 var UppyDashboardUploader = function (props) {
     return (_jsx(InputWrapper, __assign({ noBorder: true }, props, { children: _jsx(UppyElement, __assign({}, props)) })));
 };

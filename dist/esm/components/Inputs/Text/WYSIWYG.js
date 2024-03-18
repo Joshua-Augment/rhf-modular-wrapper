@@ -11,10 +11,10 @@ var __assign = (this && this.__assign) || function () {
 };
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
-import InputWrapper from "../../core/InputWrapper/index.js";
+import InputWrapper from "../../core/InputWrapper/index";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useInputValAndError } from "../../core/hook/useInputValnError.js";
+import { useInputValAndError } from "../../core/hook/useInputValnError";
 var WYSIWYG = function (props) {
     var _a;
     var _b = useInputValAndError(props.name), value = _b.value, setValue = _b.setValue;

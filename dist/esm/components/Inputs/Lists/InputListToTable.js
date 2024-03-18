@@ -55,8 +55,8 @@ import styled from "styled-components";
 import parse from "html-react-parser";
 import { useFieldArray } from 'react-hook-form';
 import { FaArrowDown, FaArrowUp, FaEdit, FaPlus, FaTrash } from 'react-icons/fa';
-import { Line } from '../Text/index.js';
-import { useInputValAndError } from '../../core/hook/useInputValnError.js';
+import { Line } from '../Text/index';
+import { useInputValAndError } from '../../core/hook/useInputValnError';
 var Table = styled.table(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: 100%;\n  margin-top:5px;\n  margin-bottom: 5px;\n"], ["\n  width: 100%;\n  margin-top:5px;\n  margin-bottom: 5px;\n"])));
 var InputListToTable = function (props) {
     var _a;

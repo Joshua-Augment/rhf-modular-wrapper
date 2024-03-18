@@ -25,7 +25,7 @@ import XHRUpload from "@uppy/xhr-upload";
 import { FaCamera } from "react-icons/fa";
 import "@uppy/core/dist/style.css";
 import "@uppy/dashboard/dist/style.css";
-import { BaseButtonTheme } from "../../../../core/baseStyles.js";
+import { BaseButtonTheme } from "../../../../core/baseStyles";
 var UppyDashboardInstance = function (props) {
     var _a = useState(false), open = _a[0], setOpen = _a[1];
     var uppy = props.uppy.use(XHRUpload, {

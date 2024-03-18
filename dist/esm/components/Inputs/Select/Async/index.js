@@ -22,7 +22,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
 import AsyncSelectInput from "react-select/async";
 import AsyncCreatableSelectInput from "react-select/async-creatable";
-import InputWrapper from "../../../core/InputWrapper/index.js";
+import InputWrapper from "../../../core/InputWrapper/index";
 var AsyncSelect = function (props) {
     var _a;
     return _jsx(InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'select_async' }, props, { noBorder: true }, { children: _jsx(_AsyncSelect, __assign({}, props)) }));

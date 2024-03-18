@@ -14,7 +14,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import InputWrapper from "../../core/InputWrapper/index.js";
+import InputWrapper from "../../core/InputWrapper/index";
 import styled from "styled-components";
 var YesNo = function (props) {
     return (_jsx(InputWrapper, __assign({ type: props.yesno }, props, { id: "".concat(props.name), noLabel: true, noBorder: true, customClasses: { wrapperClassName: "form-check" } }, { children: _jsx(_YesNo, __assign({}, props)) })));

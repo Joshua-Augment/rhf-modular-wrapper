@@ -22,10 +22,10 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { useEffect, useMemo, useRef } from "react";
-import Logger from "../../../Logger.js";
+import Logger from "../../../Logger";
 import { useWatch } from "react-hook-form";
-import DefaultInputWrapper from "./DefaultInputWrapper.js";
-import { useInputValAndError } from "../../../hook/useInputValnError.js";
+import DefaultInputWrapper from "./DefaultInputWrapper";
+import { useInputValAndError } from "../../../hook/useInputValnError";
 var InputInnerWrapper = function (props) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
     var _r = useInputValAndError(props.name), value = _r.value, error = _r.error, formState = _r.formState, methods = __rest(_r, ["value", "error", "formState"]);

@@ -10,9 +10,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import InputWrapper from "../../core/InputWrapper/index.js";
-import Logger from "../../core/Logger.js";
-// import { useInputValAndError } from '../../core/hook/useInputValnError.js'
+import InputWrapper from "../../core/InputWrapper/index";
+import Logger from "../../core/Logger";
+// import { useInputValAndError } from '../../core/hook/useInputValnError'
 var Line = function (props) {
     var _a;
     return (

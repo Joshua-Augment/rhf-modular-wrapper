@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef } from "react";
-import Logger from "../../../Logger";
+import Logger from "../../../Logger/index";
 import { UseFormReturn, useWatch } from "react-hook-form";
 import { FormBaseInput } from "../../../interfaces/index";
 import DefaultInputWrapper from "./DefaultInputWrapper";

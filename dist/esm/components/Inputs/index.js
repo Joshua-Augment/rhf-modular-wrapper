@@ -1,8 +1,8 @@
-export * from "./Checkboxes/index.js";
-export * from "./DatePicker/index.js";
-export * from "./Text/index.js";
-export * from "./Uploaders/index.js";
-export * from "./Select/index.js";
-export * from "./Lists/index.js";
-export * from "./Range/index.js";
+export * from "./Checkboxes/index";
+export * from "./DatePicker/index";
+export * from "./Text/index";
+export * from "./Uploaders/index";
+export * from "./Select/index";
+export * from "./Lists/index";
+export * from "./Range/index";
 //# sourceMappingURL=index.js.map
