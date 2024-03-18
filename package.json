@@ -5,7 +5,6 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "type": "module",
-  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -25,8 +24,8 @@
     "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "copy-esm": "copyfiles -V -E -u 1 ./src/components/styling/*.css ./dist",
-    "copy-cjs": "copyfiles -V -E -u 1 ./src/components/styling/*.css ./dist"
+    "copy-esm": "copyfiles -V -E -u 1 ./src/components/styling/*.css ./dist/esm",
+    "copy-cjs": "copyfiles -V -E -u 1 ./src/components/styling/*.css ./dist/cjs"
   },
   "keywords": [
     "React-Hook-Form",

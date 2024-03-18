@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var jsx_runtime_1 = require("react/jsx-runtime");
 var index_1 = __importDefault(require("../../core/InputWrapper/index"));
 var Logger_1 = __importDefault(require("../../core/Logger"));
-// import { useInputValAndError } from '../../core/hook/useInputValnError.js'
+// import { useInputValAndError } from '../../core/hook/useInputValnError'
 var Line = function (props) {
     var _a;
     return (
