@@ -1,25 +1,22 @@
 {
   "compilerOptions": {
+    // Default
+    "target": "es5", 
+    "esModuleInterop": true, 
     "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "declarationDir": "dist/dts",
+    "strict": true, 
     "skipLibCheck": true,
-    "jsx": "react-jsx",
-    "lib": ["ES5", "ES2015", "ES2022", "ES2016", "DOM", "ESNext"],
-    "types": ["node"],
-    "module": "ESNext",
-    "emitDeclarationOnly": false,
-    "noEmit":false,
-    "moduleResolution": "node",
-    "noImplicitAny": false,
-    "noUnusedLocals": true,
-    "outDir": "dist",
+
+    // Added
+    "jsx": "react-jsx", 
+    "module": "ESNext",  
+    "declaration": true,
+    "declarationDir": "types",
     "sourceMap": true,
-    "strict": true,
-    "target": "ES6",
-    "typeRoots": ["node_modules/@types"]
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "emitDeclarationOnly": true,
   },
   "exclude": ["src/stories"],
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/**/*.css",]

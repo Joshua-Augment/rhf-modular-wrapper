@@ -113,7 +113,7 @@ const InputListToTable = (props: IInputToTableList) => {
         props.showIndex !== false && <td>{i + 1}</td>
       }      
       {
-        props.items.map( (it, itI) => <td>{parseValue(f[it.name], it?.extKey, it?.type)}</td>)
+        props.items.map( (it, itI) => <td>{parseValue((f as any)[it.name], it?.extKey, it?.type)}</td>)
       }
       
       <td>{ActionsWrapper(i,props.tableWrappers?.tableActionsWrapper)}</td>
@@ -139,7 +139,7 @@ const InputListToTable = (props: IInputToTableList) => {
         append(vals)
       }    
       
-      let newObject = {}
+      let newObject:Record<string,unknown> = {}
       keys.forEach(key => newObject[key] = null)
     // console.log('[newObject]- ',newObject)
       resetField(props.inputName, {defaultValue: { ...newObject, __id : null}})

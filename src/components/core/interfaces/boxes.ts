@@ -1,10 +1,12 @@
 import { ReactSwitchProps } from 'react-switch';
 import { FormBaseInput, IInputsBaseProps, TInputWrapperInputHTML } from './base';
 
+export type TRadioOption = {value:any, label:string, reversed ?:boolean}
+
 export interface ICheckbox extends FormBaseInput<string> {}
 export interface IRadiobox extends IInputsBaseProps<string> {
   orientation ?: 'horizontal' | 'vertical'
-  options : {value:any, label:string, reversed ?:boolean}[]
+  options : TRadioOption[]
 }
 
 export interface ICheckboxes { 
@@ -13,7 +15,7 @@ export interface ICheckboxes {
   children : React.ReactElement | React.ReactElement[] 
 }
 
-type YesNoButtonOptions = {
+export type YesNoButtonOptions = {
   label ?: string, 
   value ?: any, 
   element ?: React.ReactNode, 

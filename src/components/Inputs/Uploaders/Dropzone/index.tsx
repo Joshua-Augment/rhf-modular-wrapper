@@ -88,7 +88,7 @@ const DropzoneHandler = (props: any) => {
   };
 
   const handleDelete = (index: number) => {
-    const rem = props.value.filter((x, i) => i !== index);
+    const rem = props.value.filter((x:File, i:number) => i !== index);
     props.onChange(rem);
   };
 

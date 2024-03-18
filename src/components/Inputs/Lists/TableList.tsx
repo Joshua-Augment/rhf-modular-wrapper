@@ -1,6 +1,6 @@
 import { useMemo,  useEffect } from 'react'
 import { useFieldArray } from 'react-hook-form';
-import { ITableList } from '../../core/interfaces/lists';
+import { ITableList, TListItems } from '../../core/interfaces/lists';
 import InputChooser from '../../core/InputChooser';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
 import styled from "styled-components"
@@ -59,8 +59,8 @@ const _Table = (props: any) => {
   const emptyRow = useMemo(()=>{
     if (props.emptyRow) {return props.emptyRow}
     else {
-      let obj = {};
-      props.items.forEach(i => obj[i.name] = '')
+      let obj:Record<string,string> = {};
+      props.items.forEach((i:TListItems) => obj[i.name] = '')
       return obj
     }
   },[])
@@ -75,7 +75,7 @@ const _Table = (props: any) => {
 
   const headerGenerator = useMemo(()=> props.headerTemplate ?? <TableHeadTemplate><TableTRTemplate>
     {props.showIndex === true && <TableTHTemplate></TableTHTemplate>}
-    {props.items.map((item,key) => <TableTHTemplate key={`tl-${props.name}-${item.name}-th-${key}`}>{item.label}</TableTHTemplate>)}
+    {props.items.map((item:TListItems,key:number) => <TableTHTemplate key={`tl-${props.name}-${item.name}-th-${key}`}>{item.label}</TableTHTemplate>)}
     {props.fixed !== true && <TableTHTemplate></TableTHTemplate>}
   </TableTRTemplate></TableHeadTemplate>,[props.headerTemplate])
 
@@ -83,7 +83,7 @@ const _Table = (props: any) => {
 
   const bodyGenerator =  fields.map((field,i) => <TableTRTemplate key={`tr-${field.id}-${i}`}>
   {props.showIndex === true && <TableTDTemplate>{i + 1}</TableTDTemplate>}
-  {props.items.map((item,iT) => <TableTDTemplate key={`td-${field?.id}-${iT}`} ><InputChooser fields={field?.[i]?.[item.name] ?? null}  {...item} noLabel name={`${props.name}.${i}.${item.name}`}/></TableTDTemplate>)}  {props.fixed !== true && <TableTDTemplate><IconUp onClick={()=>insert(i+1,emptyRow)} /> {<IconDown onClick={()=>{remove(i)}}/>}</TableTDTemplate>}
+  {props.items.map((item:TListItems,iT:number) => <TableTDTemplate key={`td-${field?.id}-${iT}`} ><InputChooser fields={(field as any)?.[i]?.[item.name] ?? null}  {...item} noLabel name={`${props.name}.${i}.${item.name}`}/></TableTDTemplate>)}  {props.fixed !== true && <TableTDTemplate><IconUp onClick={()=>insert(i+1,emptyRow)} /> {<IconDown onClick={()=>{remove(i)}}/>}</TableTDTemplate>}
 </TableTRTemplate>)
 
   return <TableTemplate>

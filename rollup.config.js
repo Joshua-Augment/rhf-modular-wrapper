@@ -1,72 +1,57 @@
 import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
-import scss from "rollup-plugin-scss";
-// To handle css files
+import terser from "@rollup/plugin-terser";
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import filesize from 'rollup-plugin-filesize';
 import postcss from "rollup-plugin-postcss";
 
-import { terser } from "rollup-plugin-terser";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-
-import packageJson from "./package.json" assert { type: "json" };
-import commonjs from "@rollup/plugin-commonjs";
-import { visualizer } from "rollup-plugin-visualizer";
-import path from "path";
+import packageJson from "./package.json" assert {type: 'json'};
+import {visualizer} from "rollup-plugin-visualizer";
 
 export default [
   {
     input: "src/index.ts",
+    external: [
+      "react-hook-form",
+      /node_modules/
+    ],
     output: [
-      /* {
+      {
         file: packageJson.main,
         format: "cjs",
         sourcemap: true,
-      }, */
+      },
       {
         file: packageJson.module,
-        format: "es",
+        format: "esm",
         sourcemap: true,
       },
     ],
     plugins: [
       peerDepsExternal(),
-      resolve(),
-      commonjs({
-        ignoreGlobal: true,
+      commonjs(),
+      resolve({
+        modulesOnly: true
       }),
-      typescript({ tsconfig: "./tsconfig.json" }),
-      postcss({
-        minimize: true,
-        modules: true,
-        extract: true,
-        extensions: [".css"],
+      typescript({ 
+        tsconfig: "./tsconfig.json",        
+        exclude: ["**/__tests__", "**/*.test.tsx", "stories"]
       }),
-      scss(),
+      postcss(),
+
       terser(),
+      filesize(),
       visualizer({
-        filename: path.resolve(`${import.meta.dirname}/stats.html`),
-        template: "sunburst",
-        gzipSize: true,
-        brotliSize: true,
-        open: true,
-      }),
-      // commonjs({
-      //   ignoreGlobal: true,
-      //   include: /\/node_modules\//,
-      //   namedExports: {},
-      // }),
-      // resolve(),
-      // peerDepsExternal(),
-      // typescript({ tsconfig: "./tsconfig.json" }),
-      // postcss(),
-      // terser(),
+        open:true
+      })
     ],
   },
   {
-    input: "dist/dts/index.d.ts",
-    output: [{ file: "dist/index.d.ts", format: "es" }],
-    plugins: [dts()],
-
-    external: [/\.css$/], // telling rollup anything that is .css aren't part of type exports
+    input: "dist/esm/types/index.d.ts",
+    output: [{ file: "dist/index.d.ts", format: "esm" }],
+    plugins: [dts()],    
+    external: [/\.css$/],
   },
 ];

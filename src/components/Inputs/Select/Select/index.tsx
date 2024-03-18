@@ -30,7 +30,7 @@ const Select = (props: ISelect) => {
 
 const _Select = (props: any) => {
   const [options, setOptions] = useState<TSelectOption[]>(props.options ?? [])
-  const _options = props.options.map(x => x.value).join(',')
+  const _options = props.options.map((x:TSelectOption) => x.value).join(',')
 
   // Synchronization
   useEffect(()=>{setOptions(props.options)},[_options])
@@ -67,7 +67,7 @@ const _Select = (props: any) => {
         // setSelectedOption({ label: a, value: a });
         props.onChange({ label: a, value: a });
       } else {
-        props.isCreatable(a).then((opt) => {
+        props.isCreatable(a).then((opt: TSelectOption) => {
           setOptions([opt, ...options]);
           // setSelectedOption(opt);
           props.onChange(opt);

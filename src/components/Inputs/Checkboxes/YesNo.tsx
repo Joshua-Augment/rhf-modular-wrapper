@@ -1,5 +1,5 @@
 import React from 'react'
-import { IYesNo } from '../../core';
+import { IYesNo, YesNoButtonOptions } from '../../core';
 import InputWrapper from "../../core/InputWrapper";
 import styled from "styled-components"
 
@@ -29,7 +29,7 @@ const _YesNo = (props:any) => {
   {buttonGenerator((props.yes && props.yes.label) ?? 'Yes', props?.yes?.value ?? true,props.yes?.extHandler, props.yes?.element ?? Button,  props.yes?.color ?? 'green')}
   {buttonGenerator((props.no && props.no.label) ?? 'No', props?.no?.value ?? false,props.no?.extHandler, props.no?.element ?? Button, props.no?.color ?? 'red')}
   {
-    props.otherOptions && props.otherOptions.map((option,i) => buttonGenerator(option.label ?? `Option ${i}`,option.value ?? i, option.extHandler, option.element ?? Button, option.color ?? '#22ffff4', `yn-${props.name}-eo-${i}`))
+    props.otherOptions && props.otherOptions.map((option: YesNoButtonOptions,i:number) => buttonGenerator(option.label ?? `Option ${i}`,option.value ?? i, option.extHandler, option.element ?? Button, option.color ?? '#22ffff4', `yn-${props.name}-eo-${i}`))
   }   
 </div>
 }

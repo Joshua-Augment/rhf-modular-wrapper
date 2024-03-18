@@ -1,6 +1,6 @@
 import React from 'react';
-import { FieldValues, DeepPartial, UseFormReturn } from 'react-hook-form/dist/types';
-import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form/dist/types';
+import { FieldValues, DeepPartial, UseFormReturn } from 'react-hook-form';
+import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form';
 import { TListInputs } from './lists';
 export interface ISubmitButton {label ?: string; children ?: React.ReactNode;buttonClass ?: string; }
 

@@ -26,7 +26,7 @@ const _AsyncSelect = (props: any) => {
         // setSelectedOption({ label: a, value: a });
         props.onChange({ label: a, value: a });
       } else {
-        props.isCreatable(a).then((opt) => {
+        props.isCreatable(a).then((opt:TSelectOption) => {
           setOptions([opt, ...options]);
           // setSelectedOption(opt);
           props.onChange(opt);

@@ -36,7 +36,7 @@ const FormList = (props:IList) => {
   const emptyRow = useMemo(()=>{
     if (props.emptyRow) {return props.emptyRow}
     else {
-      let obj = {};
+      let obj:Record<string,any> = {};
       props.items.forEach(i => obj[i.name] = '')
       return obj
     }
@@ -45,7 +45,7 @@ const FormList = (props:IList) => {
   useEffect(() =>{if (fields.length === 0) {append(emptyRow)}},[])
 
   const bodygenerator = useMemo(()=> {
-    const templateConverter = (children, i) => {
+    const templateConverter = (children:any, i:number):any => {
       return React.Children.map(children, child => {
         // console.log("[TemplateConverter - ] -props ",child.props)
         // For the Inputs
