@@ -1,5 +1,6 @@
-import { ICheckbox } from "../../core";
-import InputWrapper from "../../core/InputWrapper";
+import React from "react";
+import { ICheckbox } from "../../core/index";
+import InputWrapper from "../../core/InputWrapper/index";
 
 const Checkbox = (props: ICheckbox) => {
   return (

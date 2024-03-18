@@ -1,4 +1,4 @@
-export * from "./interfaces"
+export * from "./interfaces/index"
 export * from "./Form"
-export {default as InputWrapper} from "./InputWrapper"
+export {default as InputWrapper} from "./InputWrapper/index"
 export {default as InputChooser} from "./InputChooser"

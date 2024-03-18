@@ -1,7 +1,7 @@
-import  { useContext } from "react";
-import { FormBaseInput } from "../../interfaces";
+import  React,{ useContext } from "react";
+import { FormBaseInput } from "../../interfaces/index";
 import { ThemeContext } from "../../Form";
-import Logger from "../../Logger";
+import Logger from "../../Logger/index";
 import InputInnerWrapper from "./components/InputInnerWrapper";
 
 const InputWrapperv2 = (props: FormBaseInput) => {

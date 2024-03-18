@@ -1,5 +1,6 @@
-import { ISwitch } from "../../core";
-import InputWrapper from "../../core/InputWrapper";
+import React from "react";
+import { ISwitch } from "../../core/index";
+import InputWrapper from "../../core/InputWrapper/index";
 import { default as SwitchInput } from "react-switch";
 
 const Switch = (props: ISwitch) => {
@@ -11,7 +12,7 @@ const Switch = (props: ISwitch) => {
 };
 
 const _Switch = (props: any) => {
-  console.log(`_Switch: ${props.name} = `, props)
+  console.log(`_Switch: ${props.name} = `, props);
   return (
     <div
       className={`d-block ${props.wrapperClass}`}

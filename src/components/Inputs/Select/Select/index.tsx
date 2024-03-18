@@ -1,13 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import SelectInput from "react-select";
 import SelectCreatableInput from "react-select/creatable";
-import {
-  BaseSelect,
-  IInputsBasePropsNoSetters,
-  ISelect,  
-  TSelectOption,
-} from "../../../core";
-import InputWrapper from "../../../core/InputWrapper";
+import { BaseSelect, IInputsBasePropsNoSetters, ISelect, TSelectOption } from "../../../core/index";
+import InputWrapper from "../../../core/InputWrapper/index";
 
 const Select = (props: ISelect) => {
   // const {value, error, setValue} = useInputValAndError(props.name)
@@ -16,36 +11,40 @@ const Select = (props: ISelect) => {
   // const _val = watch(props.name)
   // const val = useMemo(()=>_val,[_val])
 
-  
+  const _props: IInputsBasePropsNoSetters = { ...props };
+  delete _props.calculatedField;
+  delete _props.externalStateSetter;
+  delete _props.onInputChange;
 
-  const _props: IInputsBasePropsNoSetters = {...props}
-  delete _props.calculatedField
-  delete _props.externalStateSetter
-  delete _props.onInputChange
-
-  return <InputWrapper type={props.type ?? 'select'} {...props} noBorder >
-  <_Select {..._props} />
-</InputWrapper>;
+  return (
+    <InputWrapper type={props.type ?? "select"} {...props} noBorder>
+      <_Select {..._props} />
+    </InputWrapper>
+  );
 };
 
 const _Select = (props: any) => {
-  const [options, setOptions] = useState<TSelectOption[]>(props.options ?? [])
-  const _options = props.options.map((x:TSelectOption) => x.value).join(',')
+  const [options, setOptions] = useState<TSelectOption[]>(props.options ?? []);
+  const _options = props.options.map((x: TSelectOption) => x.value).join(",");
 
   // Synchronization
-  useEffect(()=>{setOptions(props.options)},[_options])
-  
-  const omitOptions:BaseSelect['omitOptions'] = props.omitOptions
-  const omitFilter = useMemo(()=>omitOptions ? omitOptions.map(x => (typeof x ==='string' || typeof x === 'number') ? x : x?.value as string|number) : null,[omitOptions])
+  useEffect(() => {
+    setOptions(props.options);
+  }, [_options]);
 
-  
-  const filteredOmittedOptions = options.filter(x => {
+  const omitOptions: BaseSelect["omitOptions"] = props.omitOptions;
+  const omitFilter = useMemo(
+    () => (omitOptions ? omitOptions.map((x) => (typeof x === "string" || typeof x === "number" ? x : (x?.value as string | number))) : null),
+    [omitOptions]
+  );
+
+  const filteredOmittedOptions = options.filter((x) => {
     if (omitFilter) {
-      return !omitFilter.includes(x.value)
+      return !omitFilter.includes(x.value);
     } else {
-      return true
+      return true;
     }
-  })
+  });
 
   // useEffect(()=> {
   //   if (props.options && Array.isArray(props.options)) {
@@ -53,7 +52,7 @@ const _Select = (props: any) => {
   //     if (omitOptions && Array.isArray(omitOptions)) {
   //       const _filter = omitOptions.map(x => (typeof x ==='string' || typeof x === 'number') ? x : x?.value as string|number)
   //       setOptions((props.options as TSelectOption[]).filter(x => !_filter.includes(x.value)))
-        
+
   //     } else {
   //       setOptions(props.options)
   //     }
@@ -73,12 +72,12 @@ const _Select = (props: any) => {
           props.onChange(opt);
         });
       }
-    } 
-  }
+    }
+  };
 
-  return props.isCreatable !== undefined ?
+  return props.isCreatable !== undefined ? (
     <SelectCreatableInput
-      styles={{container: (base) => ({...base, width:'100%'})}}
+      styles={{ container: (base) => ({ ...base, width: "100%" }) }}
       onCreateOption={createNew}
       onBlur={props.onBlur}
       {...props}
@@ -88,23 +87,24 @@ const _Select = (props: any) => {
       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
       name={props.name}
       value={props.value}
-      onChange={(a) => props.onChange(a)} 
+      onChange={(a) => props.onChange(a)}
       // value={value}
       // onChange={(a:TSelectOption) => setValue(props.name, a)}
-    /> :   
-  <SelectInput
-    styles={{container: (base) => ({...base, width:'100%'})}}
-    {...props}
-    {...props.rsOptions}
-    options={filteredOmittedOptions}
-    onBlur={props.onBlur}
-    error={props.error}
-    isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false} 
-    name={props.name}
-    value={props.value}
-    onChange={(a) => props.onChange(a)}
-    /> 
-    
-}
+    />
+  ) : (
+    <SelectInput
+      styles={{ container: (base) => ({ ...base, width: "100%" }) }}
+      {...props}
+      {...props.rsOptions}
+      options={filteredOmittedOptions}
+      onBlur={props.onBlur}
+      error={props.error}
+      isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
+      name={props.name}
+      value={props.value}
+      onChange={(a) => props.onChange(a)}
+    />
+  );
+};
 
 export default Select;

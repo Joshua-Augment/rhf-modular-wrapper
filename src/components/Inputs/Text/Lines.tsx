@@ -1,5 +1,6 @@
-import { ILines } from "../../core";
-import InputWrapper from "../../core/InputWrapper";
+import React from "react";
+import { ILines } from "../../core/index";
+import InputWrapper from "../../core/InputWrapper/index";
 
 const Lines = (props: ILines) => {
   return (

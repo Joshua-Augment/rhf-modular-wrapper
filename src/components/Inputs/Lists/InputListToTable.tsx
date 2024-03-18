@@ -4,7 +4,7 @@ import { IInputToTableList, TListInputs } from '../../core/interfaces/lists'
 import parse from "html-react-parser";
 import { useFieldArray } from 'react-hook-form'
 import { FaArrowDown, FaArrowUp, FaEdit, FaPlus, FaTrash } from 'react-icons/fa'
-import { Line } from '../Text'
+import { Line } from '../Text/index'
 import { useInputValAndError } from '../../core/hook/useInputValnError';
 
 const Table = styled.table`

@@ -1,2 +1,2 @@
-export * from "./Inputs"
-export * from "./core"
+export * from "./Inputs/index"
+export * from "./core/index"

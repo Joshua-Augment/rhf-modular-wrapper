@@ -16,7 +16,7 @@
   "scripts": {
     "start": "storybook dev -p 6006",
     "rollup": "rollup -c",
-    "build": "npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs",
+    "build": "npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && fix-tsc-es-imports -y -V",
     "build-patch": "npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version patch && npm publish",
     "build-minor": "npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version minor && npm publish",
     "build-major": "npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version major && npm publish",

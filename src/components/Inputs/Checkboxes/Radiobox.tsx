@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { IRadiobox, TRadioOption } from "../../core";
-import InputWrapper from "../../core/InputWrapper";
+import { IRadiobox, TRadioOption } from "../../core/index";
+import InputWrapper from "../../core/InputWrapper/index";
 import "../../styling/Radiobox.css";
 
 const Radiobox = (props: IRadiobox) => {
@@ -20,7 +20,7 @@ const _Radiobox = (props: any) => {
 
   return (
     <div className={`radio-button-group`}>
-      {props.options.map((option:TRadioOption, i:number) =>
+      {props.options.map((option: TRadioOption, i: number) =>
         option.reversed ? (
           <React.Fragment key={`rhf-${props.name}-rb-${option.value}`}>
             <input type="radio" id={`${props.name}-${option.value}`} name={props.name} value={option.value} />

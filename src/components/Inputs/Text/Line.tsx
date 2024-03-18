@@ -1,5 +1,6 @@
-import { LineInputProps } from "../../core";
-import InputWrapper from "../../core/InputWrapper";
+import React from "react";
+import { LineInputProps } from "../../core/index";
+import InputWrapper from "../../core/InputWrapper/index";
 import Logger from "../../core/Logger";
 // import { useInputValAndError } from '../../core/hook/useInputValnError'
 

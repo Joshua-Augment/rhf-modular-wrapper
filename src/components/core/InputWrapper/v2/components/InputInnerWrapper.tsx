@@ -1,21 +1,18 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import Logger from "../../../Logger";
 import { UseFormReturn, useWatch } from "react-hook-form";
-import { FormBaseInput } from "../../../interfaces";
+import { FormBaseInput } from "../../../interfaces/index";
 import DefaultInputWrapper from "./DefaultInputWrapper";
 import { useInputValAndError } from "../../../hook/useInputValnError";
 
-export interface IInputInnerWrapper extends FormBaseInput {
-}
+export interface IInputInnerWrapper extends FormBaseInput {}
 
-export type InputWraperChildProps = {
-  
-} & IInputInnerWrapper & Omit<UseFormReturn,'control'>
+export type InputWraperChildProps = {} & IInputInnerWrapper & Omit<UseFormReturn, "control">;
 
 const InputInnerWrapper = (props: IInputInnerWrapper) => {
-  const { value, error, formState,  ...methods } = useInputValAndError(props.name);
+  const { value, error, formState, ...methods } = useInputValAndError(props.name);
   const {
-    inputWrapper : _propsInputWrapper,
+    inputWrapper: _propsInputWrapper,
     name: _propsName,
     options: _propsOptions,
     items: _propsItems,
@@ -124,35 +121,45 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
 
   Logger.info(`Setting Chosen Element`, `${_propsName} - InputWrapperv2`);
 
-  const ChosenElement = props.inputElement
+  const ChosenElement = props.inputElement;
 
   const Wrapper: any = useMemo(() => _propsInputWrapper, [_propsInputWrapper]);
 
-  const ChildComponent = <React.Fragment key={props.name}>
-  {WrapperElementLeft}
-  {ChosenElement
-    ? ChosenElement({
-        ...props.children?.props,
-        ...methods,
-        disabled: props.disabled,
-        type: props?.type ?? "line",
-        onChange: (a:unknown) => methods.setValue(props.name, a, {shouldValidate: props.shouldValidateOnChange ?? false, shouldDirty: props.shouldDirtyOnChange ?? false}),
-        value: value,
-        error: error,
-        source: "InputWrapper",
-      })
-    : React.cloneElement(props.children, {
-        ...props.children?.props,
-        ...methods,
-        disabled: props.disabled,
-        type: props?.type ?? "line",
-        onChange: (a:unknown) => methods.setValue(props.name, a, {shouldValidate: props.shouldValidateOnChange ?? false, shouldDirty: props.shouldDirtyOnChange ?? false}),
-        value: value,
-        error: error,
-        source: "InputWrapper",
-      })}
-    {WrapperElementRight}
-  </React.Fragment>
+  const ChildComponent = (
+    <React.Fragment key={props.name}>
+      {WrapperElementLeft}
+      {ChosenElement
+        ? ChosenElement({
+            ...props.children?.props,
+            ...methods,
+            disabled: props.disabled,
+            type: props?.type ?? "line",
+            onChange: (a: unknown) =>
+              methods.setValue(props.name, a, {
+                shouldValidate: props.shouldValidateOnChange ?? false,
+                shouldDirty: props.shouldDirtyOnChange ?? false,
+              }),
+            value: value,
+            error: error,
+            source: "InputWrapper/index",
+          })
+        : React.cloneElement(props.children, {
+            ...props.children?.props,
+            ...methods,
+            disabled: props.disabled,
+            type: props?.type ?? "line",
+            onChange: (a: unknown) =>
+              methods.setValue(props.name, a, {
+                shouldValidate: props.shouldValidateOnChange ?? false,
+                shouldDirty: props.shouldDirtyOnChange ?? false,
+              }),
+            value: value,
+            error: error,
+            source: "InputWrapper/index",
+          })}
+      {WrapperElementRight}
+    </React.Fragment>
+  );
 
   Logger.info(null, null, "end");
 
@@ -162,8 +169,8 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
     error: error,
     theme: null,
     ...methods,
-    formState
-  }
+    formState,
+  };
 
   return <ChosenWrapper Wrapper={Wrapper} Default={DefaultInputWrapper} props={{ ...injectProps, children: ChildComponent }} />;
 };

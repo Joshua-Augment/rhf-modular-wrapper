@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import Uppy from "@uppy/core";
 import { DashboardModal } from "@uppy/react";
 import XHRUpload from "@uppy/xhr-upload";

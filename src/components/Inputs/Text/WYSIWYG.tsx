@@ -1,6 +1,6 @@
-import  { useEffect, useMemo } from "react";
-import { IWYSIWYG } from "../../core";
-import InputWrapper from "../../core/InputWrapper";
+import React,{ useEffect, useMemo } from "react";
+import { IWYSIWYG } from "../../core/index";
+import InputWrapper from "../../core/InputWrapper/index";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useInputValAndError } from "../../core/hook/useInputValnError";

@@ -1,8 +1,8 @@
-import { useMemo } from "react";
+import React from "react";
 import Uppy from "@uppy/core";
-import { IUppyUploader } from "../../../../core";
+import { IUppyUploader } from "../../../../core/index";
 import UppyDashboardInstance from "./UppyDashboardInstance";
-import InputWrapper from "../../../../core/InputWrapper";
+import InputWrapper from "../../../../core/InputWrapper/index";
 
 const UppyDashboardUploader = (props: IUppyUploader) => {
   return (

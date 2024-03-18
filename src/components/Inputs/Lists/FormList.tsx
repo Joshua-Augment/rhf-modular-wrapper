@@ -4,7 +4,7 @@ import { IList } from '../../core/interfaces/lists';
 import styled from "styled-components"
 import InputChooser from '../../core/InputChooser';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
-import { InputWrapper } from '../../core';
+import { InputWrapper } from '../../core/index';
 import { useInputValAndError } from '../../core/hook/useInputValnError';
 
 const Row = styled.div`

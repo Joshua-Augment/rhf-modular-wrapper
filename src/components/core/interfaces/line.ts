@@ -1,5 +1,5 @@
 import { ReactQuillProps } from 'react-quill';
-import { HTMLInputTypeAttribute } from './../interfaces';
+import { HTMLInputTypeAttribute } from './../interfaces/index';
 import { FormBaseInput } from './base';
 
 export interface LineInputProps extends FormBaseInput<string> {

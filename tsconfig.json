@@ -16,7 +16,6 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "emitDeclarationOnly": true,
   },
   "exclude": ["src/stories"],
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/**/*.css",]

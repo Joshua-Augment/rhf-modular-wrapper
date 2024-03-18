@@ -1,9 +1,9 @@
-import  { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { arrayMoveImmutable } from "array-move";
 import { FaCaretDown, FaCaretUp, FaEye, FaTrash } from "react-icons/fa";
-import { IDropzoneUploader, TDropzonePreview } from "../../../core";
-import InputWrapper from "../../../core/InputWrapper";
+import { IDropzoneUploader, TDropzonePreview } from "../../../core/index";
+import InputWrapper from "../../../core/InputWrapper/index";
 import styled from "styled-components";
 import { compareArrays } from "../../../core/helpers";
 
@@ -56,7 +56,11 @@ const PaginationWrapper = styled.div`
 const ActionsWrapper = styled.div``;
 
 const DropzoneUploader = (props: IDropzoneUploader) => {
-  return <InputWrapper {...props}><DropzoneHandler {...props} /></InputWrapper>;
+  return (
+    <InputWrapper {...props}>
+      <DropzoneHandler {...props} />
+    </InputWrapper>
+  );
 };
 
 const DropzoneHandler = (props: any) => {
@@ -88,7 +92,7 @@ const DropzoneHandler = (props: any) => {
   };
 
   const handleDelete = (index: number) => {
-    const rem = props.value.filter((x:File, i:number) => i !== index);
+    const rem = props.value.filter((x: File, i: number) => i !== index);
     props.onChange(rem);
   };
 
@@ -107,7 +111,9 @@ const DropzoneHandler = (props: any) => {
         </div>
       </div>
 
-      {props.value && props.value.length > 0 && <PreviewViewer {...props} files={props.value} showPreview={showPreview} moveFile={moveFile} handleDelete={handleDelete} />}
+      {props.value && props.value.length > 0 && (
+        <PreviewViewer {...props} files={props.value} showPreview={showPreview} moveFile={moveFile} handleDelete={handleDelete} />
+      )}
     </DropzoneContainer>
   );
 };

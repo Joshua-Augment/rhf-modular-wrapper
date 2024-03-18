@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo, useRef } from "react";
 import InputElemWrapper from "../../InputElemWrapper";
-import { FormBaseInput } from "../../interfaces";
+import { FormBaseInput } from "../../interfaces/index";
 import { useInputValAndError } from "../../hook/useInputValnError";
 import { Controller } from "react-hook-form";
 import { ThemeContext } from "../../Form";
@@ -129,7 +129,7 @@ const InputWrapper = (props: FormBaseInput) => {
               value: value,
               error: error,
               // error: formState.errors?.[field.name],
-              source: "InputWrapper",
+              source: "InputWrapper/index",
             })
           ) : (
             React.cloneElement(props.children, {
@@ -141,7 +141,7 @@ const InputWrapper = (props: FormBaseInput) => {
               value: value,
               error: error,
               // error: formState.errors?.[field.name],
-              source: "InputWrapper",
+              source: "InputWrapper/index",
             })
           )
         ) : (
