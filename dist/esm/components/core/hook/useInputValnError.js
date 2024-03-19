@@ -22,7 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import { useMemo } from "react";
 import { useFormContext, useFormState, useWatch } from "react-hook-form";
-import Logger from "../Logger";
+import Logger from "../Logger/index";
 export var useInputValAndError = function (name) {
     var _a;
     Logger.info("Name : ".concat(name), "useInputValAndError", "start");

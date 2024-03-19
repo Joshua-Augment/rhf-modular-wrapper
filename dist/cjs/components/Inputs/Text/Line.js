@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var jsx_runtime_1 = require("react/jsx-runtime");
 var index_1 = __importDefault(require("../../core/InputWrapper/index"));
-var Logger_1 = __importDefault(require("../../core/Logger"));
+var index_2 = __importDefault(require("../../core/Logger/index"));
 // import { useInputValAndError } from '../../core/hook/useInputValnError'
 var Line = function (props) {
     var _a;
@@ -27,8 +27,8 @@ var Line = function (props) {
 };
 var _Line = function (props) {
     var _a, _b, _c;
-    Logger_1.default.info(props, "Line", "start");
-    Logger_1.default.info(null, null, "end");
+    index_2.default.info(props, "Line", "start");
+    index_2.default.info(null, null, "end");
     return ((0, jsx_runtime_1.jsx)("input", __assign({ disabled: props.disabled, id: props.name, className: (_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.inputClassName) !== null && _b !== void 0 ? _b : "" }, props.register(props.name), { placeholder: props.placeholder, type: (_c = props.type) !== null && _c !== void 0 ? _c : "text" })));
 };
 exports.default = Line;

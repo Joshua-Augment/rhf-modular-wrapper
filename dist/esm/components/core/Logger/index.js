@@ -1,12 +1,12 @@
 var COLOURS = {
-    trace: '#aaa',
-    info: 'blue',
-    warn: 'pink',
-    error: 'red'
+    trace: "#aaa",
+    info: "blue",
+    warn: "pink",
+    error: "red",
 };
 var Log = /** @class */ (function () {
     function Log() {
-        this.debug = true;
+        this.debug = false;
     }
     Log.prototype.generateMessage = function (level, message, source, group) {
         if (!this.debug) {
@@ -15,12 +15,12 @@ var Log = /** @class */ (function () {
         var textColor = COLOURS[level];
         if (!group) {
             if (typeof message === "object") {
-                var _message = '';
+                var _message = "";
                 try {
                     _message = JSON.parse(JSON.stringify(message));
                 }
                 catch (err) {
-                    _message = 'Cyclic Object';
+                    _message = "Cyclic Object";
                 }
                 console.log("%c" + source + "  ||  %c" + _message, "color:#000;", "color:" + textColor + ";");
             }
@@ -36,16 +36,16 @@ var Log = /** @class */ (function () {
         }
     };
     Log.prototype.trace = function (message, source, group) {
-        return this.generateMessage('trace', message, source, group);
+        return this.generateMessage("trace", message, source, group);
     };
     Log.prototype.info = function (message, source, group) {
-        return this.generateMessage('info', message, source, group);
+        return this.generateMessage("info", message, source, group);
     };
     Log.prototype.warn = function (message, source, group) {
-        return this.generateMessage('warn', message, source, group);
+        return this.generateMessage("warn", message, source, group);
     };
     Log.prototype.error = function (message, source, group) {
-        return this.generateMessage('error', message, source, group);
+        return this.generateMessage("error", message, source, group);
     };
     return Log;
 }());
