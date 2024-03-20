@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createContext, useMemo, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { FieldValues } from "react-hook-form/dist/types";
@@ -9,6 +9,7 @@ import "../styling/form_bootstrap.css";
 
 import "../styling/core.css";
 import { TListInputs } from "./interfaces/lists";
+import Logger from "./Logger";
 
 export type TTemplateContext = {
   inputTemplate: null | React.ComponentType<FormFrameWrapperProps> | React.ComponentType<any>;
@@ -34,10 +35,19 @@ export const Form = <T extends FieldValues>(props: IForm<T>) => {
     delayError: props.delayError ?? undefined,
   });
 
+  
   const inputWrapper = useMemo(() => props.inputWrapper ?? null, []);
   const buttonTemplate = useMemo(() => props.buttonWrapper ?? null, []);
   const elements = useMemo(() => props.elements ?? {}, []);
   const debug = useMemo(() => props.debug ?? false, []);
+
+  useEffect(() => {
+    if (props.defaultValues) {
+      Logger.info(debug,`Setting Default Values to ${JSON.stringify(JSON.parse(JSON.stringify(props.defaultValues ?? {})))}`,'Form-useEffect')
+      methods.reset(props.defaultValues as any);
+    }
+  }, [props.defaultValues]);
+
 
   return (
     <ThemeContext.Provider

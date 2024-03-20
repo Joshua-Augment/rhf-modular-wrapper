@@ -10,11 +10,13 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx } from "react/jsx-runtime";
+import { useEffect } from "react";
 import { createContext, useMemo, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "../styling/form_bootstrap.css";
 import "../styling/core.css";
+import Logger from "./Logger";
 export var ThemeContext = createContext({ debug: false, inputTemplate: null, buttonTemplate: null, elements: {} });
 export var Form = function (props) {
     var _a, _b, _c, _d, _e, _f, _g;
@@ -35,6 +37,13 @@ export var Form = function (props) {
     var buttonTemplate = useMemo(function () { var _a; return (_a = props.buttonWrapper) !== null && _a !== void 0 ? _a : null; }, []);
     var elements = useMemo(function () { var _a; return (_a = props.elements) !== null && _a !== void 0 ? _a : {}; }, []);
     var debug = useMemo(function () { var _a; return (_a = props.debug) !== null && _a !== void 0 ? _a : false; }, []);
+    useEffect(function () {
+        var _a;
+        if (props.defaultValues) {
+            Logger.info(debug, "Setting Default Values to ".concat(JSON.stringify(JSON.parse(JSON.stringify((_a = props.defaultValues) !== null && _a !== void 0 ? _a : {})))), 'Form-useEffect');
+            methods.reset(props.defaultValues);
+        }
+    }, [props.defaultValues]);
     return (_jsx(ThemeContext.Provider, __assign({ value: {
             inputTemplate: inputWrapper,
             buttonTemplate: buttonTemplate,
