@@ -56,14 +56,14 @@ var DefaultInputWrapper_1 = __importDefault(require("./DefaultInputWrapper"));
 var useInputValnError_1 = require("../../../hook/useInputValnError");
 var Form_1 = require("../../../Form");
 var InputInnerWrapper = function (props) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
     var debug = (0, react_1.useContext)(Form_1.ThemeContext).debug;
-    var _r = (0, useInputValnError_1.useInputValAndError)(props.name), value = _r.value, error = _r.error, formState = _r.formState, methods = __rest(_r, ["value", "error", "formState"]);
+    var _t = (0, useInputValnError_1.useInputValAndError)(props.name, (_b = (_a = props.defaultValue) !== null && _a !== void 0 ? _a : props.empty) !== null && _b !== void 0 ? _b : null), value = _t.value, error = _t.error, formState = _t.formState, methods = __rest(_t, ["value", "error", "formState"]);
     var _propsInputWrapper = props.inputWrapper, _propsName = props.name, _propsOptions = props.options, _propsItems = props.items, _propsLabel = props.label, _propsNoLabel = props.noLabel, _propsType = props.type, _propsHelperText = props.helperText;
     var firstUpdate = (0, react_1.useRef)(true);
     index_1.default.info(debug, "First Update : ".concat(firstUpdate.current), "".concat(_propsName, " - InputWrapperv2"));
     var watchCalculated = (0, react_hook_form_1.useWatch)({
-        name: ((_a = props === null || props === void 0 ? void 0 : props.calculatedField) === null || _a === void 0 ? void 0 : _a.find) !== undefined ? props.calculatedField.find : "#_#_noinputtofind_#_#",
+        name: ((_c = props === null || props === void 0 ? void 0 : props.calculatedField) === null || _c === void 0 ? void 0 : _c.find) !== undefined ? props.calculatedField.find : "#_#_noinputtofind_#_#",
     });
     index_1.default.info(debug, "Watching Calculated : ".concat(String(watchCalculated)), "".concat(_propsName, " - InputWrapperv2"));
     // console.log(`For ${props.name}, error : `,rest.error)
@@ -132,7 +132,7 @@ var InputInnerWrapper = function (props) {
         return ((_a = props === null || props === void 0 ? void 0 : props.buttons) === null || _a === void 0 ? void 0 : _a.left)
             ? WrapperMaker((_c = (_b = props === null || props === void 0 ? void 0 : props.buttons) === null || _b === void 0 ? void 0 : _b.wrapper) === null || _c === void 0 ? void 0 : _c.left, (_e = (_d = props === null || props === void 0 ? void 0 : props.buttons) === null || _d === void 0 ? void 0 : _d.wrapper) === null || _e === void 0 ? void 0 : _e.all, ((_f = props === null || props === void 0 ? void 0 : props.buttons) === null || _f === void 0 ? void 0 : _f.left) ? props.buttons.left(value, props.name, methods.getValues) : null)
             : null;
-    }, [(_b = props === null || props === void 0 ? void 0 : props.buttons) === null || _b === void 0 ? void 0 : _b.left, (_d = (_c = props === null || props === void 0 ? void 0 : props.buttons) === null || _c === void 0 ? void 0 : _c.wrapper) === null || _d === void 0 ? void 0 : _d.left, (_f = (_e = props === null || props === void 0 ? void 0 : props.buttons) === null || _e === void 0 ? void 0 : _e.wrapper) === null || _f === void 0 ? void 0 : _f.all]);
+    }, [(_d = props === null || props === void 0 ? void 0 : props.buttons) === null || _d === void 0 ? void 0 : _d.left, (_f = (_e = props === null || props === void 0 ? void 0 : props.buttons) === null || _e === void 0 ? void 0 : _e.wrapper) === null || _f === void 0 ? void 0 : _f.left, (_h = (_g = props === null || props === void 0 ? void 0 : props.buttons) === null || _g === void 0 ? void 0 : _g.wrapper) === null || _h === void 0 ? void 0 : _h.all]);
     index_1.default.info(debug, "Setting Right Wrapper", "".concat(_propsName, " - InputWrapperv2"));
     var WrapperElementRight = (0, react_1.useMemo)(function () {
         var _a, _b, _c, _d, _e, _f;
@@ -141,19 +141,19 @@ var InputInnerWrapper = function (props) {
         return ((_a = props === null || props === void 0 ? void 0 : props.buttons) === null || _a === void 0 ? void 0 : _a.right)
             ? WrapperMaker((_c = (_b = props === null || props === void 0 ? void 0 : props.buttons) === null || _b === void 0 ? void 0 : _b.wrapper) === null || _c === void 0 ? void 0 : _c.right, (_e = (_d = props === null || props === void 0 ? void 0 : props.buttons) === null || _d === void 0 ? void 0 : _d.wrapper) === null || _e === void 0 ? void 0 : _e.all, ((_f = props === null || props === void 0 ? void 0 : props.buttons) === null || _f === void 0 ? void 0 : _f.right) ? props.buttons.right(value, props.name, methods.getValues) : null)
             : null;
-    }, [(_g = props === null || props === void 0 ? void 0 : props.buttons) === null || _g === void 0 ? void 0 : _g.right, (_j = (_h = props === null || props === void 0 ? void 0 : props.buttons) === null || _h === void 0 ? void 0 : _h.wrapper) === null || _j === void 0 ? void 0 : _j.right, (_l = (_k = props === null || props === void 0 ? void 0 : props.buttons) === null || _k === void 0 ? void 0 : _k.wrapper) === null || _l === void 0 ? void 0 : _l.all]);
+    }, [(_j = props === null || props === void 0 ? void 0 : props.buttons) === null || _j === void 0 ? void 0 : _j.right, (_l = (_k = props === null || props === void 0 ? void 0 : props.buttons) === null || _k === void 0 ? void 0 : _k.wrapper) === null || _l === void 0 ? void 0 : _l.right, (_o = (_m = props === null || props === void 0 ? void 0 : props.buttons) === null || _m === void 0 ? void 0 : _m.wrapper) === null || _o === void 0 ? void 0 : _o.all]);
     index_1.default.info(debug, "Setting Chosen Element", "".concat(_propsName, " - InputWrapperv2"));
     var ChosenElement = props.inputElement;
     var Wrapper = (0, react_1.useMemo)(function () { return _propsInputWrapper; }, [_propsInputWrapper]);
     var ChildComponent = ((0, jsx_runtime_1.jsxs)(react_1.default.Fragment, { children: [WrapperElementLeft, ChosenElement
-                ? ChosenElement(__assign(__assign(__assign({}, (_m = props.children) === null || _m === void 0 ? void 0 : _m.props), methods), { disabled: props.disabled, type: (_o = props === null || props === void 0 ? void 0 : props.type) !== null && _o !== void 0 ? _o : "line", onChange: function (a) {
+                ? ChosenElement(__assign(__assign(__assign({}, (_p = props.children) === null || _p === void 0 ? void 0 : _p.props), methods), { disabled: props.disabled, type: (_q = props === null || props === void 0 ? void 0 : props.type) !== null && _q !== void 0 ? _q : "line", onChange: function (a) {
                         var _a, _b;
                         return methods.setValue(props.name, a, {
                             shouldValidate: (_a = props.shouldValidateOnChange) !== null && _a !== void 0 ? _a : false,
                             shouldDirty: (_b = props.shouldDirtyOnChange) !== null && _b !== void 0 ? _b : true,
                         });
                     }, formState: formState, value: value, error: error, source: "InputWrapper/index" }))
-                : react_1.default.cloneElement(props.children, __assign(__assign(__assign({}, (_p = props.children) === null || _p === void 0 ? void 0 : _p.props), methods), { formState: formState, disabled: props.disabled, type: (_q = props === null || props === void 0 ? void 0 : props.type) !== null && _q !== void 0 ? _q : "line", onChange: function (a) {
+                : react_1.default.cloneElement(props.children, __assign(__assign(__assign({}, (_r = props.children) === null || _r === void 0 ? void 0 : _r.props), methods), { formState: formState, disabled: props.disabled, type: (_s = props === null || props === void 0 ? void 0 : props.type) !== null && _s !== void 0 ? _s : "line", onChange: function (a) {
                         var _a, _b;
                         return methods.setValue(props.name, a, {
                             shouldValidate: (_a = props.shouldValidateOnChange) !== null && _a !== void 0 ? _a : false,

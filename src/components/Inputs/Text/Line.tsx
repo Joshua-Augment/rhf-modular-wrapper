@@ -6,7 +6,7 @@ import Logger from "../../core/Logger/index";
 
 const Line = (props: LineInputProps) => {
   return (
-    <InputWrapper type={props.type ?? "line"} {...props}>
+    <InputWrapper empty={''} type={props.type ?? "line"} {...props} >
       <_Line {...props} />
     </InputWrapper>
   );

@@ -6,7 +6,7 @@ import "react-range-slider-input/dist/style.css";
 
 const Slider = (props: ISlider) => {
   return (
-    <InputWrapper type={props.type ?? "slider"} {...props}>
+    <InputWrapper empty={0} type={props.type ?? "slider"} {...props}>
       <_Slider {...props} />
     </InputWrapper>
   );

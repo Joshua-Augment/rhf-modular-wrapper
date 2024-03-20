@@ -104,7 +104,7 @@ const FormList = (props:IList) => {
   },[value, error])
 
   return (
-    <InputWrapper type={props.type ?? 'list'} {...props} noBorder>
+    <InputWrapper empty={[emptyRow]} type={props.type ?? 'list'} {...props} noBorder>
       <div style={{width:'100%'}}>{bodygenerator}</div>
     </InputWrapper>
   )

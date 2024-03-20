@@ -5,6 +5,7 @@ import InputWrapper from "../../core/InputWrapper/index";
 const Checkbox = (props: ICheckbox) => {
   return (
     <InputWrapper
+      empty={null}
       type={props.type ?? "checkbox"}
       {...props}
       reversedLabel

@@ -14,7 +14,7 @@ const DatePicker = (props: IDatePicker) => {
   // console.log('DatePicker -  value', value)
 
   return (
-    <InputWrapper type={props.type ?? 'datepicker'} {...props} noBorder>
+    <InputWrapper empty={new Date()} type={props.type ?? 'datepicker'} {...props} noBorder>
       <_DatePicker {...props} />
     </InputWrapper>
   )

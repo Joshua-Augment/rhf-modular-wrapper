@@ -5,7 +5,7 @@ import { TSelectOption, ISelectAsync, BaseSelect} from "../../../core/index";
 import InputWrapper from "../../../core/InputWrapper/index";
 
 const AsyncSelect = (props: ISelectAsync) => {  
-  return <InputWrapper type={props.type ?? 'select_async'} {...props} noBorder>
+  return <InputWrapper empty={null} type={props.type ?? 'select_async'} {...props} noBorder>
     <_AsyncSelect {...props} />
   </InputWrapper>
 };

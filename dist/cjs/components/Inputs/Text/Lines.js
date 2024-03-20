@@ -18,7 +18,7 @@ var jsx_runtime_1 = require("react/jsx-runtime");
 var index_1 = __importDefault(require("../../core/InputWrapper/index"));
 var Lines = function (props) {
     var _a;
-    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "lines" }, props, { children: (0, jsx_runtime_1.jsx)(_Lines, __assign({}, props)) })));
+    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: '', type: (_a = props.type) !== null && _a !== void 0 ? _a : "lines" }, props, { children: (0, jsx_runtime_1.jsx)(_Lines, __assign({}, props)) })));
 };
 var _Lines = function (props) {
     var _a, _b, _c;

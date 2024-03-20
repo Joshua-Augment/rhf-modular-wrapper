@@ -48,23 +48,6 @@ const IconDown = styled(FaMinusSquare)`
 `;
 
 const TableList = (props: ITableList) => {
-  return (
-    <InputWrapper type={props.type ?? "tablelist"} {...props}>
-      <_Table {...props} />
-    </InputWrapper>
-  );
-};
-
-const _Table = (props: any) => {
-  const { fields, append, insert, remove } = useFieldArray({ control: props.control, name: props.name });
-  const TableTemplate = props.elemTable ?? Table;
-  const TableHeadTemplate = props.elemTableHead ?? TableHead;
-  const TableBodyTemplate = props.elemTableBody ?? TableBody;
-  const TableHeaderTRTemplate = props.elemTR ?? TableHeaderTR;
-  const TableTRTemplate = props.elemTR ?? TableTR;
-  const TableTHTemplate = props.elemTH ?? TableTH;
-  const TableTDTemplate = props.elemTD ?? TableTD;
-
   const emptyRow = useMemo(() => {
     if (props.emptyRow) {
       return props.emptyRow;
@@ -75,17 +58,31 @@ const _Table = (props: any) => {
     }
   }, []);
 
+  return (
+    <InputWrapper empty={[emptyRow]} type={props.type ?? "tablelist"} {...props}>
+      <_Table {...props} emptyRow={emptyRow} />
+    </InputWrapper>
+  );
+};
+
+const _Table = (props: any) => {
+  const { fields, append, insert, remove } = useFieldArray({ name: props.name });
+  const TableTemplate = props.elemTable ?? Table;
+  const TableHeadTemplate = props.elemTableHead ?? TableHead;
+  const TableBodyTemplate = props.elemTableBody ?? TableBody;
+  const TableHeaderTRTemplate = props.elemTR ?? TableHeaderTR;
+  const TableTRTemplate = props.elemTR ?? TableTR;
+  const TableTHTemplate = props.elemTH ?? TableTH;
+  const TableTDTemplate = props.elemTD ?? TableTD;
+
+  
+
   useEffect(() => {
     if (fields.length === 0) {
-      append(emptyRow);
+      append(props.emptyRow);
     }
   });
 
-  /* const generateRow = (field: any, i:number) => <TableTRTemplate key={`fw-${props.name}-${field.id}`}>
-    {props.showIndex === true && <TableTDTemplate>{i + 1}</TableTDTemplate>}
-    {props.items.map((item,iT) => <TableTDTemplate key={`fw-${props.name}-${field?.id}-${iT}`} ><InputChooser fields={field?.[i]?.[item.name] ?? null}  {...item} noLabel name={`${props.name}.${i}.${item.name}`}/></TableTDTemplate>)}
-    {props.fixed !== true && <TableTDTemplate><IconUp onClick={()=>insert(i+1,emptyRow)} /> {<IconDown onClick={()=>{remove(i)}}/>}</TableTDTemplate>}
-  </TableTRTemplate> */
 
   const headerGenerator = useMemo(
     () =>
@@ -115,7 +112,7 @@ const _Table = (props: any) => {
       ))}{" "}
       {props.fixed !== true && (
         <TableTDTemplate>
-          <IconUp onClick={() => insert(i + 1, emptyRow)} />{" "}
+          <IconUp onClick={() => insert(i + 1, props.emptyRow)} />{" "}
           {
             <IconDown
               onClick={() => {

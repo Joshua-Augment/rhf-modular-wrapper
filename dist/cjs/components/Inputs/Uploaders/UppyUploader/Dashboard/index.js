@@ -19,7 +19,7 @@ var core_1 = __importDefault(require("@uppy/core"));
 var UppyDashboardInstance_1 = __importDefault(require("./UppyDashboardInstance"));
 var index_1 = __importDefault(require("../../../../core/InputWrapper/index"));
 var UppyDashboardUploader = function (props) {
-    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ noBorder: true }, props, { children: (0, jsx_runtime_1.jsx)(UppyElement, __assign({}, props)) })));
+    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: [], noBorder: true }, props, { children: (0, jsx_runtime_1.jsx)(UppyElement, __assign({}, props)) })));
 };
 var UppyElement = function (props) {
     var uppy = new core_1.default();

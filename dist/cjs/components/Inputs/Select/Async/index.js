@@ -30,7 +30,7 @@ var async_creatable_1 = __importDefault(require("react-select/async-creatable"))
 var index_1 = __importDefault(require("../../../core/InputWrapper/index"));
 var AsyncSelect = function (props) {
     var _a;
-    return (0, jsx_runtime_1.jsx)(index_1.default, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'select_async' }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)(_AsyncSelect, __assign({}, props)) }));
+    return (0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: null, type: (_a = props.type) !== null && _a !== void 0 ? _a : 'select_async' }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)(_AsyncSelect, __assign({}, props)) }));
 };
 var _AsyncSelect = function (props) {
     var _a, _b, _c, _d, _e, _f, _g;

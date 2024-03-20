@@ -5,7 +5,7 @@ import "../../styling/Radiobox.css";
 
 const Radiobox = (props: IRadiobox) => {
   return (
-    <InputWrapper type={props.type ?? "radiobox"} {...props} id={`${props.name}`} noBorder>
+    <InputWrapper empty={null} type={props.type ?? "radiobox"} {...props} id={`${props.name}`} noBorder>
       <_Radiobox {...props} />
     </InputWrapper>
   );

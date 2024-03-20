@@ -18,7 +18,7 @@ var jsx_runtime_1 = require("react/jsx-runtime");
 var index_1 = __importDefault(require("../../core/InputWrapper/index"));
 var Checkbox = function (props) {
     var _a;
-    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "checkbox" }, props, { reversedLabel: true, customClasses: { wrapperClassName: "form-check" }, style: { display: "flex", alignItems: "center" } }, { children: (0, jsx_runtime_1.jsx)(_Checkbox, __assign({}, props)) })));
+    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: null, type: (_a = props.type) !== null && _a !== void 0 ? _a : "checkbox" }, props, { reversedLabel: true, customClasses: { wrapperClassName: "form-check" }, style: { display: "flex", alignItems: "center" } }, { children: (0, jsx_runtime_1.jsx)(_Checkbox, __assign({}, props)) })));
 };
 var _Checkbox = function (props) {
     return (0, jsx_runtime_1.jsx)("input", __assign({ id: props.name, type: "checkbox", checked: props.value }, props.register(props.name)));

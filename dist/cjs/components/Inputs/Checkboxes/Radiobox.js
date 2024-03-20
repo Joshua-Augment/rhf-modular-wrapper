@@ -20,7 +20,7 @@ var index_1 = __importDefault(require("../../core/InputWrapper/index"));
 require("../../styling/Radiobox.css");
 var Radiobox = function (props) {
     var _a;
-    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "radiobox" }, props, { id: "".concat(props.name), noBorder: true }, { children: (0, jsx_runtime_1.jsx)(_Radiobox, __assign({}, props)) })));
+    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: null, type: (_a = props.type) !== null && _a !== void 0 ? _a : "radiobox" }, props, { id: "".concat(props.name), noBorder: true }, { children: (0, jsx_runtime_1.jsx)(_Radiobox, __assign({}, props)) })));
 };
 var _Radiobox = function (props) {
     console.log("Radiobox value : ", props.value);

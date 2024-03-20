@@ -22,7 +22,7 @@ var jsx_runtime_1 = require("react/jsx-runtime");
 var index_1 = __importDefault(require("../../core/InputWrapper/index"));
 var styled_components_1 = __importDefault(require("styled-components"));
 var YesNo = function (props) {
-    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ type: props.yesno }, props, { id: "".concat(props.name), noLabel: true, noBorder: true, customClasses: { wrapperClassName: "form-check" } }, { children: (0, jsx_runtime_1.jsx)(_YesNo, __assign({}, props)) })));
+    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: false, type: props.yesno }, props, { id: "".concat(props.name), noLabel: true, noBorder: true, customClasses: { wrapperClassName: "form-check" } }, { children: (0, jsx_runtime_1.jsx)(_YesNo, __assign({}, props)) })));
 };
 var _YesNo = function (props) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;

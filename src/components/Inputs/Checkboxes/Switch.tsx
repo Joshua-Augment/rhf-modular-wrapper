@@ -5,7 +5,7 @@ import { default as SwitchInput } from "react-switch";
 
 const Switch = (props: ISwitch) => {
   return (
-    <InputWrapper type={props.type ?? "switch"} {...props} id={`${props.name}`} noBorder customClasses={{ wrapperClassName: "form-check" }}>
+    <InputWrapper empty={false} type={props.type ?? "switch"} {...props} id={`${props.name}`} noBorder customClasses={{ wrapperClassName: "form-check" }}>
       <_Switch {...props} />
     </InputWrapper>
   );

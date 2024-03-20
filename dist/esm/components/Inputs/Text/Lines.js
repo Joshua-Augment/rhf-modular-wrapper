@@ -13,7 +13,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import InputWrapper from "../../core/InputWrapper/index";
 var Lines = function (props) {
     var _a;
-    return (_jsx(InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "lines" }, props, { children: _jsx(_Lines, __assign({}, props)) })));
+    return (_jsx(InputWrapper, __assign({ empty: '', type: (_a = props.type) !== null && _a !== void 0 ? _a : "lines" }, props, { children: _jsx(_Lines, __assign({}, props)) })));
 };
 var _Lines = function (props) {
     var _a, _b, _c;

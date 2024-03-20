@@ -38,7 +38,7 @@ var Select = function (props) {
     delete _props.calculatedField;
     delete _props.externalStateSetter;
     delete _props.onInputChange;
-    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "select" }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)(_Select, __assign({}, _props)) })));
+    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: null, type: (_a = props.type) !== null && _a !== void 0 ? _a : "select" }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)(_Select, __assign({}, _props)) })));
 };
 var _Select = function (props) {
     var _a, _b, _c, _d, _e, _f, _g;

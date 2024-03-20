@@ -25,7 +25,7 @@ var DatePicker = function (props) {
     // const val = useMemo(() => value ,[value])
     // console.log('DatePicker -  value', value)
     var _a;
-    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'datepicker' }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)(_DatePicker, __assign({}, props)) })));
+    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: new Date(), type: (_a = props.type) !== null && _a !== void 0 ? _a : 'datepicker' }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)(_DatePicker, __assign({}, props)) })));
 };
 var _DatePicker = function (props) {
     return (0, jsx_runtime_1.jsx)(react_datepicker_1.default

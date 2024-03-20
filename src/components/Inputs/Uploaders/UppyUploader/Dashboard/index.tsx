@@ -6,7 +6,7 @@ import InputWrapper from "../../../../core/InputWrapper/index";
 
 const UppyDashboardUploader = (props: IUppyUploader) => {
   return (
-    <InputWrapper noBorder {...props}>
+    <InputWrapper empty={[]} noBorder {...props}>
       <UppyElement {...props} />
     </InputWrapper>
   );

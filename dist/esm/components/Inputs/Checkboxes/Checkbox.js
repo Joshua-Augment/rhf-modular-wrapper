@@ -13,7 +13,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import InputWrapper from "../../core/InputWrapper/index";
 var Checkbox = function (props) {
     var _a;
-    return (_jsx(InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "checkbox" }, props, { reversedLabel: true, customClasses: { wrapperClassName: "form-check" }, style: { display: "flex", alignItems: "center" } }, { children: _jsx(_Checkbox, __assign({}, props)) })));
+    return (_jsx(InputWrapper, __assign({ empty: null, type: (_a = props.type) !== null && _a !== void 0 ? _a : "checkbox" }, props, { reversedLabel: true, customClasses: { wrapperClassName: "form-check" }, style: { display: "flex", alignItems: "center" } }, { children: _jsx(_Checkbox, __assign({}, props)) })));
 };
 var _Checkbox = function (props) {
     return _jsx("input", __assign({ id: props.name, type: "checkbox", checked: props.value }, props.register(props.name)));

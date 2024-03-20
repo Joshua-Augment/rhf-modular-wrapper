@@ -15,7 +15,7 @@ import InputWrapper from "../../core/InputWrapper/index";
 import "../../styling/Radiobox.css";
 var Radiobox = function (props) {
     var _a;
-    return (_jsx(InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "radiobox" }, props, { id: "".concat(props.name), noBorder: true }, { children: _jsx(_Radiobox, __assign({}, props)) })));
+    return (_jsx(InputWrapper, __assign({ empty: null, type: (_a = props.type) !== null && _a !== void 0 ? _a : "radiobox" }, props, { id: "".concat(props.name), noBorder: true }, { children: _jsx(_Radiobox, __assign({}, props)) })));
 };
 var _Radiobox = function (props) {
     console.log("Radiobox value : ", props.value);

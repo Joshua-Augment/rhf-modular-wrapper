@@ -70,6 +70,7 @@ export interface IInputsBasePropsNoSetters<T=any> {
 
   element ?: React.ComponentType<IInputsBasePropsNoSetters<any>>,
 
+  empty ?: T,
   defaultValue ?: T,
 
   disabled ?: boolean,
@@ -114,7 +115,6 @@ type isCalculatedPromise<T> = {
   calculate : (thisValue : T, thisName: string, foundFields : any[], allFields: any ) => Promise<T>,
 }
 export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {  
-  children ?: any
 }
 
 export interface CustomElementBaseInput<T=any> extends UseFormReturn,IInputsBaseProps<T> {

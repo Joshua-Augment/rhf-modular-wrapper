@@ -143,7 +143,7 @@ var FormList = function (props) {
             }
         });
     }, [value, error]);
-    return ((0, jsx_runtime_1.jsx)(index_1.InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : 'list' }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ style: { width: '100%' } }, { children: bodygenerator })) })));
+    return ((0, jsx_runtime_1.jsx)(index_1.InputWrapper, __assign({ empty: [emptyRow], type: (_a = props.type) !== null && _a !== void 0 ? _a : 'list' }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ style: { width: '100%' } }, { children: bodygenerator })) })));
 };
 exports.default = FormList;
 var templateObject_1, templateObject_2;

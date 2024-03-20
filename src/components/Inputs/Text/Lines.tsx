@@ -4,7 +4,7 @@ import InputWrapper from "../../core/InputWrapper/index";
 
 const Lines = (props: ILines) => {
   return (
-    <InputWrapper type={props.type ?? "lines"} {...props}>
+    <InputWrapper empty={''} type={props.type ?? "lines"} {...props}>
       <_Lines {...props} />
     </InputWrapper>
   );

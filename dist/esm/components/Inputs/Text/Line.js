@@ -14,7 +14,7 @@ import InputWrapper from "../../core/InputWrapper/index";
 // import { useInputValAndError } from '../../core/hook/useInputValnError'
 var Line = function (props) {
     var _a;
-    return (_jsx(InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "line" }, props, { children: _jsx(_Line, __assign({}, props)) })));
+    return (_jsx(InputWrapper, __assign({ empty: '', type: (_a = props.type) !== null && _a !== void 0 ? _a : "line" }, props, { children: _jsx(_Line, __assign({}, props)) })));
 };
 var _Line = function (props) {
     var _a, _b, _c;

@@ -42,7 +42,7 @@ var ButtonsWrapper = styled_components_1.default.div(templateObject_4 || (templa
 var PaginationWrapper = styled_components_1.default.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  background-color: gainsboro;\n  padding: 0 5px;\n  margin-left: 15px;\n  border-radius: 3px;\n"], ["\n  background-color: gainsboro;\n  padding: 0 5px;\n  margin-left: 15px;\n  border-radius: 3px;\n"])));
 var ActionsWrapper = styled_components_1.default.div(templateObject_6 || (templateObject_6 = __makeTemplateObject([""], [""])));
 var DropzoneUploader = function (props) {
-    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({}, props, { children: (0, jsx_runtime_1.jsx)(DropzoneHandler, __assign({}, props)) })));
+    return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: [] }, props, { children: (0, jsx_runtime_1.jsx)(DropzoneHandler, __assign({}, props)) })));
 };
 var DropzoneHandler = function (props) {
     var _a;

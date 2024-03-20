@@ -14,7 +14,7 @@ import Uppy from "@uppy/core";
 import UppyDashboardInstance from "./UppyDashboardInstance";
 import InputWrapper from "../../../../core/InputWrapper/index";
 var UppyDashboardUploader = function (props) {
-    return (_jsx(InputWrapper, __assign({ noBorder: true }, props, { children: _jsx(UppyElement, __assign({}, props)) })));
+    return (_jsx(InputWrapper, __assign({ empty: [], noBorder: true }, props, { children: _jsx(UppyElement, __assign({}, props)) })));
 };
 var UppyElement = function (props) {
     var uppy = new Uppy();

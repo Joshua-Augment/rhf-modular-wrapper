@@ -23,7 +23,7 @@ var WYSIWYG = function (props) {
             setValue(props.name, "");
         }
     }, [value]);
-    return (_jsx(InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "wysiwyg" }, props, { children: _jsx(ReactQuillWrapper, __assign({}, props)) })));
+    return (_jsx(InputWrapper, __assign({ empty: _jsx("p", {}), type: (_a = props.type) !== null && _a !== void 0 ? _a : "wysiwyg" }, props, { children: _jsx(ReactQuillWrapper, __assign({}, props)) })));
 };
 var ReactQuillWrapper = function (props) {
     var toolbarOptions = useMemo(function () { return [

@@ -17,7 +17,7 @@ const Select = (props: ISelect) => {
   delete _props.onInputChange;
 
   return (
-    <InputWrapper type={props.type ?? "select"} {...props} noBorder>
+    <InputWrapper empty={null} type={props.type ?? "select"} {...props} noBorder>
       <_Select {..._props} />
     </InputWrapper>
   );

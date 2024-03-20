@@ -57,7 +57,7 @@ const ActionsWrapper = styled.div``;
 
 const DropzoneUploader = (props: IDropzoneUploader) => {
   return (
-    <InputWrapper {...props}>
+    <InputWrapper empty={[]} {...props}>
       <DropzoneHandler {...props} />
     </InputWrapper>
   );

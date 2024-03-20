@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const YesNo = (props: IYesNo) => {
   return (
-    <InputWrapper type={props.yesno} {...props} id={`${props.name}`} noLabel noBorder customClasses={{ wrapperClassName: "form-check" }}>
+    <InputWrapper empty={false} type={props.yesno} {...props} id={`${props.name}`} noLabel noBorder customClasses={{ wrapperClassName: "form-check" }}>
       <_YesNo {...props} />
     </InputWrapper>
   );

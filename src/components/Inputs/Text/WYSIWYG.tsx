@@ -14,7 +14,7 @@ const WYSIWYG = (props: IWYSIWYG) => {
   }, [value]);
 
   return (
-    <InputWrapper type={props.type ?? "wysiwyg"} {...props}>
+    <InputWrapper empty={<p></p>} type={props.type ?? "wysiwyg"} {...props}>
       <ReactQuillWrapper {...props} />
     </InputWrapper>
   );

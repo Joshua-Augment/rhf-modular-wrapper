@@ -14,7 +14,7 @@ import InputWrapper from "../../core/InputWrapper/index";
 import { default as SwitchInput } from "react-switch";
 var Switch = function (props) {
     var _a;
-    return (_jsx(InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "switch" }, props, { id: "".concat(props.name), noBorder: true, customClasses: { wrapperClassName: "form-check" } }, { children: _jsx(_Switch, __assign({}, props)) })));
+    return (_jsx(InputWrapper, __assign({ empty: false, type: (_a = props.type) !== null && _a !== void 0 ? _a : "switch" }, props, { id: "".concat(props.name), noBorder: true, customClasses: { wrapperClassName: "form-check" } }, { children: _jsx(_Switch, __assign({}, props)) })));
 };
 var _Switch = function (props) {
     var _a, _b;

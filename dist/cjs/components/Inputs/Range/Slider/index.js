@@ -21,7 +21,7 @@ var react_range_slider_input_1 = __importDefault(require("react-range-slider-inp
 require("react-range-slider-input/dist/style.css");
 var Slider = function (props) {
     var _a;
-    return ((0, jsx_runtime_1.jsx)(index_1.InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "slider" }, props, { children: (0, jsx_runtime_1.jsx)(_Slider, __assign({}, props)) })));
+    return ((0, jsx_runtime_1.jsx)(index_1.InputWrapper, __assign({ empty: 0, type: (_a = props.type) !== null && _a !== void 0 ? _a : "slider" }, props, { children: (0, jsx_runtime_1.jsx)(_Slider, __assign({}, props)) })));
 };
 var _Slider = function (props) {
     return (0, jsx_runtime_1.jsx)(react_range_slider_input_1.default, __assign({}, props, props.sliderOptions, { value: props.value, onInput: function (a) { return props.onChange(a); } }));
