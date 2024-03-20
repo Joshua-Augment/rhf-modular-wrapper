@@ -35,20 +35,50 @@ class Log {
     }
   }
 
-  trace(message: unknown | unknown[], source: string | null, group?: "start" | "end") {
+  trace(debug : boolean, message: unknown | unknown[], source: string | null, group?: "start" | "end") {
+    this.debug = debug;
     return this.generateMessage("trace", message, source, group);
   }
 
-  info(message: unknown | unknown[], source: string | null, group?: "start" | "end") {
+  info(debug : boolean, message: unknown | unknown[], source: string | null, group?: "start" | "end") {
+    this.debug = debug;
     return this.generateMessage("info", message, source, group);
   }
 
-  warn(message: unknown | unknown[], source: string | null, group?: "start" | "end") {
+  warn(debug : boolean, message: unknown | unknown[], source: string | null, group?: "start" | "end") {
+    this.debug = debug;
     return this.generateMessage("warn", message, source, group);
   }
 
-  error(message: unknown | unknown[], source: string | null, group?: "start" | "end") {
+  error(debug : boolean, message: unknown | unknown[], source: string | null, group?: "start" | "end") {
+    this.debug = debug;
     return this.generateMessage("error", message, source, group);
+  }
+
+  nullifyCircular(obj: Record<any, any>):Record<any, any>|null {
+    // Base case: if obj is not an object, return it as it is
+    if (typeof obj !== "object" || obj === null) {
+      return obj;
+    }
+
+    // If obj is an HTMLInputElement, nullify it
+    if (obj instanceof HTMLInputElement) {
+      return null;
+    }
+
+    // Recursively process arrays
+    if (Array.isArray(obj)) {
+      return obj.map((item:any) => this.nullifyCircular(item));
+    }
+
+    // Recursively process objects
+    const newObj:Record<any,any> = {};
+    for (let key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        newObj[key] = this.nullifyCircular(obj[key]);
+      }
+    }
+    return newObj;
   }
 }
 

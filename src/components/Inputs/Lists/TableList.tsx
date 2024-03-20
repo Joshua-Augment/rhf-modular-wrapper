@@ -14,9 +14,17 @@ const Table = styled.table`
 
 const TableHead = styled.thead``;
 const TableBody = styled.tbody``;
-const TableTH = styled.th``;
+const TableTH = styled.th`
+  position: sticky;
+  top: 0;
+  background-color: gainsboro;
+  z-index: 1;
+  padding:5px
+`;
 const TableTD = styled.td``;
 const TableTR = styled.tr``;
+const TableHeaderTR = styled.tr`
+`;
 
 const IconUp = styled(FaPlusSquare)`
   color: green;
@@ -52,6 +60,7 @@ const _Table = (props: any) => {
   const TableTemplate = props.elemTable ?? Table;
   const TableHeadTemplate = props.elemTableHead ?? TableHead;
   const TableBodyTemplate = props.elemTableBody ?? TableBody;
+  const TableHeaderTRTemplate = props.elemTR ?? TableHeaderTR;
   const TableTRTemplate = props.elemTR ?? TableTR;
   const TableTHTemplate = props.elemTH ?? TableTH;
   const TableTDTemplate = props.elemTD ?? TableTD;
@@ -82,13 +91,13 @@ const _Table = (props: any) => {
     () =>
       props.headerTemplate ?? (
         <TableHeadTemplate>
-          <TableTRTemplate>
+          <TableHeaderTRTemplate>
             {props.showIndex === true && <TableTHTemplate></TableTHTemplate>}
             {props.items.map((item: TListItems, key: number) => (
               <TableTHTemplate key={`tl-${props.name}-${item.name}-th-${key}`}>{item.label}</TableTHTemplate>
             ))}
             {props.fixed !== true && <TableTHTemplate></TableTHTemplate>}
-          </TableTRTemplate>
+          </TableHeaderTRTemplate>
         </TableHeadTemplate>
       ),
     [props.headerTemplate]

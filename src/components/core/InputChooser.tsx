@@ -1,4 +1,4 @@
-import React, { memo, useMemo /* , { useMemo }  */ } from "react";
+import React, { memo, useContext, useMemo /* , { useMemo }  */ } from "react";
 import {
   DatePicker,
   Select,
@@ -16,11 +16,13 @@ import {
 } from "../Inputs/index";
 import { TListItems } from "./interfaces/lists";
 import Logger from "./Logger/index";
+import { ThemeContext } from "./Form";
 
 const InputChooser = (props: TListItems) => {
+  const {debug} = useContext(ThemeContext)
   const OutputComponent = useMemo(() => {
-    Logger.info(`Choosing Input`, "InputChooser", "start");
-    Logger.info(null, null, "end");
+    Logger.info(debug, `Choosing Input`, "InputChooser", "start");
+    Logger.info(debug, null, null, "end");
     switch (props.type) {
       case "custom":
         const Elem = props.elem;

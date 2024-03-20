@@ -2,7 +2,6 @@ import React from "react";
 import { IInputInnerWrapper } from "./InputInnerWrapper";
 
 const DefaultInputWrapper = (props: IInputInnerWrapper) => {
-  console.log('[DefaultInputWrapper] - Props : ',props)
   return (
     <div style={{ position: "relative", ...props.style }} className={`form-item-wrapper ${props?.customClasses?.wrapperClassName ?? ""}`}>
       {props.reversedLabel === true ? (

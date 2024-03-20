@@ -23,67 +23,20 @@ export const LinesBootstrap = Template.bind({
 });
 LinesBootstrap.args = {
   defaultValues: {
+    textDef: "Default Value Given",
+    numberDef: 4,
     line: {
-      textDef: "Default Value Given",
-      numberDef: 4,
       emailDef: "2@s.com",
     },
   },
   children: (
     <>
       {/* <Line label="Simple Form Input (Text)" name="line.text" placeholder="Simple Form Placeholder" /> */}
-      <Line
-        label="Simple Form Input (Text) - Default Value"
-        name="line.textDef"
-        placeholder="Simple Form Placeholder"
-      />
-      <Line
-        label="Simple Form Input (Number) - Default Value"
-        name="line.numberDef"
-        placeholder="Simple Number Placeholder"
-        type="number"
-      />
-      <Line
-        label="Simple Form Input (Email) - Default Value"
-        name="line.emailDef"
-        placeholder="Simple Email Placeholder"
-        type="email"
-      />
-      <Line
-        label="Simple Form Input (Disabled) - Default Value"
-        disabled
-        name="line.disabledDef"
-        placeholder="Simple Disabled Placeholder"
-        type="text"
-      />
-      <Line
-        label="Simple Form Input (Text) - Default Value 2"
-        name="textDef"
-        placeholder="Simple Form Placeholder"
-      />
-      <Line
-        label="Simple Form Input (Number)"
-        name="line.number"
-        placeholder="Simple Number Placeholder"
-        type="number"
-      />
-      <Line
-        label="Simple Form Input (Email)"
-        name="line.email"
-        placeholder="Simple Email Placeholder"
-        type="email"
-      />
-      <Line
-        label="Simple Form Input (Disabled)"
-        disabled
-        name="line.disabled"
-        placeholder="Simple Disabled Placeholder"
-        type="text"
-      />
-      {/*
-       */}
+      <Line label="Simple Form Input (Text) - Default Value" name="textDef" placeholder="Simple Form Placeholder" />
+      <Line label="Simple Form Input (Number) - Default Value" name="numberDef" placeholder="Simple Number Placeholder" type="number" />
+      <Line label="Simple Form Input (Email) - Default Value" name="line.emailDef" placeholder="Simple Email Placeholder" type="email" />
     </>
-  ),
+  ), 
 };
 
 export const LineWithButton = Template.bind({});
@@ -96,22 +49,14 @@ LineWithButton.args = {
         buttons={{
           left: () => (
             <div>
-              <button onClick={(a) => alert(`Value is ${a} From Button #1!`)}>
-                #L1
-              </button>
-              <button onClick={(a) => alert(`Value is ${a} From Button #2!`)}>
-                #L2
-              </button>
+              <button onClick={(a) => alert(`Value is ${a} From Button #1!`)}>#L1</button>
+              <button onClick={(a) => alert(`Value is ${a} From Button #2!`)}>#L2</button>
             </div>
           ),
           right: () => (
             <div>
-              <button onClick={(a) => alert(`Value is ${a} From Button #R1!`)}>
-                #R1
-              </button>
-              <button onClick={(a) => alert(`Value is ${a} From Button #R2!`)}>
-                #R2
-              </button>
+              <button onClick={(a) => alert(`Value is ${a} From Button #R1!`)}>#R1</button>
+              <button onClick={(a) => alert(`Value is ${a} From Button #R2!`)}>#R2</button>
             </div>
           ),
         }}
@@ -122,20 +67,8 @@ LineWithButton.args = {
         buttons={{
           left: (value, name) => (
             <div>
-              <button
-                onClick={(a) =>
-                  alert(`Value is ${value} for Input ${name} From Button #1!`)
-                }
-              >
-                #L1
-              </button>
-              <button
-                onClick={(a) =>
-                  alert(`Value is ${value} for Input ${name} From Button #2!`)
-                }
-              >
-                #L2
-              </button>
+              <button onClick={(a) => alert(`Value is ${value} for Input ${name} From Button #1!`)}>#L1</button>
+              <button onClick={(a) => alert(`Value is ${value} for Input ${name} From Button #2!`)}>#L2</button>
             </div>
           ),
         }}
@@ -155,41 +88,13 @@ TextArea.args = {
   },
   children: (
     <>
-      <Lines
-        label="Simple Form Input (Textarea)"
-        name="lines.text"
-        placeholder="Simple Textarea Placeholder"
-      />
-      <Lines
-        label="Simple Form Input (Textarea) Long"
-        rows={10}
-        name="lines.long"
-        placeholder="Simple Textarea Placeholder"
-      />
-      <Lines
-        label="Simple Form Input (Textarea) Wide"
-        cols={100}
-        name="lines.wide"
-        placeholder="Simple Textarea Placeholder"
-      />
+      <Lines label="Simple Form Input (Textarea)" name="lines.text" placeholder="Simple Textarea Placeholder" />
+      <Lines label="Simple Form Input (Textarea) Long" rows={10} name="lines.long" placeholder="Simple Textarea Placeholder" />
+      <Lines label="Simple Form Input (Textarea) Wide" cols={100} name="lines.wide" placeholder="Simple Textarea Placeholder" />
 
-      <Lines
-        label="Simple Form Input (Textarea)"
-        name="lines.textDef"
-        placeholder="Simple Textarea Placeholder"
-      />
-      <Lines
-        label="Simple Form Input (Textarea) Long"
-        rows={10}
-        name="lines.longDef"
-        placeholder="Simple Textarea Placeholder"
-      />
-      <Lines
-        label="Simple Form Input (Textarea) Wide"
-        cols={100}
-        name="lines.wideDef"
-        placeholder="Simple Textarea Placeholder"
-      />
+      <Lines label="Simple Form Input (Textarea)" name="lines.textDef" placeholder="Simple Textarea Placeholder" />
+      <Lines label="Simple Form Input (Textarea) Long" rows={10} name="lines.longDef" placeholder="Simple Textarea Placeholder" />
+      <Lines label="Simple Form Input (Textarea) Wide" cols={100} name="lines.wideDef" placeholder="Simple Textarea Placeholder" />
     </>
   ),
 };
@@ -201,16 +106,8 @@ WYSIWYGEditor.args = {
   },
   children: (
     <>
-      <WYSIWYG
-        label="Simple Form Input (WYSIWYG Editor)"
-        name="wysiwyg"
-        placeholder="Text Placeholder"
-      />
-      <WYSIWYG
-        label="Simple Form Input (WYSIWYG Editor) with Default Values"
-        name="wysiwygDef"
-        placeholder="Text Placeholder"
-      />
+      <WYSIWYG label="Simple Form Input (WYSIWYG Editor)" name="wysiwyg" placeholder="Text Placeholder" />
+      <WYSIWYG label="Simple Form Input (WYSIWYG Editor) with Default Values" name="wysiwygDef" placeholder="Text Placeholder" />
     </>
   ),
 };
@@ -227,9 +124,7 @@ export const WYSIWYGEditorWhenStateChanges = () => {
   const _onSubmit = (a: any) =>
     new Promise((resolve, reject) => {
       // console.log("[Raw Submit] - ",a)
-      setResponse(
-        JSON.stringify(a, (key, value) => (key == "parent" ? null : value), 2),
-      );
+      setResponse(JSON.stringify(a, (key, value) => (key == "parent" ? null : value), 2));
     });
 
   return (
@@ -245,11 +140,7 @@ export const WYSIWYGEditorWhenStateChanges = () => {
         Submitted Object : {response}
       </p>
       <Form onSubmit={_onSubmit}>
-        <WYSIWYG
-          label="Simple Form Input (WYSIWYG Editor)"
-          name="wysiwyg"
-          placeholder="Text Placeholder"
-        />
+        <WYSIWYG label="Simple Form Input (WYSIWYG Editor)" name="wysiwyg" placeholder="Text Placeholder" />
         <SubmitButton>Submit</SubmitButton>
       </Form>
     </div>

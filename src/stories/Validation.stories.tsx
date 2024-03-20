@@ -14,24 +14,16 @@ export const SimpleYupValidation = () => {
 
   const schema = yup.object().shape({
     test: yup.string().required("Write something to continue!"),
-    testSelect: yup
-      .mixed()
-      .test("test_null", "Please Select an Option to Continue!", (val) => {
-        console.log(
-          "[yupValidation] - react select. Val",
-          val,
-          val?.value !== undefined && val?.value !== null,
-        );
-        return val?.value !== undefined && val?.value !== null;
-      }),
+    testSelect: yup.mixed().test("test_null", "Please Select an Option to Continue!", (val) => {
+      console.log("[yupValidation] - react select. Val", val, val?.value !== undefined && val?.value !== null);
+      return val?.value !== undefined && val?.value !== null;
+    }),
   });
 
   const _onSubmit = (a: any) =>
     new Promise((resolve, reject) => {
       // console.log("[Raw Submit] - ",a)
-      setResponse(
-        JSON.stringify(a, (key, value) => (key == "parent" ? null : value), 2),
-      );
+      setResponse(JSON.stringify(a, (key, value) => (key == "parent" ? null : value), 2));
     });
 
   return (
@@ -57,6 +49,42 @@ export const SimpleYupValidation = () => {
           ]}
           label="Test Select"
         />
+        <Line name="test" label="Test Input" />
+        <SubmitButton>Submit</SubmitButton>
+      </Form>
+    </div>
+  );
+};
+
+export const DefaultValueValidation = () => {
+  const [response, setResponse] = useState<string | null>(null);
+
+  const schema = yup.object().shape({
+    test: yup
+      .string()
+      .required("Write something to continue!")
+      .matches(/A Simple Default Value1/),
+  });
+
+  const _onSubmit = (a: any) =>
+    new Promise((resolve, reject) => {
+      // console.log("[Raw Submit] - ",a)
+      setResponse(JSON.stringify(a, (key, value) => (key == "parent" ? null : value), 2));
+    });
+
+  return (
+    <div>
+      <p
+        style={{
+          margin: "10px",
+          padding: "5px",
+          border: "1px solid blue",
+          borderRadius: "5px",
+        }}
+      >
+        Submitted Object : {response}
+      </p>
+      <Form defaultValues={{ test: "A Simple Default Value1" }} yupSchema={schema} onSubmit={_onSubmit}>
         <Line name="test" label="Test Input" />
         <SubmitButton>Submit</SubmitButton>
       </Form>

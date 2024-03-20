@@ -24,6 +24,7 @@ const _DatePicker = (props: any) => {
   return <DatePickerComponent 
     // {...props.register(props.name)}
     selected={props.value} 
+    value={props.value}
     onChange={(a)=>props.onChange(a)} 
     {...props.options}
     id={props.id} 

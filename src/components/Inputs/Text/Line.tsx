@@ -13,8 +13,6 @@ const Line = (props: LineInputProps) => {
 };
 
 const _Line = (props: any) => {
-  Logger.info(props, "Line", "start");
-  Logger.info(null, null, "end");
   return (
     <input
       disabled={props.disabled}

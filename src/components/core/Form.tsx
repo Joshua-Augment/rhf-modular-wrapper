@@ -23,7 +23,7 @@ export const Form = <T extends FieldValues>(props: IForm<T>) => {
   const formID = useMemo(() => props.id ?? `rhf-wc-f-${new Date().getTime()}`, []);
   const methods = useForm<T, any>({
     mode: props.mode ?? "onChange",
-    reValidateMode: props.reValidateMode ?? "onChange",
+    reValidateMode: props.reValidateMode ?? "onSubmit",
     defaultValues: props.defaultValues as any,
     resolver: props.yupSchema ? yupResolver(props.yupSchema) : undefined,
     context: props.context,

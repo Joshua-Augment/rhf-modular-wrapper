@@ -1,15 +1,17 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useContext, useEffect, useMemo, useRef } from "react";
 import Logger from "../../../Logger/index";
 import { UseFormReturn, useWatch } from "react-hook-form";
 import { FormBaseInput } from "../../../interfaces/index";
 import DefaultInputWrapper from "./DefaultInputWrapper";
 import { useInputValAndError } from "../../../hook/useInputValnError";
+import { ThemeContext } from "../../../Form";
 
 export interface IInputInnerWrapper extends FormBaseInput {}
 
 export type InputWraperChildProps = {} & IInputInnerWrapper & Omit<UseFormReturn, "control">;
 
 const InputInnerWrapper = (props: IInputInnerWrapper) => {
+  const { debug } = useContext(ThemeContext);
   const { value, error, formState, ...methods } = useInputValAndError(props.name);
   const {
     inputWrapper: _propsInputWrapper,
@@ -23,17 +25,17 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
   } = props;
 
   const firstUpdate = useRef(true);
-  Logger.info(`First Update : ${firstUpdate.current}`, `${_propsName} - InputWrapperv2`);
+  Logger.info(debug, `First Update : ${firstUpdate.current}`, `${_propsName} - InputWrapperv2`);
 
   const watchCalculated = useWatch({
     name: props?.calculatedField?.find !== undefined ? props.calculatedField.find : (`#_#_noinputtofind_#_#` as any),
   });
-  Logger.info(`Watching Calculated : ${String(watchCalculated)}`, `${_propsName} - InputWrapperv2`);
+  Logger.info(debug, `Watching Calculated : ${String(watchCalculated)}`, `${_propsName} - InputWrapperv2`);
   // console.log(`For ${props.name}, error : `,rest.error)
   // On Value change
 
   // useEffect(() => {
-  //   Logger.info(`Default Value : ${String(props.defaultValue)}`, `${_propsName} - InputWrapperv2`);
+  //   Logger.info(debug,`Default Value : ${String(props.defaultValue)}`, `${_propsName} - InputWrapperv2`);
   //   if (props.defaultValue !== undefined) {
   //     // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
   //     methods.setValue("inputWrapper - DefaultValue", props.defaultValue);
@@ -46,12 +48,12 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
 
     // External Field
     if (props.externalStateSetter) {
-      Logger.info(`Setting External State`, `${_propsName} - InputWrapperv2`);
+      Logger.info(debug, `Setting External State`, `${_propsName} - InputWrapperv2`);
       props.externalStateSetter(value);
     }
     // On Input Change
     if (props.onInputChange && !firstUpdate.current) {
-      Logger.info(`First Time Setting`, `${_propsName} - InputWrapperv2`);
+      Logger.info(debug, `First Time Setting`, `${_propsName} - InputWrapperv2`);
       props.onInputChange(value, _propsName, methods.getValues(), { ...props.formMethods });
     }
 
@@ -61,24 +63,24 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
   useEffect(() => {
     // Calculated Fields
     if (props.calculatedField) {
-      Logger.info(`Setting External State`, `${_propsName} - calculatedField`, "start");
+      Logger.info(debug, `Setting External State`, `${_propsName} - calculatedField`, "start");
       if (props.calculatedField.isPromise === true) {
-        Logger.info(`Promise expected`, `${_propsName} - calculatedField`);
+        Logger.info(debug, `Promise expected`, `${_propsName} - calculatedField`);
         props.calculatedField
           .calculate(value, props.name, methods.getValues(props.calculatedField.find), methods.getValues())
           // .then(data => { contextSetValue(props.name, data) })
           .then((data) => {
-            Logger.info(`Calculated Data : ${String(data)}`, `${_propsName} - calculatedField`);
-            Logger.info(null, null, "end");
+            Logger.info(debug, `Calculated Data : ${String(data)}`, `${_propsName} - calculatedField`);
+            Logger.info(debug, null, null, "end");
             // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
             methods.setValue(props.name, data);
           });
       } else {
         const _result = props.calculatedField.calculate(value, props.name, methods.getValues(props.calculatedField.find), methods.getValues());
-        Logger.info(`No Promise expected. Value Expected : ${String(_result)}`, `${_propsName} - calculatedField`);
+        Logger.info(debug, `No Promise expected. Value Expected : ${String(_result)}`, `${_propsName} - calculatedField`);
         // console.log(`[Setting] Setting value for ${props.name} by calculation`)
         methods.setValue(props.name, _result);
-        Logger.info(null, null, "end");
+        Logger.info(debug, null, null, "end");
       }
     }
   }, [watchCalculated]);
@@ -93,10 +95,10 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
     return <div style={{ display: "flex", flexDirection: "row" }}>{children}</div>;
   };
 
-  Logger.info(`Setting Left Wrapper`, `${_propsName} - InputWrapperv2`);
+  Logger.info(debug, `Setting Left Wrapper`, `${_propsName} - InputWrapperv2`);
   const WrapperElementLeft = useMemo(() => {
-    Logger.info(`useMemo`, `WrapperElementLeft`, "start");
-    Logger.info(null, null, "end");
+    Logger.info(debug, `useMemo`, `WrapperElementLeft`, "start");
+    Logger.info(debug, null, null, "end");
     return props?.buttons?.left
       ? WrapperMaker(
           props?.buttons?.wrapper?.left,
@@ -106,10 +108,10 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
       : null;
   }, [props?.buttons?.left, props?.buttons?.wrapper?.left, props?.buttons?.wrapper?.all]);
 
-  Logger.info(`Setting Right Wrapper`, `${_propsName} - InputWrapperv2`);
+  Logger.info(debug, `Setting Right Wrapper`, `${_propsName} - InputWrapperv2`);
   const WrapperElementRight = useMemo(() => {
-    Logger.info(`useMemo`, `WrapperElementRight`, "start");
-    Logger.info(null, null, "end");
+    Logger.info(debug, `useMemo`, `WrapperElementRight`, "start");
+    Logger.info(debug, null, null, "end");
     return props?.buttons?.right
       ? WrapperMaker(
           props?.buttons?.wrapper?.right,
@@ -119,7 +121,7 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
       : null;
   }, [props?.buttons?.right, props?.buttons?.wrapper?.right, props?.buttons?.wrapper?.all]);
 
-  Logger.info(`Setting Chosen Element`, `${_propsName} - InputWrapperv2`);
+  Logger.info(debug, `Setting Chosen Element`, `${_propsName} - InputWrapperv2`);
 
   const ChosenElement = props.inputElement;
 
@@ -137,8 +139,9 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
             onChange: (a: unknown) =>
               methods.setValue(props.name, a, {
                 shouldValidate: props.shouldValidateOnChange ?? false,
-                shouldDirty: props.shouldDirtyOnChange ?? false,
+                shouldDirty: props.shouldDirtyOnChange ?? true,
               }),
+            formState,
             value: value,
             error: error,
             source: "InputWrapper/index",
@@ -146,12 +149,13 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
         : React.cloneElement(props.children, {
             ...props.children?.props,
             ...methods,
+            formState,
             disabled: props.disabled,
             type: props?.type ?? "line",
             onChange: (a: unknown) =>
               methods.setValue(props.name, a, {
                 shouldValidate: props.shouldValidateOnChange ?? false,
-                shouldDirty: props.shouldDirtyOnChange ?? false,
+                shouldDirty: props.shouldDirtyOnChange ?? true,
               }),
             value: value,
             error: error,
@@ -161,7 +165,7 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
     </React.Fragment>
   );
 
-  Logger.info(null, null, "end");
+  Logger.info(debug, null, null, "end");
 
   const injectProps = {
     ...props,

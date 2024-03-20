@@ -5,8 +5,9 @@ import Logger from "../../Logger/index";
 import InputInnerWrapper from "./components/InputInnerWrapper";
 
 const InputWrapperv2 = (props: FormBaseInput) => {
-  Logger.info(`Value - ${typeof props.value === 'object' ? JSON.stringify(props.value) : props.value}`, `${props.name} - InputWrapperv2`, "start");
-  Logger.info(props, `${props.name} - InputWrapperv2`);
+  const {debug} = useContext(ThemeContext)
+  Logger.info(debug, `Value - ${typeof props.value === 'object' ? JSON.stringify(props.value) : props.value}`, `${props.name} - InputWrapperv2`, "start");
+  Logger.info(debug, props, `${props.name} - InputWrapperv2`);
 
   const {inputTemplate, elements} = useContext(ThemeContext);  
 
