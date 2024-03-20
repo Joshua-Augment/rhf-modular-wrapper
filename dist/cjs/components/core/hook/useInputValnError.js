@@ -45,33 +45,27 @@ var accessObjectByDottedName = function (obj, name) {
     return result;
 };
 var useInputValAndError = function (name, directDefaultValue) {
-    var _a, _b;
+    var _a, _b, _c;
     var debug = (0, react_1.useContext)(Form_1.ThemeContext).debug;
     index_1.default.info(debug, "Name : ".concat(name), "useInputValAndError", "start");
-    var _c = (0, react_hook_form_1.useFormContext)(), control = _c.control, methods = __rest(_c, ["control"]);
-    var _d = (0, react_hook_form_1.useFormState)({
-    // name: name,
-    }), isLoading = _d.isLoading, errors = _d.errors, isSubmitSuccessful = _d.isSubmitSuccessful, isSubmitted = _d.isSubmitted, isSubmitting = _d.isSubmitting, submitCount = _d.submitCount, defaultValues = _d.defaultValues;
+    var _d = (0, react_hook_form_1.useFormContext)(), control = _d.control, methods = __rest(_d, ["control"]);
+    var _e = (0, react_hook_form_1.useFormState)({
+        name: name,
+        exact: true,
+    }), isLoading = _e.isLoading, errors = _e.errors, isSubmitSuccessful = _e.isSubmitSuccessful, isSubmitted = _e.isSubmitted, isSubmitting = _e.isSubmitting, submitCount = _e.submitCount, defaultValues = _e.defaultValues;
     var value = (0, react_hook_form_1.useWatch)({
         name: name,
-        defaultValue: (_a = accessObjectByDottedName(defaultValues !== null && defaultValues !== void 0 ? defaultValues : {}, name)) !== null && _a !== void 0 ? _a : (directDefaultValue !== null && directDefaultValue !== void 0 ? directDefaultValue : null),
-        // defaultValue: defaultValues && name in defaultValues ? defaultValues?.[name] : directDefaultValue ?? null
-    }); /* ?? null */
+        defaultValue: (_b = (_a = accessObjectByDottedName(defaultValues !== null && defaultValues !== void 0 ? defaultValues : {}, name)) !== null && _a !== void 0 ? _a : directDefaultValue) !== null && _b !== void 0 ? _b : null,
+    });
     index_1.default.info(debug, "Value : ".concat(String(value)), "useInputValAndError");
     index_1.default.info(debug, "Errors : ".concat(JSON.stringify(index_1.default.nullifyCircular(errors !== null && errors !== void 0 ? errors : {}))), "useInputValAndError");
-    // const _methods = useMemo(() => methods, []);
-    var error = (0, react_1.useMemo)(function () { return accessObjectByDottedName(errors, name); }, [(_b = accessObjectByDottedName(errors, name)) === null || _b === void 0 ? void 0 : _b.message, value]);
-    // const isDirty = useMemo(()=> dirtyFields[name] ?? null, [dirtyFields?.[name]])
-    // Logger.info(`Error : ${error?.message}`, "useInputValAndError");
+    var error = (0, react_1.useMemo)(function () { return accessObjectByDottedName(errors, name); }, [(_c = accessObjectByDottedName(errors, name)) === null || _c === void 0 ? void 0 : _c.message, value]);
     index_1.default.info(debug, null, null, "end");
     return __assign(__assign({ value: value }, methods), { error: error, formState: {
             isLoading: isLoading,
-            // isValid,
-            // disabled,
             isSubmitSuccessful: isSubmitSuccessful,
             isSubmitted: isSubmitted,
             isSubmitting: isSubmitting,
-            // isValidating,
             submitCount: submitCount,
         } });
 };

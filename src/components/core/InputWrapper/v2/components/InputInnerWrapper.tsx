@@ -31,21 +31,8 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
     name: props?.calculatedField?.find !== undefined ? props.calculatedField.find : (`#_#_noinputtofind_#_#` as any),
   });
   Logger.info(debug, `Watching Calculated : ${String(watchCalculated)}`, `${_propsName} - InputWrapperv2`);
-  // console.log(`For ${props.name}, error : `,rest.error)
-  // On Value change
-
-  // useEffect(() => {
-  //   Logger.info(debug,`Default Value : ${String(props.defaultValue)}`, `${_propsName} - InputWrapperv2`);
-  //   if (props.defaultValue !== undefined) {
-  //     // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
-  //     methods.setValue("inputWrapper - DefaultValue", props.defaultValue);
-  //   }
-  // }, [props.defaultValue]);
 
   useEffect(() => {
-    // // Make sure value isnt undefined
-    // if (value === undefined) {methods.setValue(props.name, null)}
-
     // External Field
     if (props.externalStateSetter) {
       Logger.info(debug, `Setting External State`, `${_propsName} - InputWrapperv2`);
@@ -63,22 +50,21 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
   useEffect(() => {
     // Calculated Fields
     if (props.calculatedField) {
-      Logger.info(debug, `Setting External State`, `${_propsName} - calculatedField`, "start");
+      Logger.info(debug, `Calculating Field...`, `${_propsName} - calculatedField`, "start");
       if (props.calculatedField.isPromise === true) {
         Logger.info(debug, `Promise expected`, `${_propsName} - calculatedField`);
         props.calculatedField
           .calculate(value, props.name, methods.getValues(props.calculatedField.find), methods.getValues())
           // .then(data => { contextSetValue(props.name, data) })
           .then((data) => {
-            Logger.info(debug, `Calculated Data : ${String(data)}`, `${_propsName} - calculatedField`);
+            Logger.info(debug, `Setting Value! Calculated Data : ${String(data)}`, `${_propsName} - calculatedField`);
             Logger.info(debug, null, null, "end");
             // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
             methods.setValue(props.name, data);
           });
       } else {
         const _result = props.calculatedField.calculate(value, props.name, methods.getValues(props.calculatedField.find), methods.getValues());
-        Logger.info(debug, `No Promise expected. Value Expected : ${String(_result)}`, `${_propsName} - calculatedField`);
-        // console.log(`[Setting] Setting value for ${props.name} by calculation`)
+        Logger.info(debug, `Setting Value! No Promise expected. Value Expected : ${String(_result)}`, `${_propsName} - calculatedField`);
         methods.setValue(props.name, _result);
         Logger.info(debug, null, null, "end");
       }
@@ -136,11 +122,13 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
             ...methods,
             disabled: props.disabled,
             type: props?.type ?? "line",
-            onChange: (a: unknown) =>
+            onChange: (a: unknown) => {
+              Logger.info(debug, "Setting Value! Using the onChange passed to component",'onChange');
               methods.setValue(props.name, a, {
                 shouldValidate: props.shouldValidateOnChange ?? false,
                 shouldDirty: props.shouldDirtyOnChange ?? true,
-              }),
+              });
+            },
             formState,
             value: value,
             error: error,
@@ -152,11 +140,13 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
             formState,
             disabled: props.disabled,
             type: props?.type ?? "line",
-            onChange: (a: unknown) =>
+            onChange: (a: unknown) => {
+              Logger.info(debug, "Setting Value! Using the onChange passed to component",'onChange');
               methods.setValue(props.name, a, {
                 shouldValidate: props.shouldValidateOnChange ?? false,
                 shouldDirty: props.shouldDirtyOnChange ?? true,
-              }),
+              });
+            },
             value: value,
             error: error,
             source: "InputWrapper/index",

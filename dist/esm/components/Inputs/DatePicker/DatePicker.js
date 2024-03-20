@@ -14,11 +14,6 @@ import InputWrapper from '../../core/InputWrapper/index';
 import DatePickerComponent from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 var DatePicker = function (props) {
-    // const {value, setValue} = useInputValAndError(props.name)
-    // const {watch, setValue} = useFormContext()
-    // const _val = watch(props.name)
-    // const val = useMemo(() => value ,[value])
-    // console.log('DatePicker -  value', value)
     var _a;
     return (_jsx(InputWrapper, __assign({ empty: new Date(), type: (_a = props.type) !== null && _a !== void 0 ? _a : 'datepicker' }, props, { noBorder: true }, { children: _jsx(_DatePicker, __assign({}, props)) })));
 };

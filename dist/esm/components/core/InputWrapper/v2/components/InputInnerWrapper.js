@@ -38,18 +38,7 @@ var InputInnerWrapper = function (props) {
         name: ((_c = props === null || props === void 0 ? void 0 : props.calculatedField) === null || _c === void 0 ? void 0 : _c.find) !== undefined ? props.calculatedField.find : "#_#_noinputtofind_#_#",
     });
     Logger.info(debug, "Watching Calculated : ".concat(String(watchCalculated)), "".concat(_propsName, " - InputWrapperv2"));
-    // console.log(`For ${props.name}, error : `,rest.error)
-    // On Value change
-    // useEffect(() => {
-    //   Logger.info(debug,`Default Value : ${String(props.defaultValue)}`, `${_propsName} - InputWrapperv2`);
-    //   if (props.defaultValue !== undefined) {
-    //     // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
-    //     methods.setValue("inputWrapper - DefaultValue", props.defaultValue);
-    //   }
-    // }, [props.defaultValue]);
     useEffect(function () {
-        // // Make sure value isnt undefined
-        // if (value === undefined) {methods.setValue(props.name, null)}
         // External Field
         if (props.externalStateSetter) {
             Logger.info(debug, "Setting External State", "".concat(_propsName, " - InputWrapperv2"));
@@ -65,14 +54,14 @@ var InputInnerWrapper = function (props) {
     useEffect(function () {
         // Calculated Fields
         if (props.calculatedField) {
-            Logger.info(debug, "Setting External State", "".concat(_propsName, " - calculatedField"), "start");
+            Logger.info(debug, "Calculating Field...", "".concat(_propsName, " - calculatedField"), "start");
             if (props.calculatedField.isPromise === true) {
                 Logger.info(debug, "Promise expected", "".concat(_propsName, " - calculatedField"));
                 props.calculatedField
                     .calculate(value, props.name, methods.getValues(props.calculatedField.find), methods.getValues())
                     // .then(data => { contextSetValue(props.name, data) })
                     .then(function (data) {
-                    Logger.info(debug, "Calculated Data : ".concat(String(data)), "".concat(_propsName, " - calculatedField"));
+                    Logger.info(debug, "Setting Value! Calculated Data : ".concat(String(data)), "".concat(_propsName, " - calculatedField"));
                     Logger.info(debug, null, null, "end");
                     // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
                     methods.setValue(props.name, data);
@@ -80,8 +69,7 @@ var InputInnerWrapper = function (props) {
             }
             else {
                 var _result = props.calculatedField.calculate(value, props.name, methods.getValues(props.calculatedField.find), methods.getValues());
-                Logger.info(debug, "No Promise expected. Value Expected : ".concat(String(_result)), "".concat(_propsName, " - calculatedField"));
-                // console.log(`[Setting] Setting value for ${props.name} by calculation`)
+                Logger.info(debug, "Setting Value! No Promise expected. Value Expected : ".concat(String(_result)), "".concat(_propsName, " - calculatedField"));
                 methods.setValue(props.name, _result);
                 Logger.info(debug, null, null, "end");
             }
@@ -120,14 +108,16 @@ var InputInnerWrapper = function (props) {
     var ChildComponent = (_jsxs(React.Fragment, { children: [WrapperElementLeft, ChosenElement
                 ? ChosenElement(__assign(__assign(__assign({}, (_p = props.children) === null || _p === void 0 ? void 0 : _p.props), methods), { disabled: props.disabled, type: (_q = props === null || props === void 0 ? void 0 : props.type) !== null && _q !== void 0 ? _q : "line", onChange: function (a) {
                         var _a, _b;
-                        return methods.setValue(props.name, a, {
+                        Logger.info(debug, "Setting Value! Using the onChange passed to component", 'onChange');
+                        methods.setValue(props.name, a, {
                             shouldValidate: (_a = props.shouldValidateOnChange) !== null && _a !== void 0 ? _a : false,
                             shouldDirty: (_b = props.shouldDirtyOnChange) !== null && _b !== void 0 ? _b : true,
                         });
                     }, formState: formState, value: value, error: error, source: "InputWrapper/index" }))
                 : React.cloneElement(props.children, __assign(__assign(__assign({}, (_r = props.children) === null || _r === void 0 ? void 0 : _r.props), methods), { formState: formState, disabled: props.disabled, type: (_s = props === null || props === void 0 ? void 0 : props.type) !== null && _s !== void 0 ? _s : "line", onChange: function (a) {
                         var _a, _b;
-                        return methods.setValue(props.name, a, {
+                        Logger.info(debug, "Setting Value! Using the onChange passed to component", 'onChange');
+                        methods.setValue(props.name, a, {
                             shouldValidate: (_a = props.shouldValidateOnChange) !== null && _a !== void 0 ? _a : false,
                             shouldDirty: (_b = props.shouldDirtyOnChange) !== null && _b !== void 0 ? _b : true,
                         });

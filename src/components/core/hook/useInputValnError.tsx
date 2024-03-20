@@ -19,25 +19,21 @@ const accessObjectByDottedName = (obj: Record<string, any>, name: string) => {
 };
 
 export const useInputValAndError = <T = any,>(name: string, directDefaultValue?: T) => {
-  const {debug} = useContext(ThemeContext)
+  const { debug } = useContext(ThemeContext);
   Logger.info(debug, `Name : ${name}`, "useInputValAndError", "start");
   const { control, ...methods } = useFormContext();
   const { isLoading, errors, isSubmitSuccessful, isSubmitted, isSubmitting, submitCount, defaultValues } = useFormState({
-    // name: name,
+    name,
+    exact: true,
   });
   const value: T = useWatch({
     name: name,
-    defaultValue: accessObjectByDottedName(defaultValues ?? {}, name) ?? (directDefaultValue ?? null),
-    // defaultValue: defaultValues && name in defaultValues ? defaultValues?.[name] : directDefaultValue ?? null
-  }); /* ?? null */
+    defaultValue: accessObjectByDottedName(defaultValues ?? {}, name) ?? directDefaultValue ?? null,
+  });
   Logger.info(debug, `Value : ${String(value)}`, "useInputValAndError");
   Logger.info(debug, `Errors : ${JSON.stringify(Logger.nullifyCircular(errors ?? {}))}`, "useInputValAndError");
 
-  // const _methods = useMemo(() => methods, []);
-
   const error = useMemo(() => accessObjectByDottedName(errors, name), [accessObjectByDottedName(errors, name)?.message, value]);
-  // const isDirty = useMemo(()=> dirtyFields[name] ?? null, [dirtyFields?.[name]])
-  // Logger.info(`Error : ${error?.message}`, "useInputValAndError");
 
   Logger.info(debug, null, null, "end");
 
@@ -47,12 +43,9 @@ export const useInputValAndError = <T = any,>(name: string, directDefaultValue?:
     error,
     formState: {
       isLoading,
-      // isValid,
-      // disabled,
       isSubmitSuccessful,
       isSubmitted,
       isSubmitting,
-      // isValidating,
       submitCount,
     },
   };
