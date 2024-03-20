@@ -18,10 +18,12 @@ var jsx_runtime_1 = require("react/jsx-runtime");
 var react_1 = require("react");
 var index_1 = require("../Inputs/index");
 var index_2 = __importDefault(require("./Logger/index"));
+var Form_1 = require("./Form");
 var InputChooser = function (props) {
+    var debug = (0, react_1.useContext)(Form_1.ThemeContext).debug;
     var OutputComponent = (0, react_1.useMemo)(function () {
-        index_2.default.info("Choosing Input", "InputChooser", "start");
-        index_2.default.info(null, null, "end");
+        index_2.default.info(debug, "Choosing Input", "InputChooser", "start");
+        index_2.default.info(debug, null, null, "end");
         switch (props.type) {
             case "custom":
                 var Elem = props.elem;

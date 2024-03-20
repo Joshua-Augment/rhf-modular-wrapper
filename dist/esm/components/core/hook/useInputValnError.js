@@ -20,33 +20,52 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { useFormContext, useFormState, useWatch } from "react-hook-form";
 import Logger from "../Logger/index";
+import { ThemeContext } from "../Form";
+var accessObjectByDottedName = function (obj, name) {
+    var keys = name.split(".");
+    var result = obj;
+    for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+        var key = keys_1[_i];
+        if (result && typeof result === "object" && key in result) {
+            result = result[key];
+        }
+        else {
+            return null; // Property not found
+        }
+    }
+    return result;
+};
 export var useInputValAndError = function (name, directDefaultValue) {
-    var _a;
-    Logger.info("Name : ".concat(name), "useInputValAndError", "start");
-    var _b = useFormContext(), control = _b.control, methods = __rest(_b, ["control"]);
-    Logger.info("All Values : ".concat(JSON.stringify(methods.getValues())), "useInputValAndError");
-    var _c = useFormState(), errors = _c.errors, isLoading = _c.isLoading, isValid = _c.isValid, disabled = _c.disabled, isSubmitSuccessful = _c.isSubmitSuccessful, isSubmitted = _c.isSubmitted, isSubmitting = _c.isSubmitting, isValidating = _c.isValidating, submitCount = _c.submitCount, defaultValues = _c.defaultValues;
+    var _a, _b;
+    var debug = useContext(ThemeContext).debug;
+    Logger.info(debug, "Name : ".concat(name), "useInputValAndError", "start");
+    var _c = useFormContext(), control = _c.control, methods = __rest(_c, ["control"]);
+    var _d = useFormState({
+    // name: name,
+    }), isLoading = _d.isLoading, errors = _d.errors, isSubmitSuccessful = _d.isSubmitSuccessful, isSubmitted = _d.isSubmitted, isSubmitting = _d.isSubmitting, submitCount = _d.submitCount, defaultValues = _d.defaultValues;
     var value = useWatch({
         name: name,
-        defaultValue: defaultValues && name in defaultValues ? defaultValues === null || defaultValues === void 0 ? void 0 : defaultValues[name] : directDefaultValue !== null && directDefaultValue !== void 0 ? directDefaultValue : null
+        defaultValue: (_a = accessObjectByDottedName(defaultValues !== null && defaultValues !== void 0 ? defaultValues : {}, name)) !== null && _a !== void 0 ? _a : (directDefaultValue !== null && directDefaultValue !== void 0 ? directDefaultValue : null),
+        // defaultValue: defaultValues && name in defaultValues ? defaultValues?.[name] : directDefaultValue ?? null
     }); /* ?? null */
-    Logger.info("Value : ".concat(String(value)), "useInputValAndError");
+    Logger.info(debug, "Value : ".concat(String(value)), "useInputValAndError");
+    Logger.info(debug, "Errors : ".concat(JSON.stringify(Logger.nullifyCircular(errors !== null && errors !== void 0 ? errors : {}))), "useInputValAndError");
     // const _methods = useMemo(() => methods, []);
-    var error = useMemo(function () { var _a; return (_a = errors[name]) !== null && _a !== void 0 ? _a : null; }, [(_a = errors === null || errors === void 0 ? void 0 : errors[name]) === null || _a === void 0 ? void 0 : _a.message, value]);
+    var error = useMemo(function () { return accessObjectByDottedName(errors, name); }, [(_b = accessObjectByDottedName(errors, name)) === null || _b === void 0 ? void 0 : _b.message, value]);
     // const isDirty = useMemo(()=> dirtyFields[name] ?? null, [dirtyFields?.[name]])
-    Logger.info("Error : ".concat(error === null || error === void 0 ? void 0 : error.message), "useInputValAndError");
-    Logger.info(null, null, "end");
-    return __assign(__assign({ value: value, error: error }, methods), { formState: {
+    // Logger.info(`Error : ${error?.message}`, "useInputValAndError");
+    Logger.info(debug, null, null, "end");
+    return __assign(__assign({ value: value }, methods), { error: error, formState: {
             isLoading: isLoading,
-            isValid: isValid,
-            disabled: disabled,
+            // isValid,
+            // disabled,
             isSubmitSuccessful: isSubmitSuccessful,
             isSubmitted: isSubmitted,
             isSubmitting: isSubmitting,
-            isValidating: isValidating,
+            // isValidating,
             submitCount: submitCount,
         } });
 };

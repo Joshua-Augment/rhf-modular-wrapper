@@ -27,7 +27,7 @@ var _DatePicker = function (props) {
     // {...props.register(props.name)}
     , __assign({ 
         // {...props.register(props.name)}
-        selected: props.value, onChange: function (a) { return props.onChange(a); } }, props.options, { id: props.id }));
+        selected: props.value, value: props.value, onChange: function (a) { return props.onChange(a); } }, props.options, { id: props.id }));
 };
 export default DatePicker;
 //# sourceMappingURL=DatePicker.js.map

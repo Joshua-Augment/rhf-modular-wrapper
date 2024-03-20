@@ -21,7 +21,7 @@ export var Form = function (props) {
     var formID = useMemo(function () { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : "rhf-wc-f-".concat(new Date().getTime()); }, []);
     var methods = useForm({
         mode: (_a = props.mode) !== null && _a !== void 0 ? _a : "onChange",
-        reValidateMode: (_b = props.reValidateMode) !== null && _b !== void 0 ? _b : "onChange",
+        reValidateMode: (_b = props.reValidateMode) !== null && _b !== void 0 ? _b : "onSubmit",
         defaultValues: props.defaultValues,
         resolver: props.yupSchema ? yupResolver(props.yupSchema) : undefined,
         context: props.context,

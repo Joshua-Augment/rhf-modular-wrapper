@@ -29,30 +29,49 @@ exports.useInputValAndError = void 0;
 var react_1 = require("react");
 var react_hook_form_1 = require("react-hook-form");
 var index_1 = __importDefault(require("../Logger/index"));
+var Form_1 = require("../Form");
+var accessObjectByDottedName = function (obj, name) {
+    var keys = name.split(".");
+    var result = obj;
+    for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+        var key = keys_1[_i];
+        if (result && typeof result === "object" && key in result) {
+            result = result[key];
+        }
+        else {
+            return null; // Property not found
+        }
+    }
+    return result;
+};
 var useInputValAndError = function (name, directDefaultValue) {
-    var _a;
-    index_1.default.info("Name : ".concat(name), "useInputValAndError", "start");
-    var _b = (0, react_hook_form_1.useFormContext)(), control = _b.control, methods = __rest(_b, ["control"]);
-    index_1.default.info("All Values : ".concat(JSON.stringify(methods.getValues())), "useInputValAndError");
-    var _c = (0, react_hook_form_1.useFormState)(), errors = _c.errors, isLoading = _c.isLoading, isValid = _c.isValid, disabled = _c.disabled, isSubmitSuccessful = _c.isSubmitSuccessful, isSubmitted = _c.isSubmitted, isSubmitting = _c.isSubmitting, isValidating = _c.isValidating, submitCount = _c.submitCount, defaultValues = _c.defaultValues;
+    var _a, _b;
+    var debug = (0, react_1.useContext)(Form_1.ThemeContext).debug;
+    index_1.default.info(debug, "Name : ".concat(name), "useInputValAndError", "start");
+    var _c = (0, react_hook_form_1.useFormContext)(), control = _c.control, methods = __rest(_c, ["control"]);
+    var _d = (0, react_hook_form_1.useFormState)({
+    // name: name,
+    }), isLoading = _d.isLoading, errors = _d.errors, isSubmitSuccessful = _d.isSubmitSuccessful, isSubmitted = _d.isSubmitted, isSubmitting = _d.isSubmitting, submitCount = _d.submitCount, defaultValues = _d.defaultValues;
     var value = (0, react_hook_form_1.useWatch)({
         name: name,
-        defaultValue: defaultValues && name in defaultValues ? defaultValues === null || defaultValues === void 0 ? void 0 : defaultValues[name] : directDefaultValue !== null && directDefaultValue !== void 0 ? directDefaultValue : null
+        defaultValue: (_a = accessObjectByDottedName(defaultValues !== null && defaultValues !== void 0 ? defaultValues : {}, name)) !== null && _a !== void 0 ? _a : (directDefaultValue !== null && directDefaultValue !== void 0 ? directDefaultValue : null),
+        // defaultValue: defaultValues && name in defaultValues ? defaultValues?.[name] : directDefaultValue ?? null
     }); /* ?? null */
-    index_1.default.info("Value : ".concat(String(value)), "useInputValAndError");
+    index_1.default.info(debug, "Value : ".concat(String(value)), "useInputValAndError");
+    index_1.default.info(debug, "Errors : ".concat(JSON.stringify(index_1.default.nullifyCircular(errors !== null && errors !== void 0 ? errors : {}))), "useInputValAndError");
     // const _methods = useMemo(() => methods, []);
-    var error = (0, react_1.useMemo)(function () { var _a; return (_a = errors[name]) !== null && _a !== void 0 ? _a : null; }, [(_a = errors === null || errors === void 0 ? void 0 : errors[name]) === null || _a === void 0 ? void 0 : _a.message, value]);
+    var error = (0, react_1.useMemo)(function () { return accessObjectByDottedName(errors, name); }, [(_b = accessObjectByDottedName(errors, name)) === null || _b === void 0 ? void 0 : _b.message, value]);
     // const isDirty = useMemo(()=> dirtyFields[name] ?? null, [dirtyFields?.[name]])
-    index_1.default.info("Error : ".concat(error === null || error === void 0 ? void 0 : error.message), "useInputValAndError");
-    index_1.default.info(null, null, "end");
-    return __assign(__assign({ value: value, error: error }, methods), { formState: {
+    // Logger.info(`Error : ${error?.message}`, "useInputValAndError");
+    index_1.default.info(debug, null, null, "end");
+    return __assign(__assign({ value: value }, methods), { error: error, formState: {
             isLoading: isLoading,
-            isValid: isValid,
-            disabled: disabled,
+            // isValid,
+            // disabled,
             isSubmitSuccessful: isSubmitSuccessful,
             isSubmitted: isSubmitted,
             isSubmitting: isSubmitting,
-            isValidating: isValidating,
+            // isValidating,
             submitCount: submitCount,
         } });
 };

@@ -10,13 +10,15 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import { memo, useMemo /* , { useMemo }  */ } from "react";
+import { memo, useContext, useMemo /* , { useMemo }  */ } from "react";
 import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList, } from "../Inputs/index";
 import Logger from "./Logger/index";
+import { ThemeContext } from "./Form";
 var InputChooser = function (props) {
+    var debug = useContext(ThemeContext).debug;
     var OutputComponent = useMemo(function () {
-        Logger.info("Choosing Input", "InputChooser", "start");
-        Logger.info(null, null, "end");
+        Logger.info(debug, "Choosing Input", "InputChooser", "start");
+        Logger.info(debug, null, null, "end");
         switch (props.type) {
             case "custom":
                 var Elem = props.elem;

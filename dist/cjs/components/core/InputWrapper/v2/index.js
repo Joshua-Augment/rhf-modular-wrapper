@@ -21,8 +21,9 @@ var index_1 = __importDefault(require("../../Logger/index"));
 var InputInnerWrapper_1 = __importDefault(require("./components/InputInnerWrapper"));
 var InputWrapperv2 = function (props) {
     var _a, _b, _c, _d;
-    index_1.default.info("Value - ".concat(typeof props.value === 'object' ? JSON.stringify(props.value) : props.value), "".concat(props.name, " - InputWrapperv2"), "start");
-    index_1.default.info(props, "".concat(props.name, " - InputWrapperv2"));
+    var debug = (0, react_1.useContext)(Form_1.ThemeContext).debug;
+    index_1.default.info(debug, "Value - ".concat(typeof props.value === 'object' ? JSON.stringify(props.value) : props.value), "".concat(props.name, " - InputWrapperv2"), "start");
+    index_1.default.info(debug, props, "".concat(props.name, " - InputWrapperv2"));
     var _e = (0, react_1.useContext)(Form_1.ThemeContext), inputTemplate = _e.inputTemplate, elements = _e.elements;
     return (0, jsx_runtime_1.jsx)(InputInnerWrapper_1.default, __assign({}, props, { inputWrapper: (_b = (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : inputTemplate) !== null && _b !== void 0 ? _b : undefined, inputElement: (_d = elements === null || elements === void 0 ? void 0 : elements[((_c = props === null || props === void 0 ? void 0 : props.type) !== null && _c !== void 0 ? _c : 'line')]) !== null && _d !== void 0 ? _d : null }, { children: props.children }));
 };

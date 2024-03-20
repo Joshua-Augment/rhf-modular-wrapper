@@ -1,12 +1,10 @@
 export declare const useInputValAndError: <T = any>(name: string, directDefaultValue?: T | undefined) => {
+    error: Record<string, any> | null;
     formState: {
         isLoading: boolean;
-        isValid: boolean;
-        disabled: boolean;
         isSubmitSuccessful: boolean;
         isSubmitted: boolean;
         isSubmitting: boolean;
-        isValidating: boolean;
         submitCount: number;
     };
     watch: import("react-hook-form").UseFormWatch<import("react-hook-form").FieldValues>;
@@ -23,5 +21,4 @@ export declare const useInputValAndError: <T = any>(name: string, directDefaultV
     register: import("react-hook-form").UseFormRegister<import("react-hook-form").FieldValues>;
     setFocus: import("react-hook-form").UseFormSetFocus<import("react-hook-form").FieldValues>;
     value: T;
-    error: import("react-hook-form").FieldError | import("react-hook-form").Merge<import("react-hook-form").FieldError, import("react-hook-form").FieldErrorsImpl<any>> | null;
 };

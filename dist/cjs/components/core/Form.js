@@ -24,7 +24,7 @@ var Form = function (props) {
     var formID = (0, react_1.useMemo)(function () { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : "rhf-wc-f-".concat(new Date().getTime()); }, []);
     var methods = (0, react_hook_form_1.useForm)({
         mode: (_a = props.mode) !== null && _a !== void 0 ? _a : "onChange",
-        reValidateMode: (_b = props.reValidateMode) !== null && _b !== void 0 ? _b : "onChange",
+        reValidateMode: (_b = props.reValidateMode) !== null && _b !== void 0 ? _b : "onSubmit",
         defaultValues: props.defaultValues,
         resolver: props.yupSchema ? (0, yup_1.yupResolver)(props.yupSchema) : undefined,
         context: props.context,
