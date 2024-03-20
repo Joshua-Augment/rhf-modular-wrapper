@@ -15,10 +15,7 @@ import Logger from "../../core/Logger/index";
 // import { useInputValAndError } from '../../core/hook/useInputValnError'
 var Line = function (props) {
     var _a;
-    return (
-    // props?.type === "hidden" ?
-    //   <input disabled={props.disabled} id={props.name} className={props?.customClasses?.inputClassName ?? ''} name={props.name} value={props.value !== undefined && props.value !== null ? props.value : ""} onChange={(a) => props.onChange && props.onChange(a.target.value)} placeholder={props.placeholder} type={props.type ?? 'text'} /> :
-    _jsx(InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "line" }, props, { children: _jsx(_Line, __assign({}, props)) })));
+    return (_jsx(InputWrapper, __assign({ type: (_a = props.type) !== null && _a !== void 0 ? _a : "line" }, props, { children: _jsx(_Line, __assign({}, props)) })));
 };
 var _Line = function (props) {
     var _a, _b, _c;

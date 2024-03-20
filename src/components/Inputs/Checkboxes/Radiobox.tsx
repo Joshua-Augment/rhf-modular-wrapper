@@ -12,26 +12,20 @@ const Radiobox = (props: IRadiobox) => {
 };
 
 const _Radiobox = (props: any) => {
-  useEffect(() => {
-    if (props.value === undefined || props.value === "" || props.value === null) {
-      props.onChange(props.options[0].value);
-    }
-  }, [props.value]);
+  console.log(`Radiobox value : `,props.value)
 
   return (
     <div className={`radio-button-group`}>
       {props.options.map((option: TRadioOption, i: number) =>
         option.reversed ? (
           <React.Fragment key={`rhf-${props.name}-rb-${option.value}`}>
-            <input type="radio" id={`${props.name}-${option.value}`} name={props.name} value={option.value} />
-            <br />
+            <input {...props.register(props.name)}  type="radio" id={`${props.name}-${option.value}`}  value={option.value} />
             <label htmlFor={`${props.name}-${option.value}`}>{option.label}</label>
           </React.Fragment>
         ) : (
           <React.Fragment key={`rhf-${props.name}-rb-${option.value}`}>
             <label htmlFor={`${props.name}-${option.value}`}>{option.label}</label>
-            <br />
-            <input type="radio" id={`${props.name}-${option.value}`} name={props.name} value={option.value} />
+            <input {...props.register(props.name)}  type="radio" id={`${props.name}-${option.value}`}  value={option.value} />
           </React.Fragment>
         )
       )}

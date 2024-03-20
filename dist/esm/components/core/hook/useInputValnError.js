@@ -23,15 +23,18 @@ var __rest = (this && this.__rest) || function (s, e) {
 import { useMemo } from "react";
 import { useFormContext, useFormState, useWatch } from "react-hook-form";
 import Logger from "../Logger/index";
-export var useInputValAndError = function (name) {
+export var useInputValAndError = function (name, directDefaultValue) {
     var _a;
     Logger.info("Name : ".concat(name), "useInputValAndError", "start");
     var _b = useFormContext(), control = _b.control, methods = __rest(_b, ["control"]);
-    Logger.info("All Values : ", JSON.stringify(methods.getValues()));
-    var value = useWatch({ name: name, defaultValue: null }); /* ?? null */
+    Logger.info("All Values : ".concat(JSON.stringify(methods.getValues())), "useInputValAndError");
+    var _c = useFormState(), errors = _c.errors, isLoading = _c.isLoading, isValid = _c.isValid, disabled = _c.disabled, isSubmitSuccessful = _c.isSubmitSuccessful, isSubmitted = _c.isSubmitted, isSubmitting = _c.isSubmitting, isValidating = _c.isValidating, submitCount = _c.submitCount, defaultValues = _c.defaultValues;
+    var value = useWatch({
+        name: name,
+        defaultValue: defaultValues && name in defaultValues ? defaultValues === null || defaultValues === void 0 ? void 0 : defaultValues[name] : directDefaultValue !== null && directDefaultValue !== void 0 ? directDefaultValue : null
+    }); /* ?? null */
     Logger.info("Value : ".concat(String(value)), "useInputValAndError");
     // const _methods = useMemo(() => methods, []);
-    var _c = useFormState(), errors = _c.errors, isLoading = _c.isLoading, isValid = _c.isValid, disabled = _c.disabled, isSubmitSuccessful = _c.isSubmitSuccessful, isSubmitted = _c.isSubmitted, isSubmitting = _c.isSubmitting, isValidating = _c.isValidating, submitCount = _c.submitCount;
     var error = useMemo(function () { var _a; return (_a = errors[name]) !== null && _a !== void 0 ? _a : null; }, [(_a = errors === null || errors === void 0 ? void 0 : errors[name]) === null || _a === void 0 ? void 0 : _a.message, value]);
     // const isDirty = useMemo(()=> dirtyFields[name] ?? null, [dirtyFields?.[name]])
     Logger.info("Error : ".concat(error === null || error === void 0 ? void 0 : error.message), "useInputValAndError");

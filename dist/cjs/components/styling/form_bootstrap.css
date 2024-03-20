@@ -38,7 +38,7 @@
 
 .form-item-child-wrapper.no-border > div {border:none !important;}
 
-/* .form-item-child-wrapper > *,  */.form-item-child-wrapper input {
+/* .form-item-child-wrapper > *,  */.form-item-child-wrapper input:not([type=checkbox]):not([type=radio]) {
   box-sizing: border-box;
   display: block;
   width: 100%;

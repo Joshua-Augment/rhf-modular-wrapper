@@ -33,6 +33,8 @@ const InputChooser = (props: TListItems) => {
         return <Switch {...props} />;
       case "checkbox":
         return <Checkbox {...props} />;
+      case "radio":
+        return <Radiobox options={props.options} {...props} />;
       case "radiobox":
         return <Radiobox options={props.options} {...props} />;
       case "wysiwyg":

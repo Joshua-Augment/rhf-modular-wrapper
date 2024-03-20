@@ -66,13 +66,13 @@ var InputInnerWrapper = function (props) {
     index_1.default.info("Watching Calculated : ".concat(String(watchCalculated)), "".concat(_propsName, " - InputWrapperv2"));
     // console.log(`For ${props.name}, error : `,rest.error)
     // On Value change
-    (0, react_1.useEffect)(function () {
-        index_1.default.info("Default Value : ".concat(String(props.defaultValue)), "".concat(_propsName, " - InputWrapperv2"));
-        if (props.defaultValue !== undefined) {
-            // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
-            methods.setValue("inputWrapper - DefaultValue", props.defaultValue);
-        }
-    }, [props.defaultValue]);
+    // useEffect(() => {
+    //   Logger.info(`Default Value : ${String(props.defaultValue)}`, `${_propsName} - InputWrapperv2`);
+    //   if (props.defaultValue !== undefined) {
+    //     // console.log(`[Setting] ${props.name} has a defaultValue of ${props.defaultValue} [ Default Value ? ${props.defaultValue === undefined ? 'Undefined' : 'Have'}]`);
+    //     methods.setValue("inputWrapper - DefaultValue", props.defaultValue);
+    //   }
+    // }, [props.defaultValue]);
     (0, react_1.useEffect)(function () {
         // // Make sure value isnt undefined
         // if (value === undefined) {methods.setValue(props.name, null)}

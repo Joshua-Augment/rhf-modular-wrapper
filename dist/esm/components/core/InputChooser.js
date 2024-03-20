@@ -29,6 +29,8 @@ var InputChooser = function (props) {
                 return _jsx(Switch, __assign({}, props));
             case "checkbox":
                 return _jsx(Checkbox, __assign({}, props));
+            case "radio":
+                return _jsx(Radiobox, __assign({ options: props.options }, props));
             case "radiobox":
                 return _jsx(Radiobox, __assign({ options: props.options }, props));
             case "wysiwyg":

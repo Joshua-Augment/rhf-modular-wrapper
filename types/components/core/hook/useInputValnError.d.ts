@@ -1,4 +1,4 @@
-export declare const useInputValAndError: <T = any>(name: string) => {
+export declare const useInputValAndError: <T = any>(name: string, directDefaultValue?: T | undefined) => {
     formState: {
         isLoading: boolean;
         isValid: boolean;
