@@ -20,11 +20,7 @@ const baseOptions = [
 ];
 const loadOptions = (a: string, b: Function) => {
   setTimeout(() => {
-    b(
-      baseOptions.filter((x) =>
-        a === "" ? x.value === x.value : x.label.includes(a),
-      ),
-    );
+    b(baseOptions.filter((x) => (a === "" ? x.value === x.value : x.label.includes(a))));
   }, 500);
 };
 
@@ -102,12 +98,7 @@ MappedInputChooser.args = {
       {mappedFields.map((field, i) => (
         <div style={{ padding: "10px", width: "100%", flex: 1 }} key={i}>
           {field.map((_field) => (
-            <InputChooser
-              {..._field}
-              name={`${_field.name}-${i}`}
-              label={`${_field.label}-${i}`}
-              key={_field.name}
-            />
+            <InputChooser {..._field} name={`${_field.name}-${i}`} label={`${_field.label}-${i}`} key={_field.name} />
           ))}
         </div>
       ))}
@@ -116,7 +107,7 @@ MappedInputChooser.args = {
 };
 
 const _loopedFields: any[][] = [];
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 100; i++) {
   _loopedFields.push([
     {
       name: `async_${i}`,
@@ -148,12 +139,7 @@ LoopedInputChooser.args = {
       {_loopedFields.map((field, i) => (
         <div style={{ padding: "10px", width: "100%", flex: 1 }} key={i}>
           {field.map((_field) => (
-            <InputChooser
-              {..._field}
-              name={`${_field.name}-${i}`}
-              label={`${_field.label}-${i}`}
-              key={_field.name}
-            />
+            <InputChooser {..._field} name={`${_field.name}-${i}`} label={`${_field.label}-${i}`} key={_field.name} />
           ))}
         </div>
       ))}
@@ -181,14 +167,7 @@ SimpleWithDefaults.args = {
         loadOptions={(a, b) => loadOptions(a, b)}
         name="inputChooserAsyncSelect"
       />
-      <InputChooser
-        cacheOptions
-        defaultOptions
-        type="select"
-        label="Select using Input Chooser"
-        options={baseOptions}
-        name="inputChooserSelect"
-      />
+      <InputChooser cacheOptions defaultOptions type="select" label="Select using Input Chooser" options={baseOptions} name="inputChooserSelect" />
       <InputChooser
         cacheOptions
         defaultOptions
@@ -216,12 +195,7 @@ MappedWithDefaults.args = {
       {mappedFields.map((field, i) => (
         <div style={{ padding: "10px", width: "100%", flex: 1 }} key={i}>
           {field.map((_field) => (
-            <InputChooser
-              {..._field}
-              name={`${_field.name}-${i}`}
-              label={`${_field.label}-${i}`}
-              key={_field.name}
-            />
+            <InputChooser {..._field} name={`${_field.name}-${i}`} label={`${_field.label}-${i}`} key={_field.name} />
           ))}
         </div>
       ))}

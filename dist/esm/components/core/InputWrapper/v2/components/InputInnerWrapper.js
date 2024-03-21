@@ -30,7 +30,7 @@ import { ThemeContext } from "../../../Form";
 var InputInnerWrapper = function (props) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
     var debug = useContext(ThemeContext).debug;
-    var _t = useInputValAndError(props.name, (_b = (_a = props.defaultValue) !== null && _a !== void 0 ? _a : props.empty) !== null && _b !== void 0 ? _b : null), value = _t.value, error = _t.error, formState = _t.formState, methods = __rest(_t, ["value", "error", "formState"]);
+    var _t = useInputValAndError(props.name, (_b = (_a = props.defaultValue) !== null && _a !== void 0 ? _a : props.empty) !== null && _b !== void 0 ? _b : null), value = _t.value, error = _t.error, formState = _t.formState, fieldState = _t.fieldState, onChange = _t.onChange, onBlur = _t.onBlur, methods = __rest(_t, ["value", "error", "formState", "fieldState", "onChange", "onBlur"]);
     var _propsInputWrapper = props.inputWrapper, _propsName = props.name, _propsOptions = props.options, _propsItems = props.items, _propsLabel = props.label, _propsNoLabel = props.noLabel, _propsType = props.type, _propsHelperText = props.helperText;
     var firstUpdate = useRef(true);
     Logger.info(debug, "First Update : ".concat(firstUpdate.current), "".concat(_propsName, " - InputWrapperv2"));
@@ -64,13 +64,15 @@ var InputInnerWrapper = function (props) {
                     Logger.info(debug, "Setting Value! Calculated Data : ".concat(String(data)), "".concat(_propsName, " - calculatedField"));
                     Logger.info(debug, null, null, "end");
                     // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
-                    methods.setValue(props.name, data);
+                    // methods.setValue(props.name, data);
+                    onChange(data);
                 });
             }
             else {
                 var _result = props.calculatedField.calculate(value, props.name, methods.getValues(props.calculatedField.find), methods.getValues());
                 Logger.info(debug, "Setting Value! No Promise expected. Value Expected : ".concat(String(_result)), "".concat(_propsName, " - calculatedField"));
-                methods.setValue(props.name, _result);
+                // methods.setValue(props.name, _result);
+                onChange(_result);
                 Logger.info(debug, null, null, "end");
             }
         }
@@ -106,22 +108,8 @@ var InputInnerWrapper = function (props) {
     var ChosenElement = props.inputElement;
     var Wrapper = useMemo(function () { return _propsInputWrapper; }, [_propsInputWrapper]);
     var ChildComponent = (_jsxs(React.Fragment, { children: [WrapperElementLeft, ChosenElement
-                ? ChosenElement(__assign(__assign(__assign({}, (_p = props.children) === null || _p === void 0 ? void 0 : _p.props), methods), { disabled: props.disabled, type: (_q = props === null || props === void 0 ? void 0 : props.type) !== null && _q !== void 0 ? _q : "line", onChange: function (a) {
-                        var _a, _b;
-                        Logger.info(debug, "Setting Value! Using the onChange passed to component", 'onChange');
-                        methods.setValue(props.name, a, {
-                            shouldValidate: (_a = props.shouldValidateOnChange) !== null && _a !== void 0 ? _a : false,
-                            shouldDirty: (_b = props.shouldDirtyOnChange) !== null && _b !== void 0 ? _b : true,
-                        });
-                    }, formState: formState, value: value, error: error, source: "InputWrapper/index" }))
-                : React.cloneElement(props.children, __assign(__assign(__assign({}, (_r = props.children) === null || _r === void 0 ? void 0 : _r.props), methods), { formState: formState, disabled: props.disabled, type: (_s = props === null || props === void 0 ? void 0 : props.type) !== null && _s !== void 0 ? _s : "line", onChange: function (a) {
-                        var _a, _b;
-                        Logger.info(debug, "Setting Value! Using the onChange passed to component", 'onChange');
-                        methods.setValue(props.name, a, {
-                            shouldValidate: (_a = props.shouldValidateOnChange) !== null && _a !== void 0 ? _a : false,
-                            shouldDirty: (_b = props.shouldDirtyOnChange) !== null && _b !== void 0 ? _b : true,
-                        });
-                    }, value: value, error: error, source: "InputWrapper/index" })), WrapperElementRight] }, props.name));
+                ? ChosenElement(__assign(__assign(__assign({}, (_p = props.children) === null || _p === void 0 ? void 0 : _p.props), methods), { disabled: props.disabled, type: (_q = props === null || props === void 0 ? void 0 : props.type) !== null && _q !== void 0 ? _q : "line", onBlur: onBlur, onChange: onChange, value: value, error: error, fieldState: fieldState, formState: formState, source: "InputWrapper/index" }))
+                : React.cloneElement(props.children, __assign(__assign(__assign({}, (_r = props.children) === null || _r === void 0 ? void 0 : _r.props), methods), { formState: formState, disabled: props.disabled, type: (_s = props === null || props === void 0 ? void 0 : props.type) !== null && _s !== void 0 ? _s : "line", onBlur: onBlur, onChange: onChange, value: value, error: error, fieldState: fieldState, source: "InputWrapper/index" })), WrapperElementRight] }, props.name));
     Logger.info(debug, null, null, "end");
     var injectProps = __assign(__assign(__assign(__assign({}, props), { value: value, error: error, theme: null }), methods), { formState: formState });
     return _jsx(ChosenWrapper, { Wrapper: Wrapper, Default: DefaultInputWrapper, props: __assign(__assign({}, injectProps), { children: ChildComponent }) });

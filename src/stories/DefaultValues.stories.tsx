@@ -14,6 +14,7 @@ export default {
 
 export const DefaultLine = Template.bind({});
 DefaultLine.args = {
+  debug:true,
   defaultValues: { simple: "A Simple Default Value" },
   children: <InputChooser name="simple" label="Simple Text" />,
 };

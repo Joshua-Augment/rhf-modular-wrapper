@@ -12,7 +12,10 @@ export type InputWraperChildProps = {} & IInputInnerWrapper & Omit<UseFormReturn
 
 const InputInnerWrapper = (props: IInputInnerWrapper) => {
   const { debug } = useContext(ThemeContext);
-  const { value, error, formState, ...methods } = useInputValAndError(props.name, props.defaultValue ?? props.empty ?? null);
+  const { value, error, formState, fieldState, onChange, onBlur, ...methods } = useInputValAndError(
+    props.name,
+    props.defaultValue ?? props.empty ?? null
+  );
   const {
     inputWrapper: _propsInputWrapper,
     name: _propsName,
@@ -60,12 +63,14 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
             Logger.info(debug, `Setting Value! Calculated Data : ${String(data)}`, `${_propsName} - calculatedField`);
             Logger.info(debug, null, null, "end");
             // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
-            methods.setValue(props.name, data);
+            // methods.setValue(props.name, data);
+            onChange(data)
           });
       } else {
         const _result = props.calculatedField.calculate(value, props.name, methods.getValues(props.calculatedField.find), methods.getValues());
         Logger.info(debug, `Setting Value! No Promise expected. Value Expected : ${String(_result)}`, `${_propsName} - calculatedField`);
-        methods.setValue(props.name, _result);
+        // methods.setValue(props.name, _result);
+        onChange(_result)
         Logger.info(debug, null, null, "end");
       }
     }
@@ -122,16 +127,12 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
             ...methods,
             disabled: props.disabled,
             type: props?.type ?? "line",
-            onChange: (a: unknown) => {
-              Logger.info(debug, "Setting Value! Using the onChange passed to component",'onChange');
-              methods.setValue(props.name, a, {
-                shouldValidate: props.shouldValidateOnChange ?? false,
-                shouldDirty: props.shouldDirtyOnChange ?? true,
-              });
-            },
+            onBlur,
+            onChange,
+            value,
+            error,
+            fieldState,
             formState,
-            value: value,
-            error: error,
             source: "InputWrapper/index",
           })
         : React.cloneElement(props.children, {
@@ -140,15 +141,11 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
             formState,
             disabled: props.disabled,
             type: props?.type ?? "line",
-            onChange: (a: unknown) => {
-              Logger.info(debug, "Setting Value! Using the onChange passed to component",'onChange');
-              methods.setValue(props.name, a, {
-                shouldValidate: props.shouldValidateOnChange ?? false,
-                shouldDirty: props.shouldDirtyOnChange ?? true,
-              });
-            },
-            value: value,
-            error: error,
+            onBlur,
+            onChange,
+            value,
+            error,
+            fieldState,
             source: "InputWrapper/index",
           })}
       {WrapperElementRight}

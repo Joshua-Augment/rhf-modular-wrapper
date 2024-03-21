@@ -14,7 +14,6 @@ class Log {
     }
 
     var textColor = COLOURS[level];
-
     if (!group) {
       if (typeof message === "object") {
         let _message = "";

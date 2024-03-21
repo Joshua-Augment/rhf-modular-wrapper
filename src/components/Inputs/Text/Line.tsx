@@ -1,5 +1,5 @@
-import React from "react";
-import { LineInputProps } from "../../core/index";
+import React, { useContext } from "react";
+import { LineInputProps, ThemeContext } from "../../core/index";
 import InputWrapper from "../../core/InputWrapper/index";
 import Logger from "../../core/Logger/index";
 // import { useInputValAndError } from '../../core/hook/useInputValnError'

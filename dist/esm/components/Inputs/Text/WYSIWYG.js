@@ -42,7 +42,7 @@ var ReactQuillWrapper = function (props) {
         [{ align: [] }],
         ["clean"], // remove formatting button
     ]; }, []);
-    return (_jsx(ReactQuill, __assign({ theme: "snow", modules: { toolbar: toolbarOptions }, onChange: function (a) { return props.onChange && props.onChange(a); }, value: props.value, onBlur: props.onBlur }, props.quillProps)));
+    return (_jsx(ReactQuill, __assign({ theme: "snow", modules: { toolbar: toolbarOptions } }, props.register(props.name), props.quillProps)));
 };
 export default WYSIWYG;
 //# sourceMappingURL=WYSIWYG.js.map

@@ -48,10 +48,11 @@ const ReactQuillWrapper = (props: IWYSIWYG) => {
   return (
     <ReactQuill
       theme={"snow"}
-      modules={{ toolbar: toolbarOptions }}
-      onChange={(a: any) => props.onChange && props.onChange(a)}
-      value={props.value}
-      onBlur={props.onBlur}
+      modules={{ toolbar: toolbarOptions }}      
+      {...props.register(props.name)}
+      // onChange={(a: any) => props.onChange && props.onChange(a)}
+      // value={props.value}
+      // onBlur={props.onBlur}
       {...props.quillProps}
     />
   );
