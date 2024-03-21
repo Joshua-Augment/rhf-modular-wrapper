@@ -1,7 +1,6 @@
 export declare const useInputValAndError: <T = any>(name: string, directDefaultValue?: T | undefined) => {
     error: import("react-hook-form").FieldError | undefined;
     fieldState: {
-        invalid: boolean;
         isTouched: boolean;
     };
     watch: import("react-hook-form").UseFormWatch<import("react-hook-form").FieldValues>;

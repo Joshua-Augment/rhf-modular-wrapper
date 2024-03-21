@@ -5,7 +5,6 @@ import styled from "styled-components"
 import InputChooser from '../../core/InputChooser';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
 import { InputWrapper } from '../../core/index';
-import { useInputValAndError } from '../../core/hook/useInputValnError';
 
 const Row = styled.div`
   display:flex;
@@ -27,17 +26,22 @@ const iconStyle:React.CSSProperties = {
 }
 
 const FormList = (props:IList) => {
-  const {value, error } = useInputValAndError(props.name)
-  // const {control} = useFormContext()
+  return (
+    <InputWrapper empty={[]} type={props.type ?? 'list'} {...props} noBorder>
+      <div style={{width:'100%'}}>{<_FormWrapper {...props} />}</div>
+    </InputWrapper>
+  )
+}
+
+const _FormWrapper = (props: any) => {
+  const {error} = props
   const {fields,append,insert,remove} = useFieldArray({name: props.name});
-  // const _val = watch(props.name)
-  // const value = useMemo(() => _val ,[_val])
 
   const emptyRow = useMemo(()=>{
     if (props.emptyRow) {return props.emptyRow}
     else {
       let obj:Record<string,any> = {};
-      props.items.forEach(i => obj[i.name] = '')
+      props.items.forEach((i:any) => obj[i.name] = '')
       return obj
     }
   },[])
@@ -50,7 +54,7 @@ const FormList = (props:IList) => {
         // console.log("[TemplateConverter - ] -props ",child.props)
         // For the Inputs
         if (child.props['data-name'] !== undefined) {
-          const input = props.items.filter(x => x.name === child.props['data-name'])
+          const input = props.items.filter((x:any) => x.name === child.props['data-name'])
           if (input === undefined || input.length === 0) {return child}
           else {
             return <InputChooser {...input[0]} noBorder name={`${props.name}.${i}.${input[0].name}`}/>
@@ -96,18 +100,14 @@ const FormList = (props:IList) => {
       } else {
         return  <Row key={`fw-${props.name}-${i}`}>
           {props.showIndex === true && <Col g={1}>{i + 1}</Col>}
-          {props.items.map((item,iT) => <Col g={item.grid ?? 12 / (props.items.length + (props.showIndex ? 1 : 0) + (props.fixed !== true ? 1 : 0))} key={`fw-${props.name}-${i}-${iT}-iew`} ><InputChooser {...item} noBorder name={`${props.name}.${i}.${item.name}`}/></Col>)}
+          {props.items.map((item:any,iT:number) => <Col g={item.grid ?? 12 / (props.items.length + (props.showIndex ? 1 : 0) + (props.fixed !== true ? 1 : 0))} key={`fw-${props.name}-${i}-${iT}-iew`} ><InputChooser {...item} noBorder name={`${props.name}.${i}.${item.name}`}/></Col>)}
           {props.fixed !== true && <Col g={1}><FaPlusSquare style={{...iconStyle, color : props.maxItems && fields.length >= props.maxItems ? 'olive' : 'green' }} onClick={()=>{if (!(props.maxItems && fields.length >= props.maxItems)){insert(i+1,emptyRow)}}} /> <FaMinusSquare style={{...iconStyle, color : fields.length > 1 ? 'red' : 'maroon'}} onClick={()=>{ if( fields.length > 1 ) { remove(i)}}}/></Col>}
         </Row>
       }
     })
-  },[value, error])
+  },[fields, error])
 
-  return (
-    <InputWrapper empty={[emptyRow]} type={props.type ?? 'list'} {...props} noBorder>
-      <div style={{width:'100%'}}>{bodygenerator}</div>
-    </InputWrapper>
-  )
+  return <React.Fragment key={`fl-${props.name}-bg`}>{bodygenerator}</React.Fragment>
 }
 
 export default FormList

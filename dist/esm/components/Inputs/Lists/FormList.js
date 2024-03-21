@@ -20,7 +20,6 @@ import styled from "styled-components";
 import InputChooser from '../../core/InputChooser';
 import { FaMinusSquare, FaPlusSquare } from 'react-icons/fa';
 import { InputWrapper } from '../../core/index';
-import { useInputValAndError } from '../../core/hook/useInputValnError';
 var Row = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display:flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n"], ["\n  display:flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n"])));
 var Col = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  flex: 0 0 ", ";\n  width : ", ";\n  padding-right : 5px;\n\n"], ["\n  flex: 0 0 ", ";\n  width : ", ";\n  padding-right : 5px;\n\n"])), function (_a) {
     var g = _a.g;
@@ -36,11 +35,11 @@ var iconStyle = {
 };
 var FormList = function (props) {
     var _a;
-    var _b = useInputValAndError(props.name), value = _b.value, error = _b.error;
-    // const {control} = useFormContext()
-    var _c = useFieldArray({ name: props.name }), fields = _c.fields, append = _c.append, insert = _c.insert, remove = _c.remove;
-    // const _val = watch(props.name)
-    // const value = useMemo(() => _val ,[_val])
+    return (_jsx(InputWrapper, __assign({ empty: [], type: (_a = props.type) !== null && _a !== void 0 ? _a : 'list' }, props, { noBorder: true }, { children: _jsx("div", __assign({ style: { width: '100%' } }, { children: _jsx(_FormWrapper, __assign({}, props)) })) })));
+};
+var _FormWrapper = function (props) {
+    var error = props.error;
+    var _a = useFieldArray({ name: props.name }), fields = _a.fields, append = _a.append, insert = _a.insert, remove = _a.remove;
     var emptyRow = useMemo(function () {
         if (props.emptyRow) {
             return props.emptyRow;
@@ -114,8 +113,8 @@ var FormList = function (props) {
                                     } } })] }))] }, "fw-".concat(props.name, "-").concat(i));
             }
         });
-    }, [value, error]);
-    return (_jsx(InputWrapper, __assign({ empty: [emptyRow], type: (_a = props.type) !== null && _a !== void 0 ? _a : 'list' }, props, { noBorder: true }, { children: _jsx("div", __assign({ style: { width: '100%' } }, { children: bodygenerator })) })));
+    }, [fields, error]);
+    return _jsx(React.Fragment, { children: bodygenerator }, "fl-".concat(props.name, "-bg"));
 };
 export default FormList;
 var templateObject_1, templateObject_2;

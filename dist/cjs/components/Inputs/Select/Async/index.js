@@ -37,9 +37,8 @@ var _AsyncSelect = function (props) {
     // console.log(`[Select] [${props.name}] props : `,props)
     var _h = (0, react_1.useState)((_a = props.options) !== null && _a !== void 0 ? _a : []), options = _h[0], setOptions = _h[1];
     (0, react_1.useEffect)(function () {
-        // console.log("[options] - ",props.options)
         setOptions(props.options);
-    }, [props.options]);
+    }, [JSON.stringify(props.options)]);
     var createNew = function (a) {
         if (props.isCreatable !== undefined) {
             if (props.isCreatable === true) {

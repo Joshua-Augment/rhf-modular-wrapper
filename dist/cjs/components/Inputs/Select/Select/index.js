@@ -29,11 +29,7 @@ var react_select_1 = __importDefault(require("react-select"));
 var creatable_1 = __importDefault(require("react-select/creatable"));
 var index_1 = __importDefault(require("../../../core/InputWrapper/index"));
 var Select = function (props) {
-    // const {value, error, setValue} = useInputValAndError(props.name)
     var _a;
-    // const {watch, setValue} = useFormContext()
-    // const _val = watch(props.name)
-    // const val = useMemo(()=>_val,[_val])
     var _props = __assign({}, props);
     delete _props.calculatedField;
     delete _props.externalStateSetter;

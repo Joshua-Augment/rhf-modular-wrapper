@@ -5,11 +5,6 @@ import { BaseSelect, IInputsBasePropsNoSetters, ISelect, TSelectOption } from ".
 import InputWrapper from "../../../core/InputWrapper/index";
 
 const Select = (props: ISelect) => {
-  // const {value, error, setValue} = useInputValAndError(props.name)
-
-  // const {watch, setValue} = useFormContext()
-  // const _val = watch(props.name)
-  // const val = useMemo(()=>_val,[_val])
 
   const _props: IInputsBasePropsNoSetters = { ...props };
   delete _props.calculatedField;

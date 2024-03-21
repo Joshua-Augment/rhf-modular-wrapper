@@ -20,7 +20,7 @@ require("../styling/form_bootstrap.css");
 require("../styling/core.css");
 exports.ThemeContext = (0, react_1.createContext)({ debug: false, inputTemplate: null, buttonTemplate: null, elements: {} });
 var Form = function (props) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     var formID = (0, react_1.useMemo)(function () { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : "rhf-wc-f-".concat(new Date().getTime()); }, []);
     var methods = (0, react_hook_form_1.useForm)({
         mode: (_a = props.mode) !== null && _a !== void 0 ? _a : "onChange",
@@ -34,14 +34,14 @@ var Form = function (props) {
         shouldUseNativeValidation: (_f = props.shouldUseNativeValidation) !== null && _f !== void 0 ? _f : false,
         delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined,
     });
-    // const inputWrapper = useMemo(() => props.inputWrapper ?? null, []);
-    // const buttonTemplate = useMemo(() => props.buttonWrapper ?? null, []);
-    // const elements = useMemo(() => props.elements ?? {}, []);
+    var inputWrapper = (0, react_1.useMemo)(function () { var _a; return (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : null; }, []);
+    var buttonTemplate = (0, react_1.useMemo)(function () { var _a; return (_a = props.buttonWrapper) !== null && _a !== void 0 ? _a : null; }, []);
+    var elements = (0, react_1.useMemo)(function () { var _a; return (_a = props.elements) !== null && _a !== void 0 ? _a : {}; }, []);
     return ((0, jsx_runtime_1.jsx)(exports.ThemeContext.Provider, __assign({ value: {
-            inputTemplate: (_h = props.inputWrapper) !== null && _h !== void 0 ? _h : null,
-            buttonTemplate: (_j = props.buttonWrapper) !== null && _j !== void 0 ? _j : null,
-            elements: (_k = props.elements) !== null && _k !== void 0 ? _k : {},
-            debug: (_l = props.debug) !== null && _l !== void 0 ? _l : false,
+            inputTemplate: inputWrapper,
+            buttonTemplate: buttonTemplate,
+            elements: elements,
+            debug: (_h = props.debug) !== null && _h !== void 0 ? _h : false,
         } }, { children: (0, jsx_runtime_1.jsx)(react_hook_form_1.FormProvider, __assign({}, methods, { children: (0, jsx_runtime_1.jsx)("form", __assign({ onSubmit: methods.handleSubmit(props.onSubmit, props.onInvalid), id: formID }, { children: props.children })) })) })));
 };
 exports.Form = Form;

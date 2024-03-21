@@ -19,10 +19,8 @@ import Logger from "./Logger/index";
 import { ThemeContext } from "./Form";
 
 const InputChooser = (props: TListItems) => {
-  const {debug} = useContext(ThemeContext)
-  const OutputComponent = 
-  // useMemo(
-    () => {
+  const { debug } = useContext(ThemeContext);
+  const OutputComponent = useMemo(() => {
     Logger.info(debug, `Choosing Input`, "InputChooser", "start");
     Logger.info(debug, null, null, "end");
     switch (props.type) {
@@ -58,10 +56,9 @@ const InputChooser = (props: TListItems) => {
       default:
         return <Line {...props} />;
     }
-  }
-  // }, [props?.items, props?.name, props.type, props?.options, props.placeholder, props.value, props.defaultValue]);
+  }, [props?.items, props?.name, props.type, props?.options, props.placeholder, props.value, props.defaultValue]);
 
-  return OutputComponent();
+  return OutputComponent;
 };
 
 export default memo(InputChooser);

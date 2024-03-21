@@ -16,7 +16,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var jsx_runtime_1 = require("react/jsx-runtime");
 var index_1 = __importDefault(require("../../core/InputWrapper/index"));
-// import { useInputValAndError } from '../../core/hook/useInputValnError'
 var Line = function (props) {
     var _a;
     return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: '', type: (_a = props.type) !== null && _a !== void 0 ? _a : "line" }, props, { children: (0, jsx_runtime_1.jsx)(_Line, __assign({}, props)) })));

@@ -26,15 +26,14 @@ const loadOptions = (a: string, b: Function) => {
 
 export const SimpleInputChooser = Template.bind({});
 SimpleInputChooser.args = {
+  debug: true,
   children: (
-    <InputChooser
-      cacheOptions
-      defaultOptions
-      type="select_async"
-      label="Select Async using Input Chooser"
-      loadOptions={(a, b) => loadOptions(a, b)}
-      name="simple_InputChooser"
-    />
+    <>
+      <InputChooser label="Text" name="wysiwyg" type="wysiwyg" />
+      <InputChooser label="Text" name="wysiwyg2" type="wysiwyg" />
+      <InputChooser label="Text" name="wysiwyg3" type="wysiwyg" />
+      <InputChooser label="Text" name="wysiwyg  " type="wysiwyg" />
+    </>
   ),
 };
 

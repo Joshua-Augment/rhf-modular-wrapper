@@ -17,7 +17,7 @@ import "../styling/form_bootstrap.css";
 import "../styling/core.css";
 export var ThemeContext = createContext({ debug: false, inputTemplate: null, buttonTemplate: null, elements: {} });
 export var Form = function (props) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     var formID = useMemo(function () { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : "rhf-wc-f-".concat(new Date().getTime()); }, []);
     var methods = useForm({
         mode: (_a = props.mode) !== null && _a !== void 0 ? _a : "onChange",
@@ -31,14 +31,14 @@ export var Form = function (props) {
         shouldUseNativeValidation: (_f = props.shouldUseNativeValidation) !== null && _f !== void 0 ? _f : false,
         delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined,
     });
-    // const inputWrapper = useMemo(() => props.inputWrapper ?? null, []);
-    // const buttonTemplate = useMemo(() => props.buttonWrapper ?? null, []);
-    // const elements = useMemo(() => props.elements ?? {}, []);
+    var inputWrapper = useMemo(function () { var _a; return (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : null; }, []);
+    var buttonTemplate = useMemo(function () { var _a; return (_a = props.buttonWrapper) !== null && _a !== void 0 ? _a : null; }, []);
+    var elements = useMemo(function () { var _a; return (_a = props.elements) !== null && _a !== void 0 ? _a : {}; }, []);
     return (_jsx(ThemeContext.Provider, __assign({ value: {
-            inputTemplate: (_h = props.inputWrapper) !== null && _h !== void 0 ? _h : null,
-            buttonTemplate: (_j = props.buttonWrapper) !== null && _j !== void 0 ? _j : null,
-            elements: (_k = props.elements) !== null && _k !== void 0 ? _k : {},
-            debug: (_l = props.debug) !== null && _l !== void 0 ? _l : false,
+            inputTemplate: inputWrapper,
+            buttonTemplate: buttonTemplate,
+            elements: elements,
+            debug: (_h = props.debug) !== null && _h !== void 0 ? _h : false,
         } }, { children: _jsx(FormProvider, __assign({}, methods, { children: _jsx("form", __assign({ onSubmit: methods.handleSubmit(props.onSubmit, props.onInvalid), id: formID }, { children: props.children })) })) })));
 };
 export var SubmitButton = function (props) {

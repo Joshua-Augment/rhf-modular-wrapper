@@ -61,7 +61,7 @@ var Table = styled.table(templateObject_1 || (templateObject_1 = __makeTemplateO
 var InputListToTable = function (props) {
     var _a;
     var _b = useState(false), editMode = _b[0], setEditMode = _b[1];
-    var _c = useInputValAndError(props.name), value = _c.value, /* register, unregister, */ getValues = _c.getValues, setValue = _c.setValue, watch = _c.watch, resetField = _c.resetField, trigger = _c.trigger;
+    var _c = useInputValAndError(props.name), value = _c.value, getValues = _c.getValues, setValue = _c.setValue, watch = _c.watch, resetField = _c.resetField, trigger = _c.trigger;
     var _d = useFieldArray({ name: props.name }), fields = _d.fields, append = _d.append, move = _d.move, remove = _d.remove, update = _d.update;
     var __idWatch = watch("".concat(props.inputName, ".__id"));
     var inputNameCheck = watch(props.inputName);

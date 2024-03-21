@@ -12,10 +12,7 @@ export type InputWraperChildProps = {} & IInputInnerWrapper & Omit<UseFormReturn
 
 const InputInnerWrapper = (props: IInputInnerWrapper) => {
   const { debug } = useContext(ThemeContext);
-  const { value, error, formState, fieldState, onChange, onBlur, ...methods } = useInputValAndError(
-    props.name,
-    props.defaultValue ?? props.empty ?? null
-  );
+  const { value, error, fieldState, onChange, onBlur, ...methods } = useInputValAndError(props.name, props.defaultValue ?? props.empty ?? null);
   const {
     inputWrapper: _propsInputWrapper,
     name: _propsName,
@@ -62,15 +59,15 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
           .then((data) => {
             Logger.info(debug, `Setting Value! Calculated Data : ${String(data)}`, `${_propsName} - calculatedField`);
             Logger.info(debug, null, null, "end");
-            // console.log(`[Setting] Setting value for ${props.name} by calculation (async)`)
+            console.log(`[Setting] Setting value for ${props.name} by calculation (async)`);
             // methods.setValue(props.name, data);
-            onChange(data)
+            onChange(data);
           });
       } else {
         const _result = props.calculatedField.calculate(value, props.name, methods.getValues(props.calculatedField.find), methods.getValues());
         Logger.info(debug, `Setting Value! No Promise expected. Value Expected : ${String(_result)}`, `${_propsName} - calculatedField`);
         // methods.setValue(props.name, _result);
-        onChange(_result)
+        onChange(_result);
         Logger.info(debug, null, null, "end");
       }
     }
@@ -132,13 +129,13 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
             value,
             error,
             fieldState,
-            formState,
+            // formState,
             source: "InputWrapper/index",
           })
         : React.cloneElement(props.children, {
             ...props.children?.props,
             ...methods,
-            formState,
+            // formState,
             disabled: props.disabled,
             type: props?.type ?? "line",
             onBlur,
@@ -159,8 +156,11 @@ const InputInnerWrapper = (props: IInputInnerWrapper) => {
     value: value,
     error: error,
     theme: null,
+    fieldState,
+    onChange,
+    onBlur,
     ...methods,
-    formState,
+    // formState,
   };
 
   return <ChosenWrapper Wrapper={Wrapper} Default={DefaultInputWrapper} props={{ ...injectProps, children: ChildComponent }} />;

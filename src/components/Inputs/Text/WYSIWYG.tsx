@@ -1,18 +1,10 @@
-import React,{ useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { IWYSIWYG } from "../../core/index";
 import InputWrapper from "../../core/InputWrapper/index";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useInputValAndError } from "../../core/hook/useInputValnError";
 
 const WYSIWYG = (props: IWYSIWYG) => {
-  const { value, setValue } = useInputValAndError(props.name);
-  useEffect(() => {
-    if (value === undefined || value === null) {
-      setValue(props.name, "");
-    }
-  }, [value]);
-
   return (
     <InputWrapper empty={<p></p>} type={props.type ?? "wysiwyg"} {...props}>
       <ReactQuillWrapper {...props} />
@@ -48,11 +40,10 @@ const ReactQuillWrapper = (props: IWYSIWYG) => {
   return (
     <ReactQuill
       theme={"snow"}
-      modules={{ toolbar: toolbarOptions }}      
-      {...props.register(props.name)}
-      // onChange={(a: any) => props.onChange && props.onChange(a)}
-      // value={props.value}
-      // onBlur={props.onBlur}
+      modules={{ toolbar: toolbarOptions }}
+      value={props.value}
+      onBlur={props.onBlur}
+      onChange={props.onChange}
       {...props.quillProps}
     />
   );

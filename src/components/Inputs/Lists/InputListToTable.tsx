@@ -15,7 +15,7 @@ const Table = styled.table`
 
 const InputListToTable = (props: IInputToTableList) => {
   const [editMode, setEditMode] = useState<boolean>(false)
-  const {value, /* register, unregister, */ getValues, setValue, watch, resetField, trigger} = useInputValAndError(props.name)
+  const {value,  getValues, setValue, watch, resetField, trigger} = useInputValAndError(props.name)
   const {fields,append,move,remove, update} = useFieldArray({name: props.name});
 
   const __idWatch = watch(`${props.inputName}.__id`)

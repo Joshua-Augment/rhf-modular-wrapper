@@ -15,9 +15,8 @@ const _AsyncSelect = (props: any) => {
   const [options, setOptions] = useState<TSelectOption[]>(props.options ?? [])
 
   useEffect(()=> {
-    // console.log("[options] - ",props.options)
     setOptions(props.options)
-  },[props.options])
+  },[JSON.stringify(props.options)])
 
   const createNew = (a: string) => {
     if (props.isCreatable !== undefined) {

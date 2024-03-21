@@ -19,15 +19,8 @@ var react_1 = require("react");
 var index_1 = __importDefault(require("../../core/InputWrapper/index"));
 var react_quill_1 = __importDefault(require("react-quill"));
 require("react-quill/dist/quill.snow.css");
-var useInputValnError_1 = require("../../core/hook/useInputValnError");
 var WYSIWYG = function (props) {
     var _a;
-    var _b = (0, useInputValnError_1.useInputValAndError)(props.name), value = _b.value, setValue = _b.setValue;
-    (0, react_1.useEffect)(function () {
-        if (value === undefined || value === null) {
-            setValue(props.name, "");
-        }
-    }, [value]);
     return ((0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: (0, jsx_runtime_1.jsx)("p", {}), type: (_a = props.type) !== null && _a !== void 0 ? _a : "wysiwyg" }, props, { children: (0, jsx_runtime_1.jsx)(ReactQuillWrapper, __assign({}, props)) })));
 };
 var ReactQuillWrapper = function (props) {
@@ -47,7 +40,7 @@ var ReactQuillWrapper = function (props) {
         [{ align: [] }],
         ["clean"], // remove formatting button
     ]; }, []);
-    return ((0, jsx_runtime_1.jsx)(react_quill_1.default, __assign({ theme: "snow", modules: { toolbar: toolbarOptions } }, props.register(props.name), props.quillProps)));
+    return ((0, jsx_runtime_1.jsx)(react_quill_1.default, __assign({ theme: "snow", modules: { toolbar: toolbarOptions }, value: props.value, onBlur: props.onBlur, onChange: props.onChange }, props.quillProps)));
 };
 exports.default = WYSIWYG;
 //# sourceMappingURL=WYSIWYG.js.map

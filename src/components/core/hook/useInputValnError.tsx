@@ -25,7 +25,7 @@ export const useInputValAndError = <T = any,>(name: string, directDefaultValue?:
 
   const {
     field: { onChange, onBlur, value, ref },
-    fieldState: { invalid, isTouched, /* isValidating, */ error },
+    fieldState: { /* invalid, */ isTouched, /* isValidating, */ error },
     // formState: { isLoading, isSubmitSuccessful, isSubmitted, isSubmitting, submitCount },
   } = useController({ name: name, defaultValue: directDefaultValue });
 
@@ -44,7 +44,7 @@ export const useInputValAndError = <T = any,>(name: string, directDefaultValue?:
     ...methods,
     error,
     fieldState: {
-      invalid,
+      // invalid,
       isTouched,
       // isValidating,
     },

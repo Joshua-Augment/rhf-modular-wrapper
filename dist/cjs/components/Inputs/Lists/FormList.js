@@ -48,7 +48,6 @@ var styled_components_1 = __importDefault(require("styled-components"));
 var InputChooser_1 = __importDefault(require("../../core/InputChooser"));
 var fa_1 = require("react-icons/fa");
 var index_1 = require("../../core/index");
-var useInputValnError_1 = require("../../core/hook/useInputValnError");
 var Row = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display:flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n"], ["\n  display:flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n"])));
 var Col = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  flex: 0 0 ", ";\n  width : ", ";\n  padding-right : 5px;\n\n"], ["\n  flex: 0 0 ", ";\n  width : ", ";\n  padding-right : 5px;\n\n"])), function (_a) {
     var g = _a.g;
@@ -64,11 +63,11 @@ var iconStyle = {
 };
 var FormList = function (props) {
     var _a;
-    var _b = (0, useInputValnError_1.useInputValAndError)(props.name), value = _b.value, error = _b.error;
-    // const {control} = useFormContext()
-    var _c = (0, react_hook_form_1.useFieldArray)({ name: props.name }), fields = _c.fields, append = _c.append, insert = _c.insert, remove = _c.remove;
-    // const _val = watch(props.name)
-    // const value = useMemo(() => _val ,[_val])
+    return ((0, jsx_runtime_1.jsx)(index_1.InputWrapper, __assign({ empty: [], type: (_a = props.type) !== null && _a !== void 0 ? _a : 'list' }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ style: { width: '100%' } }, { children: (0, jsx_runtime_1.jsx)(_FormWrapper, __assign({}, props)) })) })));
+};
+var _FormWrapper = function (props) {
+    var error = props.error;
+    var _a = (0, react_hook_form_1.useFieldArray)({ name: props.name }), fields = _a.fields, append = _a.append, insert = _a.insert, remove = _a.remove;
     var emptyRow = (0, react_1.useMemo)(function () {
         if (props.emptyRow) {
             return props.emptyRow;
@@ -142,8 +141,8 @@ var FormList = function (props) {
                                     } } })] }))] }, "fw-".concat(props.name, "-").concat(i));
             }
         });
-    }, [value, error]);
-    return ((0, jsx_runtime_1.jsx)(index_1.InputWrapper, __assign({ empty: [emptyRow], type: (_a = props.type) !== null && _a !== void 0 ? _a : 'list' }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ style: { width: '100%' } }, { children: bodygenerator })) })));
+    }, [fields, error]);
+    return (0, jsx_runtime_1.jsx)(react_1.default.Fragment, { children: bodygenerator }, "fl-".concat(props.name, "-bg"));
 };
 exports.default = FormList;
 var templateObject_1, templateObject_2;

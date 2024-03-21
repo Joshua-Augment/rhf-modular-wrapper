@@ -89,7 +89,7 @@ var Table = styled_components_1.default.table(templateObject_1 || (templateObjec
 var InputListToTable = function (props) {
     var _a;
     var _b = (0, react_1.useState)(false), editMode = _b[0], setEditMode = _b[1];
-    var _c = (0, useInputValnError_1.useInputValAndError)(props.name), value = _c.value, /* register, unregister, */ getValues = _c.getValues, setValue = _c.setValue, watch = _c.watch, resetField = _c.resetField, trigger = _c.trigger;
+    var _c = (0, useInputValnError_1.useInputValAndError)(props.name), value = _c.value, getValues = _c.getValues, setValue = _c.setValue, watch = _c.watch, resetField = _c.resetField, trigger = _c.trigger;
     var _d = (0, react_hook_form_1.useFieldArray)({ name: props.name }), fields = _d.fields, append = _d.append, move = _d.move, remove = _d.remove, update = _d.update;
     var __idWatch = watch("".concat(props.inputName, ".__id"));
     var inputNameCheck = watch(props.inputName);
