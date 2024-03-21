@@ -33,19 +33,19 @@ export const Form = <T extends FieldValues>(props: IForm<T>) => {
     shouldUnregister: props.shouldUnregister ?? true,
     shouldUseNativeValidation: props.shouldUseNativeValidation ?? false,
     delayError: props.delayError ?? undefined,
+
   });
 
-  
-  const inputWrapper = useMemo(() => props.inputWrapper ?? null, []);
-  const buttonTemplate = useMemo(() => props.buttonWrapper ?? null, []);
-  const elements = useMemo(() => props.elements ?? {}, []);
+  // const inputWrapper = useMemo(() => props.inputWrapper ?? null, []);
+  // const buttonTemplate = useMemo(() => props.buttonWrapper ?? null, []);
+  // const elements = useMemo(() => props.elements ?? {}, []);
 
   return (
     <ThemeContext.Provider
       value={{
-        inputTemplate: inputWrapper,
-        buttonTemplate: buttonTemplate,
-        elements: elements,
+        inputTemplate: props.inputWrapper ?? null,
+        buttonTemplate: props.buttonWrapper ?? null,
+        elements: props.elements ?? {},
         debug: props.debug ?? false,
       }}
     >

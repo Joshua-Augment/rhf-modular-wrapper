@@ -28,26 +28,26 @@ export const useInputValAndError = <T = any,>(name: string, directDefaultValue?:
   });
 
   const defaultValue = accessObjectByDottedName(defaultValues ?? {}, name) ?? directDefaultValue ?? null
-  Logger.info(
-    debug,
-    `isLoading : ${isLoading ? "true" : "false"} | 
-  isSubmitted : ${isSubmitting ? "true" : "false"} | 
-  isSubmitSuccessful : ${isSubmitSuccessful ? "true" : "false"} |
-  isSubmitted : ${isSubmitted ? "true" : "false"} |
-  submitCount : ${submitCount} |
-  errors : ${JSON.stringify(errors)} |
-  defaultValues : ${JSON.stringify(defaultValues)} |
-  Value for this field : ${typeof defaultValue === 'object'? JSON.stringify(defaultValue) : defaultValue === null ? 'null' : defaultValue}}
-  `,
-    "useInputValAndError"
-  );
+  // Logger.info(
+  //   debug,
+  //   `isLoading : ${isLoading ? "true" : "false"} | 
+  // isSubmitted : ${isSubmitting ? "true" : "false"} | 
+  // isSubmitSuccessful : ${isSubmitSuccessful ? "true" : "false"} |
+  // isSubmitted : ${isSubmitted ? "true" : "false"} |
+  // submitCount : ${submitCount} |
+  // errors : ${JSON.stringify(errors)} |
+  // defaultValues : ${JSON.stringify(defaultValues)} |
+  // Value for this field : ${typeof defaultValue === 'object'? JSON.stringify(defaultValue) : defaultValue === null ? 'null' : defaultValue}}
+  // `,
+  //   "useInputValAndError"
+  // );
   const value: T = useWatch({
     name: name,
     defaultValue: defaultValue,
   });
 
   Logger.info(debug, `Value : ${String(value)}`, "useInputValAndError");
-  Logger.info(debug, `Errors : ${JSON.stringify(Logger.nullifyCircular(errors ?? {}))}`, "useInputValAndError");
+  // Logger.info(debug, `Errors : ${JSON.stringify(Logger.nullifyCircular(errors ?? {}))}`, "useInputValAndError");
 
   const error = useMemo(() => accessObjectByDottedName(errors, name), [accessObjectByDottedName(errors, name)?.message, value]);
 

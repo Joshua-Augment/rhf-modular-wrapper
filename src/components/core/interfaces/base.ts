@@ -2,7 +2,7 @@ import React from 'react';
 import { FieldValues, DeepPartial, UseFormReturn, UseFormStateReturn, DefaultValues, FieldErrors } from 'react-hook-form';
 import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form';
 import { TListInputs } from './lists';
-export interface ISubmitButton {label ?: string; children ?: React.ReactNode;buttonClass ?: string; }
+export interface ISubmitButton {label ?: string; children ?: React.ReactNode;buttonClass ?: string; [key:string]: any}
 
 export interface IForm<T extends FieldValues> {
   inputWrapper ?: React.ComponentType<FormFrameWrapperProps>,
@@ -15,7 +15,7 @@ export interface IForm<T extends FieldValues> {
   resetOnComplete ?: boolean,
   onSubmit : (data: T, event ?: React.BaseSyntheticEvent) => Promise<any>,
   onInvalid ?: (errors: FieldErrors<T>, event?: React.BaseSyntheticEvent) => unknown | Promise<unknown>,
-  children : JSX.Element[] | JSX.Element
+  children : JSX.Element[] | JSX.Element | any
   mode ?: keyof ValidationMode,
   reValidateMode ?: "onBlur" | "onChange" | "onSubmit",
   yupSchema ?: any, 

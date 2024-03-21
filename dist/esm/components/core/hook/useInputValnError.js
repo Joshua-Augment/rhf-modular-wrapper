@@ -48,13 +48,25 @@ export var useInputValAndError = function (name, directDefaultValue) {
         exact: true,
     }), isLoading = _e.isLoading, errors = _e.errors, isSubmitSuccessful = _e.isSubmitSuccessful, isSubmitted = _e.isSubmitted, isSubmitting = _e.isSubmitting, submitCount = _e.submitCount, defaultValues = _e.defaultValues;
     var defaultValue = (_b = (_a = accessObjectByDottedName(defaultValues !== null && defaultValues !== void 0 ? defaultValues : {}, name)) !== null && _a !== void 0 ? _a : directDefaultValue) !== null && _b !== void 0 ? _b : null;
-    Logger.info(debug, "isLoading : ".concat(isLoading ? "true" : "false", " | \n  isSubmitted : ").concat(isSubmitting ? "true" : "false", " | \n  isSubmitSuccessful : ").concat(isSubmitSuccessful ? "true" : "false", " |\n  isSubmitted : ").concat(isSubmitted ? "true" : "false", " |\n  submitCount : ").concat(submitCount, " |\n  errors : ").concat(JSON.stringify(errors), " |\n  defaultValues : ").concat(JSON.stringify(defaultValues), " |\n  Value for this field : ").concat(typeof defaultValue === 'object' ? JSON.stringify(defaultValue) : defaultValue === null ? 'null' : defaultValue, "}\n  "), "useInputValAndError");
+    // Logger.info(
+    //   debug,
+    //   `isLoading : ${isLoading ? "true" : "false"} | 
+    // isSubmitted : ${isSubmitting ? "true" : "false"} | 
+    // isSubmitSuccessful : ${isSubmitSuccessful ? "true" : "false"} |
+    // isSubmitted : ${isSubmitted ? "true" : "false"} |
+    // submitCount : ${submitCount} |
+    // errors : ${JSON.stringify(errors)} |
+    // defaultValues : ${JSON.stringify(defaultValues)} |
+    // Value for this field : ${typeof defaultValue === 'object'? JSON.stringify(defaultValue) : defaultValue === null ? 'null' : defaultValue}}
+    // `,
+    //   "useInputValAndError"
+    // );
     var value = useWatch({
         name: name,
         defaultValue: defaultValue,
     });
     Logger.info(debug, "Value : ".concat(String(value)), "useInputValAndError");
-    Logger.info(debug, "Errors : ".concat(JSON.stringify(Logger.nullifyCircular(errors !== null && errors !== void 0 ? errors : {}))), "useInputValAndError");
+    // Logger.info(debug, `Errors : ${JSON.stringify(Logger.nullifyCircular(errors ?? {}))}`, "useInputValAndError");
     var error = useMemo(function () { return accessObjectByDottedName(errors, name); }, [(_c = accessObjectByDottedName(errors, name)) === null || _c === void 0 ? void 0 : _c.message, value]);
     Logger.info(debug, null, null, "end");
     return __assign(__assign({ value: value }, methods), { error: error, formState: {
