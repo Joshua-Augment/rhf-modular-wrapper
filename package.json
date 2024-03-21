@@ -14,7 +14,7 @@
     "url": "https://github.com/Joshua-Augment/rhf-modular-wrapper"
   },
   "scripts": {
-    "start": "storybook dev -p 6006",
+    "start": "storybook dev -p 6007",
     "rollup": "rollup -c",
     "build": "npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs",
     "fix-exports": "fix-tsc-es-imports -y -V",

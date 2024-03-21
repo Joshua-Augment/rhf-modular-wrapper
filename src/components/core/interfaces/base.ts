@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldValues, DeepPartial, UseFormReturn } from 'react-hook-form';
+import { FieldValues, DeepPartial, UseFormReturn, UseFormStateReturn, DefaultValues, FieldErrors } from 'react-hook-form';
 import { CriteriaMode, ValidationMode, FieldError } from 'react-hook-form';
 import { TListInputs } from './lists';
 export interface ISubmitButton {label ?: string; children ?: React.ReactNode;buttonClass ?: string; }
@@ -11,9 +11,10 @@ export interface IForm<T extends FieldValues> {
   style ?: 'bootstrap' | 'mui'
   debug ?: boolean,
   id ?:string
-  defaultValues ?: DeepPartial<T>, 
+  defaultValues ?: DefaultValues<T> , 
   resetOnComplete ?: boolean,
   onSubmit : (data: T, event ?: React.BaseSyntheticEvent) => Promise<any>,
+  onInvalid ?: (errors: FieldErrors<T>, event?: React.BaseSyntheticEvent) => unknown | Promise<unknown>,
   children : JSX.Element[] | JSX.Element
   mode ?: keyof ValidationMode,
   reValidateMode ?: "onBlur" | "onChange" | "onSubmit",
@@ -117,8 +118,15 @@ type isCalculatedPromise<T> = {
 export interface FormBaseInput<T = any> extends IInputsBaseProps<T> {  
 }
 
-export interface CustomElementBaseInput<T=any> extends UseFormReturn,IInputsBaseProps<T> {
+export interface CustomElementBaseInput<T=any> extends Omit<UseFormReturn,'formState'>,IInputsBaseProps<T> {
   type : string,
+  formState: {
+    isLoading: boolean,
+    isSubmitSuccessful: boolean,
+    isSubmitted: boolean
+    isSubmitting: boolean
+    submitCount: number
+  },  
   value : T,
   onChange : (value : T) => void,
   error ?: FieldError,

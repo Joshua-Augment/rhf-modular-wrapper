@@ -25,7 +25,7 @@ export const Form = <T extends FieldValues>(props: IForm<T>) => {
   const methods = useForm<T, any>({
     mode: props.mode ?? "onChange",
     reValidateMode: props.reValidateMode ?? "onSubmit",
-    defaultValues: props.defaultValues as any,
+    defaultValues: props.defaultValues,
     resolver: props.yupSchema ? yupResolver(props.yupSchema) : undefined,
     context: props.context,
     criteriaMode: props.criteriaMode ?? "firstError",
@@ -39,15 +39,6 @@ export const Form = <T extends FieldValues>(props: IForm<T>) => {
   const inputWrapper = useMemo(() => props.inputWrapper ?? null, []);
   const buttonTemplate = useMemo(() => props.buttonWrapper ?? null, []);
   const elements = useMemo(() => props.elements ?? {}, []);
-  const debug = useMemo(() => props.debug ?? false, []);
-
-  useEffect(() => {
-    if (props.defaultValues) {
-      Logger.info(debug,`Setting Default Values to ${JSON.stringify(JSON.parse(JSON.stringify(props.defaultValues ?? {})))}`,'Form-useEffect')
-      methods.reset(props.defaultValues as any);
-    }
-  }, [props.defaultValues]);
-
 
   return (
     <ThemeContext.Provider
@@ -55,11 +46,11 @@ export const Form = <T extends FieldValues>(props: IForm<T>) => {
         inputTemplate: inputWrapper,
         buttonTemplate: buttonTemplate,
         elements: elements,
-        debug: debug,
+        debug: props.debug ?? false,
       }}
     >
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(props.onSubmit)} id={formID}>
+        <form onSubmit={methods.handleSubmit(props.onSubmit, props.onInvalid)} id={formID}>
           {props.children}
         </form>
       </FormProvider>

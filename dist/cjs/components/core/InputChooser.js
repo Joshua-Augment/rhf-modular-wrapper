@@ -21,7 +21,9 @@ var index_2 = __importDefault(require("./Logger/index"));
 var Form_1 = require("./Form");
 var InputChooser = function (props) {
     var debug = (0, react_1.useContext)(Form_1.ThemeContext).debug;
-    var OutputComponent = (0, react_1.useMemo)(function () {
+    var OutputComponent = 
+    // useMemo(
+    function () {
         index_2.default.info(debug, "Choosing Input", "InputChooser", "start");
         index_2.default.info(debug, null, null, "end");
         switch (props.type) {
@@ -57,8 +59,9 @@ var InputChooser = function (props) {
             default:
                 return (0, jsx_runtime_1.jsx)(index_1.Line, __assign({}, props));
         }
-    }, [props === null || props === void 0 ? void 0 : props.items, props === null || props === void 0 ? void 0 : props.name, props.type, props === null || props === void 0 ? void 0 : props.options, props.placeholder, props.value, props.defaultValue]);
-    return OutputComponent;
+    };
+    // }, [props?.items, props?.name, props.type, props?.options, props.placeholder, props.value, props.defaultValue]);
+    return OutputComponent();
 };
 exports.default = (0, react_1.memo)(InputChooser);
 //# sourceMappingURL=InputChooser.js.map

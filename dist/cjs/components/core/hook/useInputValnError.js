@@ -53,9 +53,11 @@ var useInputValAndError = function (name, directDefaultValue) {
         name: name,
         exact: true,
     }), isLoading = _e.isLoading, errors = _e.errors, isSubmitSuccessful = _e.isSubmitSuccessful, isSubmitted = _e.isSubmitted, isSubmitting = _e.isSubmitting, submitCount = _e.submitCount, defaultValues = _e.defaultValues;
+    var defaultValue = (_b = (_a = accessObjectByDottedName(defaultValues !== null && defaultValues !== void 0 ? defaultValues : {}, name)) !== null && _a !== void 0 ? _a : directDefaultValue) !== null && _b !== void 0 ? _b : null;
+    index_1.default.info(debug, "isLoading : ".concat(isLoading ? "true" : "false", " | \n  isSubmitted : ").concat(isSubmitting ? "true" : "false", " | \n  isSubmitSuccessful : ").concat(isSubmitSuccessful ? "true" : "false", " |\n  isSubmitted : ").concat(isSubmitted ? "true" : "false", " |\n  submitCount : ").concat(submitCount, " |\n  errors : ").concat(JSON.stringify(errors), " |\n  defaultValues : ").concat(JSON.stringify(defaultValues), " |\n  Value for this field : ").concat(typeof defaultValue === 'object' ? JSON.stringify(defaultValue) : defaultValue === null ? 'null' : defaultValue, "}\n  "), "useInputValAndError");
     var value = (0, react_hook_form_1.useWatch)({
         name: name,
-        defaultValue: (_b = (_a = accessObjectByDottedName(defaultValues !== null && defaultValues !== void 0 ? defaultValues : {}, name)) !== null && _a !== void 0 ? _a : directDefaultValue) !== null && _b !== void 0 ? _b : null,
+        defaultValue: defaultValue,
     });
     index_1.default.info(debug, "Value : ".concat(String(value)), "useInputValAndError");
     index_1.default.info(debug, "Errors : ".concat(JSON.stringify(index_1.default.nullifyCircular(errors !== null && errors !== void 0 ? errors : {}))), "useInputValAndError");

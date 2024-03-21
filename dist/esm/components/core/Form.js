@@ -10,16 +10,14 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import { useEffect } from "react";
 import { createContext, useMemo, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "../styling/form_bootstrap.css";
 import "../styling/core.css";
-import Logger from "./Logger";
 export var ThemeContext = createContext({ debug: false, inputTemplate: null, buttonTemplate: null, elements: {} });
 export var Form = function (props) {
-    var _a, _b, _c, _d, _e, _f, _g;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     var formID = useMemo(function () { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : "rhf-wc-f-".concat(new Date().getTime()); }, []);
     var methods = useForm({
         mode: (_a = props.mode) !== null && _a !== void 0 ? _a : "onChange",
@@ -36,20 +34,12 @@ export var Form = function (props) {
     var inputWrapper = useMemo(function () { var _a; return (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : null; }, []);
     var buttonTemplate = useMemo(function () { var _a; return (_a = props.buttonWrapper) !== null && _a !== void 0 ? _a : null; }, []);
     var elements = useMemo(function () { var _a; return (_a = props.elements) !== null && _a !== void 0 ? _a : {}; }, []);
-    var debug = useMemo(function () { var _a; return (_a = props.debug) !== null && _a !== void 0 ? _a : false; }, []);
-    useEffect(function () {
-        var _a;
-        if (props.defaultValues) {
-            Logger.info(debug, "Setting Default Values to ".concat(JSON.stringify(JSON.parse(JSON.stringify((_a = props.defaultValues) !== null && _a !== void 0 ? _a : {})))), 'Form-useEffect');
-            methods.reset(props.defaultValues);
-        }
-    }, [props.defaultValues]);
     return (_jsx(ThemeContext.Provider, __assign({ value: {
             inputTemplate: inputWrapper,
             buttonTemplate: buttonTemplate,
             elements: elements,
-            debug: debug,
-        } }, { children: _jsx(FormProvider, __assign({}, methods, { children: _jsx("form", __assign({ onSubmit: methods.handleSubmit(props.onSubmit), id: formID }, { children: props.children })) })) })));
+            debug: (_h = props.debug) !== null && _h !== void 0 ? _h : false,
+        } }, { children: _jsx(FormProvider, __assign({}, methods, { children: _jsx("form", __assign({ onSubmit: methods.handleSubmit(props.onSubmit, props.onInvalid), id: formID }, { children: props.children })) })) })));
 };
 export var SubmitButton = function (props) {
     var _a, _b, _c;

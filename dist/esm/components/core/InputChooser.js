@@ -10,13 +10,15 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import { memo, useContext, useMemo /* , { useMemo }  */ } from "react";
+import { memo, useContext } from "react";
 import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList, } from "../Inputs/index";
 import Logger from "./Logger/index";
 import { ThemeContext } from "./Form";
 var InputChooser = function (props) {
     var debug = useContext(ThemeContext).debug;
-    var OutputComponent = useMemo(function () {
+    var OutputComponent = 
+    // useMemo(
+    function () {
         Logger.info(debug, "Choosing Input", "InputChooser", "start");
         Logger.info(debug, null, null, "end");
         switch (props.type) {
@@ -52,8 +54,9 @@ var InputChooser = function (props) {
             default:
                 return _jsx(Line, __assign({}, props));
         }
-    }, [props === null || props === void 0 ? void 0 : props.items, props === null || props === void 0 ? void 0 : props.name, props.type, props === null || props === void 0 ? void 0 : props.options, props.placeholder, props.value, props.defaultValue]);
-    return OutputComponent;
+    };
+    // }, [props?.items, props?.name, props.type, props?.options, props.placeholder, props.value, props.defaultValue]);
+    return OutputComponent();
 };
 export default memo(InputChooser);
 //# sourceMappingURL=InputChooser.js.map
