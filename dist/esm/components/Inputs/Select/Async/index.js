@@ -29,10 +29,12 @@ var AsyncSelect = function (props) {
 };
 var _AsyncSelect = function (props) {
     var _a, _b, _c, _d, _e, _f, _g;
-    // console.log(`[Select] [${props.name}] props : `,props)
     var _h = useState((_a = props.options) !== null && _a !== void 0 ? _a : []), options = _h[0], setOptions = _h[1];
+    console.log("[Select] [".concat(props.name, "] props : "), props);
+    console.log("[Select] [".concat(props.name, "] options : "), options);
     useEffect(function () {
-        setOptions(props.options);
+        var _a;
+        setOptions((_a = props.options) !== null && _a !== void 0 ? _a : []);
     }, [JSON.stringify(props.options)]);
     var createNew = function (a) {
         if (props.isCreatable !== undefined) {

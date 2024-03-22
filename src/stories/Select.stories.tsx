@@ -69,6 +69,29 @@ SimpleSelectCreatable.args = {
   ),
 };
 
+const asyncHandler = (a: string) =>
+new Promise<TSelectOption[]>((resolve, reject) => {
+  setTimeout(() => {
+    resolve(
+      BASE_SELECTS.filter((x) =>
+        a === "" ? true : x.label.toString().includes(a),
+      ),
+    );
+  }, 400);
+});
+
+export const SimpleAsyncSelectCreatable = Template.bind({});
+SimpleAsyncSelectCreatable.args = {
+  children: (
+    <AsyncSelect
+      isCreatable
+      label="Simple Select"
+      name="select"
+      loadOptions={asyncHandler}
+    />
+  ),
+};
+
 export const SimpleAsyncSelect = () => {
   const [response, setResponse] = useState<string | null>(null);
 

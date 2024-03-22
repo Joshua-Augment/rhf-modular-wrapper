@@ -11,11 +11,12 @@ const AsyncSelect = (props: ISelectAsync) => {
 };
  
 const _AsyncSelect = (props: any) => {
-  // console.log(`[Select] [${props.name}] props : `,props)
   const [options, setOptions] = useState<TSelectOption[]>(props.options ?? [])
+  console.log(`[Select] [${props.name}] props : `,props)
+  console.log(`[Select] [${props.name}] options : `,options)
 
   useEffect(()=> {
-    setOptions(props.options)
+    setOptions(props.options ?? [])
   },[JSON.stringify(props.options)])
 
   const createNew = (a: string) => {
