@@ -1,4 +1,4 @@
-export declare const useInputValAndError: <T = any>(name: string, directDefaultValue?: T | undefined) => {
+export declare const useInputValAndError: <T = any>(name: string, directDefaultValue?: T | undefined, disabled?: boolean) => {
     error: import("react-hook-form").FieldError | undefined;
     fieldState: {
         isTouched: boolean;

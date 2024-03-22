@@ -44,11 +44,11 @@ var accessObjectByDottedName = function (obj, name) {
     }
     return result;
 };
-var useInputValAndError = function (name, directDefaultValue) {
+var useInputValAndError = function (name, directDefaultValue, disabled) {
     var debug = (0, react_1.useContext)(Form_1.ThemeContext).debug;
     index_1.default.info(debug, "Name : ".concat(name), "useInputValAndError", "start");
     var _a = (0, react_hook_form_1.useFormContext)(), control = _a.control, methods = __rest(_a, ["control"]);
-    var _b = (0, react_hook_form_1.useController)({ name: name, defaultValue: directDefaultValue }), _c = _b.field, onChange = _c.onChange, onBlur = _c.onBlur, value = _c.value, ref = _c.ref, _d = _b.fieldState, /* invalid, */ isTouched = _d.isTouched, /* isValidating, */ error = _d.error;
+    var _b = (0, react_hook_form_1.useController)({ name: name, defaultValue: directDefaultValue, disabled: disabled }), _c = _b.field, onChange = _c.onChange, onBlur = _c.onBlur, value = _c.value, ref = _c.ref, _d = _b.fieldState, /* invalid, */ isTouched = _d.isTouched, /* isValidating, */ error = _d.error;
     index_1.default.info(debug, "Value : ".concat(String(value)), "useInputValAndError");
     // Logger.info(debug, `Errors : ${JSON.stringify(Logger.nullifyCircular(errors ?? {}))}`, "useInputValAndError");
     // const error = useMemo(() => accessObjectByDottedName(errors, name), [accessObjectByDottedName(errors, name)?.message, value]);

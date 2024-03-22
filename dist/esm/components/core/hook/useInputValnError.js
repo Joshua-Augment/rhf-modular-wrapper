@@ -38,11 +38,11 @@ var accessObjectByDottedName = function (obj, name) {
     }
     return result;
 };
-export var useInputValAndError = function (name, directDefaultValue) {
+export var useInputValAndError = function (name, directDefaultValue, disabled) {
     var debug = useContext(ThemeContext).debug;
     Logger.info(debug, "Name : ".concat(name), "useInputValAndError", "start");
     var _a = useFormContext(), control = _a.control, methods = __rest(_a, ["control"]);
-    var _b = useController({ name: name, defaultValue: directDefaultValue }), _c = _b.field, onChange = _c.onChange, onBlur = _c.onBlur, value = _c.value, ref = _c.ref, _d = _b.fieldState, /* invalid, */ isTouched = _d.isTouched, /* isValidating, */ error = _d.error;
+    var _b = useController({ name: name, defaultValue: directDefaultValue, disabled: disabled }), _c = _b.field, onChange = _c.onChange, onBlur = _c.onBlur, value = _c.value, ref = _c.ref, _d = _b.fieldState, /* invalid, */ isTouched = _d.isTouched, /* isValidating, */ error = _d.error;
     Logger.info(debug, "Value : ".concat(String(value)), "useInputValAndError");
     // Logger.info(debug, `Errors : ${JSON.stringify(Logger.nullifyCircular(errors ?? {}))}`, "useInputValAndError");
     // const error = useMemo(() => accessObjectByDottedName(errors, name), [accessObjectByDottedName(errors, name)?.message, value]);

@@ -18,7 +18,7 @@ const accessObjectByDottedName = (obj: Record<string, any>, name: string) => {
   return result;
 };
 
-export const useInputValAndError = <T = any,>(name: string, directDefaultValue?: T) => {
+export const useInputValAndError = <T = any,>(name: string, directDefaultValue?: T, disabled ?: boolean) => {
   const { debug } = useContext(ThemeContext);
   Logger.info(debug, `Name : ${name}`, "useInputValAndError", "start");
   const { control, ...methods } = useFormContext();
@@ -27,7 +27,7 @@ export const useInputValAndError = <T = any,>(name: string, directDefaultValue?:
     field: { onChange, onBlur, value, ref },
     fieldState: { /* invalid, */ isTouched, /* isValidating, */ error },
     // formState: { isLoading, isSubmitSuccessful, isSubmitted, isSubmitting, submitCount },
-  } = useController({ name: name, defaultValue: directDefaultValue });
+  } = useController({ name: name, defaultValue: directDefaultValue, disabled });
 
   Logger.info(debug, `Value : ${String(value)}`, "useInputValAndError");
   // Logger.info(debug, `Errors : ${JSON.stringify(Logger.nullifyCircular(errors ?? {}))}`, "useInputValAndError");

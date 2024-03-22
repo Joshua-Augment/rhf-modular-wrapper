@@ -77,6 +77,7 @@ export interface IInputsBasePropsNoSetters<T = any> {
     element?: React.ComponentType<IInputsBasePropsNoSetters<any>>;
     empty?: T;
     defaultValue?: T;
+    disableController?: boolean;
     disabled?: boolean;
     customClasses?: FormInputClassNames;
     style?: React.CSSProperties;

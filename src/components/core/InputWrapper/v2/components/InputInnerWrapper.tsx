@@ -12,7 +12,7 @@ export type InputWraperChildProps = {} & IInputInnerWrapper & Omit<UseFormReturn
 
 const InputInnerWrapper = (props: IInputInnerWrapper) => {
   const { debug } = useContext(ThemeContext);
-  const { value, error, fieldState, onChange, onBlur, ...methods } = useInputValAndError(props.name, props.defaultValue ?? props.empty ?? null);
+  const { value, error, fieldState, onChange, onBlur, ...methods } = useInputValAndError(props.name, props.defaultValue ?? props.empty ?? null, props.disableController ?? false);
   const {
     inputWrapper: _propsInputWrapper,
     name: _propsName,

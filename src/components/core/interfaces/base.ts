@@ -74,6 +74,7 @@ export interface IInputsBasePropsNoSetters<T=any> {
   empty ?: T,
   defaultValue ?: T,
 
+  disableController ?: boolean,
   disabled ?: boolean,
 
   customClasses ?: FormInputClassNames,
