@@ -23,10 +23,10 @@ import { InputWrapper } from "../../core/index";
 var Table = styled.table(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: 100%;\n  margin-top: 5px;\n  margin-bottom: 5px;\n"], ["\n  width: 100%;\n  margin-top: 5px;\n  margin-bottom: 5px;\n"])));
 var TableHead = styled.thead(templateObject_2 || (templateObject_2 = __makeTemplateObject([""], [""])));
 var TableBody = styled.tbody(templateObject_3 || (templateObject_3 = __makeTemplateObject([""], [""])));
-var TableTH = styled.th(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  position: sticky;\n  top: 0;\n  background-color: gainsboro;\n  z-index: 1;\n  padding:5px\n"], ["\n  position: sticky;\n  top: 0;\n  background-color: gainsboro;\n  z-index: 1;\n  padding:5px\n"])));
+var TableTH = styled.th(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  position: sticky;\n  top: 0;\n  background-color: gainsboro;\n  z-index: 1;\n  padding: 5px;\n"], ["\n  position: sticky;\n  top: 0;\n  background-color: gainsboro;\n  z-index: 1;\n  padding: 5px;\n"])));
 var TableTD = styled.td(templateObject_5 || (templateObject_5 = __makeTemplateObject([""], [""])));
 var TableTR = styled.tr(templateObject_6 || (templateObject_6 = __makeTemplateObject([""], [""])));
-var TableHeaderTR = styled.tr(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n"], ["\n"])));
+var TableHeaderTR = styled.tr(templateObject_7 || (templateObject_7 = __makeTemplateObject([""], [""])));
 var IconUp = styled(FaPlusSquare)(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  color: green;\n  font-size: 1.5em;\n  margin: 2px 5px;\n  transition: 0.2s all ease-in-out;\n  &:hover {\n    filter: brightness(110%);\n    box-shadow: 1px 1px 10px 1px green;\n  }\n"], ["\n  color: green;\n  font-size: 1.5em;\n  margin: 2px 5px;\n  transition: 0.2s all ease-in-out;\n  &:hover {\n    filter: brightness(110%);\n    box-shadow: 1px 1px 10px 1px green;\n  }\n"])));
 var IconDown = styled(FaMinusSquare)(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n  color: red;\n  font-size: 1.5em;\n  margin: 2px 5px;\n  transition: 0.2s all ease-in-out;\n  &:hover {\n    filter: brightness(110%);\n    box-shadow: 1px 1px 10px 1px red;\n  }\n"], ["\n  color: red;\n  font-size: 1.5em;\n  margin: 2px 5px;\n  transition: 0.2s all ease-in-out;\n  &:hover {\n    filter: brightness(110%);\n    box-shadow: 1px 1px 10px 1px red;\n  }\n"])));
 var TableList = function (props) {
@@ -41,7 +41,7 @@ var TableList = function (props) {
             return obj_1;
         }
     }, []);
-    return (_jsx(InputWrapper, __assign({ empty: [emptyRow], type: (_a = props.type) !== null && _a !== void 0 ? _a : "tablelist" }, props, { children: _jsx(_Table, __assign({}, props, { emptyRow: emptyRow })) })));
+    return (_jsx(InputWrapper, __assign({ disableController: true, empty: [emptyRow], type: (_a = props.type) !== null && _a !== void 0 ? _a : "tablelist" }, props, { children: _jsx(_Table, __assign({}, props, { emptyRow: emptyRow })) })));
 };
 var _Table = function (props) {
     var _a, _b, _c, _d, _e, _f, _g;

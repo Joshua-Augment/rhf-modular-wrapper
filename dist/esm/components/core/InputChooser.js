@@ -46,9 +46,9 @@ var InputChooser = function (props) {
             case "textarea":
                 return _jsx(Lines, __assign({}, props));
             case "list":
-                return _jsx(FormList, __assign({}, props, { items: props.items }));
+                return _jsx(FormList, __assign({ disableController: true }, props, { items: props.items }));
             case "tablelist":
-                return _jsx(TableList, __assign({}, props, { items: props.items }));
+                return _jsx(TableList, __assign({ disableController: true }, props, { items: props.items }));
             default:
                 return _jsx(Line, __assign({}, props));
         }

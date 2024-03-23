@@ -51,9 +51,9 @@ var InputChooser = function (props) {
             case "textarea":
                 return (0, jsx_runtime_1.jsx)(index_1.Lines, __assign({}, props));
             case "list":
-                return (0, jsx_runtime_1.jsx)(index_1.FormList, __assign({}, props, { items: props.items }));
+                return (0, jsx_runtime_1.jsx)(index_1.FormList, __assign({ disableController: true }, props, { items: props.items }));
             case "tablelist":
-                return (0, jsx_runtime_1.jsx)(index_1.TableList, __assign({}, props, { items: props.items }));
+                return (0, jsx_runtime_1.jsx)(index_1.TableList, __assign({ disableController: true }, props, { items: props.items }));
             default:
                 return (0, jsx_runtime_1.jsx)(index_1.Line, __assign({}, props));
         }
