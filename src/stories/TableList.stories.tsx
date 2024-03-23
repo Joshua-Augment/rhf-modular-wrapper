@@ -1,53 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { ComponentMeta } from "@storybook/react";
-import { TableList } from "../components/Inputs";
-import * as yup from "yup";
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
+import { TableList } from "../components";
 
-import Slider from "../components/Inputs/Range/Slider";
-import { Template } from "./_story_template";
-
-export default {
-  title: "Components/Inputs/Tablelist",
+const meta: Meta<typeof TableList> = {
+  title:'Inputs/List/TableList',
   component: TableList,
-} as ComponentMeta<typeof Slider>;
-
-const schema = yup.object({
-  test : yup
-  .array()
-  .of(
-    yup.object({
-      name: yup.string().required().label("Name"),
-    })
-  )
-  .min(5)
-});
-
-export const TableListNotStatic = Template.bind({});
-TableListNotStatic.args = {
-  schema: schema,
-  children: (
-    <TableList
-      name="test"
-      items={[
-        { name: "name", label: "Name" },
-        { name: "email", label: "Email" },
-        { name: "phone", label: "Phone" },
-      ]}
-    />
-  ),
 };
 
-export const TableListStatic = Template.bind({});
-TableListStatic.args = {
-  schema: schema,
-  children: (
+export default meta;
+type Story = StoryObj<typeof TableList>;
+
+/*
+ *👇 Render functions are a framework specific feature to allow you control on how the component renders.
+ * See https://storybook.js.org/docs/api/csf
+ * to learn how to use render functions.
+ */
+export const Primary: Story = {
+  render: () => (
     <TableList
-      isStatic
-      name="test"
+      name="tablelist"
       items={[
         { name: "name", label: "Name" },
-        { name: "email", label: "Email" },
-        { name: "phone", label: "Phone" },
+        { name: "description", label: "Description", type: "lines" },
+        { name: "date", label: "Date", type: "date" },
       ]}
     />
   ),

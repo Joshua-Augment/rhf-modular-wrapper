@@ -50,9 +50,9 @@ const InputChooser = (props: TListItems) => {
       case "textarea":
         return <Lines {...props} />;
       case "list":
-        return <FormList {...props} items={props.items} />;
+        return <FormList disableController {...props} items={props.items} />;
       case "tablelist":
-        return <TableList {...props} items={props.items} />;
+        return <TableList disableController {...props} items={props.items} />;
       default:
         return <Line {...props} />;
     }

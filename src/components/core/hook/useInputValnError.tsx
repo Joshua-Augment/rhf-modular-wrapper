@@ -18,22 +18,19 @@ const accessObjectByDottedName = (obj: Record<string, any>, name: string) => {
   return result;
 };
 
-export const useInputValAndError = <T = any,>(name: string, directDefaultValue?: T, disabled ?: boolean) => {
+export const useInputValAndError = <T = any,>(name: string, directDefaultValue?: T, disabled?: boolean) => {
   const { debug } = useContext(ThemeContext);
   Logger.info(debug, `Name : ${name}`, "useInputValAndError", "start");
   const { control, ...methods } = useFormContext();
 
   const {
     field: { onChange, onBlur, value, ref },
-    fieldState: { /* invalid, */ isTouched, /* isValidating, */ error },
-    // formState: { isLoading, isSubmitSuccessful, isSubmitted, isSubmitting, submitCount },
-  } = useController({ name: name, defaultValue: directDefaultValue, disabled });
+    fieldState: { isTouched, error },
+  } = useController({ name: name, defaultValue: directDefaultValue ?? undefined, disabled });
 
-  Logger.info(debug, `Value : ${String(value)}`, "useInputValAndError");
-  // Logger.info(debug, `Errors : ${JSON.stringify(Logger.nullifyCircular(errors ?? {}))}`, "useInputValAndError");
-
-  // const error = useMemo(() => accessObjectByDottedName(errors, name), [accessObjectByDottedName(errors, name)?.message, value]);
-
+  Logger.info(debug, value, "useInputValAndError-value");
+  Logger.info(debug, error, "useInputValAndError-error");
+  Logger.info(debug, isTouched, "useInputValAndError-isTouched");
   Logger.info(debug, null, null, "end");
 
   return {
@@ -44,16 +41,7 @@ export const useInputValAndError = <T = any,>(name: string, directDefaultValue?:
     ...methods,
     error,
     fieldState: {
-      // invalid,
       isTouched,
-      // isValidating,
     },
-    // formState: {
-    //   isLoading,
-    //   isSubmitSuccessful,
-    //   isSubmitted,
-    //   isSubmitting,
-    //   submitCount,
-    // },
   };
 };

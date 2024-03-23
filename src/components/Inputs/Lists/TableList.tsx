@@ -19,12 +19,11 @@ const TableTH = styled.th`
   top: 0;
   background-color: gainsboro;
   z-index: 1;
-  padding:5px
+  padding: 5px;
 `;
 const TableTD = styled.td``;
 const TableTR = styled.tr``;
-const TableHeaderTR = styled.tr`
-`;
+const TableHeaderTR = styled.tr``;
 
 const IconUp = styled(FaPlusSquare)`
   color: green;
@@ -59,7 +58,7 @@ const TableList = (props: ITableList) => {
   }, []);
 
   return (
-    <InputWrapper empty={[emptyRow]} type={props.type ?? "tablelist"} {...props}>
+    <InputWrapper disableController empty={[emptyRow]} type={props.type ?? "tablelist"} {...props}>
       <_Table {...props} emptyRow={emptyRow} />
     </InputWrapper>
   );
@@ -75,14 +74,11 @@ const _Table = (props: any) => {
   const TableTHTemplate = props.elemTH ?? TableTH;
   const TableTDTemplate = props.elemTD ?? TableTD;
 
-  
-
   useEffect(() => {
     if (fields.length === 0) {
       append(props.emptyRow);
     }
   });
-
 
   const headerGenerator = useMemo(
     () =>
