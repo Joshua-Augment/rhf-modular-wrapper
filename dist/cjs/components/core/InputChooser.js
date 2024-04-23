@@ -58,7 +58,40 @@ var InputChooser = function (props) {
                 return (0, jsx_runtime_1.jsx)(index_1.Line, __assign({}, props));
         }
     }, [props === null || props === void 0 ? void 0 : props.items, props === null || props === void 0 ? void 0 : props.name, props.type, props === null || props === void 0 ? void 0 : props.options, props.placeholder, props.value, props.defaultValue]);
-    return OutputComponent;
+    switch (props.type) {
+        case "custom":
+            var Elem = props.elem;
+            return (0, jsx_runtime_1.jsx)(Elem, __assign({}, props));
+        case "dropzone":
+            return (0, jsx_runtime_1.jsx)(index_1.DropzoneUploader, __assign({}, props));
+        case "yesno":
+            return (0, jsx_runtime_1.jsx)(index_1.YesNo, __assign({}, props));
+        case "switch":
+            return (0, jsx_runtime_1.jsx)(index_1.Switch, __assign({}, props));
+        case "checkbox":
+            return (0, jsx_runtime_1.jsx)(index_1.Checkbox, __assign({}, props));
+        case "radio":
+            return (0, jsx_runtime_1.jsx)(index_1.Radiobox, __assign({ options: props.options }, props));
+        case "radiobox":
+            return (0, jsx_runtime_1.jsx)(index_1.Radiobox, __assign({ options: props.options }, props));
+        case "wysiwyg":
+            return (0, jsx_runtime_1.jsx)(index_1.WYSIWYGEditor, __assign({}, props));
+        case "datepicker":
+            return (0, jsx_runtime_1.jsx)(index_1.DatePicker, __assign({}, props));
+        case "select":
+            return (0, jsx_runtime_1.jsx)(index_1.Select, __assign({}, props, { options: props.options }));
+        case "select_async":
+            return (0, jsx_runtime_1.jsx)(index_1.AsyncSelect, __assign({}, props, { options: props.options, loadOptions: props.loadOptions }));
+        case "textarea":
+            return (0, jsx_runtime_1.jsx)(index_1.Lines, __assign({}, props));
+        case "list":
+            return (0, jsx_runtime_1.jsx)(index_1.FormList, __assign({ disableController: true }, props, { items: props.items }));
+        case "tablelist":
+            return (0, jsx_runtime_1.jsx)(index_1.TableList, __assign({ disableController: true }, props, { items: props.items }));
+        default:
+            return (0, jsx_runtime_1.jsx)(index_1.Line, __assign({}, props));
+    }
+    // return OutputComponent;
 };
 exports.default = (0, react_1.memo)(InputChooser);
 //# sourceMappingURL=InputChooser.js.map

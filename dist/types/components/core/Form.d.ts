@@ -9,6 +9,7 @@ export type TTemplateContext = {
     buttonTemplate: null | React.ComponentType<ISubmitButton> | React.ComponentType<any>;
     elements: Record<TListInputs, React.ComponentType<any>>;
     debug: boolean;
+    id: string;
 };
 export declare const ThemeContext: React.Context<TTemplateContext>;
 export declare const Form: <T extends FieldValues>(props: IForm<T>) => import("react/jsx-runtime").JSX.Element;

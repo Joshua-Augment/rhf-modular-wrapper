@@ -32,13 +32,18 @@ var Select = function (props) {
     return (_jsx(InputWrapper, __assign({ empty: null, type: (_a = props.type) !== null && _a !== void 0 ? _a : "select" }, props, { noBorder: true }, { children: _jsx(_Select, __assign({}, _props)) })));
 };
 var _Select = function (props) {
-    var _a, _b, _c, _d, _e, _f, _g;
-    var _h = useState((_a = props.options) !== null && _a !== void 0 ? _a : []), options = _h[0], setOptions = _h[1];
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+    var _k = useState((_a = props.options) !== null && _a !== void 0 ? _a : []), options = _k[0], setOptions = _k[1];
     var _options = props.options.map(function (x) { return x.value; }).join(",");
     // Synchronization
     useEffect(function () {
         setOptions(props.options);
     }, [_options]);
+    useEffect(function () {
+        if (props.value === undefined) {
+            props.onChange(null);
+        }
+    }, [props.value]);
     var omitOptions = props.omitOptions;
     var omitFilter = useMemo(function () { return (omitOptions ? omitOptions.map(function (x) { return (typeof x === "string" || typeof x === "number" ? x : x === null || x === void 0 ? void 0 : x.value); }) : null); }, [omitOptions]);
     var filteredOmittedOptions = options.filter(function (x) {
@@ -76,7 +81,7 @@ var _Select = function (props) {
             }
         }
     };
-    return props.isCreatable !== undefined ? (_jsx(SelectCreatableInput, __assign({ styles: { container: function (base) { return (__assign(__assign({}, base), { width: "100%" })); } }, onCreateOption: createNew, onBlur: props.onBlur }, props, props.rsOptions, { options: filteredOmittedOptions, error: props.error, isDisabled: (_d = (_c = (_b = props.rsOptions) === null || _b === void 0 ? void 0 : _b.isDisabled) !== null && _c !== void 0 ? _c : props.disabled) !== null && _d !== void 0 ? _d : false, name: props.name, value: props.value, onChange: function (a) { return props.onChange(a); } }))) : (_jsx(SelectInput, __assign({ styles: { container: function (base) { return (__assign(__assign({}, base), { width: "100%" })); } } }, props, props.rsOptions, { options: filteredOmittedOptions, onBlur: props.onBlur, error: props.error, isDisabled: (_g = (_f = (_e = props.rsOptions) === null || _e === void 0 ? void 0 : _e.isDisabled) !== null && _f !== void 0 ? _f : props.disabled) !== null && _g !== void 0 ? _g : false, name: props.name, value: props.value, onChange: function (a) { return props.onChange(a); } })));
+    return props.isCreatable !== undefined ? (_jsx(SelectCreatableInput, __assign({ styles: { container: function (base) { return (__assign(__assign({}, base), { width: "100%" })); } }, onCreateOption: createNew, onBlur: props.onBlur }, props, props.rsOptions, { options: filteredOmittedOptions, error: props.error, isDisabled: (_d = (_c = (_b = props.rsOptions) === null || _b === void 0 ? void 0 : _b.isDisabled) !== null && _c !== void 0 ? _c : props.disabled) !== null && _d !== void 0 ? _d : false, name: props.name, value: (_e = props.value) !== null && _e !== void 0 ? _e : null, onChange: function (a) { return props.onChange(a); } }))) : (_jsx(SelectInput, __assign({ styles: { container: function (base) { return (__assign(__assign({}, base), { width: "100%" })); } } }, props, props.rsOptions, { options: filteredOmittedOptions, onBlur: props.onBlur, error: props.error, isDisabled: (_h = (_g = (_f = props.rsOptions) === null || _f === void 0 ? void 0 : _f.isDisabled) !== null && _g !== void 0 ? _g : props.disabled) !== null && _h !== void 0 ? _h : false, name: props.name, value: (_j = props.value) !== null && _j !== void 0 ? _j : null, onChange: function (a) { return props.onChange(a); } })));
 };
 export default Select;
 //# sourceMappingURL=index.js.map

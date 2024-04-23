@@ -15,6 +15,9 @@ const _AsyncSelect = (props: any) => {
   console.log(`[Select] [${props.name}] props : `,props)
   console.log(`[Select] [${props.name}] options : `,options)
 
+  useEffect(()=>{
+    if (props.value === undefined) {props.onChange(null)}
+  },[props.value])
   useEffect(()=> {
     setOptions(props.options ?? [])
   },[JSON.stringify(props.options)])
@@ -45,6 +48,8 @@ const _AsyncSelect = (props: any) => {
       }
   }
 
+  console.log(`AsyncSelect Value [${props.name}]`,props.value)
+
   return props.isCreatable !== undefined ? 
   <AsyncCreatableSelectInput
     styles={{container: (base) => ({...base, width:'100%'})}}
@@ -53,7 +58,7 @@ const _AsyncSelect = (props: any) => {
     options={options}
     isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
     name={props.name}
-    value={props.value}
+    value={props.value ?? null}
     onChange={(a) => props.onChange(a)}
     error={props.error}
     {...props.rsOptions}
@@ -66,7 +71,7 @@ const _AsyncSelect = (props: any) => {
     options={options}
     isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
     name={props.name}
-    value={props.value}
+    value={props.value ?? null}
     onChange={(a) => props.onChange(a)}
     error={props.error}
     {...props.rsOptions}

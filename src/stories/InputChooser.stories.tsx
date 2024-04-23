@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { ComponentMeta } from "@storybook/react";
-import { InputChooser } from "../components";
+import { InputChooser, SubmitButton } from "../components";
 import { Template } from "./_story_template";
+import { Form } from "../components";
 
 export default {
   title: "Components/InputChooser",
@@ -36,6 +37,32 @@ SimpleInputChooser.args = {
     </>
   ),
 };
+
+export const ChangingProps = () => {
+  const [label, setLabel]= useState('Label 1')
+  const labels = ['Label 1', 'Label 2', 'Label 3']
+
+  const changeLabel = () => {
+    const currentIndex = labels.indexOf(label)
+    const nextIndex = currentIndex === 2 ? 0 : currentIndex + 1
+
+    setLabel(labels[nextIndex])
+  }
+
+  const onSubmit = (a:any) => new Promise(resolve => {
+    console.log(a)
+    resolve(true)
+  })
+
+  return <>
+    <button onClick={()=>changeLabel()}>Change Label</button>
+    <Form onSubmit={onSubmit}>
+      <InputChooser name='text' label={label} />
+      <SubmitButton>Submit</SubmitButton>
+    </Form>
+  </>
+
+}
 
 export const MappedInputChooser = Template.bind({});
 const mappedFields: any[][] = [

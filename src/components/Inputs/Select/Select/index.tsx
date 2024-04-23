@@ -27,6 +27,10 @@ const _Select = (props: any) => {
     setOptions(props.options);
   }, [_options]);
 
+  useEffect(()=>{
+   if (props.value === undefined) { props.onChange(null)}
+  },[props.value])
+
   const omitOptions: BaseSelect["omitOptions"] = props.omitOptions;
   const omitFilter = useMemo(
     () => (omitOptions ? omitOptions.map((x) => (typeof x === "string" || typeof x === "number" ? x : (x?.value as string | number))) : null),
@@ -81,7 +85,7 @@ const _Select = (props: any) => {
       error={props.error}
       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
       name={props.name}
-      value={props.value}
+      value={props.value ?? null}
       onChange={(a) => props.onChange(a)}
       // value={value}
       // onChange={(a:TSelectOption) => setValue(props.name, a)}
@@ -96,7 +100,7 @@ const _Select = (props: any) => {
       error={props.error}
       isDisabled={props.rsOptions?.isDisabled ?? props.disabled ?? false}
       name={props.name}
-      value={props.value}
+      value={props.value ?? null}
       onChange={(a) => props.onChange(a)}
     />
   );

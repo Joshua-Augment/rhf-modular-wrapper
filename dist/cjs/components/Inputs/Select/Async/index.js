@@ -33,10 +33,15 @@ var AsyncSelect = function (props) {
     return (0, jsx_runtime_1.jsx)(index_1.default, __assign({ empty: null, type: (_a = props.type) !== null && _a !== void 0 ? _a : 'select_async' }, props, { noBorder: true }, { children: (0, jsx_runtime_1.jsx)(_AsyncSelect, __assign({}, props)) }));
 };
 var _AsyncSelect = function (props) {
-    var _a, _b, _c, _d, _e, _f, _g;
-    var _h = (0, react_1.useState)((_a = props.options) !== null && _a !== void 0 ? _a : []), options = _h[0], setOptions = _h[1];
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+    var _k = (0, react_1.useState)((_a = props.options) !== null && _a !== void 0 ? _a : []), options = _k[0], setOptions = _k[1];
     console.log("[Select] [".concat(props.name, "] props : "), props);
     console.log("[Select] [".concat(props.name, "] options : "), options);
+    (0, react_1.useEffect)(function () {
+        if (props.value === undefined) {
+            props.onChange(null);
+        }
+    }, [props.value]);
     (0, react_1.useEffect)(function () {
         var _a;
         setOptions((_a = props.options) !== null && _a !== void 0 ? _a : []);
@@ -67,10 +72,11 @@ var _AsyncSelect = function (props) {
             callback(options);
         }
     };
+    console.log("AsyncSelect Value [".concat(props.name, "]"), props.value);
     return props.isCreatable !== undefined ?
-        (0, jsx_runtime_1.jsx)(async_creatable_1.default, __assign({ styles: { container: function (base) { return (__assign(__assign({}, base), { width: '100%' })); } }, onCreateOption: createNew }, props, { options: options, isDisabled: (_d = (_c = (_b = props.rsOptions) === null || _b === void 0 ? void 0 : _b.isDisabled) !== null && _c !== void 0 ? _c : props.disabled) !== null && _d !== void 0 ? _d : false, name: props.name, value: props.value, onChange: function (a) { return props.onChange(a); }, error: props.error }, props.rsOptions, { loadOptions: function (a, b) { return props.allLoad ? props.allLoad(a, props.name, props.getValues(), function (retOptions) { return omitHandler(retOptions, b); }) : props.loadOptions(a, function (retOptions) { return omitHandler(retOptions, b); }); } }))
+        (0, jsx_runtime_1.jsx)(async_creatable_1.default, __assign({ styles: { container: function (base) { return (__assign(__assign({}, base), { width: '100%' })); } }, onCreateOption: createNew }, props, { options: options, isDisabled: (_d = (_c = (_b = props.rsOptions) === null || _b === void 0 ? void 0 : _b.isDisabled) !== null && _c !== void 0 ? _c : props.disabled) !== null && _d !== void 0 ? _d : false, name: props.name, value: (_e = props.value) !== null && _e !== void 0 ? _e : null, onChange: function (a) { return props.onChange(a); }, error: props.error }, props.rsOptions, { loadOptions: function (a, b) { return props.allLoad ? props.allLoad(a, props.name, props.getValues(), function (retOptions) { return omitHandler(retOptions, b); }) : props.loadOptions(a, function (retOptions) { return omitHandler(retOptions, b); }); } }))
         :
-            (0, jsx_runtime_1.jsx)(async_1.default, __assign({ styles: { container: function (base) { return (__assign(__assign({}, base), { width: '100%' })); } } }, props, { options: options, isDisabled: (_g = (_f = (_e = props.rsOptions) === null || _e === void 0 ? void 0 : _e.isDisabled) !== null && _f !== void 0 ? _f : props.disabled) !== null && _g !== void 0 ? _g : false, name: props.name, value: props.value, onChange: function (a) { return props.onChange(a); }, error: props.error }, props.rsOptions, { loadOptions: function (a, b) { return props.allLoad ? props.allLoad(a, props.name, props.getValues(), function (retOptions) { return omitHandler(retOptions, b); }) : props.loadOptions(a, function (retOptions) { return omitHandler(retOptions, b); }); } }));
+            (0, jsx_runtime_1.jsx)(async_1.default, __assign({ styles: { container: function (base) { return (__assign(__assign({}, base), { width: '100%' })); } } }, props, { options: options, isDisabled: (_h = (_g = (_f = props.rsOptions) === null || _f === void 0 ? void 0 : _f.isDisabled) !== null && _g !== void 0 ? _g : props.disabled) !== null && _h !== void 0 ? _h : false, name: props.name, value: (_j = props.value) !== null && _j !== void 0 ? _j : null, onChange: function (a) { return props.onChange(a); }, error: props.error }, props.rsOptions, { loadOptions: function (a, b) { return props.allLoad ? props.allLoad(a, props.name, props.getValues(), function (retOptions) { return omitHandler(retOptions, b); }) : props.loadOptions(a, function (retOptions) { return omitHandler(retOptions, b); }); } }));
     // return <Controller      
     //   control={props.control}
     //   name={props.name}

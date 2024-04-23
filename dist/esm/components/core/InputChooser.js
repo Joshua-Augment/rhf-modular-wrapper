@@ -53,7 +53,40 @@ var InputChooser = function (props) {
                 return _jsx(Line, __assign({}, props));
         }
     }, [props === null || props === void 0 ? void 0 : props.items, props === null || props === void 0 ? void 0 : props.name, props.type, props === null || props === void 0 ? void 0 : props.options, props.placeholder, props.value, props.defaultValue]);
-    return OutputComponent;
+    switch (props.type) {
+        case "custom":
+            var Elem = props.elem;
+            return _jsx(Elem, __assign({}, props));
+        case "dropzone":
+            return _jsx(DropzoneUploader, __assign({}, props));
+        case "yesno":
+            return _jsx(YesNo, __assign({}, props));
+        case "switch":
+            return _jsx(Switch, __assign({}, props));
+        case "checkbox":
+            return _jsx(Checkbox, __assign({}, props));
+        case "radio":
+            return _jsx(Radiobox, __assign({ options: props.options }, props));
+        case "radiobox":
+            return _jsx(Radiobox, __assign({ options: props.options }, props));
+        case "wysiwyg":
+            return _jsx(WYSIWYGEditor, __assign({}, props));
+        case "datepicker":
+            return _jsx(DatePicker, __assign({}, props));
+        case "select":
+            return _jsx(Select, __assign({}, props, { options: props.options }));
+        case "select_async":
+            return _jsx(AsyncSelect, __assign({}, props, { options: props.options, loadOptions: props.loadOptions }));
+        case "textarea":
+            return _jsx(Lines, __assign({}, props));
+        case "list":
+            return _jsx(FormList, __assign({ disableController: true }, props, { items: props.items }));
+        case "tablelist":
+            return _jsx(TableList, __assign({ disableController: true }, props, { items: props.items }));
+        default:
+            return _jsx(Line, __assign({}, props));
+    }
+    // return OutputComponent;
 };
 export default memo(InputChooser);
 //# sourceMappingURL=InputChooser.js.map

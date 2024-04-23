@@ -6,8 +6,9 @@ export const Template = ({defaultValues = {}, children, yupSchema, ...formProps}
   const [response, setResponse] = useState<string|null>(null)
 
   const _onSubmit = (a:any) => new Promise((resolve, reject) => {
-    // console.log("[Raw Submit] - ",a)
+    console.log("[Raw Submit] - ",a)
     setResponse(JSON.stringify(a,( key, value) => key == 'parent' ? null : value,2))
+    return resolve(true)
   })
 
   return <div>

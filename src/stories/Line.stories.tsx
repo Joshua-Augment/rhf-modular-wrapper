@@ -14,6 +14,8 @@ export default {
 
 // const onSubmit = (a:any) => new Promise((resolve, reject) => resolve(// console.log('FormSubmission:',a)))
 
+
+
 export const LinesBootstrap = Template.bind({
   defaultValues: {
     line: {
@@ -21,6 +23,7 @@ export const LinesBootstrap = Template.bind({
     },
   },
 });
+
 LinesBootstrap.args = {
   defaultValues: {
     textDef: "Default Value Given",
@@ -38,6 +41,8 @@ LinesBootstrap.args = {
     </>
   ), 
 };
+
+
 
 export const LineWithButton = Template.bind({});
 LineWithButton.args = {

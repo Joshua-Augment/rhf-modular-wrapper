@@ -15,7 +15,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "../styling/form_bootstrap.css";
 import "../styling/core.css";
-export var ThemeContext = createContext({ debug: false, inputTemplate: null, buttonTemplate: null, elements: {} });
+export var ThemeContext = createContext({ id: '', debug: false, inputTemplate: null, buttonTemplate: null, elements: {} });
 export var Form = function (props) {
     var _a, _b, _c, _d, _e, _f, _g, _h;
     var formID = useMemo(function () { var _a; return (_a = props.id) !== null && _a !== void 0 ? _a : "rhf-wc-f-".concat(new Date().getTime()); }, []);
@@ -29,21 +29,30 @@ export var Form = function (props) {
         shouldFocusError: (_d = props.shouldFocusError) !== null && _d !== void 0 ? _d : true,
         shouldUnregister: (_e = props.shouldUnregister) !== null && _e !== void 0 ? _e : true,
         shouldUseNativeValidation: (_f = props.shouldUseNativeValidation) !== null && _f !== void 0 ? _f : false,
-        delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined,
+        delayError: (_g = props.delayError) !== null && _g !== void 0 ? _g : undefined
     });
     var inputWrapper = useMemo(function () { var _a; return (_a = props.inputWrapper) !== null && _a !== void 0 ? _a : null; }, []);
     var buttonTemplate = useMemo(function () { var _a; return (_a = props.buttonWrapper) !== null && _a !== void 0 ? _a : null; }, []);
     var elements = useMemo(function () { var _a; return (_a = props.elements) !== null && _a !== void 0 ? _a : {}; }, []);
+    var handleSubmit = function (data, event) { return new Promise(function (resolve, reject) {
+        console.log('HandleSubmit', data, event);
+        event.preventDefault();
+        event.stopPropagation();
+        props.onSubmit(data, event).then(resolve);
+    }); };
     return (_jsx(ThemeContext.Provider, __assign({ value: {
+            id: formID,
             inputTemplate: inputWrapper,
             buttonTemplate: buttonTemplate,
             elements: elements,
             debug: (_h = props.debug) !== null && _h !== void 0 ? _h : false,
-        } }, { children: _jsx(FormProvider, __assign({}, methods, { children: _jsx("form", __assign({ onSubmit: methods.handleSubmit(props.onSubmit, props.onInvalid), id: formID }, { children: props.children })) })) })));
+        } }, { children: _jsx(FormProvider, __assign({}, methods, { children: _jsx("form", __assign({ onSubmit: methods.handleSubmit(handleSubmit, props.onInvalid), id: formID }, { children: props.children })) })) })));
 };
 export var SubmitButton = function (props) {
     var _a, _b, _c;
-    var Wrapper = useContext(ThemeContext).buttonTemplate;
-    return Wrapper === null ? (_jsx("button", __assign({ type: "submit", className: "".concat((_a = props.buttonClass) !== null && _a !== void 0 ? _a : "") }, { children: (_c = (_b = props.label) !== null && _b !== void 0 ? _b : props.children) !== null && _c !== void 0 ? _c : "" }))) : (_jsx(Wrapper, __assign({}, props)));
+    // const { handleSubmit } = useFormContext()
+    var _d = useContext(ThemeContext), Wrapper = _d.buttonTemplate, id = _d.id;
+    console.log("SubmitButton - id ", id);
+    return Wrapper === null ? (_jsx("button", __assign({ type: "submit", form: id, className: "".concat((_a = props.buttonClass) !== null && _a !== void 0 ? _a : "") }, { children: (_c = (_b = props.label) !== null && _b !== void 0 ? _b : props.children) !== null && _c !== void 0 ? _c : "" }))) : (_jsx(Wrapper, __assign({}, props)));
 };
 //# sourceMappingURL=Form.js.map
