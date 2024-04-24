@@ -15,7 +15,9 @@ const _Lines = (props: any) => {
     <textarea
       id={props.name}
       className={props?.customClasses?.inputClassName ?? ""}
-      {...props.register(props.name)}
+      value={props.value}
+      onChange={(e)=>props.onChange(e.target.value)}
+      // {...props.register(props.name, {value: props.value})}
       placeholder={props.placeholder}
       rows={props.rows ?? 3}
       cols={props.cols}

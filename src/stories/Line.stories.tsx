@@ -13,7 +13,23 @@ export default {
 } as ComponentMeta<typeof Line>;
 
 // const onSubmit = (a:any) => new Promise((resolve, reject) => resolve(// console.log('FormSubmission:',a)))
-
+const calculated = (thisField, thisName, thatField, allFields) => {
+  return `${thatField}-Calculated`
+}
+export const CalculatedField = Template.bind({})
+CalculatedField.args = {
+  children : <>
+    <Line name='text1' label="Text 1" />
+    <Line name='text2' label="Text 2" calculatedField={{isPromise:false, find:['text1'], calculate: calculated}}/>
+  </>
+}
+export const CalculatedFieldLines = Template.bind({})
+CalculatedField.args = {
+  children : <>
+    <Lines name='text1' label="Text 1" />
+    <Lines name='text2' label="Text 2" calculatedField={{isPromise:false, find:['text1'], calculate: calculated}}/>
+  </>
+}
 
 
 export const LinesBootstrap = Template.bind({

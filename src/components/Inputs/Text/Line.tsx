@@ -12,12 +12,15 @@ const Line = (props: LineInputProps) => {
 };
 
 const _Line = (props: any) => {
+  console.log("_Line", props)
   return (
     <input
       disabled={props.disabled}
       id={props.name}
       className={props?.customClasses?.inputClassName ?? ""}
-      {...props.register(props.name)}
+      value={props.value}
+      onChange={(e) => props.onChange(e.target.value)}
+      // {...props.register(props.name)}
       placeholder={props.placeholder}
       type={props.type ?? "text"}
     />

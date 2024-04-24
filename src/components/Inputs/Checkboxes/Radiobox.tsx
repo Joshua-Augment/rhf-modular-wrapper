@@ -19,13 +19,13 @@ const _Radiobox = (props: any) => {
       {props.options.map((option: TRadioOption, i: number) =>
         option.reversed ? (
           <React.Fragment key={`rhf-${props.name}-rb-${option.value}`}>
-            <input {...props.register(props.name)}  type="radio" id={`${props.name}-${option.value}`}  value={option.value} />
+            <input onChange={(e) => props.onChange(e.target.value)} checked={props.value === option.value}  type="radio" id={`${props.name}-${option.value}`}  value={option.value} />
             <label htmlFor={`${props.name}-${option.value}`}>{option.label}</label>
           </React.Fragment>
         ) : (
           <React.Fragment key={`rhf-${props.name}-rb-${option.value}`}>
             <label htmlFor={`${props.name}-${option.value}`}>{option.label}</label>
-            <input {...props.register(props.name)}  type="radio" id={`${props.name}-${option.value}`}  value={option.value} />
+            <input onChange={(e) => props.onChange(e.target.value)} checked={props.value === option.value}  type="radio" id={`${props.name}-${option.value}`}  value={option.value} />
           </React.Fragment>
         )
       )}
