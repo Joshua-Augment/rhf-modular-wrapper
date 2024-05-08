@@ -22,7 +22,10 @@ var Line = function (props) {
 };
 var _Line = function (props) {
     var _a, _b, _c;
-    return ((0, jsx_runtime_1.jsx)("input", __assign({ disabled: props.disabled, id: props.name, className: (_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.inputClassName) !== null && _b !== void 0 ? _b : "" }, props.register(props.name), { placeholder: props.placeholder, type: (_c = props.type) !== null && _c !== void 0 ? _c : "text" })));
+    console.log("_Line", props);
+    return ((0, jsx_runtime_1.jsx)("input", { disabled: props.disabled, id: props.name, className: (_b = (_a = props === null || props === void 0 ? void 0 : props.customClasses) === null || _a === void 0 ? void 0 : _a.inputClassName) !== null && _b !== void 0 ? _b : "", value: props.value, onChange: function (e) { return props.onChange(e.target.value); }, 
+        // {...props.register(props.name)}
+        placeholder: props.placeholder, type: (_c = props.type) !== null && _c !== void 0 ? _c : "text" }));
 };
 exports.default = Line;
 //# sourceMappingURL=Line.js.map

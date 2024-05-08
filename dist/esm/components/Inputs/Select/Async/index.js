@@ -42,17 +42,19 @@ var _AsyncSelect = function (props) {
         setOptions((_a = props.options) !== null && _a !== void 0 ? _a : []);
     }, [JSON.stringify(props.options)]);
     var createNew = function (a) {
+        var _a;
         if (props.isCreatable !== undefined) {
             if (props.isCreatable === true) {
                 setOptions(__spreadArray([{ label: a, value: a }], options, true));
                 // setSelectedOption({ label: a, value: a });
-                props.onChange({ label: a, value: a });
+                props.onChange(props.isMulti || props.rsOptions.isMulti ? __spreadArray(__spreadArray([], ((_a = props.value) !== null && _a !== void 0 ? _a : []), true), [{ label: a, value: a }], false) : { label: a, value: a });
             }
             else {
                 props.isCreatable(a).then(function (opt) {
+                    var _a;
                     setOptions(__spreadArray([opt], options, true));
                     // setSelectedOption(opt);
-                    props.onChange(opt);
+                    props.onChange(props.isMulti || props.rsOptions.isMulti ? __spreadArray(__spreadArray([], ((_a = props.value) !== null && _a !== void 0 ? _a : []), true), [opt], false) : opt);
                 });
             }
         }

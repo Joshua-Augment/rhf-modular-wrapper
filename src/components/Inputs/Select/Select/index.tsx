@@ -5,7 +5,6 @@ import { BaseSelect, IInputsBasePropsNoSetters, ISelect, TSelectOption } from ".
 import InputWrapper from "../../../core/InputWrapper/index";
 
 const Select = (props: ISelect) => {
-
   const _props: IInputsBasePropsNoSetters = { ...props };
   delete _props.calculatedField;
   delete _props.externalStateSetter;
@@ -27,9 +26,11 @@ const _Select = (props: any) => {
     setOptions(props.options);
   }, [_options]);
 
-  useEffect(()=>{
-   if (props.value === undefined) { props.onChange(null)}
-  },[props.value])
+  useEffect(() => {
+    if (props.value === undefined) {
+      props.onChange(null);
+    }
+  }, [props.value]);
 
   const omitOptions: BaseSelect["omitOptions"] = props.omitOptions;
   const omitFilter = useMemo(
@@ -63,12 +64,12 @@ const _Select = (props: any) => {
       if (props.isCreatable === true) {
         setOptions([{ label: a, value: a }, ...options]);
         // setSelectedOption({ label: a, value: a });
-        props.onChange({ label: a, value: a });
+        props.onChange(props.isMulti || props.rsOptions.isMulti ? [...(props.value ?? []), { label: a, value: a }] : { label: a, value: a });
       } else {
         props.isCreatable(a).then((opt: TSelectOption) => {
           setOptions([opt, ...options]);
           // setSelectedOption(opt);
-          props.onChange(opt);
+          props.onChange(props.isMulti || props.rsOptions.isMulti ? [...(props.value ?? []), opt] : opt);
         });
       }
     }

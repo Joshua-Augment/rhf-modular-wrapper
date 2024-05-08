@@ -27,12 +27,12 @@ const _AsyncSelect = (props: any) => {
       if (props.isCreatable === true) {
         setOptions([{ label: a, value: a }, ...options]);
         // setSelectedOption({ label: a, value: a });
-        props.onChange({ label: a, value: a });
+        props.onChange(props.isMulti || props.rsOptions.isMulti ? [...(props.value ?? []), { label: a, value: a }] : { label: a, value: a });
       } else {
         props.isCreatable(a).then((opt:TSelectOption) => {
           setOptions([opt, ...options]);
           // setSelectedOption(opt);
-          props.onChange(opt);
+          props.onChange(props.isMulti || props.rsOptions.isMulti ? [...(props.value ?? []), opt]: opt);
         });
       }
     }
