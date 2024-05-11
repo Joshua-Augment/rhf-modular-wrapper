@@ -13,7 +13,8 @@ export interface ILines extends FormBaseInput<string> {
 }
 
 export interface IWYSIWYG extends FormBaseInput<string> {
-  quillProps ?: ReactQuillProps
+  quillProps ?: ReactQuillProps,
+  toolbar ?: any[] | {mobile: any[], normal : []}
 }
 
 export interface IWYSIWYG extends FormBaseInput<string> {}
