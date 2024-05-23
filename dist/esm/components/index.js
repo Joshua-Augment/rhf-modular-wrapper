@@ -1,3 +1,3 @@
-export * from "./Inputs/index";
-export * from "./core/index";
+export * from "./Inputs/index.js";
+export * from "./core/index.js";
 //# sourceMappingURL=index.js.map

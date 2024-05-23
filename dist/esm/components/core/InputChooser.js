@@ -11,9 +11,9 @@ var __assign = (this && this.__assign) || function () {
 };
 import { jsx as _jsx } from "react/jsx-runtime";
 import { memo, useContext, useMemo /* , { useMemo }  */ } from "react";
-import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList, } from "../Inputs/index";
-import Logger from "./Logger/index";
-import { ThemeContext } from "./Form";
+import { DatePicker, Select, AsyncSelect, WYSIWYGEditor, Line, Lines, YesNo, Checkbox, Radiobox, Switch, DropzoneUploader, FormList, TableList, } from "../Inputs/index.js";
+import Logger from "./Logger/index.js";
+import { ThemeContext } from "./Form.js";
 var InputChooser = function (props) {
     var debug = useContext(ThemeContext).debug;
     var OutputComponent = useMemo(function () {

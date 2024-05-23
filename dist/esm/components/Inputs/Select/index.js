@@ -1,3 +1,3 @@
-export { default as Select } from "./Select/index";
-export { default as AsyncSelect } from "./Async/index";
+export { default as Select } from "./Select/index.js";
+export { default as AsyncSelect } from "./Async/index.js";
 //# sourceMappingURL=index.js.map

@@ -71,12 +71,13 @@ var _Select = function (props) {
     //   }
     // },[props.options])
     var createNew = function (a) {
-        var _a;
+        var _a, _b, _c, _d;
         if (props.isCreatable !== undefined) {
+            var isMulti = (props === null || props === void 0 ? void 0 : props.rsOptions) ? (_c = (_b = (_a = props.rsOptions) === null || _a === void 0 ? void 0 : _a.isMulti) !== null && _b !== void 0 ? _b : props === null || props === void 0 ? void 0 : props.isMulti) !== null && _c !== void 0 ? _c : false : false;
             if (props.isCreatable === true) {
                 setOptions(__spreadArray([{ label: a, value: a }], options, true));
                 // setSelectedOption({ label: a, value: a });
-                props.onChange(props.isMulti || props.rsOptions.isMulti ? __spreadArray(__spreadArray([], ((_a = props.value) !== null && _a !== void 0 ? _a : []), true), [{ label: a, value: a }], false) : { label: a, value: a });
+                props.onChange(isMulti ? __spreadArray(__spreadArray([], ((_d = props.value) !== null && _d !== void 0 ? _d : []), true), [{ label: a, value: a }], false) : { label: a, value: a });
             }
             else {
                 props.isCreatable(a).then(function (opt) {

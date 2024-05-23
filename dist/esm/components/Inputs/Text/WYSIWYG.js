@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
 };
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import InputWrapper from "../../core/InputWrapper/index";
+import InputWrapper from "../../core/InputWrapper/index.js";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 var WYSIWYG = function (props) {

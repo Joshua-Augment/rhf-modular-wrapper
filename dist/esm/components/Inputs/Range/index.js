@@ -1,2 +1,2 @@
-export { default as Slider } from "./Slider/index";
+export { default as Slider } from "./Slider/index.js";
 //# sourceMappingURL=index.js.map

@@ -22,8 +22,8 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import { useContext } from "react";
 import { useController, useFormContext } from "react-hook-form";
-import Logger from "../Logger/index";
-import { ThemeContext } from "../Form";
+import Logger from "../Logger/index.js";
+import { ThemeContext } from "../Form.js";
 var accessObjectByDottedName = function (obj, name) {
     var keys = name.split(".");
     var result = obj;
