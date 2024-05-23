@@ -1,8 +1,8 @@
-export * from './selectInputs.js';
-export * from "./base.js";
-export * from "./date.js";
-export * from "./line.js";
-export * from "./uploads.js";
-export * from "./boxes.js";
-export * from "./slider.js";
+export * from './selectInputs';
+export * from "./base";
+export * from "./date";
+export * from "./line";
+export * from "./uploads";
+export * from "./boxes";
+export * from "./slider";
 //# sourceMappingURL=index.js.map

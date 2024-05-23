@@ -22,11 +22,11 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { useContext, useEffect, useMemo, useRef } from "react";
-import Logger from "../../../Logger/index.js";
+import Logger from "../../../Logger/index";
 import { useWatch } from "react-hook-form";
-import DefaultInputWrapper from "./DefaultInputWrapper.js";
-import { useInputValAndError } from "../../../hook/useInputValnError.js";
-import { ThemeContext } from "../../../Form.js";
+import DefaultInputWrapper from "./DefaultInputWrapper";
+import { useInputValAndError } from "../../../hook/useInputValnError";
+import { ThemeContext } from "../../../Form";
 var InputInnerWrapper = function (props) {
     return props.disableController ? _jsx(InputInnerWrapperNoController, __assign({}, props)) : _jsx(InputInnerWrapperWithController, __assign({}, props));
 };

@@ -22,7 +22,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useMemo, useState } from "react";
 import SelectInput from "react-select";
 import SelectCreatableInput from "react-select/creatable";
-import InputWrapper from "../../../core/InputWrapper/index.js";
+import InputWrapper from "../../../core/InputWrapper/index";
 var Select = function (props) {
     var _a;
     var _props = __assign({}, props);

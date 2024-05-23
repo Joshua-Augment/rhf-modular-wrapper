@@ -16,10 +16,10 @@ var __assign = (this && this.__assign) || function () {
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useMemo, useEffect } from "react";
 import { useFieldArray } from "react-hook-form";
-import InputChooser from "../../core/InputChooser.js";
+import InputChooser from "../../core/InputChooser";
 import { FaMinusSquare, FaPlusSquare } from "react-icons/fa";
 import styled from "styled-components";
-import { InputWrapper } from "../../core/index.js";
+import { InputWrapper } from "../../core/index";
 var Table = styled.table(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: 100%;\n  margin-top: 5px;\n  margin-bottom: 5px;\n"], ["\n  width: 100%;\n  margin-top: 5px;\n  margin-bottom: 5px;\n"])));
 var TableHead = styled.thead(templateObject_2 || (templateObject_2 = __makeTemplateObject([""], [""])));
 var TableBody = styled.tbody(templateObject_3 || (templateObject_3 = __makeTemplateObject([""], [""])));

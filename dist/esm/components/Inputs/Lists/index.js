@@ -1,4 +1,4 @@
-export { default as FormList } from "./FormList.js";
-export { default as TableList } from "./TableList.js";
-export { default as InputListtoTable } from "./InputListToTable.js";
+export { default as FormList } from "./FormList";
+export { default as TableList } from "./TableList";
+export { default as InputListtoTable } from "./InputListToTable";
 //# sourceMappingURL=index.js.map

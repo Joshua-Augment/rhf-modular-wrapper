@@ -10,7 +10,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import InputWrapper from '../../core/InputWrapper/index.js';
+import InputWrapper from '../../core/InputWrapper/index';
 import DatePickerComponent from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 var DatePicker = function (props) {
