@@ -148,13 +148,13 @@ const InputListToTable = (props: IInputToTableList) => {
     } 
   }
 
-  const headerGenerator = useMemo(()=> props.headerTemplate ?? <tr>
+  const headerGenerator = useMemo(()=> props.headerTemplate ? props.headerTemplate(props, fields) : <tr>
     {props.showIndex === true && <th></th>}
     {props.items.map((item,key) => <th key={`tl-${props.name}-${item.name}-th-${key}`}>{item.label}</th>)}
     <th></th>
   </tr>,[])
 
-  const footerGenerator = useMemo(()=> props.footerTemplate ?? headerGenerator,[])
+  const footerGenerator = useMemo(()=> props.footerTemplate ? props.footerTemplate(props, fields) : headerGenerator,[])
 
   const AddButton = useMemo(()=>{
     const buttonWrapper = (onClick:()=>void, Wrapper ?: any, ElemA ?: any) => {

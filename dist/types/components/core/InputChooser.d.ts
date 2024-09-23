@@ -1,4 +1,4 @@
 import React from "react";
-import { TListItems } from "./interfaces/lists";
-declare const _default: React.MemoExoticComponent<(props: TListItems) => import("react/jsx-runtime").JSX.Element>;
+import { InputChooserProps, InputType } from "./interfaces/lists";
+declare const _default: React.MemoExoticComponent<(<T extends InputType>(props: InputChooserProps<T>) => import("react/jsx-runtime").JSX.Element)>;
 export default _default;

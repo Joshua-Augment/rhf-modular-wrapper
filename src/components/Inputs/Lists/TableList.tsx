@@ -64,8 +64,9 @@ const TableList = (props: ITableList) => {
   );
 };
 
-const _Table = (props: any) => {
+const _Table = (props: ITableList) => {
   const { fields, append, insert, remove } = useFieldArray({ name: props.name });
+  console.log("TABLELIST_FIELDS", fields);
   const TableTemplate = props.elemTable ?? Table;
   const TableHeadTemplate = props.elemTableHead ?? TableHead;
   const TableBodyTemplate = props.elemTableBody ?? TableBody;
@@ -74,57 +75,102 @@ const _Table = (props: any) => {
   const TableTHTemplate = props.elemTH ?? TableTH;
   const TableTDTemplate = props.elemTD ?? TableTD;
 
+  const IconAdd = props.iconAdd ?? IconUp;
+  const IconRemove = props.iconRemove ?? IconDown;
+
+  const Row = React.memo(
+    ({
+      field,
+      index,
+      items,
+      emptyRow,
+      insert,
+      remove,
+      showIndex,
+    }: {
+      field: any;
+      index: number;
+      items: any[];
+      emptyRow: any[];
+      insert: any;
+      remove: any;
+      showIndex?: boolean;
+    }) => (
+      <TableTRTemplate key={`tr-${field.id}-${index}`}>
+        {showIndex && <TableTDTemplate>{index + 1}</TableTDTemplate>}
+        {items.map((item, iT) => (
+          <TableTDTemplate key={`td-${field.id}-${iT}`} style={{ ...(item?.cellProps ?? {}) }}>
+            <InputChooser fields={field[item.name] ?? null} {...item} noLabel name={`${props.name}.${index}.${item.name}`} />
+          </TableTDTemplate>
+        ))}
+        {props.fixed !== true && (
+          <TableTDTemplate>
+            <IconAdd onClick={() => insert(index + 1, emptyRow)} />
+            <IconRemove onClick={() => remove(index)} />
+          </TableTDTemplate>
+        )}
+      </TableTRTemplate>
+    )
+  );
+
   useEffect(() => {
     if (fields.length === 0) {
       append(props.emptyRow);
     }
-  });
+  },[]);
 
   const headerGenerator = useMemo(
     () =>
-      props.headerTemplate ?? (
+      props.headerTemplate ? (
+        props.headerTemplate(props, fields)
+      ) : (
         <TableHeadTemplate>
           <TableHeaderTRTemplate>
             {props.showIndex === true && <TableTHTemplate></TableTHTemplate>}
             {props.items.map((item: TListItems, key: number) => (
-              <TableTHTemplate key={`tl-${props.name}-${item.name}-th-${key}`}>{item.label}</TableTHTemplate>
+              <TableTHTemplate key={`tl-${props.name}-${item.name}-th-${key}`} style={{ ...(item?.cellProps ?? {}), ...(item?.headerProps ?? {}) }}>
+                {item.label}
+              </TableTHTemplate>
             ))}
             {props.fixed !== true && <TableTHTemplate></TableTHTemplate>}
           </TableHeaderTRTemplate>
         </TableHeadTemplate>
       ),
-    [props.headerTemplate]
+    [props.headerTemplate, fields]
   );
 
-  const footerGenerator = useMemo(() => props.footerTemplate ?? headerGenerator, [props.footerTemplate]);
+  // const footerGenerator = useMemo(
+  //   () => (props.footerTemplate ? props.footerTemplate(props, fields) : headerGenerator),
+  //   [props.footerTemplate, fields]
+  // );
+
+  const footerGenerator = props.footerTemplate ? props.footerTemplate(props, fields) : headerGenerator;
 
   const bodyGenerator = fields.map((field, i) => (
-    <TableTRTemplate key={`tr-${field.id}-${i}`}>
-      {props.showIndex === true && <TableTDTemplate>{i + 1}</TableTDTemplate>}
-      {props.items.map((item: TListItems, iT: number) => (
-        <TableTDTemplate key={`td-${field?.id}-${iT}`}>
-          <InputChooser fields={(field as any)?.[i]?.[item.name] ?? null} {...item} noLabel name={`${props.name}.${i}.${item.name}`} />
-        </TableTDTemplate>
-      ))}{" "}
-      {props.fixed !== true && (
-        <TableTDTemplate>
-          <IconUp onClick={() => insert(i + 1, props.emptyRow)} />{" "}
-          {
-            <IconDown
-              onClick={() => {
-                remove(i);
-              }}
-            />
-          }
-        </TableTDTemplate>
-      )}
-    </TableTRTemplate>
+    <Row
+      key={`row-${field.id}`}
+      field={field}
+      index={i}
+      items={props.items}
+      emptyRow={props.emptyRow}
+      insert={insert}
+      remove={remove}
+      showIndex={props.showIndex}
+    />
   ));
 
   return (
     <TableTemplate>
       {(props.header === undefined || props.header === "top" || props.header === "both" || props.header === "header_footer") && headerGenerator}
-      <TableBodyTemplate>{bodyGenerator}</TableBodyTemplate>
+      <TableBodyTemplate>
+        {bodyGenerator}
+
+        {props.add_element && !props.fixed &&  <TableTR>
+            <TableTH colSpan={props.items.length + (props.showIndex !== false ? 1:0)}>
+              <props.add_element onClick={()=>{ insert(fields.length, props.emptyRow)}} />
+            </TableTH>
+          </TableTR>}
+      </TableBodyTemplate>
       {props.header === "footer" || props.header === "header_footer"
         ? footerGenerator
         : (props.header === "bottom" || props.header === "both") && headerGenerator}

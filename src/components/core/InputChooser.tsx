@@ -1,4 +1,4 @@
-import React, { memo, useContext, useMemo /* , { useMemo }  */ } from "react";
+import React, { memo, useContext } from "react";
 import {
   DatePicker,
   Select,
@@ -14,50 +14,11 @@ import {
   FormList,
   TableList,
 } from "../Inputs/index";
-import { TListItems } from "./interfaces/lists";
-import Logger from "./Logger/index";
+import { IList, InputChooserProps, InputType, ITableList } from "./interfaces/lists";
 import { ThemeContext } from "./Form";
+import { IDatePicker, IRadiobox, ISelect, ISelectAsync, ISwitch } from "./interfaces";
 
-const InputChooser = (props: TListItems) => {
-  const { debug } = useContext(ThemeContext);
-  const OutputComponent = useMemo(() => {
-    Logger.info(debug, `Choosing Input`, "InputChooser", "start");
-    Logger.info(debug, null, null, "end");
-    switch (props.type) {
-      case "custom":
-        const Elem = props.elem;
-        return <Elem {...props} />;
-      case "dropzone":
-        return <DropzoneUploader {...props} />;
-      case "yesno":
-        return <YesNo {...props} />;
-      case "switch":
-        return <Switch {...props} />;
-      case "checkbox":
-        return <Checkbox {...props} />;
-      case "radio":
-        return <Radiobox options={props.options} {...props} />;
-      case "radiobox":
-        return <Radiobox options={props.options} {...props} />;
-      case "wysiwyg":
-        return <WYSIWYGEditor {...props} />;
-      case "datepicker":
-        return <DatePicker {...props} />;
-      case "select":
-        return <Select {...props} options={props.options} />;
-      case "select_async":
-        return <AsyncSelect {...props} options={props.options} loadOptions={props.loadOptions} />;
-      case "textarea":
-        return <Lines {...props} />;
-      case "list":
-        return <FormList disableController {...props} items={props.items} />;
-      case "tablelist":
-        return <TableList disableController {...props} items={props.items} />;
-      default:
-        return <Line {...props} />;
-    }
-  }, [props?.items, props?.name, props.type, props?.options, props.placeholder, props.value, props.defaultValue]);
-
+const InputChooser = <T extends InputType>(props: InputChooserProps<T>) => {
   switch (props.type) {
     case "custom":
       const Elem = props.elem;
@@ -67,27 +28,27 @@ const InputChooser = (props: TListItems) => {
     case "yesno":
       return <YesNo {...props} />;
     case "switch":
-      return <Switch {...props} />;
+      return <Switch {...(props as ISwitch)} />;
     case "checkbox":
       return <Checkbox {...props} />;
     case "radio":
-      return <Radiobox options={props.options} {...props} />;
+      return <Radiobox {...(props as IRadiobox)} />;
     case "radiobox":
-      return <Radiobox options={props.options} {...props} />;
+      return <Radiobox {...(props as IRadiobox)} />;
     case "wysiwyg":
       return <WYSIWYGEditor {...props} />;
     case "datepicker":
-      return <DatePicker {...props} />;
+      return <DatePicker {...(props as IDatePicker)} />;
     case "select":
-      return <Select {...props} options={props.options} />;
+      return <Select {...(props as ISelect)} />;
     case "select_async":
-      return <AsyncSelect {...props} options={props.options} loadOptions={props.loadOptions} />;
+      return <AsyncSelect {...(props as ISelectAsync)} />;
     case "textarea":
       return <Lines {...props} />;
     case "list":
-      return <FormList disableController {...props} items={props.items} />;
+      return <FormList disableController {...(props as IList)} />;
     case "tablelist":
-      return <TableList disableController {...props} items={props.items} />;
+      return <TableList disableController {...(props as ITableList)} />;
     default:
       return <Line {...props} />;
   }

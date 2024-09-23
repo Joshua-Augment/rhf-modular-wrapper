@@ -18,10 +18,10 @@ const InputInnerWrapperNoController = (props: IInputInnerWrapper) => {
   const value = props.value ?? null;
   const error = null;
   const fieldState = {};
-  const onChange = (a:any) => {};
+  const onChange = (a: any) => {};
   const onBlur = () => {};
   const methods = {
-    getValues : (a ?:any) => a
+    getValues: (a?: any) => a,
   };
   const {
     inputWrapper: _propsInputWrapper,
@@ -37,9 +37,10 @@ const InputInnerWrapperNoController = (props: IInputInnerWrapper) => {
   const firstUpdate = useRef(true);
   Logger.info(debug, `First Update : ${firstUpdate.current}`, `${_propsName} - InputWrapperv2`);
 
-  const watchCalculated = useWatch({
-    name: props?.calculatedField?.find !== undefined ? props.calculatedField.find : (`#_#_noinputtofind_#_#` as any),
-  });
+  // const watchCalculated = useWatch({
+  //   name: props?.calculatedField?.find !== undefined ? props.calculatedField.find : (`#_#_noinputtofind_#_#` as any),
+  // });
+  const watchCalculated = null;
   Logger.info(debug, `Watching Calculated : ${String(watchCalculated)}`, `${_propsName} - InputWrapperv2`);
 
   useEffect(() => {

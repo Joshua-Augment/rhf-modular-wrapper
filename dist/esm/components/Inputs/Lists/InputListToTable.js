@@ -188,11 +188,8 @@ var InputListToTable = function (props) {
             }
         });
     }); };
-    var headerGenerator = useMemo(function () {
-        var _a;
-        return (_a = props.headerTemplate) !== null && _a !== void 0 ? _a : _jsxs("tr", { children: [props.showIndex === true && _jsx("th", {}), props.items.map(function (item, key) { return _jsx("th", { children: item.label }, "tl-".concat(props.name, "-").concat(item.name, "-th-").concat(key)); }), _jsx("th", {})] });
-    }, []);
-    var footerGenerator = useMemo(function () { var _a; return (_a = props.footerTemplate) !== null && _a !== void 0 ? _a : headerGenerator; }, []);
+    var headerGenerator = useMemo(function () { return props.headerTemplate ? props.headerTemplate(props, fields) : _jsxs("tr", { children: [props.showIndex === true && _jsx("th", {}), props.items.map(function (item, key) { return _jsx("th", { children: item.label }, "tl-".concat(props.name, "-").concat(item.name, "-th-").concat(key)); }), _jsx("th", {})] }); }, []);
+    var footerGenerator = useMemo(function () { return props.footerTemplate ? props.footerTemplate(props, fields) : headerGenerator; }, []);
     var AddButton = useMemo(function () {
         var _a, _b;
         var buttonWrapper = function (onClick, Wrapper, ElemA) {

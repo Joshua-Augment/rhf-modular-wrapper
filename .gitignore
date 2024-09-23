@@ -1,3 +1,5 @@
 .storybook
 backup
 node_modules
+
+*storybook.log

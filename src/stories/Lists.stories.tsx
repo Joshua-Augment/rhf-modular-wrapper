@@ -1,15 +1,7 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
 
-import {
-  DatePicker,
-  FormList,
-  InputListtoTable,
-  Line,
-  Select,
-  TableList,
-  WYSIWYGEditor,
-} from "../components";
+import { DatePicker, FormList, InputListtoTable, Line, Select, TableList, WYSIWYGEditor } from "../components";
 import { Template } from "./_story_template";
 
 import * as yup from "yup";
@@ -25,6 +17,12 @@ SimpleFormList.args = {
     <FormList
       showIndex
       label="Simple List"
+      emptyRow={{
+        data: new Date(),
+        name : "",
+        email: "",
+        password: "",
+      }}
       name="list"
       items={[
         { name: "date", type: "datepicker", label: "Register Date" },
@@ -83,19 +81,35 @@ SimpleTableList.args = {
   ),
 };
 
+export const TableWithAddButton = Template.bind({});
+TableWithAddButton.args = {
+  children: (
+    <TableList
+      showIndex
+      label="Simple Table List"
+      name="table_list"
+      items={[
+        { headerProps: {backgroundColor:'black'}, cellProps: { width: "50px", color: "red" }, name: "date", type: "datepicker", label: "Register Date" },
+        { name: "name", label: "name" },
+        { name: "email", label: "email", type: "email" },
+        { name: "password", label: "password", type: "password" },
+      ]}
+      add_element={({onClick}) => {
+        return <div onClick={()=>onClick()}>
+          Add New Row <button type='button'>New Row</button>
+        </div>
+      }}
+    />
+  ),
+};
+
 export const SimpleInputToTableList = Template.bind({});
 SimpleInputToTableList.args = {
   schema: yup.object({
     inputs: yup.object({
       name: yup.string().required("NAME REQUIRED"),
       email: yup.string().email("YUP HAVE TO ADD A VALID EMAIL"),
-      type1: yup
-        .mixed()
-        .test(
-          "test",
-          "PLEASE CHOOSE AN INPUT",
-          (val) => val?.value !== undefined,
-        ),
+      type1: yup.mixed().test("test", "PLEASE CHOOSE AN INPUT", (val) => val?.value !== undefined),
     }),
   }),
   children: (
@@ -127,11 +141,7 @@ SimpleInputToTableList.args = {
         <Line name="inputs.name" label="Name" />
         <Line name="inputs.email" type="email" label="Email" />
         <DatePicker name="inputs.date" label="Date" />
-        <WYSIWYGEditor
-          name="inputs.remarks"
-          label="Remarks"
-          helperText="Optional Remarks if Any"
-        />
+        <WYSIWYGEditor name="inputs.remarks" label="Remarks" helperText="Optional Remarks if Any" />
         <Select
           name="inputs.type1"
           options={[

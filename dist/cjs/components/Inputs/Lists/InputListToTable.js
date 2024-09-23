@@ -216,11 +216,8 @@ var InputListToTable = function (props) {
             }
         });
     }); };
-    var headerGenerator = (0, react_1.useMemo)(function () {
-        var _a;
-        return (_a = props.headerTemplate) !== null && _a !== void 0 ? _a : (0, jsx_runtime_1.jsxs)("tr", { children: [props.showIndex === true && (0, jsx_runtime_1.jsx)("th", {}), props.items.map(function (item, key) { return (0, jsx_runtime_1.jsx)("th", { children: item.label }, "tl-".concat(props.name, "-").concat(item.name, "-th-").concat(key)); }), (0, jsx_runtime_1.jsx)("th", {})] });
-    }, []);
-    var footerGenerator = (0, react_1.useMemo)(function () { var _a; return (_a = props.footerTemplate) !== null && _a !== void 0 ? _a : headerGenerator; }, []);
+    var headerGenerator = (0, react_1.useMemo)(function () { return props.headerTemplate ? props.headerTemplate(props, fields) : (0, jsx_runtime_1.jsxs)("tr", { children: [props.showIndex === true && (0, jsx_runtime_1.jsx)("th", {}), props.items.map(function (item, key) { return (0, jsx_runtime_1.jsx)("th", { children: item.label }, "tl-".concat(props.name, "-").concat(item.name, "-th-").concat(key)); }), (0, jsx_runtime_1.jsx)("th", {})] }); }, []);
+    var footerGenerator = (0, react_1.useMemo)(function () { return props.footerTemplate ? props.footerTemplate(props, fields) : headerGenerator; }, []);
     var AddButton = (0, react_1.useMemo)(function () {
         var _a, _b;
         var buttonWrapper = function (onClick, Wrapper, ElemA) {
